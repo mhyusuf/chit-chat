@@ -16,31 +16,32 @@
   box-shadow: 5px 5px 5px rgb(253, 238, 238);
   cursor: pointer;
 
-  &__avatar {
-    margin: 0 2rem 0 1rem;
-
-    width: 5vh;
-    height: 5vh;
-    border: solid;
-    border-radius: 50%;
-
-    background-image: linear-gradient(
-      white,
-      $secondary-color,
-      $secondary-color
-    );
-  }
-
   &__img-title-name-div {
     display: flex;
 
-    h3 {
-      font-size: 3rem;
-    }
-  }
+    &__title-name-sub-div {
+      font-style: italic;
 
-  &__title-name-sub-div {
-    font-style: italic;
+      h3 {
+        font-size: 3rem;
+        font-style: normal;
+      }
+    }
+
+    &__avatar {
+      margin: 0 2rem 0 1rem;
+
+      width: 5vh;
+      height: 5vh;
+      border: solid;
+      border-radius: 50%;
+
+      background-image: linear-gradient(
+        white,
+        $secondary-color,
+        $secondary-color
+      );
+    }
   }
 
   &__likes-comments-div {
