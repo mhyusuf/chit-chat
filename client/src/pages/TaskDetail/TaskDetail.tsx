@@ -111,15 +111,13 @@ const TaskDetail: FunctionComponent<any> = () => {
       </div>
       <div className="task-detail-grand-wrapper__page-content">
         <div className="task-detail-grand-wrapper__page-content__table-block">
+          <th className="task-detail-grand-wrapper__page-content__table-block__headers">
+            <td>Student</td>
+            <td>assigned?</td>
+            <td>completed?</td>
+          </th>
           <div className="task-detail-grand-wrapper__page-content__table-block__student-table">
-            <table>
-              <th>
-                <td>Student</td>
-                <td>assigned?</td>
-                <td>completed?</td>
-              </th>
-              {studentRows}
-            </table>
+            <table>{studentRows}</table>
           </div>
           <button>edit</button>
         </div>
