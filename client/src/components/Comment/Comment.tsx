@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from 'react';
+import './Comment.scss';
 
 const Comment: FunctionComponent<any> = () => {
   return (
