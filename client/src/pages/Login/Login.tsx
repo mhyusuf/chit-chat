@@ -1,9 +1,9 @@
 import React, { FunctionComponent } from 'react';
 
-const EventDetail: FunctionComponent<any> = () => {
+const Login: FunctionComponent<any> = () => {
   return (
     <div />
   )
 }
 
-export default EventDetail;
+export default Login;
