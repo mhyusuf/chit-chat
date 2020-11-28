@@ -13,5 +13,17 @@ body {
   font-size: 1.6rem;
 }
 
+.app-wrapper {
+  display: flex;
+
+  &__router-wrapper {
+    flex-grow: 1;
+  }
+
+  h1 {
+    padding: 4rem;
+  }
+}
+
 $primary-color: rgb(80, 80, 240);
 $secondary-color: rgb(175, 175, 248);
