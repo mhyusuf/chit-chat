@@ -1,11 +1,9 @@
-import React, { FunctionComponent } from 'react'
+import React, { FunctionComponent } from "react";
 
-import './Header.scss'
+import "./Header.scss";
 
 const Header: FunctionComponent = () => {
-  return ( 
-    <div className="header-grand-wrapper" />
-  )
-}
+  return <div className="header-grand-wrapper" />;
+};
 
 export default Header;

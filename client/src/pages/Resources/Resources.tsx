@@ -1,11 +1,9 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent } from "react";
 
-import './Resources.scss';
+import "./Resources.scss";
 
 const Resources: FunctionComponent<any> = () => {
-  return (
-    <div />
-  )
-}
+  return <div />;
+};
 
 export default Resources;

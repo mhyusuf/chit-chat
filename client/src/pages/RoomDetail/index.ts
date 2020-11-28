@@ -1,3 +1,3 @@
-import RoomDetail from './RoomDetail'
+import RoomDetail from "./RoomDetail";
 
 export default RoomDetail;

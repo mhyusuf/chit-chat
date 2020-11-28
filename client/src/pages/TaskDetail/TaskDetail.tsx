@@ -1,11 +1,9 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent } from "react";
 
-import './TaskDetail.scss';
+import "./TaskDetail.scss";
 
 const TaskDetail: FunctionComponent<any> = () => {
-  return (
-    <div />
-  )
-}
+  return <div />;
+};
 
 export default TaskDetail;

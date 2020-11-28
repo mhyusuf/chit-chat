@@ -1,11 +1,9 @@
-import React, { FunctionComponent } from 'react'
+import React, { FunctionComponent } from "react";
 
-import './SignUp.scss'
+import "./SignUp.scss";
 
 const SignUp: FunctionComponent = () => {
-  return ( 
-    <div />
-  )
-}
+  return <div />;
+};
 
 export default SignUp;

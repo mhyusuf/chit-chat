@@ -1,3 +1,3 @@
-import Header from './Nav'
+import Header from "./Nav";
 
-export default Header
+export default Header;

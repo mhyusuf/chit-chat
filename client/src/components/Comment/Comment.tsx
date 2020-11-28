@@ -1,10 +1,8 @@
-import React, { FunctionComponent } from 'react';
-import './Comment.scss';
+import React, { FunctionComponent } from "react";
+import "./Comment.scss";
 
 const Comment: FunctionComponent<any> = () => {
-  return (
-    <div />
-  )
-}
+  return <div />;
+};
 
 export default Comment;

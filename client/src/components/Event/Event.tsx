@@ -1,11 +1,9 @@
-import React, { FunctionComponent } from 'react'
+import React, { FunctionComponent } from "react";
 
-import './Event.scss'
+import "./Event.scss";
 
 const Event: FunctionComponent = () => {
-  return ( 
-    <div />
-  )
-}
+  return <div />;
+};
 
 export default Event;

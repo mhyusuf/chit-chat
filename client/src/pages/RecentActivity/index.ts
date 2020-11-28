@@ -1,3 +1,3 @@
-import RecentActivity from './RecentActivity'
+import RecentActivity from "./RecentActivity";
 
-export default RecentActivity
+export default RecentActivity;

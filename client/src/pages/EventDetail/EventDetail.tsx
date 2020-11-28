@@ -1,10 +1,8 @@
-import React, { FunctionComponent } from 'react';
-import './EventDetail.scss';
+import React, { FunctionComponent } from "react";
+import "./EventDetail.scss";
 
 const EventDetail: FunctionComponent<any> = () => {
-  return (
-    <div />
-  )
-}
+  return <div />;
+};
 
 export default EventDetail;

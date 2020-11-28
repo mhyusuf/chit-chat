@@ -1,11 +1,9 @@
-import React, { FunctionComponent } from 'react'
+import React, { FunctionComponent } from "react";
 
-import './ChatPreview.scss'
+import "./ChatPreview.scss";
 
 const ChatPreview: FunctionComponent = () => {
-  return ( 
-    <div />
-  )
-}
+  return <div />;
+};
 
 export default ChatPreview;
