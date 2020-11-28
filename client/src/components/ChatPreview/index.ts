@@ -1,3 +1,3 @@
-import ChatPreview from './ChatPreview'
+import ChatPreview from "./ChatPreview";
 
-export default ChatPreview
+export default ChatPreview;

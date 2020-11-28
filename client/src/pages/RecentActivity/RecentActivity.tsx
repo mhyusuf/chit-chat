@@ -1,11 +1,9 @@
-import React, { FunctionComponent } from 'react'
+import React, { FunctionComponent } from "react";
 
-import './RecentActivity.scss'
+import "./RecentActivity.scss";
 
 const RecentActivity: FunctionComponent = () => {
-  return ( 
-    <div />
-  )
-}
+  return <div />;
+};
 
 export default RecentActivity;

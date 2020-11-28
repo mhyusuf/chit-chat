@@ -1,3 +1,3 @@
-import TaskPreview from './TaskPreview';
+import TaskPreview from "./TaskPreview";
 
 export default TaskPreview;

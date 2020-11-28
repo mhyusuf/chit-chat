@@ -1,10 +1,8 @@
-import React, { FunctionComponent } from 'react';
-import './Profile.scss';
+import React, { FunctionComponent } from "react";
+import "./Profile.scss";
 
 const Profile: FunctionComponent<any> = () => {
-  return (
-    <div />
-  )
-}
+  return <div />;
+};
 
 export default Profile;

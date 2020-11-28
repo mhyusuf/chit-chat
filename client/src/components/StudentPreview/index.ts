@@ -1,3 +1,3 @@
-import StudentPreview from './StudentPreview';
+import StudentPreview from "./StudentPreview";
 
 export default StudentPreview;

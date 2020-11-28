@@ -1,11 +1,11 @@
-import React, { FunctionComponent } from 'react'
-import { NavLink } from 'react-router-dom'
+import React, { FunctionComponent } from "react";
+import { NavLink } from "react-router-dom";
 
-import './Nav.scss'
+import "./Nav.scss";
 
 const Nav: FunctionComponent = () => {
   //TODO: SELECT COURSE
-  return ( 
+  return (
     <div className="nav-grand-wrapper">
       <NavLink to="/home">
         <p>Recent Activity</p>
@@ -23,7 +23,7 @@ const Nav: FunctionComponent = () => {
         <p>Resources</p>
       </NavLink>
     </div>
-  )
-}
+  );
+};
 
 export default Nav;

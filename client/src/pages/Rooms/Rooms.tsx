@@ -1,11 +1,9 @@
-import React, { FunctionComponent } from 'react'
+import React, { FunctionComponent } from "react";
 
-import './Rooms.scss'
+import "./Rooms.scss";
 
 const Rooms: FunctionComponent = () => {
-  return ( 
-    <div />
-  )
-}
+  return <div />;
+};
 
 export default Rooms;

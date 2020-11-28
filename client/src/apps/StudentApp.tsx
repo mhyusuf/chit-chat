@@ -1,9 +1,7 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent } from "react";
 
 const StudentApp: FunctionComponent<any> = () => {
-  return(
-    <div />
-  )
-}
+  return <div />;
+};
 
 export default StudentApp;

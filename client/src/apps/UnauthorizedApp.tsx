@@ -1,9 +1,7 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent } from "react";
 
 const UnauthorizedApp: FunctionComponent<any> = () => {
-  return(
-    <div />
-  )
-}
+  return <div />;
+};
 
 export default UnauthorizedApp;

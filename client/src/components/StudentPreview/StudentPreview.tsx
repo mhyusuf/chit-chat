@@ -1,10 +1,8 @@
-import React, { FunctionComponent } from 'react';
-import './StudentPreview.scss';
+import React, { FunctionComponent } from "react";
+import "./StudentPreview.scss";
 
 const StudentPreview: FunctionComponent<any> = () => {
-  return (
-    <div />
-  )
-}
+  return <div />;
+};
 
 export default StudentPreview;
