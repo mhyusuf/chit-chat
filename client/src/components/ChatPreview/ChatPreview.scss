@@ -1,1 +1,29 @@
 @import "../../App.scss";
+
+.chat-preview-nav-link {
+  text-decoration: none;
+  color: black;
+}
+
+.new-activity {
+  background-color: rgb(168, 245, 168);
+}
+
+.chat-preview-grand-wrapper {
+  display: flex;
+  justify-content: space-between;
+  border: solid;
+  min-width: 70vw;
+  margin-bottom: 2rem;
+  padding: 2rem;
+  border-radius: 5px;
+  box-shadow: 5px 5px 5px rgb(253, 238, 238);
+
+  &__student-names-wrapper {
+    display: flex;
+
+    p {
+      margin: 0.5rem;
+    }
+  }
+}

@@ -24,8 +24,8 @@ const Event: FunctionComponent<EventProps> = ({
     <NavLink to={`/tasks/${taskId}`} className="event-nav-link">
       <div className="event-grand-wrapper" style={{}}>
         <div className="event-grand-wrapper__img-title-name-div">
-          <div className="event-grand-wrapper__avatar"></div>
-          <div className="event-grand-wrapper__title-name-sub-div">
+          <div className="event-grand-wrapper__img-title-name-div__avatar"></div>
+          <div className="event-grand-wrapper__img-title-name-div__title-name-sub-div">
             <h3>{title}</h3>
             <p>{studentName}</p>
           </div>
