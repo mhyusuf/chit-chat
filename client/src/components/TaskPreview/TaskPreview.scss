@@ -1,1 +1,56 @@
 @import "../../App.scss";
+
+.task-preview-grand-wrapper {
+  border-top: 1px solid;
+  border-left: 1px solid;
+  border-right: 1px solid;
+  padding: 1.6rem;
+
+  &:last-of-type {
+    border-bottom: 1px solid;
+  }
+}
+
+.task-preview {
+  &__header {
+    display: flex;
+    justify-content: space-between;
+
+    .header__dropdown-icon {
+      font-size: 3rem;
+      cursor: pointer;
+    }
+  }
+
+  &__content {
+    .content__main {
+      display: flex;
+      justify-content: space-between;
+      margin: 1.6rem 0;
+
+      p {
+        width: 85%;
+      }
+    }
+
+    .content__picture {
+      border: 1px solid black;
+      height: 10rem;
+      width: 8rem;
+    }
+
+    .content__buttons {
+      display: flex;
+      justify-content: center;
+
+      button {
+        margin: 0 0.8rem;
+
+        a {
+          text-decoration: none;
+          color: black;
+        }
+      }
+    }
+  }
+}

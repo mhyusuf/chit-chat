@@ -1,8 +1,54 @@
 import React, { FunctionComponent } from "react";
+import {
+  IoIosArrowDropdownCircle,
+  IoIosArrowDropupCircle,
+} from "react-icons/io";
+import { Link } from "react-router-dom";
 import "./TaskPreview.scss";
 
-const TaskPreview: FunctionComponent<any> = () => {
-  return <div />;
+const TaskPreview: FunctionComponent<any> = ({
+  task,
+  index,
+  open,
+  handleOpen,
+}) => {
+  return (
+    <div className="task-preview-grand-wrapper">
+      <div className="task-preview__header">
+        <h2>{task.title}</h2>
+        {!open ? (
+          <IoIosArrowDropdownCircle
+            className="header__dropdown-icon"
+            onClick={() => handleOpen(index)}
+          />
+        ) : (
+          <IoIosArrowDropupCircle
+            className="header__dropdown-icon"
+            onClick={() => handleOpen(null)}
+          />
+        )}
+      </div>
+      {open && (
+        <div className="task-preview__content">
+          <div className="content__main">
+            <p>{task.description}</p>
+            <div className="content__picture"></div>
+          </div>
+          <div className="content__buttons">
+            <button>
+              <Link to="/tasks/:id">View Task</Link>
+            </button>
+            <button>
+              <p>Assign All</p>
+            </button>
+            <button>
+              <p>Assign To</p>
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default TaskPreview;
