@@ -7,21 +7,27 @@ const Nav: FunctionComponent = () => {
   //TODO: SELECT COURSE
   return (
     <div className="nav-grand-wrapper">
-      <NavLink to="/home">
-        <p>Recent Activity</p>
-      </NavLink>
-      <NavLink to="/rooms">
-        <p>Chats</p>
-      </NavLink>
-      <NavLink to="/students">
-        <p>Students</p>
-      </NavLink>
-      <NavLink to="/tasks">
-        <p>Tasks</p>
-      </NavLink>
-      <NavLink to="/resources">
-        <p>Resources</p>
-      </NavLink>
+      <div className="nav-grand-wrapper__link-wrapper">
+        <NavLink to="/home">
+          <p className="nav-grand-wrapper__link-wrapper__link-text">
+            Recent Activity
+          </p>
+        </NavLink>
+        <NavLink to="/rooms">
+          <p className="nav-grand-wrapper__link-wrapper__link-text">Chats</p>
+        </NavLink>
+        <NavLink to="/students">
+          <p className="nav-grand-wrapper__link-wrapper__link-text">Students</p>
+        </NavLink>
+        <NavLink to="/tasks">
+          <p className="nav-grand-wrapper__link-wrapper__link-text">Tasks</p>
+        </NavLink>
+        <NavLink to="/resources">
+          <p className="nav-grand-wrapper__link-wrapper__link-text">
+            Resources
+          </p>
+        </NavLink>
+      </div>
     </div>
   );
 };

@@ -1,7 +1,25 @@
 @import "../../App.scss";
 
 .nav-grand-wrapper {
-  height: 92vh;
-  background-color: green;
-  width: 10%;
+  height: 91vh;
+  width: 15%;
+
+  background-color: $secondary-color;
+
+  &__link-wrapper {
+    padding-top: 2rem;
+
+    > a {
+      text-decoration: none;
+    }
+    &__link-text {
+      margin-right: 10%;
+      width: 90%;
+      padding: 2rem 1rem;
+
+      text-align: right;
+      font-weight: bold;
+      color: black;
+    }
+  }
 }

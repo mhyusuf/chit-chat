@@ -2,6 +2,49 @@
 
 .header-grand-wrapper {
   width: 100%;
-  height: 8vh;
-  background-color: red;
+  height: 9vh;
+  background-color: $primary-color;
+
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &__left-block {
+    h1 {
+      margin: 1rem 1rem 1rem 2rem;
+      font-size: 2.5rem;
+      letter-spacing: 3pt;
+    }
+  }
+
+  &__right-block {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    > a {
+      text-decoration: none;
+    }
+
+    h3 {
+      color: white;
+      height: 100%;
+    }
+    &__avatar {
+      margin: 0 2rem 0 1rem;
+
+      width: 5vh;
+      height: 5vh;
+      border: solid;
+      border-radius: 50%;
+
+      background-image: linear-gradient(
+        white,
+        $secondary-color,
+        $secondary-color
+      );
+    }
+  }
 }
