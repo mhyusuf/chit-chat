@@ -1,1 +1,13 @@
 @import "../../App.scss";
+
+.recent-activity-grand-wrapper {
+  width: 100%;
+  height: 80vh;
+  flex: grow;
+
+  .recent-activity-events-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}

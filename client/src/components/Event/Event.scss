@@ -1,1 +1,55 @@
 @import "../../App.scss";
+
+.event-nav-link {
+  text-decoration: none;
+  color: black;
+}
+
+.event-grand-wrapper {
+  border: solid;
+  display: flex;
+  justify-content: space-between;
+  width: 50vw;
+  margin-bottom: 2rem;
+  padding: 2rem;
+  border-radius: 5px;
+  box-shadow: 5px 5px 5px rgb(253, 238, 238);
+  cursor: pointer;
+
+  &__avatar {
+    margin: 0 2rem 0 1rem;
+
+    width: 5vh;
+    height: 5vh;
+    border: solid;
+    border-radius: 50%;
+
+    background-image: linear-gradient(
+      white,
+      $secondary-color,
+      $secondary-color
+    );
+  }
+
+  &__img-title-name-div {
+    display: flex;
+
+    h3 {
+      font-size: 3rem;
+    }
+  }
+
+  &__title-name-sub-div {
+    font-style: italic;
+  }
+
+  &__likes-comments-div {
+    display: flex;
+    align-items: center;
+  }
+
+  &__icon-container {
+    display: flex;
+    margin-right: 1rem;
+  }
+}
