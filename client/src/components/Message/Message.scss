@@ -1,0 +1,46 @@
+@import "../../App.scss";
+
+.message-grand-wrapper--self {
+  align-self: flex-end;
+
+  div:first-child {
+    margin-left: 0rem;
+    margin-right: 1rem;
+
+    .text,
+    .timestamp {
+      align-self: flex-end;
+    }
+  }
+}
+
+.message-grand-wrapper {
+  display: flex;
+
+  &__avatar {
+    height: 3rem;
+    width: 3rem;
+    border: solid;
+    border-radius: 50%;
+    margin: 0.5rem;
+
+    font-size: 1.25rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  &__message-block {
+    margin-left: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    .text {
+      font-size: 1.5rem;
+    }
+    .timestamp {
+      font-size: 1rem;
+      color: gray;
+    }
+  }
+}

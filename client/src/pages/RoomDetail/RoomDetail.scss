@@ -1,1 +1,86 @@
 @import "../../App.scss";
+
+.room-detail-grand-wrapper {
+  &__chat-block {
+    width: 100%;
+    // border: solid;
+
+    display: flex;
+    &__user-list {
+      width: 20%;
+
+      h3 {
+        margin: 1rem;
+      }
+    }
+    &__user-item {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+
+      &__avatar {
+        height: 3rem;
+        width: 3rem;
+        border: solid;
+        border-radius: 50%;
+        margin: 0.5rem;
+
+        font-size: 1.25rem;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+
+    &__chatroom {
+      margin-left: 2.5%;
+      width: 75%;
+      border: 1px solid;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      border-radius: 0.5rem;
+
+      &__messages-wrapper {
+        margin: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-end;
+      }
+      &__input {
+        width: 100%;
+        height: 6rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: $secondary-color;
+        &__audio-icon {
+          height: 4rem;
+          width: 4rem;
+          border-radius: 50%;
+          border: solid;
+          background-color: gray;
+
+          &:active {
+            background-color: black;
+          }
+        }
+        > form {
+          width: 80%;
+
+          > input {
+            height: 3rem;
+            width: 100%;
+            margin: 2rem;
+          }
+        }
+        button {
+          height: 3rem;
+          width: 4rem;
+        }
+      }
+    }
+  }
+}
