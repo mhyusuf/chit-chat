@@ -1,1 +1,36 @@
 @import "../../App.scss";
+
+.student-preview-nav {
+  text-decoration: none;
+  color: black;
+}
+
+.student-preview-grand-wrapper {
+  width: 20rem;
+  align-items: center;
+  justify-content: center;
+  border: solid;
+  margin: 1rem;
+  display: flex;
+  padding: 2rem;
+  border-radius: 5px;
+  box-shadow: 5px 5px 5px rgb(253, 238, 238);
+
+  &__name {
+  }
+
+  &__avatar {
+    margin: 0 2rem 0 1rem;
+    flex-shrink: 0;
+    width: 3vh;
+    height: 3vh;
+    border: solid;
+    border-radius: 50%;
+
+    background-image: linear-gradient(
+      white,
+      $secondary-color,
+      $secondary-color
+    );
+  }
+}
