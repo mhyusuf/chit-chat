@@ -4,7 +4,7 @@ import './Header.scss'
 
 const Header: FunctionComponent = () => {
   return ( 
-    <div />
+    <div className="header-grand-wrapper" />
   )
 }
 

@@ -1,8 +1,12 @@
 import React, { FunctionComponent } from 'react';
+import TeacherApp from './TeacherApp'
 
 const AuthorizedApp: FunctionComponent<any> = () => {
   return(
-    <div />
+    <div>
+      
+      <TeacherApp />
+      </div>
   )
 }
 
