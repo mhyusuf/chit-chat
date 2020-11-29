@@ -3,7 +3,7 @@
 .nav-grand-wrapper {
   height: 91vh;
   width: 15%;
-
+  flex-shrink: 0;
   background-color: $secondary-color;
 
   &__link-wrapper {

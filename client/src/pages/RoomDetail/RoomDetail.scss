@@ -3,8 +3,6 @@
 .room-detail-grand-wrapper {
   &__chat-block {
     width: 100%;
-    // border: solid;
-
     display: flex;
     &__user-list {
       width: 20%;
@@ -55,12 +53,11 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: $secondary-color;
+        background-color: $primary-color;
         &__audio-icon {
           height: 4rem;
           width: 4rem;
-          border-radius: 50%;
-          border: solid;
+          border-radius: 0.5rem;
           background-color: gray;
 
           &:active {
@@ -69,17 +66,32 @@
         }
         > form {
           width: 80%;
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
 
           > input {
             height: 3rem;
             width: 100%;
             margin: 2rem;
           }
+
+          .submit-button {
+            background-color: $secondary-color;
+            margin: 1rem;
+            width: 2rem;
+            height: 3rem;
+            flex-shrink: 0;
+            border: none;
+            border-radius: 0.5rem;
+          }
+          .submit-button--audio {
+            background-color: $primary-color;
+          }
         }
-        button {
-          height: 3rem;
-          width: 4rem;
-        }
+      }
+      &__input--audio {
+        background-color: $secondary-color;
       }
     }
   }
