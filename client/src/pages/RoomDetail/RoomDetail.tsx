@@ -1,5 +1,6 @@
 import React, { FunctionComponent, useState } from "react";
 
+import AudioCapture from "../../components/AudioCapture";
 import Message from "../../components/Message";
 import "./RoomDetail.scss";
 
@@ -85,7 +86,7 @@ const messages = [
 ];
 
 const RoomDetail: FunctionComponent = () => {
-  const [audioDrawer, setAudioDrawer] = useState(false);
+  const [audioSelected, setAudioSelected] = useState(false);
   const [input, setInput] = useState("");
 
   const studentList = students.map((user, idx) => (
@@ -109,16 +110,47 @@ const RoomDetail: FunctionComponent = () => {
     <Message key={idx} message={message} />
   ));
 
-  function toggleAudioDrawer() {
-    setAudioDrawer((audioDrawer) => !audioDrawer);
+  function toggleAudioSelected() {
+    setAudioSelected((selected) => !selected);
   }
   function handleTextChange(e: React.ChangeEvent<HTMLInputElement>) {
     setInput(e.target.value);
   }
   function handlePost(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    console.log("hey");
+
     //trigger socket with message from variable Input and state Current User
   }
+
+  const inputBlock = !audioSelected ? (
+    <div className="room-detail-grand-wrapper__chat-block__chatroom__input">
+      <div
+        className="room-detail-grand-wrapper__chat-block__chatroom__input__audio-icon"
+        onClick={() => toggleAudioSelected()}
+      />
+      <form onSubmit={handlePost}>
+        <input
+          type="text"
+          value={input}
+          onChange={(e) => handleTextChange(e)}
+        />
+        <button type="submit" className="submit-button">
+          ^
+        </button>
+      </form>
+    </div>
+  ) : (
+    <div className="room-detail-grand-wrapper__chat-block__chatroom__input room-detail-grand-wrapper__chat-block__chatroom__input--audio">
+      <div
+        className="room-detail-grand-wrapper__chat-block__chatroom__input__audio-icon"
+        onClick={() => toggleAudioSelected()}
+      />
+      <form onSubmit={handlePost}>
+        <AudioCapture />
+      </form>
+    </div>
+  );
 
   return (
     <div className="room-detail-grand-wrapper">
@@ -134,19 +166,7 @@ const RoomDetail: FunctionComponent = () => {
           <div className="room-detail-grand-wrapper__chat-block__chatroom__messages-wrapper">
             {allMessages}
           </div>
-          <div className="room-detail-grand-wrapper__chat-block__chatroom__input">
-            <div
-              className="room-detail-grand-wrapper__chat-block__chatroom__input__audio-icon"
-              onClick={() => toggleAudioDrawer}
-            />
-            <form onSubmit={handlePost}>
-              <input
-                type="text"
-                value={input}
-                onChange={(e) => handleTextChange(e)}
-              />
-            </form>
-          </div>
+          {inputBlock}
         </div>
       </div>
     </div>

@@ -1,0 +1,49 @@
+@import "../../App.scss";
+
+.audio-capture-grand-wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  &__buttons-wrapper {
+    margin-right: 2rem;
+    height: 10vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &__button {
+      height: 4rem;
+      width: 2.5rem;
+      border: none;
+    }
+    #startButton {
+      background-color: rgb(160, 206, 160);
+      border-radius: 0.5rem 0 0 0.5rem;
+    }
+    #stopButton {
+      background-color: rgb(202, 143, 143);
+      border-radius: 0 0.5rem 0.5rem 0;
+    }
+  }
+
+  &__audio-elements-wrapper {
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .audInput {
+    height: 0px;
+    width: 0px;
+  }
+  .audOutput {
+    height: 4rem;
+    width: 30rem;
+    border: 0.25rem solid $secondary-color;
+    border-radius: 0.5rem;
+    background-color: rgb(240, 240, 240);
+  }
+}
