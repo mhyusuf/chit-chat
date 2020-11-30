@@ -28,7 +28,8 @@ const TeacherApp: FunctionComponent<any> = () => {
             <Route path="/rooms" component={Rooms} exact />
             <Route path="/rooms/:id" component={RoomDetail} />
             <Route path="/students" component={Students} exact />
-            <Route path="/students/:id" component={StudentDetail} />
+            {/* <Route path="/students/:id" component={StudentDetail} /> */}
+            <Route path="/students/1" component={StudentDetail} />
             <Route path="/profile" component={Profile} />
             <Route path="/resources" component={Resources} />
           </Switch>
