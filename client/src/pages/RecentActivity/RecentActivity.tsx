@@ -4,14 +4,13 @@ import Event from "../../components/Event";
 import "./RecentActivity.scss";
 
 const RecentActivity: FunctionComponent = () => {
-  //TODO: mock data
-
   const mockData = [
     {
       taskName: "task 1",
       studentName: "Timmy",
       studentId: "somestrangestring",
       taskId: "somestrangestring",
+      eventId: "817264",
       likes: 8,
       comments: [
         {
@@ -29,6 +28,7 @@ const RecentActivity: FunctionComponent = () => {
       studentName: "Timmy",
       studentId: "somestrangestring",
       taskId: "somestrangestring",
+      eventId: "817264",
       likes: 8,
       comments: [
         {
@@ -46,6 +46,7 @@ const RecentActivity: FunctionComponent = () => {
       studentName: "Timmy",
       studentId: "somestrangestring",
       taskId: "somestrangestring",
+      eventId: "817264",
       likes: 8,
       comments: [
         {
@@ -60,8 +61,6 @@ const RecentActivity: FunctionComponent = () => {
     },
   ];
 
-  //TODO: Make Event Component
-
   return (
     <div className="recent-activity-grand-wrapper">
       <h1>Recent Activity</h1>
@@ -75,6 +74,7 @@ const RecentActivity: FunctionComponent = () => {
               likes={event.likes}
               comments={event.comments.length}
               taskId={event.taskId}
+              eventId={event.eventId}
             />
           );
         })}

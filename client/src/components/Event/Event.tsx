@@ -11,6 +11,7 @@ type EventProps = {
   likes: number;
   comments: number;
   taskId: string;
+  eventId: string;
 };
 
 const Event: FunctionComponent<EventProps> = ({
@@ -19,9 +20,10 @@ const Event: FunctionComponent<EventProps> = ({
   likes,
   comments,
   taskId,
+  eventId,
 }) => {
   return (
-    <NavLink to={`/tasks/${taskId}`} className="event-nav-link">
+    <NavLink to={`/events/${eventId}`} className="event-nav-link">
       <div className="event-grand-wrapper" style={{}}>
         <div className="event-grand-wrapper__img-title-name-div">
           <div className="event-grand-wrapper__img-title-name-div__avatar"></div>
