@@ -1,9 +1,4 @@
 import React, { FunctionComponent } from "react";
-import { Link } from "react-router-dom";
-import {
-  IoIosArrowDropdownCircle,
-  IoIosArrowDropupCircle,
-} from "react-icons/io";
 
 import "./TaskDetail.scss";
 
