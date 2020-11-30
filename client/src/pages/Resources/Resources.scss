@@ -1,1 +1,28 @@
 @import "../../App.scss";
+
+.resources {
+  &__teacher-pack {
+    margin: 4rem;
+    width: 90%;
+
+    .teacher-pack__heading {
+      font-size: 3.2rem;
+      text-align: left;
+    }
+
+    .teacher-pack__row {
+      padding: 1.6rem 0;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .teacher-pack__action {
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  &__extra {
+    margin: 0 4rem;
+  }
+}
