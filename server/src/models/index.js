@@ -1,9 +1,7 @@
-const { Sequelize } = require("sequelize");
-
 require("dotenv").config();
-
 const { USERNAME, PASSWORD, HOST, PORT, DIALECT } = process.env;
-
+const { Sequelize } = require("sequelize");
+// @ts-ignore
 const sequelize = new Sequelize({
   username: USERNAME,
   password: PASSWORD,
@@ -12,4 +10,4 @@ const sequelize = new Sequelize({
   dialect: DIALECT,
 });
 
-export default sequelize;
+module.exports = sequelize;
