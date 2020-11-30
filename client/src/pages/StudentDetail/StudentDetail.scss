@@ -1,1 +1,52 @@
 @import "../../App.scss";
+
+.student-detail-grand-wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 8rem 8rem 4rem 8rem;
+
+  &__student-details {
+    display: flex;
+    // justify-content: space-between;
+    align-items: center;
+    // padding: 4rem 4rem 2rem 4rem;
+    margin-bottom: 10rem;
+
+    &__student-name {
+      margin: 0 1rem 0 2rem;
+    }
+
+    &__edit-icon {
+      font-size: 1rem;
+    }
+
+    &__avatar {
+      margin: 0;
+      width: 5vh;
+      height: 5vh;
+      border: solid;
+      border-radius: 50%;
+
+      background-image: linear-gradient(
+        white,
+        $secondary-color,
+        $secondary-color
+      );
+    }
+  }
+
+  &__tasks {
+    display: flex;
+    flex-direction: column;
+
+    &__subtitle {
+      margin-bottom: 2rem;
+    }
+  }
+
+  &__room {
+    &__subtitle {
+      margin: 4rem 0 2rem;
+    }
+  }
+}
