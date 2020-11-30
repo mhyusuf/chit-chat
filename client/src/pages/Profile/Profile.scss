@@ -1,1 +1,47 @@
 @import "../../App.scss";
+
+.profile {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+
+  &__avatar {
+    background-image: linear-gradient(
+      white,
+      $secondary-color,
+      $secondary-color
+    );
+    border: solid;
+    border-radius: 50%;
+    height: 12rem;
+    margin-right: 15rem;
+    margin-top: 4rem;
+    width: 12rem;
+  }
+
+  &__detail {
+    p {
+      margin-bottom: 3rem;
+    }
+
+    p,
+    button {
+      margin-left: 4rem;
+    }
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .profile {
+    justify-content: center;
+    flex-wrap: wrap;
+
+    &__avatar {
+      margin-right: 0;
+    }
+
+    &__detail {
+      margin-left: 0;
+    }
+  }
+}
