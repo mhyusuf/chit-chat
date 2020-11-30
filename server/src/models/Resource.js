@@ -1,5 +1,5 @@
-import { DataTypes } from "sequelize";
-import sequelize from "./";
+const { DataTypes } = require("sequelize");
+const sequelize = require("./");
 
 const Resource = sequelize.define("Resource", {
   title: {
@@ -20,4 +20,4 @@ const Resource = sequelize.define("Resource", {
   },
 });
 
-export default Resource;
+module.exports = Resource;
