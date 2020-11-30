@@ -3,6 +3,7 @@ import { Switch, Route } from "react-router-dom";
 import Header from "../components/Header";
 import Nav from "../components/Nav";
 import EventDetail from "../pages/EventDetail";
+import Login from "../pages/Login";
 import Profile from "../pages/Profile";
 import RecentActivity from "../pages/RecentActivity";
 import Resources from "../pages/Resources";
@@ -32,6 +33,7 @@ const TeacherApp: FunctionComponent<any> = () => {
             <Route path="/students/1" component={StudentDetail} />
             <Route path="/profile" component={Profile} />
             <Route path="/resources" component={Resources} />
+            <Route path="/login" component={Login} />
           </Switch>
         </div>
       </div>
