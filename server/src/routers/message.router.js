@@ -1,3 +1,4 @@
+const { authMiddleware } = require("../middlewares/auth");
 const {
   GetMessagesByRoom,
   CreateMessage,
@@ -5,8 +6,8 @@ const {
 } = require("../controllers/message.controller");
 const router = require("express").Router();
 
-router.get("/:roomId", GetMessagesByRoom);
-router.post("/", CreateMessage);
-router.delete("/:id", DeleteMessage);
+router.get("/:id", authMiddleware, GetMessagesByRoom);
+router.post("/", authMiddleware, CreateMessage);
+router.delete("/:id", authMiddleware, DeleteMessage);
 
 module.exports = router;

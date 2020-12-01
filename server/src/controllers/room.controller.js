@@ -7,7 +7,7 @@ exports.GetRoomsByCourseId = async (req, res) => {
     const course = await models.Course.findByPk(id, {
       include: [{ model: models.Room }],
     });
-    if (course) {
+    if (course.dataValues.Rooms.length) {
       res.status(200).send(course.dataValues.Rooms);
     } else res.status(404).send(new Error("No rooms found"));
   } catch (e) {

@@ -2,11 +2,11 @@ const models = require("../models").sequelize.models;
 
 exports.CreateComment = async (req, res) => {
   try {
-    const { sender, content, assignment } = req.body;
+    const { sender, content, AssignmentId } = req.body;
     const newComment = await models.Comment.create({
       sender,
       content,
-      assignment,
+      AssignmentId,
     });
     if (!newComment) throw new Error("could not add comment");
     res.status(201).send(newComment);

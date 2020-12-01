@@ -1,20 +1,20 @@
 // @ts-nocheck
 const models = require("../models").sequelize.models;
 
-exports.GetResources = async () => {
+exports.GetResources = async (req, res) => {
   try {
-    const { nativeLangauge, targetLanguage, level } = req.params;
-    const resources = await models.Resources.findAll({
+    const { nativeLanguage, targetLanguage, level } = req.params;
+    const resources = await models.Resource.findAll({
       where: {
-        nativeLangauge,
+        nativeLanguage,
         targetLanguage,
         level,
       },
     });
     if (resources) {
-      resizeBy.status(200).send(resources);
-    } else resizeBy.status(404).send(new Error("No resources found"));
+      res.status(200).send(resources);
+    } else res.status(404).send(new Error("No resources found"));
   } catch (e) {
-    resizeBy.status(500).send(e.message);
+    res.status(500).send(e.message);
   }
 };
