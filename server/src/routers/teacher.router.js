@@ -1,7 +1,16 @@
 const router = require("express").Router();
+const { authMiddleware } = require("../middlewares/auth");
 
-const { GetTeacherByCourse } = require("../controllers/teacher.controller");
+const {
+  GetTeacherByCourse,
+  ChangeNameTeacher,
+  RegisterTeacher,
+  LoginTeacher,
+} = require("../controllers/teacher.controller");
 
-router.get("/:id", GetTeacherByCourse);
+router.post("/register", RegisterTeacher);
+router.post("/login", authMiddleware, LoginTeacher);
+router.get("/:id", authMiddleware, GetTeacherByCourse);
+router.put("/profile", authMiddleware, ChangeNameTeacher);
 
 module.exports = router;
