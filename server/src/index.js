@@ -4,8 +4,12 @@ const app = express();
 const db = require("./models");
 const { Teacher, Course } = db.sequelize.models;
 const routers = require("./routers");
+const cookieParser = require("cookie-parser");
 
 require("dotenv").config();
+
+app.use(express.json());
+app.use(cookieParser());
 
 app.use("/api/user", routers.userRouter);
 app.use("/api/assignment", routers.assignmentRouter);
