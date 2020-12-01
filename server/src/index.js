@@ -1,20 +1,18 @@
 const express = require("express");
-const { Sequelize } = require("sequelize");
 const PORT = process.env.PORT || 5000;
 const app = express();
-const sequelize = require("./models");
-const Teacher = require("./models/Teacher");
+const db = require("./models");
+const { Teacher, Course } = db.sequelize.models;
 
 require("dotenv").config();
 
 (async () => {
-  await sequelize.sync();
+  await db.sequelize.sync();
 
-  Teacher.create({
-    userId: "0bd6ace4-a310-49a3-90e9-750f94187e76",
-    email: "fdasf@fdasfd.com",
-    name: "sdfsadf sdafasdf",
-    password: "fasdfasfas",
+  Course.create({
+    level: 1,
+    registrationId: "0bd6ace4-a310-49a3-90e9-750f94187e86",
+    TeacherId: 1,
   });
   console.log("Connected to Sequelize on 5432");
   app.listen(PORT, () => {

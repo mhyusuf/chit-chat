@@ -1,21 +1,23 @@
-const { DataTypes } = require("sequelize");
-const sequelize = require("./");
-const Teacher = require("./Teacher");
+module.exports = (sequelize, DataTypes) => {
+  const Course = sequelize.define("Course", {
+    level: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    registrationId: {
+      type: DataTypes.UUID,
+      allowNull: false,
+    },
+  });
 
-const Course = sequelize.define("Course", {
-  level: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-  },
-  courseId: {
-    type: DataTypes.UUID,
-    allowNull: false,
-  },
-});
+  Course.associate = (models) => {
+    Course.hasOne(Course, {
+      foreignKey: "sisterCourse",
+    });
+    Course.belongsTo(models.Teacher, {
+      foreignKey: "TeacherId",
+    });
+  };
 
-// Course.hasOne(Teacher);
-// Course.hasOne(Course, {
-//   foreignKey: 'sisterCourse'
-// });
-
-module.exports = Course;
+  return Course;
+};
