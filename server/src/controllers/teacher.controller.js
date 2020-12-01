@@ -1,3 +1,4 @@
+// @ts-nocheck
 const bcrypt = require("bcrypt");
 const { generateAuthToken } = require("../utils/authHelpers.js");
 const models = require("../models").sequelize.models;
@@ -10,12 +11,10 @@ exports.LoginTeacher = async (req, res) => {
     if (!teacher) {
       throw new Error("Invalid email or password");
     }
-    // @ts-ignore
     const matched = await bcrypt.compare(password, teacher.password);
     if (!matched) {
       throw new Error("Invalid email or password");
     }
-    // @ts-ignore
     const token = await generateAuthToken(teacher.userId);
     res.status(200).cookie("authToken", token).send(teacher);
   } catch (e) {
@@ -59,7 +58,6 @@ exports.GetTeacherByCourse = async (req, res) => {
   try {
     const { id } = req.params;
     const course = await models.Course.findOne({ where: { id } });
-    // @ts-ignore
     const teacher = await models.Teacher.findOne({
       where: { id: course.TeacherId },
     });
