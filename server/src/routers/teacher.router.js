@@ -9,7 +9,7 @@ const {
 } = require("../controllers/teacher.controller");
 
 router.post("/register", RegisterTeacher);
-router.post("/login", authMiddleware, LoginTeacher);
+router.post("/login", LoginTeacher);
 router.get("/:id", authMiddleware, GetTeacherByCourse);
 router.put("/profile", authMiddleware, ChangeNameTeacher);
 

@@ -58,10 +58,11 @@ exports.ChangeNameStudent = async (req, res) => {
 
 exports.ChangeAvatarStudent = async (req, res) => {
   try {
-    const { newAvatarStr, studentPKey } = req.body;
+    const { id } = req.params;
+    const { newAvatarStr } = req.body;
     const result = await models.Student.update(
       { avatar: newAvatarStr },
-      { where: { id: studentPKey }, returning: true }
+      { where: { id }, returning: true }
     );
     res.status(200).send(result[1][0]);
   } catch (e) {
@@ -73,7 +74,7 @@ exports.GetStudentById = async (req, res) => {
   try {
     const { id } = req.params;
     const result = await models.Student.findByPk(id);
-    if (result) res.status(200).send(result[1][0]);
+    if (result) res.status(200).send(result);
     else res.status(404).send(new Error("Student not found"));
   } catch (e) {
     res.status(500).send(e.message);
@@ -82,8 +83,8 @@ exports.GetStudentById = async (req, res) => {
 exports.GetStudentsByRoom = async (req, res) => {
   try {
     const { id } = req.params;
-    const result = await models.Student.findAll({ where: { room: id } });
-    if (result) res.status(200).send(result[1]);
+    const result = await models.Student.findAll({ where: { RoomId: id } });
+    if (result) res.status(200).send(result);
     else res.status(404).send(new Error("No students found"));
   } catch (e) {
     res.status(500).send(e.message);
@@ -92,8 +93,8 @@ exports.GetStudentsByRoom = async (req, res) => {
 exports.GetStudentsByCourse = async (req, res) => {
   try {
     const { id } = req.params;
-    const result = await models.Student.findAll({ where: { course: id } });
-    if (result) res.status(200).send(result[1]);
+    const result = await models.Student.findAll({ where: { CourseId: id } });
+    if (result) res.status(200).send(result);
     else res.status(404).send(new Error("No students found"));
   } catch (e) {
     res.status(500).send(e.message);

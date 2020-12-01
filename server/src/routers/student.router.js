@@ -17,6 +17,6 @@ router.get("/:id", authMiddleware, GetStudentById);
 router.get("/r/:id", authMiddleware, GetStudentsByRoom);
 router.get("/c/:id", authMiddleware, GetStudentsByCourse);
 router.put("/profile/:id", authMiddleware, ChangeNameStudent);
-router.put("/avatar", authMiddleware, ChangeAvatarStudent);
+router.put("/avatar/:id", authMiddleware, ChangeAvatarStudent);
 
 module.exports = router;
