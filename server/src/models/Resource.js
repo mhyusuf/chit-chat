@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     fileContent: {
       type: DataTypes.BLOB,
-      allowNull: true,
+      allowNull: false,
     },
     nativeLanguage: {
       type: DataTypes.STRING,
