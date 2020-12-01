@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const { authMiddleware } = require("../middlewares/auth");
 
 const {
   RegisterTeacher,
@@ -18,6 +19,6 @@ router.post("/login/student", LoginStudent);
 router.get("/logout", LogoutUser);
 router.put("/profile", ChangeNameUser);
 router.put("/avatar", ChangeAvatarUser);
-router.get("/", GetCurrentUser);
+router.get("/", authMiddleware, GetCurrentUser);
 
 module.exports = router;

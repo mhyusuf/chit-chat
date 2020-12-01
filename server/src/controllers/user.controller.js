@@ -4,8 +4,8 @@ const bcrypt = require("bcrypt");
 const models = require("../models").sequelize.models;
 const jwt = require("jsonwebtoken");
 
-async function generateAuthToken(uuid) {
-  const token = await jwt.sign({ userId: uuid }, process.env.JWT_SECRET);
+function generateAuthToken(uuid) {
+  const token = jwt.sign({ userId: uuid }, process.env.JWT_SECRET);
   return token;
 }
 
@@ -20,7 +20,7 @@ exports.RegisterTeacher = async (req, res) => {
       name,
       password: hashedPw,
     });
-    const token = generateAuthToken(userId);
+    const token = await generateAuthToken(userId);
     res.status(201).cookie("authToken", token).send(newTeacher);
   } catch (e) {
     res.status(500).send(e, e.message);
@@ -40,7 +40,7 @@ exports.RegisterStudent = async (req, res) => {
       RoomId,
       CourseId,
     });
-    const token = generateAuthToken(userId);
+    const token = await generateAuthToken(userId);
     res.status(201).cookie("authToken", token).send(newStudent);
   } catch (e) {
     res.status(500).send(e, e.message);
@@ -57,7 +57,7 @@ exports.LoginTeacher = async (req, res) => {
     if (!matched) {
       throw new Error("Invalid email or password");
     }
-    const token = generateAuthToken(teacher.userId);
+    const token = await generateAuthToken(teacher.userId);
     res.status(200).cookie("authToken", token).send(teacher);
   } catch (e) {
     res.status(500).send(e.message);
@@ -74,7 +74,7 @@ exports.LoginStudent = async (req, res) => {
     if (!matched) {
       throw new Error("Invalid email or password");
     }
-    const token = generateAuthToken(student.userId);
+    const token = await generateAuthToken(student.userId);
     res.status(200).cookie("authToken", token).send(student);
   } catch (e) {
     res.status(500).send(e.message);
@@ -87,4 +87,10 @@ exports.ChangeNameUser = async (req, res) => {};
 
 exports.ChangeAvatarUser = async (req, res) => {};
 
-exports.GetCurrentUser = async (req, res) => {};
+exports.GetCurrentUser = async (req, res) => {
+  try {
+    res.status(200).send(req.user);
+  } catch (e) {
+    res.status(500).send(e.message);
+  }
+};
