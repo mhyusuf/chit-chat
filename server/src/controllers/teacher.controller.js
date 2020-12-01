@@ -10,10 +10,12 @@ exports.LoginTeacher = async (req, res) => {
     if (!teacher) {
       throw new Error("Invalid email or password");
     }
+    // @ts-ignore
     const matched = await bcrypt.compare(password, teacher.password);
     if (!matched) {
       throw new Error("Invalid email or password");
     }
+    // @ts-ignore
     const token = await generateAuthToken(teacher.userId);
     res.status(200).cookie("authToken", token).send(teacher);
   } catch (e) {
@@ -53,4 +55,17 @@ exports.ChangeNameTeacher = async (req, res) => {
   }
 };
 
-exports.GetTeacherByCourse = () => {};
+exports.GetTeacherByCourse = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const course = await models.Course.findOne({ where: { id } });
+    // @ts-ignore
+    const teacher = await models.Teacher.findOne({
+      where: { id: course.TeacherId },
+    });
+    if (teacher) res.status(200).send(teacher);
+    else res.status(404).send(new Error("No teacher found"));
+  } catch (e) {
+    res.status(500).send(e.message);
+  }
+};

@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt");
 const { generateAuthToken } = require("../utils/authHelpers.js");
 const models = require("../models").sequelize.models;
+const uuid = require("uuid");
 
 exports.LoginStudent = async (req, res) => {
   try {
@@ -43,10 +44,11 @@ exports.RegisterStudent = async (req, res) => {
 
 exports.ChangeNameStudent = async (req, res) => {
   try {
-    const { newName, studentPKey } = req.body;
+    const { id } = req.params;
+    const { newName } = req.body;
     const result = await models.Student.update(
       { name: newName },
-      { where: { id: studentPKey }, returning: true }
+      { where: { id }, returning: true }
     );
     res.status(200).send(result[1][0]);
   } catch (e) {
@@ -67,6 +69,33 @@ exports.ChangeAvatarStudent = async (req, res) => {
   }
 };
 
-exports.GetStudentById = () => {};
-exports.GetStudentsByRoom = () => {};
-exports.GetStudentsByCourse = () => {};
+exports.GetStudentById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const result = await models.Student.findByPk(id);
+    if (result) res.status(200).send(result[1][0]);
+    else res.status(404).send(new Error("Student not found"));
+  } catch (e) {
+    res.status(500).send(e.message);
+  }
+};
+exports.GetStudentsByRoom = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const result = await models.Student.findAll({ where: { room: id } });
+    if (result) res.status(200).send(result[1]);
+    else res.status(404).send(new Error("No students found"));
+  } catch (e) {
+    res.status(500).send(e.message);
+  }
+};
+exports.GetStudentsByCourse = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const result = await models.Student.findAll({ where: { course: id } });
+    if (result) res.status(200).send(result[1]);
+    else res.status(404).send(new Error("No students found"));
+  } catch (e) {
+    res.status(500).send(e.message);
+  }
+};
