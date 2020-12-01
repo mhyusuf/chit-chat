@@ -2,17 +2,15 @@ module.exports = (sequelize, DataTypes) => {
   const Assignment = sequelize.define("Assignment", {
     submitData: {
       type: DataTypes.BLOB,
-      allowNull: false,
+      allowNull: true,
     },
     dismissed: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
-      defaultValue: false,
     },
     likes: {
       type: DataTypes.ARRAY(DataTypes.UUID),
       allowNull: false,
-      defaultValue: 0,
     },
   });
 
