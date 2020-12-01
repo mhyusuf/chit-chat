@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     thumbnail: {
       type: DataTypes.BLOB,
-      allowNull: false,
+      allowNull: true,
     },
     nativeLanguage: {
       type: DataTypes.STRING,

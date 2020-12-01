@@ -1,4 +1,4 @@
-const { Assignment } = require("./models").sequelize.models;
+const { Assignment } = require("../models").sequelize.models;
 
 exports.CreateAssignment = async (req, res) => {
   //TODO: CONFIGURE UPLOAD MIDDLEWARE
