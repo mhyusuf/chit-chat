@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
     extra: {
-      type: DataTypes.Boolean,
+      type: DataTypes.BOOLEAN,
       allowNull: false,
     },
     fileContent: {
