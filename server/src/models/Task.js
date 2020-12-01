@@ -16,6 +16,14 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.BLOB,
       allowNull: false,
     },
+    nativeLanguage: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    targetLanguage: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
   });
 
   return Task;
