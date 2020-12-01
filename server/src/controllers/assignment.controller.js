@@ -1,4 +1,4 @@
-const { Assignment } = require("../models").sequelize.models;
+const { Assignment, Course, Student } = require("../models").sequelize.models;
 
 exports.CreateAssignment = async (req, res) => {
   //TODO: CONFIGURE UPLOAD MIDDLEWARE
@@ -8,8 +8,41 @@ exports.CreateAssignment = async (req, res) => {
       submitData,
       StudentId,
       TaskId,
+      dismissed: false,
+      likes: [],
     });
     res.status(201).send(newAssigment);
+  } catch (e) {
+    res.status(500).send(e.message);
+  }
+};
+
+exports.GetAssignmentById = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const assisgnment = await Assignment.findByPk(id);
+    if (assisgnment) res.status(200).send(assisgnment);
+    else res.status(404).send(new Error("No assignment found"));
+  } catch (e) {
+    res.status(500).send(e.message);
+  }
+};
+exports.GetAssignmentByCourse = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const students = await Student.findAll({ where: { CourseId: id } });
+    const assignments = [];
+    students.forEach(async (student, i) => {
+      const StudentId = student.id;
+      let subGroup = await Assignment.findAll({ where: { StudentId } });
+      assignments.push(...subGroup);
+      // subGroup.forEach(assignment => {
+      //   assignments.push(assignment.dataValues);
+      // })
+      if (i === students.length - 1) {
+        res.status(200).send(assignments);
+      }
+    });
   } catch (e) {
     res.status(500).send(e.message);
   }
@@ -32,12 +65,11 @@ exports.EditAssignment = async (req, res) => {
     const { id } = req.params;
     const { type } = req.query;
 
-    if (type === "add") {
-      const incremented = await Assignment.increment("likes", {
-        where: { id },
-        returning: true,
-      });
-      return res.status(200).send(incremented[1][0]);
+    if (type === "like") {
+      const assignment = await Assignment.findByPk(id);
+      assignment.likes = [...assignment.likes, req.user.userId];
+      await assignment.save();
+      return res.status(200).send(assignment);
     } else if (type === "upload") {
       const { submitData } = req.body;
       const submitted = await Assignment.update(
@@ -56,8 +88,6 @@ exports.EditAssignment = async (req, res) => {
     res.status(500).send(e.message);
   }
 };
-
-exports.GetAssignments = async (req, res) => {};
 
 exports.GetAssignmentByStudent = async (req, res) => {
   try {
