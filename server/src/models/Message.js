@@ -10,15 +10,16 @@ module.exports = (sequelize, DataTypes) => {
     },
     textContent: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     fileContent: {
       type: DataTypes.BLOB,
-      allowNull: false,
+      allowNull: true,
     },
     seenBy: {
       type: DataTypes.ARRAY(DataTypes.UUID),
       allowNull: false,
+      defaultValue: [],
     },
   });
 
