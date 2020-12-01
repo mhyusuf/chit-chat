@@ -11,7 +11,7 @@ const {
 
 router.post("/", CreateAssignment);
 router.delete("/:id", DeleteAssignment);
-router.put("/", EditAssignment);
+router.put("/:id", EditAssignment);
 router.get("/", GetAssignments);
 router.get("/s/:id", GetAssignmentByStudent);
 router.get("/t/:id", GetAssignmentByTask);

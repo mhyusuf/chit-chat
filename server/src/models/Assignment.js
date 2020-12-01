@@ -7,10 +7,12 @@ module.exports = (sequelize, DataTypes) => {
     dismissed: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
+      defaultValue: false,
     },
     likes: {
       type: DataTypes.ARRAY(DataTypes.UUID),
       allowNull: false,
+      defaultValue: 0,
     },
   });
 
