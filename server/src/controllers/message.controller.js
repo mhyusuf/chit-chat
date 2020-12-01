@@ -3,9 +3,9 @@ const models = require("../models").sequelize.models;
 
 exports.GetMessagesByRoom = async (req, res) => {
   try {
-    const { roomId } = req.params;
+    const { id } = req.params;
     const messages = await models.Message.findAll({
-      where: { RoomId: roomId },
+      where: { RoomId: id },
     });
     if (messages) {
       res.status(200).send(messages);
@@ -17,16 +17,16 @@ exports.GetMessagesByRoom = async (req, res) => {
 
 exports.CreateMessage = async (req, res) => {
   try {
-    const sender = req.user.userId;
-    const { contentType, textContent, fileContent, roomId } = req.body;
-    const seenBy = [userId];
-    const newMessage = await models.create({
+    const sender = req.user.dataValues.userId;
+    const { contentType, textContent, fileContent, RoomId } = req.body;
+    const seenBy = [sender];
+    const newMessage = await models.Message.create({
       sender,
       contentType,
       textContent,
       fileContent,
       seenBy,
-      RoomId: roomId,
+      RoomId,
     });
     res.status(201).send(newMessage);
   } catch (e) {
