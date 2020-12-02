@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react";
-import Event from "../../components/Event";
+import Assignment from "../../components/Assignment";
 
 import "./RecentActivity.scss";
 
@@ -67,7 +67,7 @@ const RecentActivity: FunctionComponent = () => {
       <div className="recent-activity-events-wrapper">
         {mockData.map((event) => {
           return (
-            <Event
+            <Assignment
               studentName={event.studentName}
               key={event.studentId}
               title={event.taskName}

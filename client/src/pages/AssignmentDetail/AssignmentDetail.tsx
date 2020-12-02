@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react";
-import "./EventDetail.scss";
+import "./AssignmentDetail.scss";
 import Comment from "../../components/Comment";
 import { IoIosSend } from "react-icons/io";
 
@@ -38,7 +38,7 @@ const comments = event.comments.map((comment, idx) => (
   <Comment key={idx} comment={comment} />
 ));
 
-const EventDetail: FunctionComponent<any> = () => {
+const AssignmentDetail: FunctionComponent<any> = () => {
   const submitted = true;
 
   return (
@@ -83,4 +83,4 @@ const EventDetail: FunctionComponent<any> = () => {
   );
 };
 
-export default EventDetail;
+export default AssignmentDetail;

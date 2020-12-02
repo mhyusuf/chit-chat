@@ -2,7 +2,7 @@ import React, { FunctionComponent } from "react";
 import { Switch, Route } from "react-router-dom";
 import Header from "../components/Header";
 import StudentNav from "../components/StudentNav";
-import EventDetail from "../pages/EventDetail";
+import AssignmentDetail from "../pages/AssignmentDetail";
 import Login from "../pages/Login";
 import Profile from "../pages/Profile";
 import RecentActivity from "../pages/RecentActivity";
@@ -21,13 +21,12 @@ const StudentApp: FunctionComponent = () => {
         <div className="app-wrapper__router-wrapper">
           <Switch>
             <Route path="/home" component={RecentActivity} />
-            <Route path="/events/:id" component={EventDetail} />
+            <Route path="/events/:id" component={AssignmentDetail} />
             <Route path="/tasks" component={Tasks} exact />
-            <Route path="/tasks/:id" component={EventDetail} />
+            <Route path="/tasks/:id" component={TaskDetail} />
             <Route path="/rooms/:id" component={RoomDetail} />
             <Route path="/students" component={Students} exact />
-            {/* <Route path="/students/:id" component={StudentDetail} /> */}
-            <Route path="/students/1" component={StudentDetail} />
+            <Route path="/students/:id" component={StudentDetail} />
             <Route path="/profile" component={Profile} />
             <Route path="/login" component={Login} />
           </Switch>

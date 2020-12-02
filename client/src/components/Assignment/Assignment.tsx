@@ -3,9 +3,9 @@ import { NavLink } from "react-router-dom";
 import { FaRegHeart } from "react-icons/fa";
 import { ImBubble2 } from "react-icons/im";
 
-import "./Event.scss";
+import "./Assignment.scss";
 
-type EventProps = {
+type AssignmentProps = {
   title: string;
   studentName: string;
   likes: number;
@@ -14,7 +14,7 @@ type EventProps = {
   eventId: string;
 };
 
-const Event: FunctionComponent<EventProps> = ({
+const Assignment: FunctionComponent<AssignmentProps> = ({
   title,
   studentName,
   likes,
@@ -47,4 +47,4 @@ const Event: FunctionComponent<EventProps> = ({
   );
 };
 
-export default Event;
+export default Assignment;
