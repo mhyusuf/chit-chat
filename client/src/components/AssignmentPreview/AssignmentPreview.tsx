@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { FaRegHeart } from "react-icons/fa";
 import { ImBubble2 } from "react-icons/im";
 
-import "./Assignment.scss";
+import "./AssignmentPreview.scss";
 
 type AssignmentProps = {
   title: string;
