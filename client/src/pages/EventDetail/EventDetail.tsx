@@ -49,8 +49,9 @@ const EventDetail: FunctionComponent<any> = () => {
       </div>
 
       {!submitted && (
-        <div>
-          <h1>Hello</h1>
+        <div className="event-detail-grand-wrapper__submission-wrapper">
+          <h2>Nothing uploaded yet!</h2>
+          <button>Upload</button>
         </div>
       )}
 
@@ -73,6 +74,11 @@ const EventDetail: FunctionComponent<any> = () => {
           </div>
         </div>
       )}
+
+      <div className="event-detail-grand-wrapper__task-description">
+        <h2>Description</h2>
+        <p>{event.task.description}</p>
+      </div>
     </div>
   );
 };

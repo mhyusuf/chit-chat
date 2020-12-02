@@ -27,6 +27,7 @@ $secondary-color: $main-orange;
   &:hover {
     background-color: $main-green;
     color: black;
+    cursor: pointer;
   }
   &:focus {
     outline: none;
