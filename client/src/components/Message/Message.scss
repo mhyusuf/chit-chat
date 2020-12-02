@@ -1,30 +1,35 @@
 @import "../../App.scss";
 
-.message-grand-wrapper--self {
-  align-self: flex-end;
-
-  div:first-child {
-    margin-left: 0rem;
-    margin-right: 1rem;
-
-    .text,
-    .timestamp {
-      align-self: flex-end;
-    }
-  }
-}
-
 .message-grand-wrapper {
   display: flex;
+  border-radius: $XS;
+  position: relative;
+  background-color: $background;
+  margin: $S 0;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 0;
+    height: 0;
+    border: $S solid transparent;
+    border-right-color: $background;
+    border-left: 0;
+    border-bottom: 0;
+    margin-top: -0.6rem;
+    margin-left: -$S;
+  }
 
   &__avatar {
     height: 3rem;
     width: 3rem;
     border: solid;
     border-radius: 50%;
-    margin: 0.5rem;
+    margin: $XXS;
 
-    font-size: 1.25rem;
+    font-size: $S;
 
     display: flex;
     align-items: center;
@@ -41,6 +46,43 @@
     .timestamp {
       font-size: 1rem;
       color: gray;
+    }
+  }
+}
+
+.message-grand-wrapper--self {
+  align-self: flex-end;
+  position: relative;
+  background: $light-green;
+  border-radius: $XS;
+  margin: $S 0;
+
+  &::before {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 50%;
+    width: 0;
+    height: 0;
+    border: $S solid transparent;
+    border-left-color: $light-green;
+    border-right: 0;
+    border-bottom: 0;
+    margin-top: -6px;
+    margin-right: -$S;
+  }
+
+  &::after {
+    content: none;
+  }
+
+  div:first-child {
+    margin-left: 0rem;
+    margin-right: 1rem;
+
+    .text,
+    .timestamp {
+      align-self: flex-end;
     }
   }
 }
