@@ -1,12 +1,12 @@
 import React, { FunctionComponent, useState } from "react";
 import StudentTaskPreview from "../../components/StudentTaskPreview";
-import ChatPreview from "../../components/ChatPreview";
+import RoomPreview from "../../components/RoomPreview";
 import { BsPencilSquare } from "react-icons/bs";
 import "./StudentDetail.scss";
 
 const student = {
   name: "Brett",
-  chatGroup: {
+  room: {
     roomName: "Blue",
     teamMembers: ["Timmy", "James", "Olivia", "Carmen", "Pili", "Brett"],
     unseenMessages: false,
@@ -94,13 +94,13 @@ const StudentDetail: FunctionComponent = () => {
           <h2 className="student-detail-grand-wrapper__room__subtitle">
             Chat Group
           </h2>
-          <div className="student-detail-grand-wrapper__room__chat-preview-wrapper">
-            <ChatPreview
-              teamName={student.chatGroup.roomName}
-              teamMembers={student.chatGroup.teamMembers}
-              unseenMessages={student.chatGroup.unseenMessages}
-              roomId={student.chatGroup.roomId}
-              key={student.chatGroup.roomId}
+          <div className="student-detail-grand-wrapper__room__room-preview-wrapper">
+            <RoomPreview
+              teamName={student.room.roomName}
+              teamMembers={student.room.teamMembers}
+              unseenMessages={student.room.unseenMessages}
+              roomId={student.room.roomId}
+              key={student.room.roomId}
             />
           </div>
         </div>

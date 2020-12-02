@@ -1,3 +1,4 @@
+// @ts-nocheck
 const bcrypt = require("bcrypt");
 const models = require("../../models").sequelize.models;
 const uuid = require("uuid");

@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react";
-import ChatPreview from "../../components/ChatPreview";
+import RoomPreview from "../../components/RoomPreview";
 
 import "./Rooms.scss";
 
@@ -38,10 +38,10 @@ const Rooms: FunctionComponent = () => {
   return (
     <div className="rooms-grand-wrapper">
       <h1>Chats</h1>
-      <div className="rooms-grand-wrapper__chat-previews-wrapper">
+      <div className="rooms-grand-wrapper__room-previews-wrapper">
         {mockData.map((event) => {
           return (
-            <ChatPreview
+            <RoomPreview
               teamName={event.roomName}
               teamMembers={event.teamMembers}
               unseenMessages={event.unseenMessages}

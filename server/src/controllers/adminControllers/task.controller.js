@@ -44,8 +44,8 @@ exports.EditTask = async (req, res) => {
       description,
       nativeLanguage,
       targetLanguage,
-      thumbnail,
     } = req.body;
+    // const { thumbnail } = req.file;
     const task = await models.Task.findByPk(id);
     if (level) task.level = level;
     if (title) task.title = title;

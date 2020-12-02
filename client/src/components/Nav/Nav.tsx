@@ -14,7 +14,9 @@ const Nav: FunctionComponent = () => {
           </p>
         </NavLink>
         <NavLink to="/rooms">
-          <p className="nav-grand-wrapper__link-wrapper__link-text">Chats</p>
+          <p className="nav-grand-wrapper__link-wrapper__link-text">
+            Chat Rooms
+          </p>
         </NavLink>
         <NavLink to="/students">
           <p className="nav-grand-wrapper__link-wrapper__link-text">Students</p>
