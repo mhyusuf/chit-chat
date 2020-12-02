@@ -9,8 +9,7 @@ exports.CreateTask = async (req, res) => {
       nativeLanguage,
       targetLanguage,
     } = req.body;
-    // const { thumbnail } = req.file;
-    const thumbnail = null;
+    const thumbnail = req.file;
     const newTask = await models.Task.create({
       level,
       title,
@@ -44,8 +43,8 @@ exports.EditTask = async (req, res) => {
       description,
       nativeLanguage,
       targetLanguage,
+      thumbnail,
     } = req.body;
-    // const { thumbnail } = req.file;
     const task = await models.Task.findByPk(id);
     if (level) task.level = level;
     if (title) task.title = title;
