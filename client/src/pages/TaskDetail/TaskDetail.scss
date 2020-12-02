@@ -1,6 +1,8 @@
 @import "../../App.scss";
 
 .task-detail-grand-wrapper {
+  @include route-scroll;
+
   width: 100%;
 
   &__title-content {
@@ -32,8 +34,8 @@
         height: 50vh;
         overflow-y: scroll;
         overflow-x: hidden;
-        box-shadow: 5px 5px 5px rgb(253, 238, 238);
-        border: 1px solid gray;
+        box-shadow: $shadow-settings;
+        border: $border;
         border-radius: 0.5rem;
         > table {
           width: 100%;

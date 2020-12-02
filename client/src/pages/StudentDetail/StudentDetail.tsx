@@ -92,13 +92,15 @@ const StudentDetail: FunctionComponent = () => {
         <h2 className="student-detail-grand-wrapper__room__subtitle">
           Chat Group
         </h2>
-        <ChatPreview
-          teamName={student.chatGroup.roomName}
-          teamMembers={student.chatGroup.teamMembers}
-          unseenMessages={student.chatGroup.unseenMessages}
-          roomId={student.chatGroup.roomId}
-          key={student.chatGroup.roomId}
-        />
+        <div className="student-detail-grand-wrapper__room__chat-preview-wrapper">
+          <ChatPreview
+            teamName={student.chatGroup.roomName}
+            teamMembers={student.chatGroup.teamMembers}
+            unseenMessages={student.chatGroup.unseenMessages}
+            roomId={student.chatGroup.roomId}
+            key={student.chatGroup.roomId}
+          />
+        </div>
       </div>
     </div>
   );

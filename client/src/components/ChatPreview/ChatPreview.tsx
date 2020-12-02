@@ -23,7 +23,10 @@ const ChatPreview: FunctionComponent<ChatPreviewProps> = ({
           unseenMessages ? null : "new-activity"
         }`}
       >
-        <h2>Chat Group: {teamName} Team</h2>
+        <div className="chat-preview-grand-wrapper__text">
+          <h3>Chat Group:</h3>
+          <h2 className="name">{teamName} Team</h2>
+        </div>
         <div className="chat-preview-grand-wrapper__student-names-wrapper">
           {teamMembers.map((student) => {
             return <p>{student}</p>;

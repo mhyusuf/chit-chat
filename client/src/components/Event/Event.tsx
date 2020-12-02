@@ -35,11 +35,11 @@ const Event: FunctionComponent<EventProps> = ({
         <div className="event-grand-wrapper__likes-comments-div">
           <div className="event-grand-wrapper__icon-container">
             <h3>{likes}</h3>
-            <FaRegHeart />
+            <FaRegHeart className="red" />
           </div>
           <div className="event-grand-wrapper__icon-container">
             <h3>{comments}</h3>
-            <ImBubble2 />
+            <ImBubble2 className="blue" />
           </div>
         </div>
       </div>

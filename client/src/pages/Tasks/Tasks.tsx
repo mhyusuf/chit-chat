@@ -48,7 +48,7 @@ const Tasks: FunctionComponent<any> = () => {
   return (
     <div className="tasks-grand-wrapper">
       <h1>Tasks</h1>
-      <div className="tasks">
+      <div className="tasks-grand-wrapper__tasks-wrapper">
         {tasks.map((task, i) => {
           return (
             <TaskPreview

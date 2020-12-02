@@ -19,7 +19,7 @@
       &__avatar {
         height: 3rem;
         width: 3rem;
-        border: solid;
+        border: $border;
         border-radius: 50%;
         margin: 0.5rem;
 
@@ -34,11 +34,12 @@
     &__chatroom {
       margin-left: 2.5%;
       width: 75%;
-      border: 1px solid;
+      border: $border;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
       border-radius: 0.5rem;
+      background-color: rgba($light-blue, 0.7);
 
       &__messages-wrapper {
         margin: 2rem;
@@ -53,7 +54,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: $primary-color;
+        background-color: rgba($primary-color, 0.6);
         &__audio-icon {
           height: 4rem;
           width: 4rem;

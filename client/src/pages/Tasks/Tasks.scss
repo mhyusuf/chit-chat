@@ -1,5 +1,10 @@
 @import "../../App.scss";
 
-.tasks {
-  margin: 0 4rem;
+.tasks_grand_wrapper {
+  @include route-scroll;
+
+  &__tasks-wrapper {
+    width: 80vw;
+    margin-left: 10vw;
+  }
 }

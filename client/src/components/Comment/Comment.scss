@@ -1,9 +1,11 @@
 @import "../../App.scss";
 
 .comment-grand-wrapper {
-  background-color: adjust-color($secondary-color, $lightness: 10%);
+  $base-color: adjust-color($secondary-color, $lightness: 10%);
+  background-color: rgba($base-color, 0.6);
   &:nth-child(2n) {
-    background-color: adjust-color($primary-color, $lightness: 20%);
+    $next-color: adjust-color($primary-color, $lightness: 20%);
+    background-color: rgba($next-color, 0.6);
   }
 
   width: 100%;
@@ -27,5 +29,7 @@
     height: 2rem;
     border: none;
     border-radius: 0 0 0 0.5rem;
+    background-color: black;
+    color: white;
   }
 }
