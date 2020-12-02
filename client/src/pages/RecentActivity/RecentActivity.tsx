@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react";
-import Assignment from "../../components/Assignment";
+import Assignment from "../../components/AssignmentPreview";
 
 import "./RecentActivity.scss";
 
