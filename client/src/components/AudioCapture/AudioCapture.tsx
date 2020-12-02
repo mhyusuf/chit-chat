@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useState } from "react";
 import { useReactMediaRecorder } from "react-media-recorder";
 import { IoIosSend } from "react-icons/io";
 import { FaMicrophone, FaStop } from "react-icons/fa";
@@ -6,6 +6,7 @@ import { FaMicrophone, FaStop } from "react-icons/fa";
 import "./AudioCapture.scss";
 
 const AudioCapture: FunctionComponent<any> = () => {
+  const [recording, setRecording] = useState(false);
   const {
     startRecording,
     stopRecording,
@@ -18,6 +19,7 @@ const AudioCapture: FunctionComponent<any> = () => {
       onClick={(e) => {
         e.preventDefault();
         startRecording();
+        setRecording(true);
       }}
       id="startButton"
     >
@@ -31,6 +33,7 @@ const AudioCapture: FunctionComponent<any> = () => {
       onClick={(e) => {
         e.preventDefault();
         stopRecording();
+        setRecording(false);
       }}
       id="stopButton"
     >
@@ -41,8 +44,7 @@ const AudioCapture: FunctionComponent<any> = () => {
   return (
     <div className="audio-capture-grand-wrapper">
       <div className="audio-capture-grand-wrapper__buttons-wrapper">
-        {startButton}
-        {stopButton}
+        {recording ? stopButton : startButton}
       </div>
       <div className="audio-capture-grand-wrapper__audio-elements-wrapper">
         <audio className="audInput" controls={true}>

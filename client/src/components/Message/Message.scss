@@ -6,7 +6,7 @@
   position: relative;
   border-bottom: $border;
   border-color: $main-orange;
-  background-color: $background;
+  background-color: $light-orange;
   margin: 3px 0;
   padding: 0 1rem;
 
@@ -18,7 +18,7 @@
     width: 0;
     height: 0;
     border: $S solid transparent;
-    border-right-color: $background;
+    border-right-color: $light-orange;
     border-left: 0;
     border-bottom: $border;
     border-bottom-color: $main-orange;

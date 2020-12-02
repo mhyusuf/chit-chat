@@ -4,9 +4,9 @@
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
   &__buttons-wrapper {
-    margin-right: 2rem;
+    margin-left: 2rem;
     height: 10vh;
 
     display: flex;
@@ -14,22 +14,25 @@
     justify-content: center;
 
     &__button {
-      height: 4rem;
-      width: 2.5rem;
-      border: none;
+      height: 3rem;
+      width: 3rem;
+      border-radius: 50%;
 
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: $L;
+      font-size: $M;
+
+      &:focus {
+        outline: none;
+        border: $light-orange solid;
+      }
     }
     #startButton {
-      background-color: rgb(160, 206, 160);
-      border-radius: 0.5rem 0 0 0.5rem;
+      background-color: $main-green;
     }
     #stopButton {
-      background-color: rgb(202, 143, 143);
-      border-radius: 0 0.5rem 0.5rem 0;
+      background-color: $red;
     }
   }
 
