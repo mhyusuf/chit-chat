@@ -6,7 +6,17 @@ import "./Rooms.scss";
 const mockData = [
   {
     roomName: "Blue",
-    teamMembers: ["Timmy", "James", "Olivia", "Carmen", "Pili", "Juan"],
+    teamMembers: [
+      "Timmy",
+      "James",
+      "Olivia",
+      "Carmen",
+      "Pili",
+      "Juan",
+      "Joe",
+      "Matt",
+      "Matt Again",
+    ],
     unseenMessages: false,
     roomId: "somerandomstring",
   },

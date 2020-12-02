@@ -5,25 +5,48 @@
   color: black;
 }
 
-.new-activity {
-  background-color: rgb(168, 245, 168);
-}
-
 .chat-preview-grand-wrapper {
   display: flex;
   justify-content: space-between;
-  border: solid;
-  min-width: 70vw;
-  margin-bottom: 2rem;
-  padding: 2rem;
-  border-radius: 5px;
-  box-shadow: 5px 5px 5px rgb(253, 238, 238);
+  border: $border;
+  height: 9.5rem;
+  width: 70vw;
+
+  margin-bottom: $L;
+  padding: $L;
+  border-radius: $XXS;
+  background-color: rgba($light-orange, 0.8);
+  box-shadow: $shadow-settings;
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+
+    .name {
+      margin-left: $XXL;
+    }
+  }
+  &.new-activity {
+    // background-color: rgba($main-green, .8);
+
+    > * > h2.name {
+      &::after {
+        color: $main-green;
+        font-size: $S;
+        font-style: italic;
+        content: "  new Activity!";
+      }
+    }
+  }
 
   &__student-names-wrapper {
     display: flex;
-
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    width: 50%;
     p {
-      margin: 0.5rem;
+      margin: $XXS;
     }
   }
 }

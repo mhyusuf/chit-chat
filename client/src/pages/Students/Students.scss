@@ -1,6 +1,8 @@
 @import "../../App.scss";
 
 .students-grand-wrapper {
+  @include route-scroll;
+
   &__students-container {
     display: flex;
     justify-content: center;

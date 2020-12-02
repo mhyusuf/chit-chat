@@ -6,21 +6,25 @@
 }
 
 .student-preview-grand-wrapper {
-  width: 20rem;
+  width: 18rem;
+  height: 9.5rem;
+  display: flex;
   align-items: center;
   justify-content: center;
-  border: solid;
-  margin: 1rem;
-  display: flex;
-  padding: 2rem;
-  border-radius: 5px;
-  box-shadow: 5px 5px 5px rgb(253, 238, 238);
+  border: $border;
+  margin: 0 $S $XL $S;
+  padding: $L;
+  border-radius: $XXS;
+  box-shadow: $shadow-settings;
+  background-color: rgba($light-green, 0.6);
 
   &__name {
+    width: 70%;
+    font-size: 2rem;
   }
 
   &__avatar {
-    margin: 0 2rem 0 1rem;
+    margin: 0 $L 0 $S;
     flex-shrink: 0;
     width: 3vh;
     height: 3vh;

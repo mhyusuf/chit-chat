@@ -1,5 +1,9 @@
 @import "../../App.scss";
 
+.resources-grand-wrapper {
+  @include route-scroll;
+}
+
 .resources {
   &__teacher-pack {
     margin: 4rem;

@@ -1,6 +1,8 @@
 @import "../../App.scss";
 
 .rooms-grand-wrapper {
+  @include route-scroll;
+
   &__chat-previews-wrapper {
     display: flex;
     flex-direction: column;

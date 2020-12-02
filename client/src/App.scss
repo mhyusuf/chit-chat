@@ -1,14 +1,37 @@
 $main-orange: #e8aa64;
+$light-orange: adjust-color($main-orange, $lightness: 20%);
+
 $main-blue: #5d9197;
+$light-blue: adjust-color($main-blue, $lightness: 20%);
+
 $main-green: #72c1a5;
+$light-green: adjust-color($main-green, $lightness: 20%);
+
+$background: #dbdab8;
+$shadow: adjust-color($background, $lightness: -20%);
+
+$red: #fc5656;
 
 $primary-color: $main-green;
 $secondary-color: $main-orange;
 
-$red: #fc5656;
-$light-orange: adjust-color($main-orange, $lightness: 20%);
-$light-blue: adjust-color($main-blue, $lightness: 20%);
-$background: #dbdab8;
+@mixin route-scroll {
+  height: 91vh;
+  overflow-y: scroll;
+}
+
+$XXS: 0.4rem;
+$XS: 0.8rem;
+$S: 1.2rem;
+$M: 1.6rem;
+$L: 2rem;
+$XL: 2.4rem;
+$XXL: 2.8rem;
+
+$desktop-breakpoint: 45rem;
+
+$shadow-settings: $XXS $XXS $XS $main-blue;
+$border: 2px solid;
 
 * {
   margin: 0;
@@ -23,6 +46,7 @@ html {
 body {
   box-sizing: border-box;
   font-size: 1.6rem;
+  background-color: $background;
   background-image: url("./assets/background-tile.png");
   background-repeat: repeat;
 }

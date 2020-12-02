@@ -1,6 +1,8 @@
 @import "../../App.scss";
 
 .event-detail-grand-wrapper {
+  @include route-scroll;
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -40,14 +42,13 @@
     margin: 0 2rem;
     padding: 0 1rem 1rem 1rem;
     width: 50%;
-    height: 47rem;
     align-self: flex-start;
     // border: solid red;
 
     &__comments {
-      height: 40rem;
+      height: 33rem;
       overflow-y: scroll;
-      border-bottom: 1px solid;
+      border-bottom: $border;
       border-radius: 0.5rem;
     }
     form {
