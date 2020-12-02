@@ -69,6 +69,8 @@
         margin-top: 2rem;
         height: 3rem;
         width: 30%;
+
+        @include primary-button;
       }
     }
     &__doc-preview-block {
@@ -87,6 +89,8 @@
       button {
         height: 3rem;
         width: 40%;
+
+        @include primary-button;
       }
     }
   }

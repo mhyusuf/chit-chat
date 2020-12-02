@@ -2,12 +2,20 @@
 
 .resources-grand-wrapper {
   @include route-scroll;
+
+  > h2 {
+    padding: 0 0 2rem 4rem;
+  }
 }
 
 .resources {
   &__teacher-pack {
     margin: 4rem;
     width: 90%;
+
+    button {
+      @include primary-button;
+    }
 
     .teacher-pack__heading {
       font-size: 3.2rem;

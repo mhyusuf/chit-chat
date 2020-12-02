@@ -34,15 +34,17 @@
     &__chatroom {
       margin-left: 2.5%;
       width: 75%;
+      height: 45rem;
       border: $border;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
       border-radius: 0.5rem;
-      background-color: rgba($light-blue, 0.7);
+      background-color: rgba($light-green, 0.3);
 
       &__messages-wrapper {
         margin: 2rem;
+        height: 35rem;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
@@ -60,9 +62,15 @@
           width: 4rem;
           border-radius: 0.5rem;
           background-color: gray;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 2.5rem;
+          transition: 0.2s;
 
-          &:active {
+          &:hover {
             background-color: black;
+            color: white;
           }
         }
         > form {
@@ -78,16 +86,18 @@
           }
 
           .submit-button {
-            background-color: $secondary-color;
-            margin: 1rem;
-            width: 2rem;
+            width: 3rem;
             height: 3rem;
             flex-shrink: 0;
-            border: none;
-            border-radius: 0.5rem;
+
+            @include send-button;
           }
           .submit-button--audio {
             background-color: $primary-color;
+            margin-left: 1rem;
+            &:hover {
+              background-color: $secondary-color;
+            }
           }
         }
       }

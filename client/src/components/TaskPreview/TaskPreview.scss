@@ -53,9 +53,10 @@
       button {
         margin: 0 0.8rem;
 
+        @include primary-button;
+
         a {
           text-decoration: none;
-          color: black;
         }
       }
     }

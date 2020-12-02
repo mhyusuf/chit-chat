@@ -17,6 +17,11 @@
       height: 4rem;
       width: 2.5rem;
       border: none;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: $L;
     }
     #startButton {
       background-color: rgb(160, 206, 160);

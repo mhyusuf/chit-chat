@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from "react";
 import "./EventDetail.scss";
 import Comment from "../../components/Comment";
+import { IoIosSend } from "react-icons/io";
 
 const event = {
   type: "submit",
@@ -47,7 +48,7 @@ const EventDetail: FunctionComponent<any> = () => {
       <div className="event-detail-grand-wrapper__content-wrapper">
         <div className="event-detail-grand-wrapper__content-wrapper__preview">
           <div className="preview-placeholder" />
-          <button>download</button>
+          <button onClick={(e) => e.preventDefault()}>download</button>
         </div>
         <div className="event-detail-grand-wrapper__comment-wrapper">
           <div className="event-detail-grand-wrapper__comment-wrapper__comments">
@@ -55,7 +56,9 @@ const EventDetail: FunctionComponent<any> = () => {
           </div>
           <form>
             <input />
-            <button>^</button>
+            <button onClick={(e) => e.preventDefault()}>
+              <IoIosSend className="send-icon" />
+            </button>
           </form>
         </div>
       </div>

@@ -1,4 +1,7 @@
 import React, { FunctionComponent, useState } from "react";
+import { IoIosSend } from "react-icons/io";
+import { IoText } from "react-icons/io5";
+import { GiSpeaker } from "react-icons/gi";
 
 import AudioCapture from "../../components/AudioCapture";
 import Message from "../../components/Message";
@@ -128,7 +131,9 @@ const RoomDetail: FunctionComponent = () => {
       <div
         className="room-detail-grand-wrapper__chat-block__chatroom__input__audio-icon"
         onClick={() => toggleAudioSelected()}
-      />
+      >
+        <GiSpeaker />
+      </div>
       <form onSubmit={handlePost}>
         <input
           type="text"
@@ -136,7 +141,7 @@ const RoomDetail: FunctionComponent = () => {
           onChange={(e) => handleTextChange(e)}
         />
         <button type="submit" className="submit-button">
-          ^
+          <IoIosSend className="send-icon" />
         </button>
       </form>
     </div>
@@ -145,7 +150,9 @@ const RoomDetail: FunctionComponent = () => {
       <div
         className="room-detail-grand-wrapper__chat-block__chatroom__input__audio-icon"
         onClick={() => toggleAudioSelected()}
-      />
+      >
+        <IoText />
+      </div>
       <form onSubmit={handlePost}>
         <AudioCapture />
       </form>

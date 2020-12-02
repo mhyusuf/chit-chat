@@ -18,6 +18,8 @@
   background-color: rgba($light-orange, 0.8);
   box-shadow: $shadow-settings;
 
+  @include popout-left;
+
   &__text {
     display: flex;
     flex-direction: column;

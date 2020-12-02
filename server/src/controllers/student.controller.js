@@ -1,3 +1,4 @@
+// @ts-nocheck
 const bcrypt = require("bcrypt");
 const { generateAuthToken } = require("../utils/authHelpers.js");
 const models = require("../models").sequelize.models;

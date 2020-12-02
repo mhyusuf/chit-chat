@@ -50,9 +50,9 @@ const StudentTaskPreview: FunctionComponent<StudentTaskPreviewProps> = ({
             <div className="content__picture"></div>
           </div>
           <div className="content__buttons">
-            <button>
-              <Link to="/tasks/:id">View Task</Link>
-            </button>
+            <Link to="/tasks/:id">
+              <button>View Task</button>
+            </Link>
           </div>
         </div>
       )}
