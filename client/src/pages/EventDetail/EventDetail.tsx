@@ -48,6 +48,12 @@ const EventDetail: FunctionComponent<any> = () => {
         <h2 className="--lessPadding">{event.student.name}</h2>
       </div>
 
+      {!submitted && (
+        <div>
+          <h1>Hello</h1>
+        </div>
+      )}
+
       {submitted && (
         <div className="event-detail-grand-wrapper__content-wrapper">
           <div className="event-detail-grand-wrapper__content-wrapper__preview">
