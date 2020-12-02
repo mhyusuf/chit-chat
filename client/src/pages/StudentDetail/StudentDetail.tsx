@@ -61,6 +61,7 @@ const tasks = [
 
 const StudentDetail: FunctionComponent = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [isTeacher, setIsTeacher] = useState<boolean>(false);
 
   const handleOpen = (i: number | null) => setOpenIndex(i);
 
@@ -88,20 +89,22 @@ const StudentDetail: FunctionComponent = () => {
           );
         })}
       </div>
-      <div className="student-detail-grand-wrapper__room">
-        <h2 className="student-detail-grand-wrapper__room__subtitle">
-          Chat Group
-        </h2>
-        <div className="student-detail-grand-wrapper__room__chat-preview-wrapper">
-          <ChatPreview
-            teamName={student.chatGroup.roomName}
-            teamMembers={student.chatGroup.teamMembers}
-            unseenMessages={student.chatGroup.unseenMessages}
-            roomId={student.chatGroup.roomId}
-            key={student.chatGroup.roomId}
-          />
+      {isTeacher && (
+        <div className="student-detail-grand-wrapper__room">
+          <h2 className="student-detail-grand-wrapper__room__subtitle">
+            Chat Group
+          </h2>
+          <div className="student-detail-grand-wrapper__room__chat-preview-wrapper">
+            <ChatPreview
+              teamName={student.chatGroup.roomName}
+              teamMembers={student.chatGroup.teamMembers}
+              unseenMessages={student.chatGroup.unseenMessages}
+              roomId={student.chatGroup.roomId}
+              key={student.chatGroup.roomId}
+            />
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
