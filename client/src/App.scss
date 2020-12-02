@@ -1,14 +1,11 @@
 $main-orange: #e8aa64;
 $light-orange: adjust-color($main-orange, $lightness: 20%);
 
-$main-blue: #5d9197;
-$light-blue: adjust-color($main-blue, $lightness: 20%);
-
 $main-green: #72c1a5;
+$dark-green: adjust-color($main-green, $lightness: -20%);
 $light-green: adjust-color($main-green, $lightness: 20%);
 
 $background: #dbdab8;
-$shadow: adjust-color($background, $lightness: -20%);
 
 $red: #fc5656;
 
@@ -18,6 +15,63 @@ $secondary-color: $main-orange;
 @mixin route-scroll {
   height: 91vh;
   overflow-y: scroll;
+}
+
+@mixin primary-button {
+  padding: $XXS $S;
+  color: white;
+  background-color: $dark-green;
+  border-radius: $M;
+  transition: all 0.1s;
+
+  &:hover {
+    background-color: $main-green;
+    color: black;
+  }
+  &:focus {
+    outline: none;
+    border: solid $main-orange;
+    border-radius: $M;
+  }
+}
+@mixin popout-left {
+  transition: 0.2s;
+  &:hover {
+    transform: translateX(-1rem);
+    cursor: pointer;
+  }
+}
+@mixin rotate-hover {
+  transition: 0.1s;
+  &:hover {
+    transform: rotateZ(3deg);
+    background-color: $light-orange;
+    cursor: pointer;
+  }
+}
+@mixin send-button {
+  background-color: $main-orange;
+  color: black;
+  padding: $XXS $S;
+  border-radius: $M;
+  transition: all 0.2s;
+  position: relative;
+  .send-icon {
+    font-size: 2rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  &:hover {
+    background-color: $main-green;
+    color: white;
+  }
+  &:focus {
+    outline: none;
+    border: solid $main-green;
+    border-radius: $M;
+  }
 }
 
 $XXS: 0.4rem;
@@ -30,7 +84,7 @@ $XXL: 2.8rem;
 
 $desktop-breakpoint: 45rem;
 
-$shadow-settings: $XXS $XXS $XS $main-blue;
+$shadow-settings: $XXS $XXS $XS $dark-green;
 $border: 2px solid;
 
 * {

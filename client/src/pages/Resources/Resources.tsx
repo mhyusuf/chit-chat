@@ -48,7 +48,7 @@ const Resources: FunctionComponent<any> = () => {
         </tr>
       </table>
 
-      <h1>Extra Resources</h1>
+      <h2>Extra Resources</h2>
       <div className="resources__extra">
         {resources.map((resource, i) => {
           return (

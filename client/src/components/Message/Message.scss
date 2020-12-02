@@ -4,8 +4,11 @@
   display: flex;
   border-radius: $XS;
   position: relative;
+  border-bottom: $border;
+  border-color: $main-orange;
   background-color: $background;
-  margin: $S 0;
+  margin: 3px 0;
+  padding: 0 1rem;
 
   &::after {
     content: "";
@@ -17,7 +20,9 @@
     border: $S solid transparent;
     border-right-color: $background;
     border-left: 0;
-    border-bottom: 0;
+    border-bottom: $border;
+    border-bottom-color: $main-orange;
+
     margin-top: -0.6rem;
     margin-left: -$S;
   }
@@ -56,7 +61,8 @@
   background: $light-green;
   border-radius: $XS;
   margin: $S 0;
-
+  border-bottom: $border;
+  border-color: $main-green;
   &::before {
     content: "";
     position: absolute;
@@ -67,7 +73,8 @@
     border: $S solid transparent;
     border-left-color: $light-green;
     border-right: 0;
-    border-bottom: 0;
+    border-bottom: $border;
+    border-bottom-color: $main-green;
     margin-top: -6px;
     margin-right: -$S;
   }

@@ -1,5 +1,8 @@
 import React, { FunctionComponent } from "react";
 import { useReactMediaRecorder } from "react-media-recorder";
+import { IoIosSend } from "react-icons/io";
+import { FaMicrophone, FaStop } from "react-icons/fa";
+
 import "./AudioCapture.scss";
 
 const AudioCapture: FunctionComponent<any> = () => {
@@ -17,7 +20,9 @@ const AudioCapture: FunctionComponent<any> = () => {
         startRecording();
       }}
       id="startButton"
-    />
+    >
+      <FaMicrophone />
+    </button>
   );
 
   const stopButton = (
@@ -28,7 +33,9 @@ const AudioCapture: FunctionComponent<any> = () => {
         stopRecording();
       }}
       id="stopButton"
-    />
+    >
+      <FaStop />
+    </button>
   );
 
   return (
@@ -46,7 +53,9 @@ const AudioCapture: FunctionComponent<any> = () => {
           <audio src={mediaBlobUrl} className="audOutput" controls></audio>
         )}
       </div>
-      <button className="submit-button submit-button--audio">^</button>
+      <button className="submit-button submit-button--audio">
+        <IoIosSend className="send-icon" />
+      </button>
     </div>
   );
 };

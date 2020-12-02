@@ -18,6 +18,8 @@
   box-shadow: $shadow-settings;
   background-color: rgba($light-green, 0.6);
 
+  @include rotate-hover;
+
   &__name {
     width: 70%;
     font-size: 2rem;

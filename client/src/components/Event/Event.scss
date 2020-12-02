@@ -15,8 +15,8 @@
   padding: $L;
   border-radius: $XXS;
   box-shadow: $shadow-settings;
-  background-color: rgba($light-blue, 0.6);
-  cursor: pointer;
+  background-color: rgba($light-green, 0.6);
+  @include popout-left;
 
   &__img-title-name-div {
     display: flex;
@@ -63,7 +63,7 @@
       color: $red;
     }
     .blue {
-      color: $main-blue;
+      color: $dark-green;
     }
   }
 }
