@@ -1,3 +1,15 @@
+$main-orange: #e8aa64;
+$main-blue: #5d9197;
+$main-green: #72c1a5;
+
+$primary-color: $main-green;
+$secondary-color: $main-orange;
+
+$red: #fc5656;
+$light-orange: adjust-color($main-orange, $lightness: 20%);
+$light-blue: adjust-color($main-blue, $lightness: 20%);
+$background: #dbdab8;
+
 * {
   margin: 0;
   padding: 0;
@@ -11,6 +23,8 @@ html {
 body {
   box-sizing: border-box;
   font-size: 1.6rem;
+  background-image: url("./assets/background-tile.png");
+  background-repeat: repeat;
 }
 
 .app-wrapper {
@@ -24,6 +38,3 @@ body {
     padding: 4rem 4rem 2rem 4rem;
   }
 }
-
-$primary-color: rgb(80, 80, 240);
-$secondary-color: rgb(175, 175, 248);
