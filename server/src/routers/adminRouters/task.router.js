@@ -5,8 +5,9 @@ const {
   DeleteTask,
   EditTask,
 } = require("../../controllers/adminControllers/task.controller");
+const uploadTask = require("../../utils/uploadTask");
 
-router.post("/", CreateTask);
+router.post("/", uploadTask.single("thumbnail"), CreateTask);
 router.delete("/:id", DeleteTask);
 router.put("/:id", EditTask);
 
