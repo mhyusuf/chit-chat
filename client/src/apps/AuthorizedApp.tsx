@@ -1,12 +1,11 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useState } from "react";
 import TeacherApp from "./TeacherApp";
+import StudentApp from "./StudentApp";
 
 const AuthorizedApp: FunctionComponent<any> = () => {
-  return (
-    <div>
-      <TeacherApp />
-    </div>
-  );
+  const [isTeacher, setIsTeacher] = useState(false);
+
+  return <div>{isTeacher ? <TeacherApp /> : <StudentApp />}</div>;
 };
 
 export default AuthorizedApp;

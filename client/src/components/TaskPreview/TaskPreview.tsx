@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useState } from "react";
 import {
   IoIosArrowDropdownCircle,
   IoIosArrowDropupCircle,
@@ -12,6 +12,8 @@ const TaskPreview: FunctionComponent<any> = ({
   open,
   handleOpen,
 }) => {
+  const [isTeacher, setIsTeacher] = useState(false);
+
   return (
     <div className="task-preview-grand-wrapper">
       <div className="task-preview__header">
@@ -38,12 +40,16 @@ const TaskPreview: FunctionComponent<any> = ({
             <Link to="/tasks/:id">
               <button>View Task</button>
             </Link>
-            <button>
-              <p>Assign All</p>
-            </button>
-            <button>
-              <p>Assign To</p>
-            </button>
+            {isTeacher && (
+              <button>
+                <p>Assign All</p>
+              </button>
+            )}
+            {isTeacher && (
+              <button>
+                <p>Assign To</p>
+              </button>
+            )}
           </div>
         </div>
       )}

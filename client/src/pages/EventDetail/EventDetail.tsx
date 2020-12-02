@@ -39,29 +39,34 @@ const comments = event.comments.map((comment, idx) => (
 ));
 
 const EventDetail: FunctionComponent<any> = () => {
+  const submitted = true;
+
   return (
     <div className="event-detail-grand-wrapper">
       <div className="event-detail-grand-wrapper__text-wrapper">
         <h1>{event.task.title}</h1>
         <h2 className="--lessPadding">{event.student.name}</h2>
       </div>
-      <div className="event-detail-grand-wrapper__content-wrapper">
-        <div className="event-detail-grand-wrapper__content-wrapper__preview">
-          <div className="preview-placeholder" />
-          <button onClick={(e) => e.preventDefault()}>download</button>
-        </div>
-        <div className="event-detail-grand-wrapper__comment-wrapper">
-          <div className="event-detail-grand-wrapper__comment-wrapper__comments">
-            {comments}
+
+      {submitted && (
+        <div className="event-detail-grand-wrapper__content-wrapper">
+          <div className="event-detail-grand-wrapper__content-wrapper__preview">
+            <div className="preview-placeholder" />
+            <button onClick={(e) => e.preventDefault()}>download</button>
           </div>
-          <form>
-            <input />
-            <button onClick={(e) => e.preventDefault()}>
-              <IoIosSend className="send-icon" />
-            </button>
-          </form>
+          <div className="event-detail-grand-wrapper__comment-wrapper">
+            <div className="event-detail-grand-wrapper__comment-wrapper__comments">
+              {comments}
+            </div>
+            <form>
+              <input />
+              <button onClick={(e) => e.preventDefault()}>
+                <IoIosSend className="send-icon" />
+              </button>
+            </form>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
