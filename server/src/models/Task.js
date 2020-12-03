@@ -26,5 +26,9 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 
+  Task.associate = (models) => {
+    Task.hasMany(models.Assignment);
+  };
+
   return Task;
 };

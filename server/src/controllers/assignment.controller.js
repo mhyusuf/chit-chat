@@ -1,3 +1,4 @@
+// @ts-nocheck
 const { Assignment, Course, Student } = require("../models").sequelize.models;
 
 exports.CreateAssignment = async (req, res) => {

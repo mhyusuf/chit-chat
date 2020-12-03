@@ -18,5 +18,9 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 
+  Teacher.associate = (models) => {
+    Teacher.hasMany(models.Course);
+  };
+
   return Teacher;
 };

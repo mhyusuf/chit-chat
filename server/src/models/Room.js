@@ -8,6 +8,8 @@ module.exports = (sequelize, DataTypes) => {
 
   Room.associate = (models) => {
     Room.belongsToMany(models.Course, { through: "Course_Rooms" });
+    Room.hasMany(models.Message);
+    Room.hasMany(models.Student);
   };
 
   return Room;
