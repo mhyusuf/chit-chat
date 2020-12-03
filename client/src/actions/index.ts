@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Dispatch } from "react";
-import { GET_CURRENT_USER } from "./types";
+import { GET_CURRENT_USER, GET_ASSIGNMENT_PREVIEWS_BY_COURSE } from "./types";
 import { History } from "history";
 
 // const BASE_URL = "http://localhost:5000/";
@@ -50,4 +50,11 @@ export const logout = (history: History<any>) => async (dispatch: any) => {
   await axios.get("/api/user/logout");
   dispatch({ type: GET_CURRENT_USER, payload: null });
   history.push("/login");
+};
+
+export const getAssignmentPreviewsByCourse = (id: number) => async (
+  dispatch: any
+) => {
+  const { data } = await axios.get(`/api/assignment/course/${id}`);
+  dispatch({ type: GET_ASSIGNMENT_PREVIEWS_BY_COURSE, payload: data });
 };

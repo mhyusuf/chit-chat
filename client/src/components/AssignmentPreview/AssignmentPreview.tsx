@@ -10,8 +10,7 @@ type AssignmentProps = {
   studentName: string;
   likes: number;
   comments: number;
-  taskId: string;
-  assignmentId: string;
+  assignmentId: number;
 };
 
 const Assignment: FunctionComponent<AssignmentProps> = ({
@@ -19,7 +18,6 @@ const Assignment: FunctionComponent<AssignmentProps> = ({
   studentName,
   likes,
   comments,
-  taskId,
   assignmentId,
 }) => {
   return (
