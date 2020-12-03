@@ -2,7 +2,6 @@ const express = require("express");
 const PORT = process.env.PORT || 5000;
 const app = express();
 const db = require("./models");
-const { Teacher, Course } = db.sequelize.models;
 const routers = require("./routers");
 const adminRouters = require("./routers/adminRouters");
 const cookieParser = require("cookie-parser");
@@ -29,11 +28,27 @@ app.use("/admin/task", adminRouters.taskRouter);
 app.use("/admin/room", adminRouters.roomRouter);
 app.use("/admin/student", adminRouters.studentRouter);
 
+const server = require("http").createServer(app);
+const io = require("socket.io")(server, {
+  cors: {
+    // origin: "*",
+  },
+});
+// require("./socket")(io);
+console.log("HELLO");
+io.on("connect", (socket) => {
+  console.log("user connected to io");
+  socket.on("message", (data) => {
+    console.log("emitting", data);
+    io.emit("message", data);
+  });
+});
+
 (async () => {
   await db.sequelize.sync();
 
   console.log("Connected to Sequelize on 5432");
-  app.listen(PORT, () => {
+  server.listen(PORT, () => {
     console.log(`Server is listening on http://localhost:${PORT}`);
   });
 })();
