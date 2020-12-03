@@ -24,7 +24,7 @@ exports.LoginTeacher = async (req, res) => {
 
 exports.RegisterTeacher = async (req, res) => {
   try {
-    const { email, name, password } = req.body;
+    const { email, name, password, avatar } = req.body;
     const hashedPw = await bcrypt.hash(password, 10);
     const userId = uuid.v4();
     const newTeacher = await models.Teacher.create({
@@ -32,6 +32,7 @@ exports.RegisterTeacher = async (req, res) => {
       email,
       name,
       password: hashedPw,
+      avatar,
     });
     const token = await generateAuthToken(userId);
     res.status(201).cookie("authToken", token).send(newTeacher);
