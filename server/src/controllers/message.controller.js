@@ -15,20 +15,42 @@ exports.GetMessagesByRoom = async (req, res) => {
   }
 };
 
+exports.GetAudio = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const message = await models.Message.findByPk(id);
+    res.set("Content-Type", "audio/wave");
+    res.status(200).send(message.fileContent);
+  } catch (e) {
+    res.status(500).send(e.message);
+  }
+};
+
 exports.CreateMessage = async (req, res) => {
   try {
     const sender = req.user.dataValues.userId;
-    const { contentType, textContent, fileContent, RoomId } = req.body;
+    const { contentType, textContent, RoomId } = req.body;
+    console.log("REQ FILE", req.file);
     const seenBy = [sender];
-    const newMessage = await models.Message.create({
-      sender,
-      contentType,
-      textContent,
-      fileContent,
-      seenBy,
-      RoomId,
-    });
-    res.status(201).send(newMessage);
+    if (req.file) {
+      const newAudioMessage = await models.Message.create({
+        sender,
+        contentType,
+        fileContent: req.file.buffer,
+        seenBy,
+        RoomId,
+      });
+      res.status(201).send(newAudioMessage);
+    } else {
+      const newTextMessage = await models.Message.create({
+        sender,
+        contentType,
+        textContent,
+        seenBy,
+        RoomId,
+      });
+      res.status(201).send(newTextMessage);
+    }
   } catch (e) {
     res.status(500).send(e.message);
   }
