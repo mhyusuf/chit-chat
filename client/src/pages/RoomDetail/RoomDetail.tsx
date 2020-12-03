@@ -1,4 +1,6 @@
-import React, { FunctionComponent, useState } from "react";
+import React, { FunctionComponent, useEffect, useState } from "react";
+import { createMessage } from "../../apiService/messageService";
+import io from "socket.io-client";
 import { IoIosSend } from "react-icons/io";
 import { IoText } from "react-icons/io5";
 import { GiSpeaker } from "react-icons/gi";
@@ -88,9 +90,20 @@ const messages = [
   },
 ];
 
+const socket = io.connect("http://localhost:5000");
+
 const RoomDetail: FunctionComponent = () => {
   const [audioSelected, setAudioSelected] = useState(false);
   const [input, setInput] = useState("");
+  const [allMessages, setAllMessages] = useState(messages);
+
+  useEffect(() => {
+    socket.on("message", (message: any) => {
+      setAllMessages((msgs) => {
+        return [...msgs, message];
+      });
+    });
+  }, []);
 
   const studentList = students.map((user, idx) => (
     <div key={idx} className="room-detail-grand-wrapper__chat-block__user-item">
@@ -109,9 +122,11 @@ const RoomDetail: FunctionComponent = () => {
     </div>
   ));
 
-  const allMessages = messages.map((message, idx) => (
-    <Message key={idx} message={message} />
-  ));
+  const renderEverything = () => {
+    return allMessages.map((message, idx) => (
+      <Message key={idx} message={message} />
+    ));
+  };
 
   function toggleAudioSelected() {
     setAudioSelected((selected) => !selected);
@@ -121,8 +136,13 @@ const RoomDetail: FunctionComponent = () => {
   }
   function handlePost(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    console.log("hey");
-
+    const newMessage = createMessage({
+      sender: { name: "Matt", avatar: "MH" },
+      text_content: "OMG ITS WORKING!!!!",
+      timeSent: "today",
+      self: true,
+    });
+    socket.emit("message", newMessage);
     //trigger socket with message from variable Input and state Current User
   }
 
@@ -171,7 +191,7 @@ const RoomDetail: FunctionComponent = () => {
         </div>
         <div className="room-detail-grand-wrapper__chat-block__chatroom">
           <div className="room-detail-grand-wrapper__chat-block__chatroom__messages-wrapper">
-            {allMessages}
+            {renderEverything()}
           </div>
           {inputBlock}
         </div>
