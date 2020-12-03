@@ -1,3 +1,5 @@
+const { processImage } = require("../../utils/uploadTask");
+
 const models = require("../../models").sequelize.models;
 
 exports.CreateTask = async (req, res) => {
@@ -9,7 +11,11 @@ exports.CreateTask = async (req, res) => {
       nativeLanguage,
       targetLanguage,
     } = req.body;
-    const thumbnail = req.file;
+    const thumbnail = await processImage({
+      buffer: req.file.buffer,
+      width: 300,
+      height: 300,
+    });
     const newTask = await models.Task.create({
       level,
       title,
@@ -54,6 +60,17 @@ exports.EditTask = async (req, res) => {
     if (targetLanguage) task.targetLanguage = targetLanguage;
     await task.save();
     res.status(200).send(task);
+  } catch (e) {
+    res.status(500).send(e.message);
+  }
+};
+
+exports.GetThumbnail = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const task = await models.Task.findByPk(id);
+    res.set("Content-Type", "image/png");
+    res.send(task.thumbnail);
   } catch (e) {
     res.status(500).send(e.message);
   }
