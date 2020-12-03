@@ -1,13 +1,19 @@
 // @ts-nocheck
-const { Assignment, Course, Student } = require("../models").sequelize.models;
+const {
+  Assignment,
+  Course,
+  Task,
+  Student,
+  Comment,
+} = require("../models").sequelize.models;
 
 exports.CreateAssignment = async (req, res) => {
   try {
     const { StudentId, TaskId } = req.body;
     const newAssigment = await Assignment.create({
-      fileData: req.file.buffer,
-      fileName: req.file.originalname,
-      mimeType: req.file.mimetype,
+      fileData: req.file ? req.file.buffer : null,
+      fileName: req.file ? req.file.originalname : null,
+      mimeType: req.file ? req.file.mimetype : null,
       StudentId,
       TaskId,
       dismissed: false,
@@ -43,22 +49,34 @@ exports.GetFile = async (req, res) => {
   }
 };
 
-exports.GetAssignmentByCourse = async (req, res) => {
+exports.GetAssignmentPreviewsByCourse = async (req, res) => {
   try {
     const { id } = req.params;
-    const students = await Student.findAll({ where: { CourseId: id } });
-    const assignments = [];
-    students.forEach(async (student, i) => {
-      const StudentId = student.id;
-      let subGroup = await Assignment.findAll({ where: { StudentId } });
-      assignments.push(...subGroup);
-      // subGroup.forEach(assignment => {
-      //   assignments.push(assignment.dataValues);
-      // })
-      if (i === students.length - 1) {
-        res.status(200).send(assignments);
-      }
+    const students = await Student.findAll({
+      where: { CourseId: id },
+      include: {
+        model: Assignment,
+        include: [{ model: Task }, { model: Comment }],
+      },
     });
+    const allAssignments = [];
+    students.forEach((student) => {
+      const { Assignments } = student.dataValues;
+      Assignments.forEach((assignment) => {
+        console.log("ASSIGNEMNT", assignment);
+        if (!assignment.dataValues.dismissed) {
+          allAssignments.push({
+            AssignmentId: assignment.dataValues.id,
+            student: { name: student.name, avatar: student.avatar },
+            taskName: assignment.dataValues.Task.dataValues.title,
+            likes: assignment.dataValues.likes.length,
+            comments: assignment.dataValues.Comments.length,
+          });
+        }
+      });
+    });
+
+    res.status(200).send(allAssignments);
   } catch (e) {
     res.status(500).send(e.message);
   }

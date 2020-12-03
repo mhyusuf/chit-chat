@@ -11,3 +11,19 @@ export interface User {
   name: string;
   avatar: string;
 }
+
+export interface AssignmentPreview {
+  AssignmentId: number;
+  student: {
+    name: string;
+    avatar: string;
+  };
+  taskName: string;
+  likes: number;
+  comments: number;
+}
+
+export interface AssignmentState {
+  AssignmentDetail: any;
+  AssignmentPreviews: AssignmentPreview[];
+}

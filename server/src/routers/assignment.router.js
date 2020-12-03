@@ -7,7 +7,7 @@ const {
   DeleteAssignment,
   EditAssignment,
   GetAssignmentById,
-  GetAssignmentByCourse,
+  GetAssignmentPreviewsByCourse,
   GetAssignmentByStudent,
   GetAssignmentByTask,
   GetFile,
@@ -18,7 +18,7 @@ router.delete("/:id", DeleteAssignment);
 router.put("/:id", authMiddleware, EditAssignment);
 router.get("/:id", GetAssignmentById);
 router.get("/:id/download", GetFile);
-router.get("/course/:id", GetAssignmentByCourse);
+router.get("/course/:id", GetAssignmentPreviewsByCourse);
 router.get("/student/:id", GetAssignmentByStudent);
 router.get("/task/:id", GetAssignmentByTask);
 
