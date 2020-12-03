@@ -122,11 +122,9 @@ const RoomDetail: FunctionComponent = () => {
     </div>
   ));
 
-  const renderEverything = () => {
-    return allMessages.map((message, idx) => (
-      <Message key={idx} message={message} />
-    ));
-  };
+  const allMessagesJSX = allMessages.map((message, idx) => (
+    <Message key={idx} message={message} />
+  ));
 
   function toggleAudioSelected() {
     setAudioSelected((selected) => !selected);
@@ -191,7 +189,7 @@ const RoomDetail: FunctionComponent = () => {
         </div>
         <div className="room-detail-grand-wrapper__chat-block__chatroom">
           <div className="room-detail-grand-wrapper__chat-block__chatroom__messages-wrapper">
-            {renderEverything()}
+            <div className="flex-div">{allMessagesJSX}</div>
           </div>
           {inputBlock}
         </div>
