@@ -1,5 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
   const Student = sequelize.define("Student", {
+    isTeacher: false,
     userId: {
       type: DataTypes.UUID,
       allowNull: false,
