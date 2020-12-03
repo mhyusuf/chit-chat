@@ -1,5 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
   const Teacher = sequelize.define("Teacher", {
+    isTeacher: true,
     userId: {
       type: DataTypes.UUID,
       allowNull: false,
@@ -13,6 +14,10 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
     password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    avatar: {
       type: DataTypes.STRING,
       allowNull: false,
     },
