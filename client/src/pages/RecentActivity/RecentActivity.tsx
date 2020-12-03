@@ -6,11 +6,11 @@ import "./RecentActivity.scss";
 const RecentActivity: FunctionComponent = () => {
   const mockData = [
     {
-      taskName: "task 1",
+      taskName: "assignment 1",
       studentName: "Timmy",
       studentId: "somestrangestring",
       taskId: "somestrangestring",
-      eventId: "817264",
+      assignmentId: "817264",
       likes: 8,
       comments: [
         {
@@ -24,11 +24,11 @@ const RecentActivity: FunctionComponent = () => {
       ],
     },
     {
-      taskName: "task 2",
+      taskName: "assignment 2",
       studentName: "Timmy",
       studentId: "somestrangestring",
       taskId: "somestrangestring",
-      eventId: "817264",
+      assignmentId: "817264",
       likes: 8,
       comments: [
         {
@@ -42,11 +42,11 @@ const RecentActivity: FunctionComponent = () => {
       ],
     },
     {
-      taskName: "task 3",
+      taskName: "assignment 3",
       studentName: "Timmy",
       studentId: "somestrangestring",
       taskId: "somestrangestring",
-      eventId: "817264",
+      assignmentId: "817264",
       likes: 8,
       comments: [
         {
@@ -65,16 +65,16 @@ const RecentActivity: FunctionComponent = () => {
     <div className="recent-activity-grand-wrapper">
       <h1>Recent Activity</h1>
       <div className="recent-activity-events-wrapper">
-        {mockData.map((event) => {
+        {mockData.map((event, idx) => {
           return (
             <Assignment
               studentName={event.studentName}
-              key={event.studentId}
+              key={idx}
               title={event.taskName}
               likes={event.likes}
               comments={event.comments.length}
               taskId={event.taskId}
-              eventId={event.eventId}
+              assignmentId={event.assignmentId}
             />
           );
         })}

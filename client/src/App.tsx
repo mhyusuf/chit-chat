@@ -20,7 +20,8 @@ function App({
 
   return (
     <BrowserRouter>
-      {user.uuid ? <AuthorizedApp /> : <UnauthorizedApp />}
+      {/* {user.userId ? <AuthorizedApp /> : <UnauthorizedApp />} */}
+      <AuthorizedApp />
     </BrowserRouter>
   );
 }

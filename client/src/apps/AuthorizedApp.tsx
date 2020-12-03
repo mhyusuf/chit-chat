@@ -1,11 +1,14 @@
 import React, { FunctionComponent, useState } from "react";
 import TeacherApp from "./TeacherApp";
 import StudentApp from "./StudentApp";
+import { connect } from "react-redux";
+import { User } from "../interfaces/reducerInterfaces";
 
-const AuthorizedApp: FunctionComponent<any> = () => {
-  const [isTeacher, setIsTeacher] = useState(false);
-
-  return <div>{isTeacher ? <TeacherApp /> : <StudentApp />}</div>;
+const AuthorizedApp: FunctionComponent<any> = ({ user }) => {
+  return <div>{user.isTeacher ? <TeacherApp /> : <StudentApp />}</div>;
 };
 
-export default AuthorizedApp;
+function mapStateToProps({ user }: { user: User }) {
+  return { user };
+}
+export default connect(mapStateToProps, {})(AuthorizedApp);

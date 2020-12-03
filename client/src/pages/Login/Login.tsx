@@ -3,7 +3,16 @@ import { connect } from "react-redux";
 import { loginTeacher, loginStudent } from "../../actions";
 import "./Login.scss";
 
-const Login: FunctionComponent<any> = ({ loginTeacher, loginStudent }) => {
+// interface LoginProps extends RouteComponentProps {
+//   loginTeacher: ()=>void,
+//   loginStudent: ()=>void,
+// }
+
+const Login: FunctionComponent<any> = ({
+  loginTeacher,
+  loginStudent,
+  history,
+}) => {
   const [teacherStatus, setTeacherStatus] = useState(false);
   const [formData, setFormData] = useState({ email: "", password: "" });
 
@@ -22,8 +31,8 @@ const Login: FunctionComponent<any> = ({ loginTeacher, loginStudent }) => {
 
   const loginHandler = (e: FormEvent) => {
     e.preventDefault();
-    if (teacherStatus) loginTeacher(formData);
-    else loginStudent(formData);
+    if (teacherStatus) loginTeacher(formData, history);
+    else loginStudent(formData, history);
   };
 
   const teacherButton = teacherStatus ? (
