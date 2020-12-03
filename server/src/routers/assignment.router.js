@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const { authMiddleware } = require("../middlewares/auth");
+const { uploadFile } = require("../utils/uploadFile");
 
 const {
   CreateAssignment,
@@ -9,14 +10,16 @@ const {
   GetAssignmentByCourse,
   GetAssignmentByStudent,
   GetAssignmentByTask,
+  GetFile,
 } = require("../controllers/assignment.controller");
 
-router.post("/", CreateAssignment);
+router.post("/", uploadFile.single("fileData"), CreateAssignment);
 router.delete("/:id", DeleteAssignment);
 router.put("/:id", authMiddleware, EditAssignment);
 router.get("/:id", GetAssignmentById);
-router.get("/c/:id", GetAssignmentByCourse);
-router.get("/s/:id", GetAssignmentByStudent);
-router.get("/t/:id", GetAssignmentByTask);
+router.get("/:id/download", GetFile);
+router.get("/course/:id", GetAssignmentByCourse);
+router.get("/student/:id", GetAssignmentByStudent);
+router.get("/task/:id", GetAssignmentByTask);
 
 module.exports = router;

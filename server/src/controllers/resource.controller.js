@@ -18,3 +18,14 @@ exports.GetResources = async (req, res) => {
     res.status(500).send(e.message);
   }
 };
+
+exports.GetResourceFile = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const resource = await models.Resource.findByPk(id);
+    res.set("Content-Type", resource.mimeType);
+    res.send(resource.fileData);
+  } catch (e) {
+    res.status(500).send(e.message);
+  }
+};
