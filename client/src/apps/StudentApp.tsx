@@ -21,7 +21,7 @@ const StudentApp: FunctionComponent = () => {
         <div className="app-wrapper__router-wrapper">
           <Switch>
             <Route path="/home" component={RecentActivity} />
-            <Route path="/events/:id" component={AssignmentDetail} />
+            <Route path="/assignments/:id" component={AssignmentDetail} />
             <Route path="/tasks" component={Tasks} exact />
             <Route path="/tasks/:id" component={TaskDetail} />
             <Route path="/rooms/:id" component={RoomDetail} />

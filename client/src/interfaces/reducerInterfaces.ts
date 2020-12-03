@@ -7,7 +7,7 @@ export interface ChitChatAction<T> extends Action {
 
 export interface User {
   isTeacher: boolean;
-  uuid: string;
+  userId: string;
   name: string;
   avatar: string;
 }

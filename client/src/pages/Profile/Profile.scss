@@ -28,6 +28,9 @@
     button {
       margin-left: 4rem;
     }
+    button {
+      @include primary-button;
+    }
   }
 }
 

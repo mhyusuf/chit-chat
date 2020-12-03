@@ -11,7 +11,7 @@ type AssignmentProps = {
   likes: number;
   comments: number;
   taskId: string;
-  eventId: string;
+  assignmentId: string;
 };
 
 const Assignment: FunctionComponent<AssignmentProps> = ({
@@ -20,24 +20,27 @@ const Assignment: FunctionComponent<AssignmentProps> = ({
   likes,
   comments,
   taskId,
-  eventId,
+  assignmentId,
 }) => {
   return (
-    <NavLink to={`/events/${eventId}`} className="event-nav-link">
-      <div className="event-grand-wrapper" style={{}}>
-        <div className="event-grand-wrapper__img-title-name-div">
-          <div className="event-grand-wrapper__img-title-name-div__avatar"></div>
-          <div className="event-grand-wrapper__img-title-name-div__title-name-sub-div">
+    <NavLink
+      to={`/assignments/${assignmentId}`}
+      className="assignment-nav-link"
+    >
+      <div className="assignment-grand-wrapper" style={{}}>
+        <div className="assignment-grand-wrapper__img-title-name-div">
+          <div className="assignment-grand-wrapper__img-title-name-div__avatar"></div>
+          <div className="assignment-grand-wrapper__img-title-name-div__title-name-sub-div">
             <h3>{title}</h3>
             <p>{studentName}</p>
           </div>
         </div>
-        <div className="event-grand-wrapper__likes-comments-div">
-          <div className="event-grand-wrapper__icon-container">
+        <div className="assignment-grand-wrapper__likes-comments-div">
+          <div className="assignment-grand-wrapper__icon-container">
             <h3>{likes}</h3>
             <FaRegHeart className="red" />
           </div>
-          <div className="event-grand-wrapper__icon-container">
+          <div className="assignment-grand-wrapper__icon-container">
             <h3>{comments}</h3>
             <ImBubble2 className="blue" />
           </div>

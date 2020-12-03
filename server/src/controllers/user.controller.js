@@ -1,8 +1,6 @@
-const models = require("../models").sequelize.models;
-
 exports.LogoutUser = async (req, res) => {
   res.clearCookie("authToken");
-  res.redirect("/");
+  res.send(200);
 };
 
 exports.GetCurrentUser = async (req, res) => {

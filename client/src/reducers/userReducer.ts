@@ -3,7 +3,7 @@ import { ChitChatAction, User } from "../interfaces/reducerInterfaces";
 
 const initialState: User = {
   isTeacher: false,
-  uuid: "",
+  userId: "",
   name: "",
   avatar: "",
 };
