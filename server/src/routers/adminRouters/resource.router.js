@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const { uploadFile } = require("../../utils/uploadFile");
 
 const {
   CreateResource,
@@ -6,7 +7,7 @@ const {
   EditResource,
 } = require("../../controllers/adminControllers/resource.controller");
 
-router.post("/", CreateResource);
+router.post("/", uploadFile.single("fileData"), CreateResource);
 router.delete("/:id", DeleteResource);
 router.put("/:id", EditResource);
 

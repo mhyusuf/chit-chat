@@ -1,7 +1,11 @@
 module.exports = (sequelize, DataTypes) => {
   const Assignment = sequelize.define("Assignment", {
-    submitData: {
+    fileData: {
       type: DataTypes.BLOB,
+      allowNull: true,
+    },
+    mimeType: {
+      type: DataTypes.STRING,
       allowNull: true,
     },
     dismissed: {
@@ -11,6 +15,10 @@ module.exports = (sequelize, DataTypes) => {
     likes: {
       type: DataTypes.ARRAY(DataTypes.UUID),
       allowNull: false,
+    },
+    fileName: {
+      type: DataTypes.STRING,
+      allowNull: true,
     },
   });
 

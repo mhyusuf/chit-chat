@@ -1,11 +1,12 @@
 const { Assignment, Course, Student } = require("../models").sequelize.models;
 
 exports.CreateAssignment = async (req, res) => {
-  //TODO: CONFIGURE UPLOAD MIDDLEWARE
   try {
-    const { submitData, StudentId, TaskId } = req.body;
+    const { StudentId, TaskId } = req.body;
     const newAssigment = await Assignment.create({
-      submitData,
+      fileData: req.file.buffer,
+      fileName: req.file.originalname,
+      mimeType: req.file.mimetype,
       StudentId,
       TaskId,
       dismissed: false,
@@ -27,6 +28,20 @@ exports.GetAssignmentById = async (req, res) => {
     res.status(500).send(e.message);
   }
 };
+
+exports.GetFile = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const assignment = await Assignment.findByPk(id);
+    console.log(assignment.fileData, assignment.mimeType, assignment.fileName);
+    res.status(200);
+    res.set("Content-Type", assignment.mimeType);
+    res.send(assignment.fileData);
+  } catch (e) {
+    res.status(500).send(e.message);
+  }
+};
+
 exports.GetAssignmentByCourse = async (req, res) => {
   try {
     const { id } = req.params;

@@ -16,8 +16,16 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.BOOLEAN,
       allowNull: false,
     },
-    fileContent: {
+    fileData: {
       type: DataTypes.BLOB,
+      allowNull: true,
+    },
+    mimeType: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    fileName: {
+      type: DataTypes.STRING,
       allowNull: true,
     },
     nativeLanguage: {

@@ -1,6 +1,7 @@
 const multer = require("multer");
+const sharp = require("sharp");
 
-module.exports = multer({
+exports.uploadThumbnail = multer({
   limits: { fileSize: "1000000" },
   fileFilter(req, file, cb) {
     if (!file.originalname.match(/\.(jpg|jpeg|png|gif|svg|tiff)$/)) {
@@ -13,3 +14,7 @@ module.exports = multer({
     cb(null, true);
   },
 });
+
+exports.processImage = ({ buffer, width, height }) => {
+  return sharp(buffer).resize({ width, height }).png().toBuffer();
+};
