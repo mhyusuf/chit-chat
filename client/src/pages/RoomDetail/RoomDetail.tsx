@@ -1,4 +1,9 @@
-import React, { FunctionComponent, useEffect, useState } from "react";
+import React, {
+  FunctionComponent,
+  useEffect,
+  useState,
+  useCallback,
+} from "react";
 import { createMessage } from "../../apiService/messageService";
 import io from "socket.io-client";
 import { IoIosSend } from "react-icons/io";
@@ -96,6 +101,11 @@ const RoomDetail: FunctionComponent = () => {
   const [audioSelected, setAudioSelected] = useState(false);
   const [input, setInput] = useState("");
   const [allMessages, setAllMessages] = useState(messages);
+  const setRef = useCallback((node) => {
+    if (node) {
+      node.scrollIntoView({ smooth: true });
+    }
+  }, []);
 
   useEffect(() => {
     socket.on("message", (message: any) => {
@@ -122,9 +132,19 @@ const RoomDetail: FunctionComponent = () => {
     </div>
   ));
 
-  const allMessagesJSX = allMessages.map((message, idx) => (
-    <Message key={idx} message={message} />
-  ));
+  const allMessagesJSX = allMessages.map((message, idx) => {
+    const classes = message.self
+      ? "message-grand-wrapper message-grand-wrapper--self"
+      : "message-grand-wrapper";
+    return (
+      <div
+        className={classes}
+        ref={idx === allMessages.length - 1 ? setRef : null}
+      >
+        <Message key={idx} message={message} />
+      </div>
+    );
+  });
 
   function toggleAudioSelected() {
     setAudioSelected((selected) => !selected);
