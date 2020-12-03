@@ -1,13 +1,30 @@
-import React, { FunctionComponent, useState } from "react";
+import React, { FormEvent, FunctionComponent, useState } from "react";
+import { connect } from "react-redux";
+import { loginTeacher, loginStudent } from "../../actions";
 import "./Login.scss";
 
-const Login: FunctionComponent<any> = () => {
+const Login: FunctionComponent<any> = ({ loginTeacher, loginStudent }) => {
   const [teacherStatus, setTeacherStatus] = useState(false);
+  const [formData, setFormData] = useState({ email: "", password: "" });
 
   function toggleTeacher(e: any) {
     e.preventDefault();
     setTeacherStatus((teacherStatus) => !teacherStatus);
   }
+
+  const handleInputChange = (e: {
+    target: { name: string; value: string };
+  }) => {
+    setFormData((data) => {
+      return { ...data, [e.target.name]: e.target.value };
+    });
+  };
+
+  const loginHandler = (e: FormEvent) => {
+    e.preventDefault();
+    if (teacherStatus) loginTeacher(formData);
+    else loginStudent(formData);
+  };
 
   const teacherButton = teacherStatus ? (
     <button
@@ -38,15 +55,27 @@ const Login: FunctionComponent<any> = () => {
           {promptText}
           {teacherButton}
         </div>
-        <form>
+        <form onSubmit={loginHandler}>
           <label className="align-email" htmlFor="email">
             Email:{" "}
           </label>
-          <input className="align-email" name="email" type="text" />
-          <label className="align-pw" htmlFor="pw">
+          <input
+            onChange={handleInputChange}
+            value={formData.email}
+            className="align-email"
+            name="email"
+            type="text"
+          />
+          <label className="align-pw" htmlFor="password">
             Password:{" "}
           </label>
-          <input className="align-pw" name="pw" type="password" />
+          <input
+            onChange={handleInputChange}
+            value={formData.password}
+            className="align-pw"
+            name="password"
+            type="password"
+          />
           <button>Login</button>
         </form>
       </div>
@@ -54,4 +83,4 @@ const Login: FunctionComponent<any> = () => {
   );
 };
 
-export default Login;
+export default connect(null, { loginStudent, loginTeacher })(Login);

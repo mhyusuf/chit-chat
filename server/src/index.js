@@ -5,9 +5,11 @@ const db = require("./models");
 const routers = require("./routers");
 const adminRouters = require("./routers/adminRouters");
 const cookieParser = require("cookie-parser");
+const cors = require("cors");
 
 require("dotenv").config();
 
+app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 
@@ -29,12 +31,12 @@ app.use("/admin/room", adminRouters.roomRouter);
 app.use("/admin/student", adminRouters.studentRouter);
 
 const server = require("http").createServer(app);
+// @ts-ignore
 const io = require("socket.io")(server, {
   cors: {
-    // origin: "*",
+    origin: "*",
   },
 });
-// require("./socket")(io);
 console.log("HELLO");
 io.on("connect", (socket) => {
   console.log("user connected to io");

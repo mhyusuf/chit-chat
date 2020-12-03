@@ -1,6 +1,9 @@
 module.exports = (sequelize, DataTypes) => {
   const Teacher = sequelize.define("Teacher", {
-    isTeacher: true,
+    isTeacher: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true,
+    },
     userId: {
       type: DataTypes.UUID,
       allowNull: false,

@@ -1,9 +1,8 @@
-import { AnySoaRecord } from "dns";
+import createProxyMiddleware from "http-proxy-middleware";
 
-const { createProxyMiddleware } = require("http-proxy-middleware");
 module.exports = (app: any) => {
   app.use(
-    ["/api", "/auth"],
+    ["/api", "/admin"],
     createProxyMiddleware({
       target: "http://localhost:5000",
     })
