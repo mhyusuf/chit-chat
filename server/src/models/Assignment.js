@@ -25,6 +25,7 @@ module.exports = (sequelize, DataTypes) => {
   Assignment.associate = (models) => {
     Assignment.belongsTo(models.Student);
     Assignment.belongsTo(models.Task);
+    Assignment.hasMany(models.Comment);
   };
 
   return Assignment;

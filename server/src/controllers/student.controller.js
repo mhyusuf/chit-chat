@@ -74,7 +74,9 @@ exports.ChangeAvatarStudent = async (req, res) => {
 exports.GetStudentById = async (req, res) => {
   try {
     const { id } = req.params;
-    const result = await models.Student.findByPk(id);
+    const result = await models.Student.findByPk(id, {
+      include: [{ model: models.Assignment }, { model: models.Room }],
+    });
     if (result) res.status(200).send(result);
     else res.status(404).send(new Error("Student not found"));
   } catch (e) {
