@@ -1,6 +1,6 @@
 exports.LogoutUser = async (req, res) => {
   res.clearCookie("authToken");
-  res.send(200);
+  res.sendStatus(204);
 };
 
 exports.GetCurrentUser = async (req, res) => {

@@ -3,10 +3,10 @@ import { Dispatch } from "react";
 import { GET_CURRENT_USER } from "./types";
 import { History } from "history";
 
-const BASE_URL = "http://localhost:5000/";
+// const BASE_URL = "http://localhost:5000/";
 
 export const getCurrentUser = () => async (dispatch: Dispatch<any>) => {
-  const { data } = await axios.get(BASE_URL + "api/user");
+  const { data } = await axios.get("/api/user");
   dispatch({ type: GET_CURRENT_USER, payload: data });
 };
 
@@ -20,7 +20,7 @@ export const loginStudent = (
   },
   history: History<any>
 ) => async (dispatch: Dispatch<any>) => {
-  const { data } = await axios.post(BASE_URL + "api/student/login", {
+  const { data } = await axios.post("/api/student/login", {
     email,
     password,
   });
@@ -38,7 +38,7 @@ export const loginTeacher = (
   },
   history: History<any>
 ) => async (dispatch: Dispatch<any>) => {
-  const { data } = await axios.post(BASE_URL + "api/teacher/login", {
+  const { data } = await axios.post("/api/teacher/login", {
     email,
     password,
   });
@@ -47,7 +47,7 @@ export const loginTeacher = (
 };
 
 export const logout = (history: History<any>) => async (dispatch: any) => {
-  await axios.get(BASE_URL + "api/user/logout");
+  await axios.get("/api/user/logout");
   dispatch({ type: GET_CURRENT_USER, payload: null });
   history.push("/login");
 };
