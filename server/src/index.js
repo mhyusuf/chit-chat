@@ -5,11 +5,9 @@ const db = require("./models");
 const routers = require("./routers");
 const adminRouters = require("./routers/adminRouters");
 const cookieParser = require("cookie-parser");
-const cors = require("cors");
 
 require("dotenv").config();
 
-app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 app.use(express.json());
 app.use(cookieParser());
 
@@ -34,7 +32,7 @@ const server = require("http").createServer(app);
 // @ts-ignore
 const io = require("socket.io")(server, {
   cors: {
-    // origin: "*",
+    origin: "*",
   },
 });
 console.log("HELLO");
