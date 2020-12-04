@@ -128,12 +128,18 @@ const RoomDetail: FunctionComponent<RoomDetailProps> = (props) => {
       formData.append("contentType", "audio");
       formData.append("fileContent", blob);
       formData.append("RoomId", id);
-      const respo = await axios.post("/api/message", formData, {
+      const { data } = await axios.post("/api/message", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
-      console.log(respo);
+      socket.emit("message", {
+        sender: user,
+        type: data.contentType,
+        content: `/api/message/${data.id}/audio`,
+        seenBy: data.seenBy,
+        createdAt: data.createdAt,
+      });
     } else {
       socket.emit("message", {
         sender: user,
