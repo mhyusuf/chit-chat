@@ -27,6 +27,7 @@ exports.GetMessagesByRoom = async (req, res) => {
           ? message.textContent
           : `/message/api/${message.id}/audio`,
         seenBy: message.seenBy,
+        createdAt,
       });
     }
     res.status(200).send(results);

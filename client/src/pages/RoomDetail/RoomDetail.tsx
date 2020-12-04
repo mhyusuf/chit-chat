@@ -67,6 +67,7 @@ const RoomDetail: FunctionComponent<RoomDetailProps> = (props) => {
 
   useEffect(() => {
     setLocalMessages(roomDetail.messages);
+    console.log("MESSAGES", roomDetail.messages);
   }, [roomDetail.messages]);
 
   const studentList = roomDetail.students.map(
@@ -137,6 +138,7 @@ const RoomDetail: FunctionComponent<RoomDetailProps> = (props) => {
         RoomId: id,
       });
     }
+    setInput("");
     //trigger socket with message from variable Input and state Current User
   }
 
