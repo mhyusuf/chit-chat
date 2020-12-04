@@ -4,7 +4,8 @@ import React, {
   useState,
   useCallback,
 } from "react";
-import { connect, useDispatch } from "react-redux";
+import { connect } from "react-redux";
+import {} from "redux";
 import { createMessage } from "../../apiService/messageService";
 import io from "socket.io-client";
 import { IoIosSend } from "react-icons/io";
@@ -14,6 +15,7 @@ import { getAllMessagesByRoom, getRoomUsers } from "../../actions";
 
 import AudioCapture from "../../components/AudioCapture";
 import Message from "../../components/Message";
+import { Message as IMessage } from "../../interfaces/reducerInterfaces";
 import "./RoomDetail.scss";
 import {
   RoomDetailState,
@@ -40,7 +42,7 @@ const RoomDetail: FunctionComponent<RoomDetailProps> = (props) => {
   const { roomDetail, getAllMessagesByRoom, getRoomUsers, match, user } = props;
   const [audioSelected, setAudioSelected] = useState(false);
   const [input, setInput] = useState("");
-  const dispatch = useDispatch();
+  const [localMessages, setLocalMessages] = useState<IMessage[]>([]);
 
   const { id } = match.params;
 
@@ -51,21 +53,26 @@ const RoomDetail: FunctionComponent<RoomDetailProps> = (props) => {
   }, []);
 
   useEffect(() => {
-    getAllMessagesByRoom(id);
     getRoomUsers(id);
+    getAllMessagesByRoom(id);
 
     socket.on("message", (newMessage: any) => {
-      dispatch({
-        type: GET_ALL_MESSAGES,
-        payload: [...roomDetail.messages, newMessage],
-      });
+      setLocalMessages((msgs) => [...msgs, newMessage]);
+      // dispatch({
+      //   type: GET_ALL_MESSAGES,
+      //   payload: [...roomDetail.messages, newMessage],
+      // });
     });
   }, []);
+
+  useEffect(() => {
+    setLocalMessages(roomDetail.messages);
+  }, [roomDetail.messages]);
 
   const studentList = roomDetail.students.map(
     (user: RoomParticipant, idx: number) => (
       <div
-        key={idx}
+        key={`${idx}/student`}
         className="room-detail-grand-wrapper__chat-block__user-item"
       >
         <span>{user.name}</span>
@@ -78,7 +85,7 @@ const RoomDetail: FunctionComponent<RoomDetailProps> = (props) => {
   const teacherList = roomDetail.teachers.map(
     (user: RoomParticipant, idx: number) => (
       <div
-        key={idx}
+        key={`${idx}/teacher`}
         className="room-detail-grand-wrapper__chat-block__user-item"
       >
         <span>{user.name}</span>
@@ -89,7 +96,7 @@ const RoomDetail: FunctionComponent<RoomDetailProps> = (props) => {
     )
   );
 
-  const allMessagesJSX = roomDetail.messages.map((message, idx) => {
+  const allMessagesJSX = localMessages.map((message, idx) => {
     const self = message.sender.name === user.name;
     const classes = self
       ? "message-grand-wrapper message-grand-wrapper--self"
@@ -97,9 +104,10 @@ const RoomDetail: FunctionComponent<RoomDetailProps> = (props) => {
     return (
       <div
         className={classes}
-        ref={idx === roomDetail.messages.length - 1 ? setRef : null}
+        ref={idx === localMessages.length - 1 ? setRef : null}
+        key={`${idx}/${message.content}`}
       >
-        <Message key={idx} message={message} self={self} />
+        <Message message={message} self={self} />
       </div>
     );
   });

@@ -12,6 +12,7 @@ const initialState: RoomDetailState = {
 const reducer = (state = initialState, action: ChitChatAction<any>) => {
   switch (action.type) {
     case GET_ALL_MESSAGES:
+      // console.log(action.payload);
       return { ...state, messages: action.payload };
     case GET_ROOM_USERS:
       return {
