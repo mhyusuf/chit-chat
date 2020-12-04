@@ -48,10 +48,21 @@
     justify-content: center;
     .text {
       font-size: 1.5rem;
+      padding: 0.5rem 1rem;
     }
-    .timestamp {
+    .tiny-text {
+      display: flex;
+      justify-content: space-between;
       font-size: 1rem;
       color: gray;
+      .timestamp {
+        margin: 0 0.5rem;
+      }
+    }
+
+    audio {
+      height: 3rem;
+      margin: 0.5rem 0;
     }
   }
 }
@@ -88,9 +99,14 @@
     margin-left: 0rem;
     margin-right: 1rem;
 
-    .text,
-    .timestamp {
+    .text {
       align-self: flex-end;
+    }
+    .tiny-text {
+      flex-direction: row-reverse;
+      .timestamp {
+        align-self: flex-end;
+      }
     }
   }
 }
