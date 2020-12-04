@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export function createMessage(message: any) {
-  return message;
+  return axios.post("/api/message", { message });
 }
