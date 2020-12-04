@@ -18,89 +18,9 @@ import "./RoomDetail.scss";
 import {
   RoomDetailState,
   RoomParticipant,
+  User,
 } from "../../interfaces/reducerInterfaces";
 import { RouteComponentProps } from "react-router-dom";
-
-// const teachers = [
-//   {
-//     name: "Mme. LeBlanc",
-//     avatar: "ML",
-//   },
-//   {
-//     name: "Sr. Marquez",
-//     avatar: "SM",
-//   },
-// ];
-// const students = [
-//   {
-//     name: "Matt",
-//     avatar: "MH",
-//   },
-//   {
-//     name: "Johan",
-//     avatar: "JS",
-//   },
-//   {
-//     name: "Mohamed",
-//     avatar: "MY",
-//   },
-//   {
-//     name: "Brett",
-//     avatar: "BG",
-//   },
-//   {
-//     name: "SooYeon",
-//     avatar: "SK",
-//   },
-//   {
-//     name: "Olly",
-//     avatar: "OB",
-//   },
-// ];
-// const messages = [
-//   {
-//     sender: { name: "Matt", avatar: "MH" },
-//     text_content: "Hola amigos! ¿Qué tal?",
-//     timeSent: "today",
-//     self: true,
-//   },
-//   {
-//     sender: { name: "Brett", avatar: "BG" },
-//     text_content: "Mon français est toujours mal, désolé...",
-//     timeSent: "today",
-//     self: false,
-//   },
-//   {
-//     sender: { name: "SooYeon", avatar: "SK" },
-//     text_content: "Bonjour!",
-//     timeSent: "today",
-//     self: false,
-//   },
-//   {
-//     sender: { name: "Olly", avatar: "OB" },
-//     text_content: "Entschuldigung, falsches Chatzimmer!",
-//     timeSent: "today",
-//     self: false,
-//   },
-//   {
-//     sender: { name: "Mohamed", avatar: "MY" },
-//     text_content: "¡Encantado de conocervos todos!",
-//     timeSent: "today",
-//     self: false,
-//   },
-//   {
-//     sender: { name: "Johan", avatar: "JS" },
-//     text_content: "Still learning English, sorry.",
-//     timeSent: "today",
-//     self: false,
-//   },
-//   {
-//     sender: { name: "Matt", avatar: "MH" },
-//     text_content: "Soy inglese, pero hablo espånnol muy bien.",
-//     timeSent: "today",
-//     self: true,
-//   },
-// ];
 
 const socket = io.connect("http://localhost:5000");
 
@@ -112,17 +32,20 @@ interface RoomDetailProps extends RouteComponentProps<matchInterface> {
   roomDetail: RoomDetailState;
   getAllMessagesByRoom: (id: string) => void;
   getRoomUsers: (id: string) => void;
+  username: string;
 }
 
 const RoomDetail: FunctionComponent<RoomDetailProps> = (props) => {
-  const { roomDetail, getAllMessagesByRoom, getRoomUsers, match } = props;
+  const {
+    roomDetail,
+    getAllMessagesByRoom,
+    getRoomUsers,
+    match,
+    username,
+  } = props;
   const [audioSelected, setAudioSelected] = useState(false);
   const [input, setInput] = useState("");
-  // const [allMessages, setAllMessages] = useState([]);
 
-  const user = {
-    name: "Maffew Hearst",
-  };
   const { id } = match.params;
 
   const setRef = useCallback((node) => {
@@ -168,16 +91,16 @@ const RoomDetail: FunctionComponent<RoomDetailProps> = (props) => {
   );
 
   const allMessagesJSX = roomDetail.messages.map((message, idx) => {
-    const classes =
-      message.sender.name === user.name
-        ? "message-grand-wrapper message-grand-wrapper--self"
-        : "message-grand-wrapper";
+    const self = message.sender.name === username;
+    const classes = self
+      ? "message-grand-wrapper message-grand-wrapper--self"
+      : "message-grand-wrapper";
     return (
       <div
         className={classes}
         ref={idx === roomDetail.messages.length - 1 ? setRef : null}
       >
-        <Message key={idx} message={message} />
+        <Message key={idx} message={message} self={self} />
       </div>
     );
   });
@@ -254,8 +177,14 @@ const RoomDetail: FunctionComponent<RoomDetailProps> = (props) => {
   );
 };
 
-const mapStateToProps = ({ roomDetail }: { roomDetail: RoomDetailState }) => {
-  return { roomDetail };
+const mapStateToProps = ({
+  roomDetail,
+  user,
+}: {
+  roomDetail: RoomDetailState;
+  user: User;
+}) => {
+  return { roomDetail, username: user.name };
 };
 
 export default connect(mapStateToProps, { getAllMessagesByRoom, getRoomUsers })(

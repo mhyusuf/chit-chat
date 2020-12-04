@@ -5,22 +5,26 @@ import "./Message.scss";
 // timeSent: 'today', self: true},
 
 const Message: FunctionComponent<any> = (props) => {
-  const { sender, text_content, timeSent, self } = props.message;
+  const { sender, content, createdAt } = props.message;
 
-  return self ? (
+  return props.self ? (
     <>
       <div className="message-grand-wrapper__message-block">
-        <p className="text">{text_content}</p>
-        <p className="timestamp">{timeSent}</p>
+        <p className="text">{content}</p>
+        <p className="timestamp">{createdAt}</p>
       </div>
-      <div className="message-grand-wrapper__avatar">{sender.avatar}</div>
+      <div className="message-grand-wrapper__avatar-wrapper">
+        <div className="message-grand-wrapper__avatar-wrapper__avatar" />
+      </div>
     </>
   ) : (
     <>
-      <div className="message-grand-wrapper__avatar">{sender.avatar}</div>
+      <div className="message-grand-wrapper__avatar-wrapper">
+        <div className="message-grand-wrapper__avatar-wrapper__avatar" />
+      </div>
       <div className="message-grand-wrapper__message-block">
-        <p className="text">{text_content}</p>
-        <p className="timestamp">{timeSent}</p>
+        <p className="text">{content}</p>
+        <p className="timestamp">{createdAt}</p>
       </div>
     </>
   );

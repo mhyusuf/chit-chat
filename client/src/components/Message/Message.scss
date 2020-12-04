@@ -26,19 +26,20 @@
     margin-top: -0.6rem;
     margin-left: -$S;
   }
-
-  &__avatar {
+  &__avatar-wrapper {
     height: 3rem;
     width: 3rem;
-    border: solid;
-    border-radius: 50%;
-    margin: $XXS;
-
-    font-size: $S;
-
     display: flex;
     align-items: center;
     justify-content: center;
+
+    &__avatar {
+      height: 100%;
+      width: 100%;
+      background-image: url("../../assets/unicorn.svg");
+      background-repeat: round;
+      flex-shrink: 0;
+    }
   }
   &__message-block {
     margin-left: 1rem;
