@@ -19,7 +19,7 @@ exports.GetMessagesByRoom = async (req, res) => {
       let sender =
         (teacher && teacher.dataValues) || (student && student.dataValues);
       const { name, avatar } = sender;
-      sender = { name, avatar };
+      sender = { name, avatar, createdAt: message.createdAt };
       results.push({
         sender,
         type: message.contentType,

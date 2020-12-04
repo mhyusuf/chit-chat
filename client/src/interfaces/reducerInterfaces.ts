@@ -38,6 +38,7 @@ export interface Message {
   type: string;
   content: string;
   seenBy: string[];
+  createdAt: string;
 }
 
 export interface RoomDetailState {
