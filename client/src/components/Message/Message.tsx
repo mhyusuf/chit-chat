@@ -1,3 +1,4 @@
+import moment from "moment";
 import React, { FunctionComponent } from "react";
 import "./Message.scss";
 // {sender: {name: 'Matt', avatar: 'MH'},
@@ -11,7 +12,7 @@ const Message: FunctionComponent<any> = (props) => {
     <>
       <div className="message-grand-wrapper__message-block">
         <p className="text">{content}</p>
-        <p className="timestamp">{createdAt}</p>
+        <p className="timestamp">{moment(createdAt).format("h:mm")}</p>
       </div>
       <div className="message-grand-wrapper__avatar-wrapper">
         <div className="message-grand-wrapper__avatar-wrapper__avatar" />
@@ -24,7 +25,7 @@ const Message: FunctionComponent<any> = (props) => {
       </div>
       <div className="message-grand-wrapper__message-block">
         <p className="text">{content}</p>
-        <p className="timestamp">{createdAt}</p>
+        <p className="timestamp">{moment(createdAt).format("h:mm")}</p>
       </div>
     </>
   );

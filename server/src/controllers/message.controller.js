@@ -19,7 +19,7 @@ exports.GetMessagesByRoom = async (req, res) => {
       let sender =
         (teacher && teacher.dataValues) || (student && student.dataValues);
       const { name, avatar } = sender;
-      sender = { name, avatar, createdAt: message.createdAt };
+      sender = { name, avatar };
       results.push({
         sender,
         type: message.contentType,
@@ -27,7 +27,7 @@ exports.GetMessagesByRoom = async (req, res) => {
           ? message.textContent
           : `/message/api/${message.id}/audio`,
         seenBy: message.seenBy,
-        createdAt,
+        createdAt: message.createdAt,
       });
     }
     res.status(200).send(results);
