@@ -7,9 +7,29 @@ exports.GetMessagesByRoom = async (req, res) => {
     const messages = await models.Message.findAll({
       where: { RoomId: id },
     });
-    if (messages) {
-      res.status(200).send(messages);
-    } else res.status(404).send(new Error("No messages found"));
+    const results = [];
+    for (let i = 0; i < messages.length; i++) {
+      const message = messages[i];
+      const teacher = await models.Teacher.findOne({
+        where: { userId: message.dataValues.sender },
+      });
+      const student = await models.Student.findOne({
+        where: { userId: message.dataValues.sender },
+      });
+      let sender =
+        (teacher && teacher.dataValues) || (student && student.dataValues);
+      const { name, avatar } = sender;
+      sender = { name, avatar };
+      results.push({
+        sender,
+        type: message.contentType,
+        content: message.textContent
+          ? message.textContent
+          : `/message/api/${message.id}/audio`,
+        seenBy: message.seenBy,
+      });
+    }
+    res.status(200).send(results);
   } catch (e) {
     res.status(500).send(e.message);
   }

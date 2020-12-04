@@ -83,16 +83,6 @@ exports.GetStudentById = async (req, res) => {
     res.status(500).send(e.message);
   }
 };
-exports.GetStudentsByRoom = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const result = await models.Student.findAll({ where: { RoomId: id } });
-    if (result) res.status(200).send(result);
-    else res.status(404).send(new Error("No students found"));
-  } catch (e) {
-    res.status(500).send(e.message);
-  }
-};
 exports.GetStudentsByCourse = async (req, res) => {
   try {
     const { id } = req.params;

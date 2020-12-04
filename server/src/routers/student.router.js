@@ -3,7 +3,6 @@ const { authMiddleware } = require("../middlewares/auth");
 
 const {
   GetStudentById,
-  GetStudentsByRoom,
   GetStudentsByCourse,
   ChangeNameStudent,
   ChangeAvatarStudent,
@@ -14,8 +13,7 @@ const {
 router.post("/register", RegisterStudent);
 router.post("/login", LoginStudent);
 router.get("/:id", authMiddleware, GetStudentById);
-router.get("/r/:id", authMiddleware, GetStudentsByRoom);
-router.get("/c/:id", authMiddleware, GetStudentsByCourse);
+router.get("/course/:id", authMiddleware, GetStudentsByCourse);
 router.put("/profile/:id", authMiddleware, ChangeNameStudent);
 router.put("/avatar/:id", authMiddleware, ChangeAvatarStudent);
 

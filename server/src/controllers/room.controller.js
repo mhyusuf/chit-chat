@@ -15,6 +15,38 @@ exports.GetRoomsByCourseId = async (req, res) => {
   }
 };
 
+exports.GetRoomDetailUsers = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const students = await models.Student.findAll({
+      where: { RoomId: id },
+      include: { model: models.Course, include: { model: models.Teacher } },
+    });
+    const teachers = [];
+    const roomDetailStudents = students.map((student) => {
+      const teacher = student.dataValues.Course.dataValues.Teacher;
+      const teacherId =
+        student.dataValues.Course.dataValues.Teacher.dataValues.userId;
+      const hasNoTeacher = teachers.length;
+      const hasOneTeacher = teachers[0] && !teachers[1];
+      if (!hasNoTeacher) {
+        teachers.push(teacher.dataValues);
+      } else if (hasOneTeacher && teachers[0].userId !== teacherId) {
+        teachers.push(teacher.dataValues);
+      }
+      return { name: student.name, avatar: student.avatar };
+    });
+    const roomDetailTeachers = teachers.map((teacher) => {
+      return { name: teacher.name, avatar: teacher.avatar };
+    });
+    res
+      .status(200)
+      .send({ students: roomDetailStudents, teachers: roomDetailTeachers });
+  } catch (e) {
+    res.status(500).send(e.message);
+  }
+};
+
 exports.GetRoomByStudentId = async (req, res) => {
   try {
     const { id } = req.params;
