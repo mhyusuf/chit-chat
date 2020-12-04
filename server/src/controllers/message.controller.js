@@ -49,7 +49,7 @@ exports.GetAudio = async (req, res) => {
 exports.CreateMessage = async (req, res) => {
   try {
     const sender = req.user.dataValues.userId;
-    const { contentType, textContent, RoomId } = req.body;
+    const { contentType, textContent, RoomId } = req.body.message;
     console.log("REQ FILE", req.file);
     const seenBy = [sender];
     if (req.file) {

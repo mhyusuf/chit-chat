@@ -4,7 +4,7 @@ import React, {
   useState,
   useCallback,
 } from "react";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { createMessage } from "../../apiService/messageService";
 import io from "socket.io-client";
 import { IoIosSend } from "react-icons/io";
@@ -21,6 +21,7 @@ import {
   User,
 } from "../../interfaces/reducerInterfaces";
 import { RouteComponentProps } from "react-router-dom";
+import { GET_ALL_MESSAGES } from "../../actions/types";
 
 const socket = io.connect("http://localhost:5000");
 
@@ -32,19 +33,14 @@ interface RoomDetailProps extends RouteComponentProps<matchInterface> {
   roomDetail: RoomDetailState;
   getAllMessagesByRoom: (id: string) => void;
   getRoomUsers: (id: string) => void;
-  username: string;
+  user: User;
 }
 
 const RoomDetail: FunctionComponent<RoomDetailProps> = (props) => {
-  const {
-    roomDetail,
-    getAllMessagesByRoom,
-    getRoomUsers,
-    match,
-    username,
-  } = props;
+  const { roomDetail, getAllMessagesByRoom, getRoomUsers, match, user } = props;
   const [audioSelected, setAudioSelected] = useState(false);
   const [input, setInput] = useState("");
+  const dispatch = useDispatch();
 
   const { id } = match.params;
 
@@ -58,8 +54,11 @@ const RoomDetail: FunctionComponent<RoomDetailProps> = (props) => {
     getAllMessagesByRoom(id);
     getRoomUsers(id);
 
-    socket.on("message", (message: any) => {
-      getAllMessagesByRoom(id);
+    socket.on("message", (newMessage: any) => {
+      dispatch({
+        type: GET_ALL_MESSAGES,
+        payload: [...roomDetail.messages, newMessage],
+      });
     });
   }, []);
 
@@ -91,7 +90,7 @@ const RoomDetail: FunctionComponent<RoomDetailProps> = (props) => {
   );
 
   const allMessagesJSX = roomDetail.messages.map((message, idx) => {
-    const self = message.sender.name === username;
+    const self = message.sender.name === user.name;
     const classes = self
       ? "message-grand-wrapper message-grand-wrapper--self"
       : "message-grand-wrapper";
@@ -111,15 +110,25 @@ const RoomDetail: FunctionComponent<RoomDetailProps> = (props) => {
   function handleTextChange(e: React.ChangeEvent<HTMLInputElement>) {
     setInput(e.target.value);
   }
-  function handlePost(e: React.FormEvent<HTMLFormElement>) {
+  async function handlePost(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const newMessage = createMessage({
-      sender: { name: "Matt", avatar: "MH" },
-      text_content: "OMG ITS WORKING!!!!",
-      timeSent: "today",
-      self: true,
-    });
-    socket.emit("message", newMessage);
+
+    if (audioSelected) {
+      // TODO;
+    } else {
+      socket.emit("message", {
+        sender: user,
+        type: "text",
+        content: input,
+        seenBy: [user.userId],
+        createdAt: Date.now(),
+      });
+      createMessage({
+        contentType: "text",
+        textContent: input,
+        RoomId: id,
+      });
+    }
     //trigger socket with message from variable Input and state Current User
   }
 
@@ -184,7 +193,7 @@ const mapStateToProps = ({
   roomDetail: RoomDetailState;
   user: User;
 }) => {
-  return { roomDetail, username: user.name };
+  return { roomDetail, user };
 };
 
 export default connect(mapStateToProps, { getAllMessagesByRoom, getRoomUsers })(
