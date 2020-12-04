@@ -35,8 +35,8 @@ const AudioCapture: FunctionComponent<any> = ({ blobHandler }) => {
         stopRecording();
         setRecording(false);
         setTimeout(() => {
-          const audios = document.querySelectorAll("audio");
-          const url = audios[1].src;
+          const audio: any = document.querySelector(".audOutput");
+          const url = audio.src;
           blobHandler(url);
         }, 0);
       }}

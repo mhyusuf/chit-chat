@@ -25,7 +25,7 @@ exports.GetMessagesByRoom = async (req, res) => {
         type: message.contentType,
         content: message.textContent
           ? message.textContent
-          : `/message/api/${message.id}/audio`,
+          : `/api/message/${message.id}/audio`,
         seenBy: message.seenBy,
         createdAt: message.createdAt,
       });
@@ -49,8 +49,6 @@ exports.GetAudio = async (req, res) => {
 
 exports.CreateMessage = async (req, res) => {
   try {
-    console.log(req.body, "REQ BODY");
-    console.log(req.file, "REQ FILE");
     const sender = req.user.dataValues.userId;
     const { contentType, textContent, RoomId } = req.body;
     const seenBy = [sender];
