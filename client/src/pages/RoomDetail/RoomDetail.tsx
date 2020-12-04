@@ -5,9 +5,9 @@ import React, {
   useCallback,
 } from "react";
 import { connect } from "react-redux";
-import {} from "redux";
 import { createMessage } from "../../apiService/messageService";
 import io from "socket.io-client";
+import axios from "axios";
 import { IoIosSend } from "react-icons/io";
 import { IoText } from "react-icons/io5";
 import { GiSpeaker } from "react-icons/gi";
@@ -23,7 +23,6 @@ import {
   User,
 } from "../../interfaces/reducerInterfaces";
 import { RouteComponentProps } from "react-router-dom";
-import { GET_ALL_MESSAGES } from "../../actions/types";
 
 const socket = io.connect("http://localhost:5000");
 
@@ -42,6 +41,7 @@ const RoomDetail: FunctionComponent<RoomDetailProps> = (props) => {
   const { roomDetail, getAllMessagesByRoom, getRoomUsers, match, user } = props;
   const [audioSelected, setAudioSelected] = useState(false);
   const [input, setInput] = useState("");
+  const [blobURL, setBlobURL] = useState("");
   const [localMessages, setLocalMessages] = useState<IMessage[]>([]);
 
   const { id } = match.params;
@@ -58,16 +58,16 @@ const RoomDetail: FunctionComponent<RoomDetailProps> = (props) => {
 
     socket.on("message", (newMessage: any) => {
       setLocalMessages((msgs) => [...msgs, newMessage]);
-      // dispatch({
-      //   type: GET_ALL_MESSAGES,
-      //   payload: [...roomDetail.messages, newMessage],
-      // });
     });
   }, []);
 
   useEffect(() => {
     setLocalMessages(roomDetail.messages);
   }, [roomDetail.messages]);
+
+  function blobHandler(blob: any) {
+    setBlobURL(blob);
+  }
 
   const studentList = roomDetail.students.map(
     (user: RoomParticipant, idx: number) => (
@@ -122,7 +122,18 @@ const RoomDetail: FunctionComponent<RoomDetailProps> = (props) => {
     e.preventDefault();
 
     if (audioSelected) {
-      // TODO;
+      const res = await fetch(blobURL);
+      const blob = await res.blob();
+      const formData = new FormData();
+      formData.append("contentType", "audio");
+      formData.append("fileContent", blob);
+      formData.append("RoomId", id);
+      const respo = await axios.post("/api/message", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      console.log(respo);
     } else {
       socket.emit("message", {
         sender: user,
@@ -169,7 +180,7 @@ const RoomDetail: FunctionComponent<RoomDetailProps> = (props) => {
         <IoText />
       </div>
       <form onSubmit={handlePost}>
-        <AudioCapture />
+        <AudioCapture blobHandler={blobHandler} />
       </form>
     </div>
   );
