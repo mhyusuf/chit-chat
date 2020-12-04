@@ -27,3 +27,21 @@ export interface AssignmentState {
   AssignmentDetail: any;
   AssignmentPreviews: AssignmentPreview[];
 }
+
+export interface RoomParticipant {
+  name: string;
+  avatar: string;
+}
+
+export interface Message {
+  sender: RoomParticipant;
+  type: string;
+  content: string;
+  seenBy: string[];
+}
+
+export interface RoomDetailState {
+  teachers: RoomParticipant[];
+  students: RoomParticipant[];
+  messages: Message[];
+}

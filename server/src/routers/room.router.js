@@ -2,9 +2,11 @@ const router = require("express").Router();
 const {
   GetRoomsByCourseId,
   GetRoomByStudentId,
+  GetRoomDetailUsers,
 } = require("../controllers/room.controller");
 
-router.get("/getRooms/:id", GetRoomsByCourseId);
-router.get("/getRoom/:id", GetRoomByStudentId);
+router.get("/course/:id", GetRoomsByCourseId);
+router.get("/student/:id", GetRoomByStudentId);
+router.get("/:id/getUsers", GetRoomDetailUsers);
 
 module.exports = router;

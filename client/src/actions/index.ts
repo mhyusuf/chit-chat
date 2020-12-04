@@ -1,6 +1,11 @@
 import axios from "axios";
 import { Dispatch } from "react";
-import { GET_CURRENT_USER, GET_ASSIGNMENT_PREVIEWS_BY_COURSE } from "./types";
+import {
+  GET_CURRENT_USER,
+  GET_ASSIGNMENT_PREVIEWS_BY_COURSE,
+  GET_ALL_MESSAGES,
+  GET_ROOM_USERS,
+} from "./types";
 import { History } from "history";
 
 // const BASE_URL = "http://localhost:5000/";
@@ -57,4 +62,14 @@ export const getAssignmentPreviewsByCourse = (id: number) => async (
 ) => {
   const { data } = await axios.get(`/api/assignment/course/${id}`);
   dispatch({ type: GET_ASSIGNMENT_PREVIEWS_BY_COURSE, payload: data });
+};
+
+export const getAllMessagesByRoom = (id: string) => async (dispatch: any) => {
+  const { data } = await axios.get(`/api/message/${id}`);
+  dispatch({ type: GET_ALL_MESSAGES, payload: data });
+};
+
+export const getRoomUsers = (id: string) => async (dispatch: any) => {
+  const { data } = await axios.get(`/api/room/${id}/getUsers`);
+  dispatch({ type: GET_ROOM_USERS, payload: data });
 };
