@@ -5,7 +5,7 @@ import { FaMicrophone, FaStop } from "react-icons/fa";
 
 import "./AudioCapture.scss";
 
-const AudioCapture: FunctionComponent<any> = () => {
+const AudioCapture: FunctionComponent<any> = ({ blobHandler }) => {
   const [recording, setRecording] = useState(false);
   const {
     startRecording,
@@ -34,6 +34,11 @@ const AudioCapture: FunctionComponent<any> = () => {
         e.preventDefault();
         stopRecording();
         setRecording(false);
+        setTimeout(() => {
+          const audios = document.querySelectorAll("audio");
+          const url = audios[1].src;
+          blobHandler(url);
+        }, 0);
       }}
       id="stopButton"
     >

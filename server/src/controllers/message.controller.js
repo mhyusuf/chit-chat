@@ -40,7 +40,7 @@ exports.GetAudio = async (req, res) => {
   try {
     const { id } = req.params;
     const message = await models.Message.findByPk(id);
-    res.set("Content-Type", "audio/wave");
+    res.set("Content-Type", "audio/wav");
     res.status(200).send(message.fileContent);
   } catch (e) {
     res.status(500).send(e.message);
@@ -49,9 +49,10 @@ exports.GetAudio = async (req, res) => {
 
 exports.CreateMessage = async (req, res) => {
   try {
+    console.log(req.body, "REQ BODY");
+    console.log(req.file, "REQ FILE");
     const sender = req.user.dataValues.userId;
-    const { contentType, textContent, RoomId } = req.body.message;
-    console.log("REQ FILE", req.file);
+    const { contentType, textContent, RoomId } = req.body;
     const seenBy = [sender];
     if (req.file) {
       const newAudioMessage = await models.Message.create({
