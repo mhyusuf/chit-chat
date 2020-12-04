@@ -11,6 +11,7 @@ const Header: FunctionComponent = () => {
     <div className="header-grand-wrapper">
       <div className="header-grand-wrapper__left-block">
         <h1>Chit Chat</h1>
+        <div className="header-grand-wrapper__left-block__logo" />
       </div>
       <div className="header-grand-wrapper__right-block">
         <NavLink to="/profile">

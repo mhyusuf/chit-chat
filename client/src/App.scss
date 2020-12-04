@@ -1,4 +1,5 @@
 // varela round regular
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&family=Varela+Round&display=swap");
 
 $main-orange: #e8aa64;
 $light-orange: adjust-color($main-orange, $lightness: 20%);
@@ -103,6 +104,7 @@ html {
 body {
   box-sizing: border-box;
   font-size: 1.6rem;
+  font-family: "Lato", sans-serif;
   background-color: $background;
   background-image: url("./assets/background-tile.png");
   background-repeat: repeat;
@@ -116,6 +118,7 @@ body {
   }
 
   h1 {
+    font-family: "Varela Round";
     padding: 4rem 4rem 2rem 4rem;
   }
 }
