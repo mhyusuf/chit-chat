@@ -6,18 +6,24 @@ import "./Message.scss";
 // timeSent: 'today', self: true},
 
 const Message: FunctionComponent<any> = (props) => {
-  const { sender, content, createdAt, contentType } = props.message;
+  const { sender, content, createdAt, type } = props.message;
 
   const messageContent =
-    contentType === "text" ? (
+    type === "text" ? (
       <>
         <p className="text">{content}</p>
-        <p className="timestamp">{moment(createdAt).format("h:mm")}</p>
+        <div className="tiny-text">
+          <p>{sender.name}</p>
+          <p className="timestamp">{moment(createdAt).format("H:mm")}</p>
+        </div>
       </>
     ) : (
       <>
         <audio className="audioMessage" src={content} controls />
-        <p className="timestamp">{moment(createdAt).format("h:mm")}</p>
+        <div className="tiny-text">
+          <p>{sender.name}</p>
+          <p className="timestamp">{moment(createdAt).format("H:mm")}</p>
+        </div>
       </>
     );
   return props.self ? (

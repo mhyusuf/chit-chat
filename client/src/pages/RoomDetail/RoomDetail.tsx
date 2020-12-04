@@ -5,7 +5,6 @@ import React, {
   useCallback,
 } from "react";
 import { connect } from "react-redux";
-import { createMessage } from "../../apiService/messageService";
 import io from "socket.io-client";
 import axios from "axios";
 import { IoIosSend } from "react-icons/io";
@@ -148,11 +147,7 @@ const RoomDetail: FunctionComponent<RoomDetailProps> = (props) => {
         seenBy: [user.userId],
         createdAt: Date.now(),
       });
-      createMessage({
-        contentType: "text",
-        textContent: input,
-        RoomId: id,
-      });
+      axios.post("/api/message", { sender: user, type: "text", RoomId: id });
     }
     setInput("");
     //trigger socket with message from variable Input and state Current User
