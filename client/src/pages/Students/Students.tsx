@@ -1,5 +1,12 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useEffect } from "react";
+import { connect } from "react-redux";
+import { getStudentsByCourse } from "../../actions";
 import StudentPreview from "../../components/StudentPreview";
+import {
+  Course,
+  CourseState,
+  Student,
+} from "../../interfaces/reducerInterfaces";
 
 import "./Students.scss";
 
@@ -33,25 +40,59 @@ const mocks = [
   { name: "Explorer", id: 29 },
 ];
 
-const Students: FunctionComponent = () => {
+interface StudentsProps {
+  courses: Course[];
+  activeCourse: string;
+  students: Student[];
+  getStudentsByCourse: (id: string) => {};
+}
+
+const Students: FunctionComponent<StudentsProps> = ({
+  students,
+  courses,
+  activeCourse,
+  getStudentsByCourse,
+}) => {
+  useEffect(() => {
+    getStudentsByCourse(activeCourse);
+  }, [activeCourse]);
+
   return (
     <div className="students-grand-wrapper">
       <h1>Students: Class 7e</h1>
       <div className="students-grand-wrapper__students-container">
         <div className="students-grand-wrapper__students-container__students-container-wrapper">
-          {mocks.map((student) => {
-            return (
-              <StudentPreview
-                name={student.name}
-                studentId={student.id}
-                key={student.id}
-              />
-            );
-          })}
+          {students.length ? (
+            students.map((student) => {
+              return (
+                <StudentPreview
+                  name={student.name}
+                  studentId={student.id}
+                  key={student.id}
+                />
+              );
+            })
+          ) : (
+            <p>There are no students in this course</p>
+          )}
         </div>
       </div>
     </div>
   );
 };
 
-export default Students;
+const mapStateToProps = ({
+  course,
+  students,
+}: {
+  course: CourseState;
+  students: Student[];
+}) => {
+  return {
+    courses: course.courseList,
+    activeCourse: course.activeCourse,
+    students,
+  };
+};
+
+export default connect(mapStateToProps, { getStudentsByCourse })(Students);
