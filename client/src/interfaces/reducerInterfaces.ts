@@ -6,6 +6,7 @@ export interface ChitChatAction<T> extends Action {
 }
 
 export interface User {
+  id: string;
   isTeacher: boolean;
   userId: string;
   name: string;
@@ -45,4 +46,17 @@ export interface RoomDetailState {
   teachers: RoomParticipant[];
   students: RoomParticipant[];
   messages: Message[];
+}
+
+export interface Course {
+  id: string;
+  name: string;
+  level: number;
+  registrationId: string;
+  targetLanguage: string;
+}
+
+export interface CourseState {
+  courseList: Course[];
+  activeCourse: Course | {};
 }

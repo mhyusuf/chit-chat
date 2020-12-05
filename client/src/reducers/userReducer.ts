@@ -2,6 +2,7 @@ import { GET_CURRENT_USER } from "../actions/types";
 import { ChitChatAction, User } from "../interfaces/reducerInterfaces";
 
 const initialState: User = {
+  id: "",
   isTeacher: false,
   userId: "",
   name: "",

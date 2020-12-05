@@ -28,10 +28,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: true,
     },
-    nativeLanguage: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
     targetLanguage: {
       type: DataTypes.STRING,
       allowNull: false,

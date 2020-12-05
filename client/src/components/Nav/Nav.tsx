@@ -1,12 +1,21 @@
 import React, { FunctionComponent } from "react";
+import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { User } from "../../interfaces/reducerInterfaces";
+import ActiveCourse from "../ActiveCourse";
 
 import "./Nav.scss";
 
-const Nav: FunctionComponent = () => {
-  //TODO: SELECT COURSE
+interface NavProps {
+  isTeacher: boolean;
+}
+
+const Nav: FunctionComponent<NavProps> = ({ isTeacher }) => {
+  const courseSelect = isTeacher ? <ActiveCourse /> : null;
+
   return (
     <div className="nav-grand-wrapper">
+      {courseSelect}
       <div className="nav-grand-wrapper__link-wrapper">
         <NavLink to="/home">
           <p className="nav-grand-wrapper__link-wrapper__link-text">
@@ -34,4 +43,8 @@ const Nav: FunctionComponent = () => {
   );
 };
 
-export default Nav;
+const mapStateToProps = ({ user }: { user: User }) => {
+  return { isTeacher: user.isTeacher };
+};
+
+export default connect(mapStateToProps, {})(Nav);
