@@ -32,10 +32,16 @@ exports.GetRoomDetailUsers = async (req, res) => {
     const { id } = req.params;
     const students = await models.Student.findAll({
       where: { RoomId: id },
-      include: { model: models.Course, include: { model: models.Teacher } },
+      include: [
+        { model: models.Course, include: { model: models.Teacher } },
+        { model: models.Room },
+      ],
     });
+    // const room = await models.Room.findByPk(id)
     const teachers = [];
+    let roomName;
     const roomDetailStudents = students.map((student) => {
+      roomName = student.dataValues.Room.dataValues.name;
       const teacher = student.dataValues.Course.dataValues.Teacher;
       const teacherId =
         student.dataValues.Course.dataValues.Teacher.dataValues.userId;
@@ -51,9 +57,11 @@ exports.GetRoomDetailUsers = async (req, res) => {
     const roomDetailTeachers = teachers.map((teacher) => {
       return { name: teacher.name, avatar: teacher.avatar };
     });
-    res
-      .status(200)
-      .send({ students: roomDetailStudents, teachers: roomDetailTeachers });
+    res.status(200).send({
+      students: roomDetailStudents,
+      teachers: roomDetailTeachers,
+      roomName,
+    });
   } catch (e) {
     res.status(500).send(e.message);
   }

@@ -1,20 +1,26 @@
 import React, { FunctionComponent, useEffect, useState } from "react";
+import { RouteComponentProps } from "react-router-dom";
 import { connect } from "react-redux";
 import StudentAssignmentPreview from "../../components/StudentAssignmentPreview";
 import RoomPreview from "../../components/RoomPreview";
 import { BsPencilSquare } from "react-icons/bs";
 import { getStudent } from "../../actions/studentActions";
 import "./StudentDetail.scss";
-import { AssignmentPreview, User } from "../../interfaces/reducerInterfaces";
+import {
+  AssignmentPreview,
+  User,
+  RoomDetailState,
+} from "../../interfaces/reducerInterfaces";
 
 interface RoomPreview1 {
   name: string;
   studentNames: string[];
-  RoomId: string;
+  teamMembers: string[];
 }
 
-interface Student {
+interface StudentState {
   student: User;
+  roomId: string;
   assignments: AssignmentPreview[];
   room: RoomPreview1;
 }
@@ -64,31 +70,54 @@ const tasks = [
   },
 ];
 
-type StudentDetailProps = {
+interface matchInterface {
+  id: string;
+}
+
+interface StudentDetailProps extends RouteComponentProps<matchInterface> {
   getStudent: Function;
   student: User;
-};
+  room: RoomDetailState;
+  roomId: string;
+  assignments: AssignmentPreview[];
+}
 
 const StudentDetail: FunctionComponent<StudentDetailProps> = ({
   getStudent,
   student,
+  assignments,
+  roomId,
+  room,
+  match,
 }) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [isTeacher, setIsTeacher] = useState<boolean>(true);
 
   const handleOpen = (i: number | null) => setOpenIndex(i);
 
+  const { id } = match.params;
+
   useEffect(() => {
-    getStudent(student.id);
+    getStudent(id);
   }, []);
+
+  console.log("student", student);
+  console.log("assignments", assignments);
+
+  const roomMembers: string[] = [];
+  if (room) {
+    room.students.forEach((student) => roomMembers.push(student.name));
+  }
 
   return (
     <div className="student-detail-grand-wrapper">
       <div className="student-detail-grand-wrapper__student-details">
         <div className="student-detail-grand-wrapper__student-details__avatar"></div>
-        <h2 className="student-detail-grand-wrapper__student-details__student-name">
-          {student.name}
-        </h2>
+        {student && (
+          <h2 className="student-detail-grand-wrapper__student-details__student-name">
+            {student.name}
+          </h2>
+        )}
         <BsPencilSquare className="student-detail-grand-wrapper__student-details__edit-icon" />
       </div>
       <div className="student-detail-grand-wrapper__tasks">
@@ -114,12 +143,12 @@ const StudentDetail: FunctionComponent<StudentDetailProps> = ({
             Chat Group
           </h2>
           <div className="student-detail-grand-wrapper__room__room-preview-wrapper">
-            {/* <RoomPreview
-              teamName={room.name}
-              teamMembers={student.room.teamMembers}
-              roomId={student.room.roomId}
-              key={student.room.roomId}
-            /> */}
+            <RoomPreview
+              teamName={room.roomName}
+              teamMembers={roomMembers}
+              roomId={roomId}
+              key={roomId}
+            />
           </div>
         </div>
       )}
@@ -127,8 +156,19 @@ const StudentDetail: FunctionComponent<StudentDetailProps> = ({
   );
 };
 
-const mapStateToProps = ({ student }: { student: Student }) => {
-  return { student: student.student, room: student.room };
+const mapStateToProps = ({
+  student,
+  roomDetail,
+}: {
+  student: StudentState;
+  roomDetail: RoomDetailState;
+}) => {
+  return {
+    student: student.student,
+    roomId: student.roomId,
+    assignments: student.assignments,
+    room: roomDetail,
+  };
 };
 
 export default connect(mapStateToProps, { getStudent })(StudentDetail);

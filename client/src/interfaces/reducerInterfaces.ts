@@ -46,6 +46,7 @@ export interface RoomDetailState {
   teachers: RoomParticipant[];
   students: RoomParticipant[];
   messages: Message[];
+  roomName: string;
 }
 
 export interface Course {

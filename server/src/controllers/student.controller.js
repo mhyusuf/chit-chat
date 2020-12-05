@@ -77,7 +77,23 @@ exports.GetStudentById = async (req, res) => {
     const result = await models.Student.findByPk(id, {
       include: [{ model: models.Assignment }, { model: models.Room }],
     });
-    if (result) res.status(200).send(result);
+    console.log("RESULT", result);
+    const student = {
+      id: result.dataValues.id,
+      isTeacher: false,
+      userId: result.dataValues.userId,
+      name: result.dataValues.name,
+      avatar: result.dataValues.avatar,
+      CourseId: result.dataValues.CourseId,
+      RoomId: result.dataValues.RoomId,
+    };
+
+    if (result)
+      res.status(200).send({
+        student,
+        RoomId: result.dataValues.RoomId,
+        assignments: result.dataValues.Assignments,
+      });
     else res.status(404).send(new Error("Student not found"));
   } catch (e) {
     res.status(500).send(e.message);
