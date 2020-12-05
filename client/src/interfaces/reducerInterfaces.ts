@@ -58,5 +58,5 @@ export interface Course {
 
 export interface CourseState {
   courseList: Course[];
-  activeCourse: Course | {};
+  activeCourse: string;
 }

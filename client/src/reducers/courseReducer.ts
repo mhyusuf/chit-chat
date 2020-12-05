@@ -5,7 +5,7 @@ import {
 } from "../actions/courseActions";
 
 const initialState: CourseState = {
-  activeCourse: {},
+  activeCourse: "",
   courseList: [],
 };
 
