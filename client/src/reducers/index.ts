@@ -4,8 +4,9 @@ import teacherReducer from "./teacherReducer";
 import assignmentReducer from "./assignmentReducer";
 import userReducer from "./userReducer";
 import courseReducer from "./courseReducer";
-import roomReducer from "./roomReducer";
+import roomDetailReducer from "./roomDetailReducer";
 import roomListReducer from "./roomListReducer";
+import assignmentDetailReducer from "./assignmentDetailReducer";
 import resourceReducer from "./resourceReducer";
 
 export default combineReducers({
@@ -13,8 +14,9 @@ export default combineReducers({
   students: studentReducer,
   teachers: teacherReducer,
   assignments: assignmentReducer,
-  courses: courseReducer,
-  roomDetail: roomReducer,
+  assignmentDetail: assignmentDetailReducer,
+  course: courseReducer,
+  roomDetail: roomDetailReducer,
   roomList: roomListReducer,
   resources: resourceReducer,
 });
