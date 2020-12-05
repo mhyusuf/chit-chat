@@ -5,10 +5,22 @@ exports.GetRoomsByCourseId = async (req, res) => {
   try {
     const { id } = req.params;
     const course = await models.Course.findByPk(id, {
-      include: [{ model: models.Room }],
+      include: { model: models.Room, include: { model: models.Student } },
     });
-    if (course.dataValues.Rooms.length) {
-      res.status(200).send(course.dataValues.Rooms);
+    if (course.dataValues.Rooms) {
+      const rooms = course.dataValues.Rooms.map((room) => {
+        let studentNames = [];
+        room.dataValues.Students.forEach((student) => {
+          studentNames.push(student.name);
+        });
+        return {
+          name: room.name,
+          studentNames,
+          RoomId: room.id,
+        };
+      });
+      console.log(rooms);
+      res.status(200).send(rooms);
     } else res.status(404).send(new Error("No rooms found"));
   } catch (e) {
     res.status(500).send(e.message);

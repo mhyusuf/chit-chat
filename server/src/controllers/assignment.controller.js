@@ -40,7 +40,7 @@ exports.GetFile = async (req, res) => {
   try {
     const { id } = req.params;
     const assignment = await Assignment.findByPk(id);
-    console.log(assignment.fileData, assignment.mimeType, assignment.fileName);
+    // console.log(assignment.fileData, assignment.mimeType, assignment.fileName);
     res.status(200);
     res.set("Content-Type", assignment.mimeType);
     res.send(assignment.fileData);
@@ -63,7 +63,7 @@ exports.GetAssignmentPreviewsByCourse = async (req, res) => {
     students.forEach((student) => {
       const { Assignments } = student.dataValues;
       Assignments.forEach((assignment) => {
-        console.log("ASSIGNEMNT", assignment);
+        // console.log("ASSIGNEMNT", assignment);
         if (!assignment.dataValues.dismissed) {
           allAssignments.push({
             AssignmentId: assignment.dataValues.id,
