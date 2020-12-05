@@ -63,7 +63,6 @@ exports.GetAssignmentPreviewsByCourse = async (req, res) => {
     students.forEach((student) => {
       const { Assignments } = student.dataValues;
       Assignments.forEach((assignment) => {
-        // console.log("ASSIGNEMNT", assignment);
         if (!assignment.dataValues.dismissed) {
           allAssignments.push({
             AssignmentId: assignment.dataValues.id,
@@ -78,6 +77,7 @@ exports.GetAssignmentPreviewsByCourse = async (req, res) => {
 
     res.status(200).send(allAssignments);
   } catch (e) {
+    console.log(e);
     res.status(500).send(e.message);
   }
 };

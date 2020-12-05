@@ -3,82 +3,32 @@ import { connect } from "react-redux";
 import Assignment from "../../components/AssignmentPreview";
 import {
   AssignmentPreview,
-  AssignmentState,
+  CourseState,
 } from "../../interfaces/reducerInterfaces";
 import { getAssignmentPreviewsByCourse } from "../../actions";
 import "./RecentActivity.scss";
 
-const RecentActivity: FunctionComponent<any> = ({
-  getAssignmentPreviewsByCourse,
-  previews,
-}) => {
-  // const mockData = [
-  //   {
-  //     taskName: "assignment 1",
-  //     studentName: "Timmy",
-  //     studentId: "somestrangestring",
-  //     taskId: "somestrangestring",
-  //     assignmentId: "817264",
-  //     likes: 8,
-  //     comments: [
-  //       {
-  //         student: "Patricia",
-  //         comment: "You really suck at French!",
-  //       },
-  //       {
-  //         student: "Stuart",
-  //         comment: "What P said",
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     taskName: "assignment 2",
-  //     studentName: "Timmy",
-  //     studentId: "somestrangestring",
-  //     taskId: "somestrangestring",
-  //     assignmentId: "817264",
-  //     likes: 8,
-  //     comments: [
-  //       {
-  //         student: "Patricia",
-  //         comment: "You really suck at French!",
-  //       },
-  //       {
-  //         student: "Stuart",
-  //         comment: "What P said",
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     taskName: "assignment 3",
-  //     studentName: "Timmy",
-  //     studentId: "somestrangestring",
-  //     taskId: "somestrangestring",
-  //     assignmentId: "817264",
-  //     likes: 8,
-  //     comments: [
-  //       {
-  //         student: "Patricia",
-  //         comment: "You really suck at French!",
-  //       },
-  //       {
-  //         student: "Stuart",
-  //         comment: "What P said",
-  //       },
-  //     ],
-  //   },
-  // ];
+interface RecentActivityProps {
+  assignments: AssignmentPreview[];
+  getAssignmentPreviewsByCourse: (id: string) => void;
+  activeCourse: string;
+}
 
+const RecentActivity: FunctionComponent<RecentActivityProps> = ({
+  getAssignmentPreviewsByCourse,
+  assignments,
+  activeCourse,
+}) => {
   useEffect(() => {
-    getAssignmentPreviewsByCourse(2);
-  }, []);
+    if (activeCourse) getAssignmentPreviewsByCourse(activeCourse);
+  }, [activeCourse]);
 
   return (
     <div className="recent-activity-grand-wrapper">
       <h1>Recent Activity</h1>
       <div className="recent-activity-events-wrapper">
-        {previews &&
-          previews.map((assignment: AssignmentPreview, idx: number) => {
+        {assignments &&
+          assignments.map((assignment: AssignmentPreview, idx: number) => {
             return (
               <Assignment
                 studentName={assignment.student.name}
@@ -95,8 +45,14 @@ const RecentActivity: FunctionComponent<any> = ({
   );
 };
 
-const mapStateToProps = ({ assignments }: { assignments: AssignmentState }) => {
-  return { previews: assignments.AssignmentPreviews };
+const mapStateToProps = ({
+  assignments,
+  course,
+}: {
+  assignments: AssignmentPreview[];
+  course: CourseState;
+}) => {
+  return { assignments, activeCourse: course.activeCourse };
 };
 
 export default connect(mapStateToProps, { getAssignmentPreviewsByCourse })(
