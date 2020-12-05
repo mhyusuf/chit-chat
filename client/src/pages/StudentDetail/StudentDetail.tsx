@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useState } from "react";
-import StudentTaskPreview from "../../components/StudentTaskPreview";
+import StudentAssignmentPreview from "../../components/StudentAssignmentPreview";
 import RoomPreview from "../../components/RoomPreview";
 import { BsPencilSquare } from "react-icons/bs";
 import "./StudentDetail.scss";
@@ -75,10 +75,12 @@ const StudentDetail: FunctionComponent = () => {
         <BsPencilSquare className="student-detail-grand-wrapper__student-details__edit-icon" />
       </div>
       <div className="student-detail-grand-wrapper__tasks">
-        <h2 className="student-detail-grand-wrapper__tasks__subtitle">Tasks</h2>
+        <h2 className="student-detail-grand-wrapper__tasks__subtitle">
+          Assignments
+        </h2>
         {tasks.map((task, index) => {
           return (
-            <StudentTaskPreview
+            <StudentAssignmentPreview
               key={task.id}
               open={index === openIndex}
               handleOpen={handleOpen}

@@ -5,9 +5,9 @@ import {
   IoIosCheckmarkCircle,
 } from "react-icons/io";
 import { Link } from "react-router-dom";
-import "./StudentTaskPreview.scss";
+import "./StudentAssignmentPreview.scss";
 
-type StudentTaskPreviewProps = {
+type StudentAssignmentPreviewProps = {
   open: boolean;
   handleOpen: Function;
   index: number;
@@ -15,7 +15,7 @@ type StudentTaskPreviewProps = {
   submitted: boolean;
 };
 
-const StudentTaskPreview: FunctionComponent<StudentTaskPreviewProps> = ({
+const StudentAssignmentPreview: FunctionComponent<StudentAssignmentPreviewProps> = ({
   open,
   handleOpen,
   index,
@@ -50,8 +50,8 @@ const StudentTaskPreview: FunctionComponent<StudentTaskPreviewProps> = ({
             <div className="content__picture"></div>
           </div>
           <div className="content__buttons">
-            <Link to="/tasks/:id">
-              <button>View Task</button>
+            <Link to="/assignments/:id">
+              <button>View Assignment</button>
             </Link>
           </div>
         </div>
@@ -60,4 +60,4 @@ const StudentTaskPreview: FunctionComponent<StudentTaskPreviewProps> = ({
   );
 };
 
-export default StudentTaskPreview;
+export default StudentAssignmentPreview;
