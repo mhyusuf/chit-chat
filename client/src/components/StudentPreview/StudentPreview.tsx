@@ -1,21 +1,21 @@
 import React, { FunctionComponent } from "react";
 import { NavLink } from "react-router-dom";
+import { Student } from "../../interfaces/reducerInterfaces";
+import UserAvatar from "../UserAvatar";
 import "./StudentPreview.scss";
 
 type StudentPreviewProps = {
-  name: string;
-  studentId: string;
+  student: Student;
 };
 
 const StudentPreview: FunctionComponent<StudentPreviewProps> = ({
-  name,
-  studentId,
+  student,
 }) => {
   return (
-    <NavLink to={`/students/${studentId}`} className="student-preview-nav">
+    <NavLink to={`/students/${student.id}`} className="student-preview-nav">
       <div className="student-preview-grand-wrapper">
-        <div className="student-preview-grand-wrapper__avatar"></div>
-        <p className="student-preview-grand-wrapper__name">{name}</p>
+        <UserAvatar avatarString={student.avatar} />
+        <p className="student-preview-grand-wrapper__name">{student.name}</p>
       </div>
     </NavLink>
   );

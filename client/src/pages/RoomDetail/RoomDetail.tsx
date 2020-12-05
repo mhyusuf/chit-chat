@@ -22,7 +22,7 @@ import {
   User,
 } from "../../interfaces/reducerInterfaces";
 import { RouteComponentProps } from "react-router-dom";
-import getAvatar from "../../utils/getAvatar";
+import UserAvatar from "../../components/UserAvatar";
 
 const socket = io.connect("http://localhost:5000");
 
@@ -77,9 +77,7 @@ const RoomDetail: FunctionComponent<RoomDetailProps> = (props) => {
           className="room-detail-grand-wrapper__chat-block__user-item"
         >
           <span>{user.name}</span>
-          <div className="room-detail-grand-wrapper__chat-block__user-item__avatar">
-            <img src={getAvatar(user.avatar)} alt="student avatar" />
-          </div>
+          <UserAvatar avatarString={user.avatar} />
         </div>
       );
     }
@@ -91,9 +89,7 @@ const RoomDetail: FunctionComponent<RoomDetailProps> = (props) => {
         className="room-detail-grand-wrapper__chat-block__user-item"
       >
         <span>{user.name}</span>
-        <div className="room-detail-grand-wrapper__chat-block__user-item__avatar">
-          <img src={getAvatar(user.avatar)} alt="student avatar" />
-        </div>
+        <UserAvatar avatarString={user.avatar} />
       </div>
     )
   );
