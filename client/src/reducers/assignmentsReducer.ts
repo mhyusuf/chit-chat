@@ -1,14 +1,10 @@
 import {
-  AssignmentState,
   AssignmentPreview,
   ChitChatAction,
 } from "../interfaces/reducerInterfaces";
 import { GET_ASSIGNMENT_PREVIEWS_BY_COURSE } from "../actions/types";
 
-const initialState: AssignmentState = {
-  AssignmentDetail: null,
-  AssignmentPreviews: [],
-};
+const initialState: AssignmentPreview[] = [];
 
 const reducer = (
   state = initialState,
@@ -16,7 +12,7 @@ const reducer = (
 ) => {
   switch (action.type) {
     case GET_ASSIGNMENT_PREVIEWS_BY_COURSE:
-      return { ...state, AssignmentPreviews: action.payload };
+      return action.payload;
     default:
       return state;
   }
