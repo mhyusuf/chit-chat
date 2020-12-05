@@ -58,5 +58,13 @@ export interface Course {
 
 export interface CourseState {
   courseList: Course[];
-  activeCourse: Course | {};
+  activeCourse: string;
+}
+
+export interface Student {
+  id: string;
+  name: string;
+  isTeacher: boolean;
+  userId: string;
+  avatar: string;
 }

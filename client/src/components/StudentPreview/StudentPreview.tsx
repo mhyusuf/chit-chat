@@ -4,7 +4,7 @@ import "./StudentPreview.scss";
 
 type StudentPreviewProps = {
   name: string;
-  studentId: number;
+  studentId: string;
 };
 
 const StudentPreview: FunctionComponent<StudentPreviewProps> = ({
