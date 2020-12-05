@@ -22,6 +22,7 @@ import {
   User,
 } from "../../interfaces/reducerInterfaces";
 import { RouteComponentProps } from "react-router-dom";
+import getAvatar from "../../utils/getAvatar";
 
 const socket = io.connect("http://localhost:5000");
 
@@ -69,17 +70,19 @@ const RoomDetail: FunctionComponent<RoomDetailProps> = (props) => {
   }
 
   const studentList = roomDetail.students.map(
-    (user: RoomParticipant, idx: number) => (
-      <div
-        key={`${idx}/student`}
-        className="room-detail-grand-wrapper__chat-block__user-item"
-      >
-        <span>{user.name}</span>
-        <div className="room-detail-grand-wrapper__chat-block__user-item__avatar">
-          {user.avatar}
+    (user: RoomParticipant, idx: number) => {
+      return (
+        <div
+          key={`${idx}/student`}
+          className="room-detail-grand-wrapper__chat-block__user-item"
+        >
+          <span>{user.name}</span>
+          <div className="room-detail-grand-wrapper__chat-block__user-item__avatar">
+            <img src={getAvatar(user.avatar)} alt="student avatar" />
+          </div>
         </div>
-      </div>
-    )
+      );
+    }
   );
   const teacherList = roomDetail.teachers.map(
     (user: RoomParticipant, idx: number) => (
@@ -89,7 +92,7 @@ const RoomDetail: FunctionComponent<RoomDetailProps> = (props) => {
       >
         <span>{user.name}</span>
         <div className="room-detail-grand-wrapper__chat-block__user-item__avatar">
-          {user.avatar}
+          <img src={getAvatar(user.avatar)} alt="student avatar" />
         </div>
       </div>
     )
