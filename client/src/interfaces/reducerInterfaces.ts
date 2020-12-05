@@ -20,8 +20,10 @@ export interface AssignmentPreview {
     avatar: string;
   };
   taskName: string;
+  description: string;
   likes: number;
   comments: number;
+  fileData?: string;
 }
 
 export interface AssignmentState {
