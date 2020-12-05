@@ -64,13 +64,7 @@ const Students: FunctionComponent<StudentsProps> = ({
         <div className="students-grand-wrapper__students-container__students-container-wrapper">
           {students.length ? (
             students.map((student) => {
-              return (
-                <StudentPreview
-                  name={student.name}
-                  studentId={student.id}
-                  key={student.id}
-                />
-              );
+              return <StudentPreview student={student} key={student.id} />;
             })
           ) : (
             <p>There are no students in this course</p>

@@ -4,10 +4,12 @@ import { FaRegHeart } from "react-icons/fa";
 import { ImBubble2 } from "react-icons/im";
 
 import "./AssignmentPreview.scss";
+import { Student } from "../../interfaces/reducerInterfaces";
+import UserAvatar from "../UserAvatar";
 
 type AssignmentProps = {
   title: string;
-  studentName: string;
+  student: { name: string; avatar: string };
   likes: number;
   comments: number;
   assignmentId: number;
@@ -15,7 +17,7 @@ type AssignmentProps = {
 
 const Assignment: FunctionComponent<AssignmentProps> = ({
   title,
-  studentName,
+  student,
   likes,
   comments,
   assignmentId,
@@ -27,10 +29,13 @@ const Assignment: FunctionComponent<AssignmentProps> = ({
     >
       <div className="assignment-grand-wrapper" style={{}}>
         <div className="assignment-grand-wrapper__img-title-name-div">
-          <div className="assignment-grand-wrapper__img-title-name-div__avatar"></div>
+          <UserAvatar
+            avatarString={student.avatar}
+            className="assignment-grand-wrapper__img-title-name-div__avatar"
+          />
           <div className="assignment-grand-wrapper__img-title-name-div__title-name-sub-div">
             <h3>{title}</h3>
-            <p>{studentName}</p>
+            <p>{student.name}</p>
           </div>
         </div>
         <div className="assignment-grand-wrapper__likes-comments-div">

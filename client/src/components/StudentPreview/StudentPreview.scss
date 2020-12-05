@@ -6,7 +6,7 @@
 }
 
 .student-preview-grand-wrapper {
-  width: 18rem;
+  width: 19rem;
   height: 9.5rem;
   display: flex;
   align-items: center;
@@ -21,6 +21,7 @@
   @include rotate-hover;
 
   &__name {
+    margin-left: $S;
     width: 70%;
     font-size: 2rem;
   }

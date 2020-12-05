@@ -31,7 +31,7 @@ const RecentActivity: FunctionComponent<RecentActivityProps> = ({
           assignments.map((assignment: AssignmentPreview, idx: number) => {
             return (
               <Assignment
-                studentName={assignment.student.name}
+                student={assignment.student}
                 key={idx}
                 title={assignment.taskName}
                 likes={assignment.likes}
