@@ -13,15 +13,15 @@ exports.GetTaskById = async (req, res) => {
 
 exports.GetTasksByLevel = async (req, res) => {
   try {
-    const { nativeLanguage, targetLanguage, level } = req.params;
+    const { targetLanguage, level } = req.params;
     const tasks = await models.Task.findAll({
       where: {
         level,
-        nativeLanguage,
         targetLanguage,
       },
     });
     if (!tasks) throw new Error("No tasks found");
+    console.log("TASKS!", tasks);
     res.status(200).send(tasks);
   } catch (e) {
     res.status(500).send(e.message);
