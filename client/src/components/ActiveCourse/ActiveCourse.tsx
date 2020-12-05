@@ -1,8 +1,9 @@
 import React, { FunctionComponent, useEffect } from "react";
 import { connect } from "react-redux";
 
+import CourseSelect from "../CourseSelect";
 import { getCoursesByTeacher, setActiveCourse } from "../../actions";
-import { Course, CourseState, User } from "../../interfaces/reducerInterfaces";
+import { CourseState, User } from "../../interfaces/reducerInterfaces";
 
 import "./ActiveCourse.scss";
 
@@ -10,7 +11,7 @@ interface ActiveCourseProps {
   course: CourseState;
   teacherId: string;
   getCoursesByTeacher: (id: string) => void;
-  setActiveCourse: (course: Course) => void;
+  setActiveCourse: (course: string) => void;
 }
 
 const ActiveCourse: FunctionComponent<ActiveCourseProps> = ({
@@ -25,11 +26,12 @@ const ActiveCourse: FunctionComponent<ActiveCourseProps> = ({
 
   return (
     <div>
-      <select>
-        {course.courseList.map((course) => (
-          <option>{course.name}</option>
-        ))}
-      </select>
+      {course.courseList.length && (
+        <CourseSelect
+          courses={course.courseList}
+          setActiveCourse={setActiveCourse}
+        />
+      )}
     </div>
   );
 };
