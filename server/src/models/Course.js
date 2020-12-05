@@ -22,7 +22,6 @@ module.exports = (sequelize, DataTypes) => {
     Course.hasOne(Course, {
       foreignKey: "sisterCourse",
     });
-    Course.hasMany(models.Room);
     Course.hasMany(models.Student);
     Course.belongsTo(models.Teacher);
     Course.belongsToMany(models.Room, { through: "Course_Rooms" });

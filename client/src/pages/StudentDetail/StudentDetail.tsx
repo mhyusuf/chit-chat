@@ -100,7 +100,6 @@ const StudentDetail: FunctionComponent = () => {
             <RoomPreview
               teamName={student.room.roomName}
               teamMembers={student.room.teamMembers}
-              unseenMessages={student.room.unseenMessages}
               roomId={student.room.roomId}
               key={student.room.roomId}
             />

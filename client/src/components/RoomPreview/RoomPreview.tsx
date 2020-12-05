@@ -6,21 +6,21 @@ import "./RoomPreview.scss";
 type RoomPreviewProps = {
   teamName: string;
   teamMembers: string[];
-  unseenMessages: boolean;
   roomId: string;
 };
+
+const unseenMessages = true;
 
 const RoomPreview: FunctionComponent<RoomPreviewProps> = ({
   teamName,
   teamMembers,
-  unseenMessages,
   roomId,
 }) => {
   return (
     <NavLink to={`/rooms/${roomId}`} className="room-preview-nav-link">
       <div
         className={`room-preview-grand-wrapper ${
-          unseenMessages ? null : "new-activity"
+          unseenMessages ? "new-activity" : null
         }`}
       >
         <div className="room-preview-grand-wrapper__text">
@@ -28,9 +28,10 @@ const RoomPreview: FunctionComponent<RoomPreviewProps> = ({
           <h2 className="name">{teamName} Team</h2>
         </div>
         <div className="room-preview-grand-wrapper__student-names-wrapper">
-          {teamMembers.map((student) => {
-            return <p>{student}</p>;
-          })}
+          {teamMembers &&
+            teamMembers.map((student) => {
+              return <p>{student}</p>;
+            })}
         </div>
       </div>
     </NavLink>
