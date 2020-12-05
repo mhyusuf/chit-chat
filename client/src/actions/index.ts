@@ -7,7 +7,7 @@ import {
 import { getAllMessagesByRoom, getRoomUsers } from "./roomActions";
 import { getAssignmentPreviewsByCourse } from "./assignmentActions";
 import { getCoursesByTeacher, setActiveCourse } from "./courseActions";
-import { getStudentsByCourse } from "./studentActions";
+import { getStudentsByCourse, getStudent } from "./studentActions";
 
 export {
   getCurrentUser,
@@ -20,4 +20,5 @@ export {
   getCoursesByTeacher,
   setActiveCourse,
   getStudentsByCourse,
+  getStudent,
 };

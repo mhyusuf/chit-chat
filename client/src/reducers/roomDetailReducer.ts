@@ -7,6 +7,7 @@ const initialState: RoomDetailState = {
   teachers: [],
   students: [],
   messages: [],
+  roomName: "",
 };
 
 const reducer = (state = initialState, action: ChitChatAction<any>) => {
@@ -19,6 +20,7 @@ const reducer = (state = initialState, action: ChitChatAction<any>) => {
         ...state,
         students: action.payload.students,
         teachers: action.payload.teachers,
+        roomName: action.payload.roomName,
       };
     default:
       return state;

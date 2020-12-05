@@ -1,11 +1,41 @@
-import { GET_STUDENTS_BY_COURSE } from "../actions/types";
-import { ChitChatAction, Student } from "../interfaces/reducerInterfaces";
+import {
+  ChitChatAction,
+  User,
+  AssignmentPreview,
+} from "../interfaces/reducerInterfaces";
+import { GET_STUDENT } from "../actions/studentActions";
 
-const initialState: Student[] = [];
+interface RoomPreview {
+  name: string;
+  studentNames: string[];
+  RoomId: string;
+}
 
-const reducer = (state = initialState, action: ChitChatAction<Student[]>) => {
+interface StudentState {
+  student: User;
+  assignments: AssignmentPreview[];
+  room: RoomPreview;
+}
+
+const initialState: StudentState = {
+  student: {
+    id: "",
+    isTeacher: false,
+    userId: "",
+    name: "",
+    avatar: "",
+  },
+  assignments: [],
+  room: {
+    name: "",
+    studentNames: [],
+    RoomId: "",
+  },
+};
+
+const reducer = (state = initialState, action: ChitChatAction<any>) => {
   switch (action.type) {
-    case GET_STUDENTS_BY_COURSE:
+    case GET_STUDENT:
       return action.payload;
     default:
       return state;

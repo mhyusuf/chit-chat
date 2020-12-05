@@ -68,8 +68,10 @@ exports.GetAssignmentPreviewsByCourse = async (req, res) => {
             AssignmentId: assignment.dataValues.id,
             student: { name: student.name, avatar: student.avatar },
             taskName: assignment.dataValues.Task.dataValues.title,
+            description: assignment.dataValues.Task.dataValues.description,
             likes: assignment.dataValues.likes.length,
             comments: assignment.dataValues.Comments.length,
+            fileData: assignment.dataValues.fileData,
           });
         }
       });

@@ -20,8 +20,10 @@ export interface AssignmentPreview {
     avatar: string;
   };
   taskName: string;
+  description: string;
   likes: number;
   comments: number;
+  fileData?: string;
 }
 
 export interface AssignmentState {
@@ -46,6 +48,7 @@ export interface RoomDetailState {
   teachers: RoomParticipant[];
   students: RoomParticipant[];
   messages: Message[];
+  roomName: string;
 }
 
 export interface Course {
