@@ -16,10 +16,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.BLOB,
       allowNull: true,
     },
-    nativeLanguage: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
     targetLanguage: {
       type: DataTypes.STRING,
       allowNull: false,

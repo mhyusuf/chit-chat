@@ -8,11 +8,11 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.UUID,
       allowNull: false,
     },
-    nativeLanguage: {
+    targetLanguage: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    targetLanguage: {
+    name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
