@@ -1,4 +1,3 @@
-import { Dispatch } from "react";
 import axios from "axios";
 import { GET_ASSIGNMENT_PREVIEWS_BY_COURSE } from "./types";
 

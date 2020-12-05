@@ -36,7 +36,7 @@ const RecentActivity: FunctionComponent<RecentActivityProps> = ({
                 title={assignment.taskName}
                 likes={assignment.likes}
                 comments={assignment.comments}
-                assignmentId={assignment.AssignmentId}
+                assignmentId={assignment.id}
               />
             );
           })}
