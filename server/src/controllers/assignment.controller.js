@@ -128,7 +128,11 @@ exports.EditAssignment = async (req, res) => {
 exports.GetAssignmentByStudent = async (req, res) => {
   try {
     const { id } = req.params;
-    const assigments = await Assignment.findAll({ where: { StudentId: id } });
+    const assigments = await Assignment.findAll({
+      where: { StudentId: id },
+      include: { model: Task },
+    });
+    console.log("assigments", assigments);
     res.status(200).send(assigments);
   } catch (e) {
     res.status(404).send(e.message);

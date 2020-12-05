@@ -14,7 +14,7 @@ export interface User {
 }
 
 export interface AssignmentPreview {
-  AssignmentId: number;
+  id: number;
   student: {
     name: string;
     avatar: string;
@@ -24,6 +24,7 @@ export interface AssignmentPreview {
   likes: number;
   comments: number;
   fileData?: string;
+  Task: any;
 }
 
 export interface AssignmentState {

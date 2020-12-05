@@ -75,7 +75,10 @@ exports.GetStudentById = async (req, res) => {
   try {
     const { id } = req.params;
     const result = await models.Student.findByPk(id, {
-      include: [{ model: models.Assignment }, { model: models.Room }],
+      include: [
+        { model: models.Assignment, include: { model: models.Task } },
+        { model: models.Room },
+      ],
     });
     console.log("RESULT", result);
     const student = {

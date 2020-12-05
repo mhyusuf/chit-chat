@@ -124,19 +124,23 @@ const StudentDetail: FunctionComponent<StudentDetailProps> = ({
         <h2 className="student-detail-grand-wrapper__tasks__subtitle">
           Assignments
         </h2>
-        {/* {assignments.map((assignment, index) => {
+        {assignments.map((assignment, index) => {
           return (
             <StudentAssignmentPreview
-              key={assignment.AssignmentId}
+              key={assignment.id}
               open={index === openIndex}
               handleOpen={handleOpen}
               index={index}
-              task={{id: assignment.AssignmentId, title: assignment.taskName, description: assignment.description }}
+              task={{
+                id: assignment.id,
+                title: assignment.Task.title,
+                description: assignment.Task.description,
+              }}
               submitted={assignment.fileData ? true : false}
             />
           );
-        })} */}
-        {tasks.map((assignment, index) => {
+        })}
+        {/* {tasks.map((assignment, index) => {
           return (
             <StudentAssignmentPreview
               key={assignment.id}
@@ -147,7 +151,7 @@ const StudentDetail: FunctionComponent<StudentDetailProps> = ({
               submitted={assignment.submitted}
             />
           );
-        })}
+        })} */}
       </div>
       {isTeacher && (
         <div className="student-detail-grand-wrapper__room">
