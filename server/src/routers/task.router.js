@@ -6,6 +6,6 @@ const {
 } = require("../controllers/task.controller");
 
 router.get("/:id", GetTaskById);
-router.get("/:nativeLanguage/:targetLanguage/:level", GetTasksByLevel);
+router.get("/:targetLanguage/:level", GetTasksByLevel);
 
 module.exports = router;
