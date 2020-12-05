@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
 import studentsReducer from "./studentsReducer";
 import teacherReducer from "./teacherReducer";
-import assignmentReducer from "./assignmentReducer";
+import assignmentsReducer from "./assignmentsReducer";
 import userReducer from "./userReducer";
 import courseReducer from "./courseReducer";
 import roomDetailReducer from "./roomDetailReducer";
@@ -16,7 +16,7 @@ export default combineReducers({
   students: studentsReducer,
   student: studentReducer,
   teachers: teacherReducer,
-  assignments: assignmentReducer,
+  assignments: assignmentsReducer,
   assignmentDetail: assignmentDetailReducer,
   tasks: tasksReducer,
   course: courseReducer,
