@@ -1,113 +1,47 @@
-import React, { FunctionComponent } from "react";
-
+import React, { FunctionComponent, useEffect } from "react";
+import { connect } from "react-redux";
+import { getTaskDetail } from "../../actions";
+import { CourseState, Student } from "../../interfaces/reducerInterfaces";
 import "./TaskDetail.scss";
 
-const studentArr = [
-  {
-    name: "Billy S",
-    assigned: true,
-    completed: true,
-  },
-  {
-    name: "Esteban C",
-    assigned: false,
-    completed: false,
-  },
-  {
-    name: "Uardo V",
-    assigned: true,
-    completed: false,
-  },
-  {
-    name: "Luís P",
-    assigned: true,
-    completed: true,
-  },
-  {
-    name: "Sol G",
-    assigned: true,
-    completed: false,
-  },
-  {
-    name: "Benito L",
-    assigned: true,
-    completed: false,
-  },
-  {
-    name: "Matteo P",
-    assigned: false,
-    completed: false,
-  },
-  {
-    name: "Jesus R",
-    assigned: true,
-    completed: true,
-  },
-  {
-    name: "Marina J",
-    assigned: true,
-    completed: false,
-  },
-  {
-    name: "Billy S",
-    assigned: true,
-    completed: true,
-  },
-  {
-    name: "Esteban C",
-    assigned: false,
-    completed: false,
-  },
-  {
-    name: "Uardo V",
-    assigned: true,
-    completed: false,
-  },
-  {
-    name: "Luís P",
-    assigned: true,
-    completed: true,
-  },
-  {
-    name: "Sol G",
-    assigned: true,
-    completed: false,
-  },
-  {
-    name: "Benito L",
-    assigned: true,
-    completed: false,
-  },
-  {
-    name: "Matteo P",
-    assigned: false,
-    completed: false,
-  },
-  {
-    name: "Jesus R",
-    assigned: true,
-    completed: true,
-  },
-  {
-    name: "Marina J",
-    assigned: true,
-    completed: false,
-  },
-];
-const studentRows = studentArr.map((student, idx) => (
-  <tr key={idx}>
-    <td>{student.name}</td>
-    <td>{student.assigned ? "✓" : ""}</td>
-    <td>{student.completed ? "✓" : ""}</td>
-  </tr>
-));
+interface TaskDetailState {
+  task: Task;
+  students: Student[];
+}
 
-const TaskDetail: FunctionComponent<any> = () => {
+interface Task {
+  id: number;
+  title: string;
+  description: string;
+}
+
+const TaskDetail: FunctionComponent<any> = ({
+  activeCourse,
+  taskDetail,
+  getTaskDetail,
+  match,
+}) => {
+  useEffect(() => {
+    if (activeCourse) getTaskDetail(match.params.id, activeCourse);
+  }, [activeCourse]);
+  console.log(taskDetail.students);
+  const studentRows = taskDetail.students.map((student: any) => (
+    <tr key={student.id}>
+      <td>{student.name}</td>
+      <td>{student.Assignments.length ? "✓" : ""}</td>
+      <td>
+        {student.Assignments.length && student.Assignments[0].fileName
+          ? "✓"
+          : ""}
+      </td>
+    </tr>
+  ));
+
   return (
     <div className="task-detail-grand-wrapper">
       <div className="task-detail-grand-wrapper__title-content">
-        <h1 className="">Task #1: Introducing yourself and others</h1>
-        <h3>Course level 1</h3>
+        <h1 className="">{`Task #${taskDetail.task.id}: ${taskDetail.task.title}`}</h1>
+        <h3>{`Course level ${taskDetail.task.level}`}</h3>
       </div>
       <div className="task-detail-grand-wrapper__page-content">
         <div className="task-detail-grand-wrapper__page-content__table-block">
@@ -130,4 +64,14 @@ const TaskDetail: FunctionComponent<any> = () => {
   );
 };
 
-export default TaskDetail;
+const mapStateToProps = ({
+  course,
+  taskDetail,
+}: {
+  course: CourseState;
+  taskDetail: TaskDetailState;
+}) => {
+  return { activeCourse: course.activeCourse, taskDetail };
+};
+
+export default connect(mapStateToProps, { getTaskDetail })(TaskDetail);

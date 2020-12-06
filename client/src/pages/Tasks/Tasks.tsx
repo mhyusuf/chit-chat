@@ -32,7 +32,7 @@ const Tasks: FunctionComponent<any> = ({ tasks, course, getAllTasks }) => {
                 task={task}
                 open={i === openIndex}
                 index={i}
-                handleOpen={(i: number) => setOpenIndex(i)}
+                handleOpen={(i: number | null) => setOpenIndex(i)}
               />
             );
           })}

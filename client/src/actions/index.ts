@@ -8,6 +8,7 @@ import { getAllMessagesByRoom, getRoomUsers } from "./roomActions";
 import { getAssignmentPreviewsByCourse } from "./assignmentActions";
 import { getCoursesByTeacher, setActiveCourse } from "./courseActions";
 import { getStudentsByCourse, getStudent } from "./studentActions";
+import { getTaskDetail } from "./tasksActions";
 
 export {
   getCurrentUser,
@@ -21,4 +22,5 @@ export {
   setActiveCourse,
   getStudentsByCourse,
   getStudent,
+  getTaskDetail,
 };

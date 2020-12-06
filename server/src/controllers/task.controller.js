@@ -1,11 +1,28 @@
 const models = require("../models").sequelize.models;
 
-exports.GetTaskById = async (req, res) => {
+exports.GetTaskDetail = async (req, res) => {
   try {
-    const id = req.params.id;
-    const task = await models.Task.findOne({ where: { id } });
+    const { TaskId, CourseId } = req.params;
+    const task = await models.Task.findByPk(TaskId, {
+      attributes: ["id", "title", "description", "level", "targetLanguage"],
+    });
+    const students = await models.Student.findAll({
+      where: { CourseId },
+      attributes: ["id", "name"],
+      include: [
+        {
+          model: models.Assignment,
+          include: {
+            model: models.Task,
+            where: { id: TaskId },
+            attributes: [],
+          },
+          attributes: ["fileName"],
+        },
+      ],
+    });
     if (!task) throw new Error("No task found");
-    res.status(200).send(task);
+    res.status(200).send({ task, students });
   } catch (e) {
     res.status(500).send(e.message);
   }
@@ -21,7 +38,6 @@ exports.GetTasksByLevel = async (req, res) => {
       },
     });
     if (!tasks) throw new Error("No tasks found");
-    console.log("TASKS!", tasks);
     res.status(200).send(tasks);
   } catch (e) {
     res.status(500).send(e.message);

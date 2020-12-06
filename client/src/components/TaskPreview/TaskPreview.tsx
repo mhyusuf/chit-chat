@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from "react";
+import React, { FunctionComponent } from "react";
 import {
   IoIosArrowDropdownCircle,
   IoIosArrowDropupCircle,
@@ -18,10 +18,11 @@ interface TaskPreviewProps {
   task: Task;
   index: number;
   open: boolean;
-  handleOpen: (i: number) => void;
+  isTeacher: boolean;
+  handleOpen: (i: number | null) => void;
 }
 
-const TaskPreview: FunctionComponent<any> = ({
+const TaskPreview: FunctionComponent<TaskPreviewProps> = ({
   task,
   index,
   open,
@@ -53,7 +54,7 @@ const TaskPreview: FunctionComponent<any> = ({
             </div>
           </div>
           <div className="content__buttons">
-            <Link to="/tasks/:id">
+            <Link to={`/tasks/${task.id}`}>
               <button>View Task</button>
             </Link>
             {isTeacher && (
