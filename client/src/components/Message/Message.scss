@@ -27,19 +27,9 @@
     margin-left: -$S;
   }
   &__avatar-wrapper {
-    height: 3rem;
-    width: 3rem;
     display: flex;
     align-items: center;
     justify-content: center;
-
-    &__avatar {
-      height: 100%;
-      width: 100%;
-      background-image: url("../../assets/unicorn.png");
-      background-repeat: round;
-      flex-shrink: 0;
-    }
   }
   &__message-block {
     margin-left: 1rem;

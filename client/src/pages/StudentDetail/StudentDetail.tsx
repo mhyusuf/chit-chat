@@ -11,6 +11,7 @@ import {
   User,
   RoomDetailState,
 } from "../../interfaces/reducerInterfaces";
+import UserAvatar from "../../components/UserAvatar";
 
 interface RoomPreview1 {
   name: string;
@@ -112,7 +113,7 @@ const StudentDetail: FunctionComponent<StudentDetailProps> = ({
   return (
     <div className="student-detail-grand-wrapper">
       <div className="student-detail-grand-wrapper__student-details">
-        <div className="student-detail-grand-wrapper__student-details__avatar"></div>
+        <UserAvatar avatarString={student.avatar} />
         {student && (
           <h2 className="student-detail-grand-wrapper__student-details__student-name">
             {student.name}

@@ -16,18 +16,15 @@ const TaskPreview: FunctionComponent<any> = ({
 
   return (
     <div className="task-preview-grand-wrapper">
-      <div className="task-preview__header">
+      <div
+        className="task-preview__header"
+        onClick={() => handleOpen(!open ? index : null)}
+      >
         <h2>{task.title}</h2>
         {!open ? (
-          <IoIosArrowDropdownCircle
-            className="header__dropdown-icon"
-            onClick={() => handleOpen(index)}
-          />
+          <IoIosArrowDropdownCircle className="header__dropdown-icon" />
         ) : (
-          <IoIosArrowDropupCircle
-            className="header__dropdown-icon"
-            onClick={() => handleOpen(null)}
-          />
+          <IoIosArrowDropupCircle className="header__dropdown-icon" />
         )}
       </div>
       {open && (

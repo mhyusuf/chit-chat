@@ -20,20 +20,6 @@
     &__edit-icon {
       font-size: 1rem;
     }
-
-    &__avatar {
-      margin: 0;
-      width: 5vh;
-      height: 5vh;
-      border: solid;
-      border-radius: 50%;
-
-      background-image: linear-gradient(
-        white,
-        $secondary-color,
-        $secondary-color
-      );
-    }
   }
 
   &__tasks {

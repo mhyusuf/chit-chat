@@ -25,7 +25,7 @@ const ActiveCourse: FunctionComponent<ActiveCourseProps> = ({
   }, []);
 
   return (
-    <div>
+    <div className="course-select-grand-wrapper">
       {course.courseList.length && (
         <CourseSelect
           courses={course.courseList}

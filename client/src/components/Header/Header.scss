@@ -29,31 +29,21 @@
   }
 
   &__right-block {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
     > a {
+      margin-right: $M;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       text-decoration: none;
+
+      .smaller {
+        transform: scale(0.7);
+      }
     }
 
     h3 {
       color: white;
       height: 100%;
-    }
-    &__avatar {
-      margin: 0 2rem 0 1rem;
-
-      width: 5vh;
-      height: 5vh;
-      border: solid;
-      border-radius: 50%;
-
-      background-image: linear-gradient(
-        white,
-        $secondary-color,
-        $secondary-color
-      );
     }
   }
 }

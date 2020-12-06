@@ -1,5 +1,6 @@
 import moment from "moment";
 import React, { FunctionComponent } from "react";
+import UserAvatar from "../UserAvatar";
 import "./Message.scss";
 // {sender: {name: 'Matt', avatar: 'MH'},
 // text_content: 'Hola amigos! ¿Qué tal?',
@@ -32,13 +33,13 @@ const Message: FunctionComponent<any> = (props) => {
         {messageContent}
       </div>
       <div className="message-grand-wrapper__avatar-wrapper">
-        <div className="message-grand-wrapper__avatar-wrapper__avatar" />
+        <UserAvatar avatarString={sender.avatar} />
       </div>
     </>
   ) : (
     <>
       <div className="message-grand-wrapper__avatar-wrapper">
-        <div className="message-grand-wrapper__avatar-wrapper__avatar" />
+        <UserAvatar avatarString={sender.avatar} />
       </div>
       <div className="message-grand-wrapper__message-block">
         {messageContent}

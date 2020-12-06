@@ -29,7 +29,7 @@ const CourseSelect: FunctionComponent<CourseSelectProps> = ({
   };
 
   return (
-    <div>
+    <div className="course-select-grand-wrapper">
       <select value={selectedCourse} onChange={handleChange}>
         {courses.map((course) => (
           <option key={course.id} value={course.id}>

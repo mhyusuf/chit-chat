@@ -4,14 +4,13 @@ import "./UserAvatar.scss";
 
 const UserAvatar: FunctionComponent<any> = ({
   avatarString,
+  smaller,
 }: {
   avatarString: string;
-}) => {
-  return (
-    <div className="avatar-grand-wrapper">
-      <img src={getAvatar(avatarString)} alt="student avatar" />
-    </div>
-  );
-};
-
+  smaller: boolean | null;
+}) => (
+  <div className={`avatar-grand-wrapper ${smaller ? "smaller" : null}`}>
+    <img src={getAvatar(avatarString)} alt="student avatar" />
+  </div>
+);
 export default UserAvatar;
