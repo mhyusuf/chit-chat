@@ -9,6 +9,7 @@ import roomListReducer from "./roomListReducer";
 import assignmentDetailReducer from "./assignmentDetailReducer";
 import resourceReducer from "./resourceReducer";
 import tasksReducer from "./tasksReducer";
+import taskDetailReducer from "./taskDetailReducer";
 import studentReducer from "./studentReducer";
 
 export default combineReducers({
@@ -19,6 +20,7 @@ export default combineReducers({
   assignments: assignmentsReducer,
   assignmentDetail: assignmentDetailReducer,
   tasks: tasksReducer,
+  taskDetail: taskDetailReducer,
   course: courseReducer,
   roomDetail: roomDetailReducer,
   roomList: roomListReducer,
