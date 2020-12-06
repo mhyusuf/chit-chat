@@ -3,17 +3,31 @@ import {
   IoIosArrowDropdownCircle,
   IoIosArrowDropupCircle,
 } from "react-icons/io";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { User } from "../../interfaces/reducerInterfaces";
 import "./TaskPreview.scss";
+
+interface Task {
+  id: number;
+  title: string;
+  description: string;
+}
+
+interface TaskPreviewProps {
+  task: Task;
+  index: number;
+  open: boolean;
+  handleOpen: (i: number) => void;
+}
 
 const TaskPreview: FunctionComponent<any> = ({
   task,
   index,
   open,
   handleOpen,
+  isTeacher,
 }) => {
-  const [isTeacher, setIsTeacher] = useState(false);
-
   return (
     <div className="task-preview-grand-wrapper">
       <div
@@ -31,7 +45,12 @@ const TaskPreview: FunctionComponent<any> = ({
         <div className="task-preview__content">
           <div className="content__main">
             <p>{task.description}</p>
-            <div className="content__picture"></div>
+            <div className="content__picture">
+              <img
+                src={`/api/task/${task.id}/thumbnail`}
+                alt="task-thumbnail"
+              />
+            </div>
           </div>
           <div className="content__buttons">
             <Link to="/tasks/:id">
@@ -54,4 +73,8 @@ const TaskPreview: FunctionComponent<any> = ({
   );
 };
 
-export default TaskPreview;
+const mapStateToProps = ({ user }: { user: User }) => {
+  return { isTeacher: user.isTeacher };
+};
+
+export default connect(mapStateToProps)(TaskPreview);

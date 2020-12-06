@@ -27,3 +27,14 @@ exports.GetTasksByLevel = async (req, res) => {
     res.status(500).send(e.message);
   }
 };
+
+exports.GetTaskThumbnail = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const Task = await models.Task.findByPk(id);
+    res.set("Content-Type", "image/png");
+    res.status(200).send(Task.thumbnail);
+  } catch (e) {
+    res.status(500).send(e.message);
+  }
+};
