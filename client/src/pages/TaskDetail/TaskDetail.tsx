@@ -1,6 +1,8 @@
-import React, { FunctionComponent, useEffect } from "react";
+import React, { FunctionComponent, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { getTaskDetail } from "../../actions";
+import TaskAssignments from "../../components/TaskAssigments";
+import TaskAssignmentsEdit from "../../components/TaskAssignmentsEdit";
 import { CourseState, Student } from "../../interfaces/reducerInterfaces";
 import "./TaskDetail.scss";
 
@@ -21,21 +23,10 @@ const TaskDetail: FunctionComponent<any> = ({
   getTaskDetail,
   match,
 }) => {
+  const [showEdit, setShowEdit] = useState(false);
   useEffect(() => {
     if (activeCourse) getTaskDetail(match.params.id, activeCourse);
   }, [activeCourse]);
-  console.log(taskDetail.students);
-  const studentRows = taskDetail.students.map((student: any) => (
-    <tr key={student.id}>
-      <td>{student.name}</td>
-      <td>{student.Assignments.length ? "✓" : ""}</td>
-      <td>
-        {student.Assignments.length && student.Assignments[0].fileName
-          ? "✓"
-          : ""}
-      </td>
-    </tr>
-  ));
 
   return (
     <div className="task-detail-grand-wrapper">
@@ -51,12 +42,22 @@ const TaskDetail: FunctionComponent<any> = ({
             <td>completed?</td>
           </th>
           <div className="task-detail-grand-wrapper__page-content__table-block__student-table">
-            <table>{studentRows}</table>
+            <table>
+              {showEdit ? (
+                <TaskAssignmentsEdit students={taskDetail.students} />
+              ) : (
+                <TaskAssignments students={taskDetail.students} />
+              )}
+            </table>
           </div>
-          <button>edit</button>
+          {showEdit ? (
+            <button onClick={() => setShowEdit(false)}>save</button>
+          ) : (
+            <button onClick={() => setShowEdit(true)}>edit</button>
+          )}
         </div>
         <div className="task-detail-grand-wrapper__page-content__doc-preview-block">
-          <div className="task-detail-grand-wrapper__page-content__doc-preview-block__preview" />
+          <div className="task-detail-grand-wrapper__page-content__doc-preview-block__preview"></div>
           <button>download</button>
         </div>
       </div>
