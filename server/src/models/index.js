@@ -11,6 +11,7 @@ const sequelize = new Sequelize({
   host: HOST,
   port: PORT,
   dialect: DIALECT,
+  logging: false,
 });
 
 fs.readdirSync(__dirname)
