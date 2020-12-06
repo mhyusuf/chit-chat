@@ -24,22 +24,19 @@ const StudentAssignmentPreview: FunctionComponent<StudentAssignmentPreviewProps>
 }) => {
   return (
     <div className="student-task-preview-grand-wrapper">
-      <div className="student-task-preview__header">
+      <div
+        className="student-task-preview__header"
+        onClick={() => handleOpen(!open ? index : null)}
+      >
         <h2>{task.title}</h2>
         <div className="student-task-preview__header__icon-div">
           {submitted && (
             <IoIosCheckmarkCircle className="student-task-preview__header__icon-div__submitted-icon" />
           )}
           {!open ? (
-            <IoIosArrowDropdownCircle
-              className="student-task-preview__header__icon-div__dropdown-icon"
-              onClick={() => handleOpen(index)}
-            />
+            <IoIosArrowDropdownCircle className="student-task-preview__header__icon-div__dropdown-icon" />
           ) : (
-            <IoIosArrowDropupCircle
-              className="student-task-preview__header__icon-div__dropdown-icon"
-              onClick={() => handleOpen(null)}
-            />
+            <IoIosArrowDropupCircle className="student-task-preview__header__icon-div__dropdown-icon" />
           )}
         </div>
       </div>

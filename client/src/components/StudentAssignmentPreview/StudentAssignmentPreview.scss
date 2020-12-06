@@ -23,6 +23,10 @@
     display: flex;
     justify-content: space-between;
 
+    h2 {
+      user-select: none;
+    }
+
     &__icon-div {
       display: flex;
       align-items: center;

@@ -1,0 +1,19 @@
+@import "../../App.scss";
+
+.course-select-grand-wrapper {
+  select {
+    font-family: inherit;
+    font-style: italic;
+    font-weight: bold;
+    letter-spacing: 2px;
+    background-color: $light-orange;
+    border: $border $main-green;
+    border-radius: $XXS;
+
+    &:focus {
+      outline: none;
+      border: solid 3px $dark-green;
+      border-radius: $XXS;
+    }
+  }
+}
