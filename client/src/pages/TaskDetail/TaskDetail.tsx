@@ -3,19 +3,11 @@ import { connect } from "react-redux";
 import { getTaskDetail } from "../../actions";
 import TaskAssignments from "../../components/TaskAssigments";
 import TaskAssignmentsEdit from "../../components/TaskAssignmentsEdit";
-import { CourseState, Student } from "../../interfaces/reducerInterfaces";
+import {
+  CourseState,
+  TaskDetailState,
+} from "../../interfaces/reducerInterfaces";
 import "./TaskDetail.scss";
-
-interface TaskDetailState {
-  task: Task;
-  students: Student[];
-}
-
-interface Task {
-  id: number;
-  title: string;
-  description: string;
-}
 
 const TaskDetail: FunctionComponent<any> = ({
   activeCourse,

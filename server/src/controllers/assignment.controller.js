@@ -28,8 +28,18 @@ exports.CreateAssignment = async (req, res) => {
 exports.GetAssignmentById = async (req, res) => {
   const { id } = req.params;
   try {
-    const assisgnment = await Assignment.findByPk(id);
-    if (assisgnment) res.status(200).send(assisgnment);
+    const assignment = await Assignment.findByPk(id, {
+      include: [{ model: Student }, { model: Task }, { model: Comment }],
+    });
+    if (assignment)
+      res.status(200).send({
+        submitData: assignment.fileData,
+        task: assignment.Task,
+        student: assignment.Student,
+        comments: assignment.comments,
+        likes: assignment.likes,
+        completed: assignment.fileData ? true : false,
+      });
     else res.status(404).send(new Error("No assignment found"));
   } catch (e) {
     res.status(500).send(e.message);
@@ -123,36 +133,6 @@ exports.EditAssignment = async (req, res) => {
   } catch (e) {
     res.status(500).send(e.message);
   }
-};
-
-exports.GetAssignmentByStudent = async (req, res) => {
-  // try{
-  //   const { id } = req.params;
-  //   const student = await Student.findByPk(id, {
-  //     include: {
-  //       model: Assignment,
-  //       include: [{ model: Task }, { model: Comment }],
-  //     },
-  //   });
-  //   const formattedAssignments = [];
-  //   const { Assignments } = student.dataValues;
-  //   Assignments.forEach((assignment) => {
-  //     if (!assignment.dataValues.dismissed) {
-  //       allAssignments.push({
-  //         AssignmentId: assignment.dataValues.id,
-  //         student: { name: student.name, avatar: student.avatar },
-  //         taskName: assignment.dataValues.Task.dataValues.title,
-  //         description: assignment.dataValues.Task.dataValues.description,
-  //         likes: assignment.dataValues.likes.length,
-  //         comments: assignment.dataValues.Comments.length,
-  //         fileData: assignment.dataValues.fileData,
-  //       });
-  //     }
-  //   });
-  //   res.status(200).send(formattedAssignments);
-  // } catch (e) {
-  //   res.status(404).send(e.message);
-  // }
 };
 
 exports.GetAssignmentByTask = async (req, res) => {

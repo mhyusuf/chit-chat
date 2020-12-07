@@ -2,15 +2,9 @@ import React, { FunctionComponent, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { getAllTasks } from "../../actions/tasksActions";
 import TaskPreview from "../../components/TaskPreview/TaskPreview";
-import { CourseState } from "../../interfaces/reducerInterfaces";
+import { CourseState, Task } from "../../interfaces/reducerInterfaces";
 
 import "./Tasks.scss";
-
-interface Task {
-  id: number;
-  title: string;
-  description: string;
-}
 
 const Tasks: FunctionComponent<any> = ({ tasks, course, getAllTasks }) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);

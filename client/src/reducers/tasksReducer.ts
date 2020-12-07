@@ -1,11 +1,5 @@
-import { ChitChatAction } from "../interfaces/reducerInterfaces";
+import { ChitChatAction, Task } from "../interfaces/reducerInterfaces";
 import { GET_ALL_TASKS } from "../actions/tasksActions";
-
-interface Task {
-  id: number;
-  title: string;
-  description: string;
-}
 
 const initialState: Task[] = [];
 
