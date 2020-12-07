@@ -15,6 +15,7 @@ import TaskDetail from "../pages/TaskDetail";
 import Tasks from "../pages/Tasks";
 import AdminApp from "./AdminApp";
 import CourseCreate from "../pages/CourseCreate";
+import CourseEdit from "../pages/CourseEdit";
 
 const TeacherApp: FunctionComponent<any> = () => {
   return (
@@ -40,6 +41,7 @@ const TeacherApp: FunctionComponent<any> = () => {
               path="/administrator/create-course"
               component={CourseCreate}
             />
+            <Route path="/administrator/edit-course" component={CourseEdit} />
           </Switch>
         </div>
       </div>
