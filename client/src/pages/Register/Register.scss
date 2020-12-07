@@ -1,0 +1,44 @@
+@import "../../App.scss";
+
+.register-grand-wrapper {
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__form {
+    border: $border;
+    background-color: $background;
+    border-radius: 0.5rem;
+
+    > h2 {
+      padding: $S $M;
+      text-align: center;
+      background-color: $dark-green;
+      border-bottom: $border black;
+      color: #fff;
+    }
+    > form {
+      display: flex;
+      flex-direction: column;
+
+      > input,
+      > button {
+        margin: $XS $M;
+        padding: $XS $S;
+      }
+      > button {
+        border-radius: 0.5rem;
+        border: none;
+        background-color: $dark-green;
+        color: white;
+        cursor: pointer;
+        transition: all 0.2s;
+        &:hover {
+          background-color: $primary-color;
+          color: black;
+        }
+      }
+    }
+  }
+}
