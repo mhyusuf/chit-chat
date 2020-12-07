@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-
+import { registerStudent } from "../../actions/studentActions";
+import { connect } from "react-redux";
+import { User } from "../../interfaces/reducerInterfaces";
 import "./Register.scss";
 import cat from "../../assets/cat.png";
 
-const Register = () => {
+const Register = ({ registerStudent }: { registerStudent: Function }) => {
   const [input, setInput] = useState({
     name: "",
     email: "",
@@ -19,20 +21,20 @@ const Register = () => {
       return { ...prevInput, [e.target.name]: e.target.value };
     });
   };
-
   const handleClick = (e: React.MouseEvent): void => {
     e.preventDefault();
     console.log(input);
-
-    setInput({
-      name: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-      courseId: "",
-      roomId: "",
-      avatar: "cat",
-    });
+    const { email, name, password, avatar, roomId, courseId } = input;
+    registerStudent(email, name, password, avatar, roomId, courseId);
+    // setInput({
+    //   name: "",
+    //   email: "",
+    //   password: "",
+    //   confirmPassword: "",
+    //   courseId: "",
+    //   roomId: "",
+    //   avatar: "cat",
+    // });
   };
 
   return (
@@ -85,4 +87,16 @@ const Register = () => {
   );
 };
 
-export default Register;
+const mapStateToProps = ({ user }: { user: User }) => {
+  return { user };
+};
+
+export default connect(mapStateToProps, { registerStudent })(Register);
+
+// avatar: "cat"
+// confirmPassword: "password"
+// courseId: "ffcbd9d6-e39a-4504-83b6-29da127d14bc"
+// email: "andre@andre.com"
+// name: "Andre"
+// password: "password"
+// roomId: "2a38b80c-027e-45c4-b7e5-d431b7179af9"
