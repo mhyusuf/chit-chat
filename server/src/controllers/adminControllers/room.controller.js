@@ -1,11 +1,16 @@
 // @ts-nocheck
 const models = require("../../models").sequelize.models;
+const uuid = require("uuid");
 
 exports.CreateRoom = async (req, res) => {
   try {
-    const { CourseId1, CourseId2, name } = req.body;
-    const newRoom = await models.Room.create({ name });
-    newRoom.setCourses([CourseId1, CourseId2]);
+    // take in UUID => get course pk and sister course pk
+    const { id, name } = req.body;
+    // const { CourseId1, CourseId2, name } = req.body;
+    const result = await models.Course.findByPk(id);
+    const roomRegistrationId = uuid.v4();
+    const newRoom = await models.Room.create({ name, roomRegistrationId });
+    newRoom.setCourses([result.dataValues.id, result.dataValues.sisterCourse]);
     await newRoom.save();
     res.status(201).send(newRoom);
   } catch (e) {

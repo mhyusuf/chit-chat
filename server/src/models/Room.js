@@ -4,6 +4,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    roomRegistrationId: {
+      type: DataTypes.UUID,
+      allowNull: false,
+    },
   });
 
   Room.associate = (models) => {
