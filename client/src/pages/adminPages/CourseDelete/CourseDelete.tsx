@@ -5,6 +5,7 @@ import React, {
   FormEvent,
 } from "react";
 import axios from "axios";
+import "./CourseDelete.scss";
 
 const CourseDelete: FunctionComponent<any> = ({ history }) => {
   const [id, setId] = useState<string>("");
@@ -22,9 +23,11 @@ const CourseDelete: FunctionComponent<any> = ({ history }) => {
   return (
     <div>
       <h3>Delete Course</h3>
-      <form onSubmit={handleSubmit}>
-        <label>Course ID</label>
-        <input type="number" onChange={handleInputChange} name="id" />
+      <form onSubmit={handleSubmit} className="delete-course-form">
+        <label>
+          Course ID
+          <input type="number" onChange={handleInputChange} name="id" />
+        </label>
         <button type="submit">Submit</button>
       </form>
     </div>
