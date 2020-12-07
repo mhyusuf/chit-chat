@@ -115,9 +115,10 @@ exports.EditAssignment = async (req, res) => {
 
     if (type === "like") {
       const assignment = await Assignment.findByPk(id);
-      assignment.likes = [...assignment.likes, req.user.userId];
+      const set = new Set(assignment.likes).add(req.user.userId);
+      assignment.likes = Array.from(set);
       await assignment.save();
-      return res.status(200).send(assignment);
+      return res.status(200).send(assignment.likes);
     } else if (type === "upload") {
       const { submitData } = req.body;
       const submitted = await Assignment.update(
