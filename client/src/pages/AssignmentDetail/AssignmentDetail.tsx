@@ -58,8 +58,13 @@ const AssignmentDetail: FunctionComponent<AssignmentDetailProps> = (props) => {
   return (
     <div className="assignment-detail-grand-wrapper">
       <div className="assignment-detail-grand-wrapper__text-wrapper">
-        <h1>{assignment.task.title}</h1>
-        <h2 className="--lessPadding">{assignment.student.name}</h2>
+        <div className="assignment-detail-grand-wrapper__text-wrapper__left-block">
+          <h1>{assignment.task.title}:</h1>
+          <h2 className="--lessPadding">{assignment.student.name}</h2>
+        </div>
+        <div className="assignment-detail-grand-wrapper__text-wrapper__right-block">
+          <h4>{assignment.task.description}</h4>
+        </div>
       </div>
 
       {!submitted && (
@@ -93,11 +98,6 @@ const AssignmentDetail: FunctionComponent<AssignmentDetailProps> = (props) => {
           </div>
         </div>
       )}
-
-      <div className="assignment-detail-grand-wrapper__task-description">
-        <h2>Description</h2>
-        <p>{assignment.task.description}</p>
-      </div>
     </div>
   );
 };

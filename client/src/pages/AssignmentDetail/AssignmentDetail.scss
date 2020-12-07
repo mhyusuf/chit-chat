@@ -22,41 +22,54 @@
   }
 
   &__text-wrapper {
+    display: flex;
+    justify-content: space-between;
     width: 100%;
-    h2 {
-      padding: 0 0 2rem 4rem;
+    &__left-block {
+      width: 40%;
+      h2 {
+        padding: 0 0 2rem 4rem;
+      }
+    }
+    &__right-block {
+      width: 60%;
+      text-align: right;
+      padding: 4rem;
     }
   }
   &__content-wrapper {
+    margin-top: 7vh;
     width: 100%;
     height: 46rem;
     display: flex;
     align-items: flex-start;
     justify-content: center;
+    justify-content: space-evenly;
 
     &__preview {
-      margin-right: 3rem;
-      height: 50vh;
+      height: 40vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
 
       .preview-icon {
-        border: solid;
+        margin-left: -2rem;
+        // border:solid;
         width: 20rem;
         height: 20rem;
         flex-shrink: 0;
         background-repeat: round;
         &.wordDoc {
-          background-image: url("../../assets/powerpoint.png");
-          background-size: cover;
+          background-image: url("../../assets/wordDoc.png");
+          background-repeat: round;
         }
         &.powerpoint {
-          background-image: url("../../assets/wordDoc.png");
+          background-image: url("../../assets/powerpoint.png");
+          background-repeat: round;
         }
         &.pdf {
           background-image: url("../../assets/pdf.png");
+          background-repeat: round;
         }
       }
       &__button-wrapper {
@@ -76,6 +89,9 @@
               margin-top: 5px;
             }
           }
+          &:hover {
+            background-color: $light-orange;
+          }
         }
       }
     }
@@ -88,7 +104,7 @@
     // border: solid red;
 
     &__comments {
-      height: 33rem;
+      height: 32rem;
       overflow-y: scroll;
       border-bottom: $border;
       border-radius: 0.5rem;
@@ -108,14 +124,6 @@
 
         @include send-button;
       }
-    }
-  }
-
-  &__task-description {
-    padding: 2rem 4rem 8rem 4rem;
-
-    > p {
-      margin: 2rem 4rem 0 0;
     }
   }
 }
