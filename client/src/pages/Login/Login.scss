@@ -115,6 +115,7 @@
           border-radius: 0.5rem;
           margin: 0 0 1rem 35%;
           width: 30%;
+
           grid-column: 1 / 3;
           transition: all 0.2s;
           &:hover {
@@ -127,6 +128,24 @@
           }
         }
       }
+    }
+  }
+}
+
+.register-link-container {
+  display: flex;
+  width: 100vw;
+  justify-content: center;
+  margin: $XL 0;
+
+  > a {
+    margin-left: $M;
+
+    > button {
+      @include send-button;
+      cursor: pointer;
+      border-radius: 0.4rem;
+      border: none;
     }
   }
 }

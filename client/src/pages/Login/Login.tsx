@@ -1,4 +1,5 @@
 import React, { FormEvent, FunctionComponent, useState } from "react";
+import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { loginTeacher, loginStudent } from "../../actions";
 import Logo from "../../assets/color-logo.png";
@@ -98,6 +99,12 @@ const Login: FunctionComponent<any> = ({
             </form>
           </div>
         </div>
+      </div>
+      <div className="register-link-container">
+        <p>New to Chit Chat?</p>
+        <NavLink to="/register">
+          <button>Register</button>
+        </NavLink>
       </div>
     </>
   );
