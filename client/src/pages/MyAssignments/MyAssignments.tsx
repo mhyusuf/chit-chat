@@ -28,12 +28,13 @@ const MyAssignments: FunctionComponent<MyAssignmentsProps> = ({
     .map((assignment, index) => {
       return (
         <StudentAssignmentPreview
-          key={assignment.id}
+          key={assignment.AssignmentId}
+          id={assignment.AssignmentId}
           open={index === openIndex}
           handleOpen={handleOpen}
           index={index}
           task={{
-            id: assignment.id,
+            id: assignment.Task.id,
             title: assignment.Task.title,
             description: assignment.Task.description,
           }}
