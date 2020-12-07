@@ -17,22 +17,27 @@
   align-items: flex-start;
   &__textbox {
     margin: 0 5rem;
-    width: 30vw;
-    border: $border;
+    width: 40vw;
+    text-align: center;
+    // border: $border;
     font-size: 2rem;
     margin-bottom: $L;
     padding: $L;
     border-radius: $XXS;
     background-color: rgba($light-orange, 0.8);
     box-shadow: $shadow-settings;
+
+    h1 {
+      color: $dark-green;
+    }
   }
   &__login-grand-wrapper {
-    width: 40%;
+    width: 100%;
 
     &__center-block {
-      // margin-top: 10rem;
-      padding: 1rem;
-      height: 17rem;
+      height: 22rem;
+      width: 60%;
+      margin-left: 20%;
       border-radius: 0.5rem;
       border: solid $primary-color;
       display: flex;
@@ -54,20 +59,32 @@
           padding: 0.5rem;
           font-size: 1rem;
           font-weight: bold;
-          border-radius: 0.5rem;
+          border-radius: 0 0.25rem 0 0.5rem;
           cursor: pointer;
+          &:focus {
+            outline: none;
+            border-bottom: solid rgba(black, 0.5);
+            border-left: solid rgba(black, 0.5);
+          }
           &--teacher {
             background-color: adjust-color($primary-color, $lightness: 20%);
+            &:hover {
+              background-color: adjust-color($primary-color, $lightness: 10%);
+            }
           }
           &--student {
             background-color: adjust-color($secondary-color, $lightness: 10%);
+            &:hover {
+              background-color: $secondary-color;
+            }
           }
         }
         h2 {
+          margin: 1rem;
         }
       }
       form {
-        height: 10rem;
+        height: 15rem;
         display: grid;
         grid-template-rows: repeat(3, 1fr);
         grid-template-columns: repeat(2, 1fr);
@@ -86,7 +103,7 @@
         input {
           border: solid $primary-color 1px;
           border-radius: 0.5rem;
-          width: 70%;
+          width: 90%;
           height: 2.5rem;
           grid-column: 2;
         }
@@ -96,14 +113,18 @@
           color: white;
           font-weight: bold;
           border-radius: 0.5rem;
-          margin-left: 30%;
-          width: 40%;
+          margin: 0 0 1rem 35%;
+          width: 30%;
           grid-column: 1 / 3;
           transition: all 0.2s;
-        }
-        button:hover {
-          background-color: $dark-green;
-          cursor: pointer;
+          &:hover {
+            background-color: $dark-green;
+            cursor: pointer;
+          }
+          &:focus {
+            outline: none;
+            border: solid rgba(black, 0.5);
+          }
         }
       }
     }

@@ -36,6 +36,7 @@ const Login: FunctionComponent<any> = ({
       className="toggle-button toggle-button--teacher"
       onClick={toggleTeacher}
     >
+      switch to <br />
       Student login
     </button>
   ) : (
@@ -43,6 +44,7 @@ const Login: FunctionComponent<any> = ({
       className="toggle-button toggle-button--student"
       onClick={toggleTeacher}
     >
+      switch to <br />
       Teacher login
     </button>
   );
@@ -56,16 +58,15 @@ const Login: FunctionComponent<any> = ({
   return (
     <>
       <div className="top-page-grand-wrapper">
+        <div className="bottom-half-grand-wrapper__textbox">
+          <p>
+            <h1>Welcome to Chit Chat,</h1> where foreign classrooms connect in
+            real-time for language and cultural exchange
+          </p>
+        </div>
         <img src={Logo} alt="" />
       </div>
       <div className="bottom-half-grand-wrapper">
-        <div className="bottom-half-grand-wrapper__textbox">
-          <p>
-            Welcome to Chit Chat, the place where classrooms studying each
-            other's language can connect in real-time for language and cultural
-            exchange
-          </p>
-        </div>
         <div className="bottom-half-grand-wrapper__login-grand-wrapper">
           <div className="bottom-half-grand-wrapper__login-grand-wrapper__center-block">
             <div className="bottom-half-grand-wrapper__login-grand-wrapper__center-block__top-row">
