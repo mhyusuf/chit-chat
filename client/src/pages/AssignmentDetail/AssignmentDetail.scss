@@ -97,17 +97,20 @@
     }
   }
   &__comment-wrapper {
-    margin: 0 2rem;
+    margin: -10rem 2rem 0;
     padding: 0 1rem 1rem 1rem;
     width: 50%;
     align-self: flex-start;
     // border: solid red;
 
     &__comments {
-      height: 32rem;
+      height: 40rem;
       overflow-y: scroll;
       border-bottom: $border;
       border-radius: 0.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
     }
     form {
       padding-top: 1rem;

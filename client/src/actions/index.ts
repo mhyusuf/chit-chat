@@ -9,6 +9,8 @@ import {
   getAssignmentPreviewsByCourse,
   getAssignmentDetailById,
   likeAssignment,
+  commentAssignment,
+  deleteComment,
 } from "./assignmentActions";
 import { getCoursesByTeacher, setActiveCourse } from "./courseActions";
 import {
@@ -28,6 +30,8 @@ export {
   getAssignmentPreviewsByCourse,
   getAssignmentDetailById,
   likeAssignment,
+  commentAssignment,
+  deleteComment,
   getCoursesByTeacher,
   setActiveCourse,
   getStudentsByCourse,
