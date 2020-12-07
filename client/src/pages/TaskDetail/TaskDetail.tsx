@@ -41,19 +41,16 @@ const TaskDetail: FunctionComponent<any> = ({
             <td>assigned?</td>
             <td>completed?</td>
           </th>
-          <div className="task-detail-grand-wrapper__page-content__table-block__student-table">
-            <table>
-              {showEdit ? (
-                <TaskAssignmentsEdit students={taskDetail.students} />
-              ) : (
-                <TaskAssignments students={taskDetail.students} />
-              )}
-            </table>
-          </div>
           {showEdit ? (
-            <button onClick={() => setShowEdit(false)}>save</button>
+            <TaskAssignmentsEdit
+              students={taskDetail.students}
+              TaskId={taskDetail.task.id}
+            />
           ) : (
-            <button onClick={() => setShowEdit(true)}>edit</button>
+            <TaskAssignments
+              students={taskDetail.students}
+              setShowEdit={setShowEdit}
+            />
           )}
         </div>
         <div className="task-detail-grand-wrapper__page-content__doc-preview-block">
