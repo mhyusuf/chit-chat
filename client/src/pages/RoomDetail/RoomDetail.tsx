@@ -146,7 +146,11 @@ const RoomDetail: FunctionComponent<RoomDetailProps> = (props) => {
         seenBy: [user.userId],
         createdAt: Date.now(),
       });
-      axios.post("/api/message", { sender: user, type: "text", RoomId: id });
+      axios.post("/api/message", {
+        textContent: input,
+        contentType: "text",
+        RoomId: id,
+      });
     }
     setInput("");
     //trigger socket with message from variable Input and state Current User
