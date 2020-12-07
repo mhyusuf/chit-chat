@@ -33,18 +33,12 @@ exports.CreatePairOfCourses = async (req, res) => {
 exports.EditCourse = async (req, res) => {
   try {
     const { id } = req.params;
-    const {
-      level,
-      TeacherId,
-      nativeLanguage,
-      targetLanguage,
-      sisterCourse,
-    } = req.body;
+    const { level, TeacherId, targetLanguage, name, sisterCourse } = req.body;
     const course = await models.Course.findByPk(id);
     if (level) course.level = level;
     if (TeacherId) course.TeacherId = TeacherId;
-    if (nativeLanguage) course.nativeLanguage = nativeLanguage;
     if (targetLanguage) course.targetLanguage = targetLanguage;
+    if (name) course.name = name;
     if (sisterCourse) course.sisterCourse = sisterCourse;
     await course.save();
     res.status(200).send(course);
