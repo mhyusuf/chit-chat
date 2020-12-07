@@ -14,10 +14,10 @@ import Students from "../pages/Students";
 import TaskDetail from "../pages/TaskDetail";
 import Tasks from "../pages/Tasks";
 import AdminApp from "./AdminApp";
-import CourseCreate from "../pages/CourseCreate";
-import CourseEdit from "../pages/CourseEdit";
-import CourseDelete from "../pages/CourseDelete";
-import ResourceCreate from "../pages/ResourceCreate";
+import CourseCreate from "../pages/adminPages/CourseCreate";
+import CourseEdit from "../pages/adminPages/CourseEdit";
+import CourseDelete from "../pages/adminPages/CourseDelete";
+import ResourceCreate from "../pages/adminPages/ResourceCreate";
 
 const TeacherApp: FunctionComponent<any> = () => {
   return (

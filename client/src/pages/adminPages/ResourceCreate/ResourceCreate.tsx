@@ -5,6 +5,7 @@ import React, {
   FormEvent,
 } from "react";
 import axios from "axios";
+import "./ResourceCreate.scss";
 
 const ResourceCreate: FunctionComponent<any> = ({ history }) => {
   const [formValues, setFormValues] = useState<{
@@ -55,34 +56,52 @@ const ResourceCreate: FunctionComponent<any> = ({ history }) => {
   return (
     <div>
       <h3>Create resource</h3>
-      <form onSubmit={handleSubmit}>
-        <label>Title</label>
-        <input type="text" onChange={handleInputChange} name="title" />
-        <label>description</label>
-        <textarea name="description" onChange={handleInputChange} />
-        <label>Level</label>
-        <input type="number" name="level" onChange={handleInputChange} />
-        <label>Language Code</label>
-        <input type="text" name="targetLanguage" onChange={handleInputChange} />
-        <label>Extra: </label>
-        <br />
-        <label>True</label>
-        <input
-          type="radio"
-          name="extra"
-          value="true"
-          onChange={handleInputChange}
-        />
-        <label>False</label>
-        <input
-          type="radio"
-          name="extra"
-          value="false"
-          onChange={handleInputChange}
-        />
-        <br />
-        <label>File</label>
-        <input type="file" name="fileData" onChange={handleFileInputChange} />
+      <form onSubmit={handleSubmit} className="create-resource-form">
+        <label>
+          Title
+          <input type="text" onChange={handleInputChange} name="title" />
+        </label>
+        <label>
+          description
+          <textarea name="description" onChange={handleInputChange} />
+        </label>
+        <label>
+          Level
+          <input type="number" name="level" onChange={handleInputChange} />
+        </label>
+        <label>
+          Language Code
+          <input
+            type="text"
+            name="targetLanguage"
+            onChange={handleInputChange}
+          />
+        </label>
+        <label>
+          Extra--------
+          <label>
+            True
+            <input
+              type="radio"
+              name="extra"
+              value="true"
+              onChange={handleInputChange}
+            />
+          </label>
+          <label>
+            False
+            <input
+              type="radio"
+              name="extra"
+              value="false"
+              onChange={handleInputChange}
+            />
+          </label>
+        </label>
+        <label>
+          File
+          <input type="file" name="fileData" onChange={handleFileInputChange} />
+        </label>
 
         <button type="submit">Submit</button>
       </form>

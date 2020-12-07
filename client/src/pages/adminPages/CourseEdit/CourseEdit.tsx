@@ -6,6 +6,8 @@ import React, {
 } from "react";
 import axios from "axios";
 
+import "./CourseEdit.scss";
+
 const CourseEdit: FunctionComponent<any> = ({ history }) => {
   const [formValues, setFormValues] = useState<{
     id: number | null;
@@ -37,17 +39,40 @@ const CourseEdit: FunctionComponent<any> = ({ history }) => {
   return (
     <div>
       <h3>Edit course</h3>
-      <form onSubmit={handleSubmit}>
-        <label>Course ID</label>
-        <input type="number" name="id" required onChange={handleInputChange} />
-        <label>Teacher ID</label>
-        <input type="number" name="TeacherId" onChange={handleInputChange} />
-        <label>Language Code</label>
-        <input type="text" name="targetLanguage" onChange={handleInputChange} />
-        <label>Course Name</label>
-        <input type="text" name="name" onChange={handleInputChange} />
-        <label>Sister Course</label>
-        <input type="number" name="sisterCourse" onChange={handleInputChange} />
+      <form onSubmit={handleSubmit} className="edit-course-form">
+        <label>
+          Course ID
+          <input
+            type="number"
+            name="id"
+            required
+            onChange={handleInputChange}
+          />
+        </label>
+        <label>
+          Teacher ID
+          <input type="number" name="TeacherId" onChange={handleInputChange} />
+        </label>
+        <label>
+          Language Code
+          <input
+            type="text"
+            name="targetLanguage"
+            onChange={handleInputChange}
+          />
+        </label>
+        <label>
+          Course Name
+          <input type="text" name="name" onChange={handleInputChange} />
+        </label>
+        <label>
+          Sister Course
+          <input
+            type="number"
+            name="sisterCourse"
+            onChange={handleInputChange}
+          />
+        </label>
 
         <button type="submit">Submit</button>
       </form>
