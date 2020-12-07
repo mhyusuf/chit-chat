@@ -41,7 +41,12 @@ const MyAssignments: FunctionComponent<MyAssignmentsProps> = ({
   });
 
   return (
-    <div className="my-assignments-grand-wrapper">{studentAssignments}</div>
+    <div className="my-assignments-grand-wrapper">
+      <h1>My Assignments</h1>
+      <div className="my-assignments-grand-wrapper__previews-wrapper">
+        {studentAssignments}
+      </div>
+    </div>
   );
 };
 

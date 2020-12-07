@@ -18,6 +18,8 @@ const initialState: AssignmentDetail = {
     isTeacher: false,
     userId: "",
     avatar: "",
+    RoomId: 0,
+    CourseId: 0,
   },
   comments: [],
   likes: [],

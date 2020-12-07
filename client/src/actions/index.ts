@@ -10,7 +10,11 @@ import {
   getAssignmentDetailById,
 } from "./assignmentActions";
 import { getCoursesByTeacher, setActiveCourse } from "./courseActions";
-import { getStudentsByCourse, getStudent } from "./studentActions";
+import {
+  getStudentsByCourse,
+  getStudent,
+  getBothSetsStudentsByCourse,
+} from "./studentActions";
 import { getTaskDetail } from "./tasksActions";
 
 export {
@@ -25,6 +29,7 @@ export {
   getCoursesByTeacher,
   setActiveCourse,
   getStudentsByCourse,
+  getBothSetsStudentsByCourse,
   getStudent,
   getTaskDetail,
 };
