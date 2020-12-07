@@ -2,9 +2,10 @@ const models = require("../models").sequelize.models;
 
 exports.CreateComment = async (req, res) => {
   try {
-    const { sender, content, AssignmentId } = req.body;
+    const { user, content, AssignmentId } = req.body;
     const newComment = await models.Comment.create({
-      sender,
+      senderId: user.userId,
+      senderName: user.name,
       content,
       AssignmentId,
     });

@@ -29,12 +29,12 @@ export const likeAssignment = (id: string) => async (dispatch: any) => {
 
 export const commentAssignment = (
   AssignmentId: string,
-  sender: User,
+  user: User,
   content: string
 ) => async (dispatch: any) => {
   const { data } = await axios.post("/api/comment", {
     AssignmentId,
-    sender,
+    user,
     content,
   });
   dispatch({ type: COMMENT_ASSIGNMENT, payload: data });
