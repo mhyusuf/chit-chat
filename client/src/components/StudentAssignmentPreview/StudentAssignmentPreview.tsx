@@ -23,25 +23,25 @@ const StudentAssignmentPreview: FunctionComponent<StudentAssignmentPreviewProps>
   submitted,
 }) => {
   return (
-    <div className="student-task-preview-grand-wrapper">
+    <div className="student-assignment-preview-grand-wrapper">
       <div
-        className="student-task-preview__header"
+        className="student-assignment-preview__header"
         onClick={() => handleOpen(!open ? index : null)}
       >
         <h2>{task.title}</h2>
-        <div className="student-task-preview__header__icon-div">
+        <div className="student-assignment-preview__header__icon-div">
           {submitted && (
-            <IoIosCheckmarkCircle className="student-task-preview__header__icon-div__submitted-icon" />
+            <IoIosCheckmarkCircle className="student-assignment-preview__header__icon-div__submitted-icon" />
           )}
           {!open ? (
-            <IoIosArrowDropdownCircle className="student-task-preview__header__icon-div__dropdown-icon" />
+            <IoIosArrowDropdownCircle className="student-assignment-preview__header__icon-div__dropdown-icon" />
           ) : (
-            <IoIosArrowDropupCircle className="student-task-preview__header__icon-div__dropdown-icon" />
+            <IoIosArrowDropupCircle className="student-assignment-preview__header__icon-div__dropdown-icon" />
           )}
         </div>
       </div>
       {open && (
-        <div className="student-task-preview__content">
+        <div className="student-assignment-preview__content">
           <div className="content__main">
             <p>{task.description}</p>
             <div className="content__picture"></div>

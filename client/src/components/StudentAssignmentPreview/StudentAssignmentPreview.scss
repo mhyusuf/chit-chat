@@ -1,6 +1,6 @@
 @import "../../App.scss";
 
-.student-task-preview-grand-wrapper {
+.student-assignment-preview-grand-wrapper {
   border: $border;
   border-bottom: none;
   padding: $M;
@@ -18,7 +18,7 @@
   }
 }
 
-.student-task-preview {
+.student-assignment-preview {
   &__header {
     display: flex;
     justify-content: space-between;

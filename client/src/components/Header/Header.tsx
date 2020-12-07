@@ -5,10 +5,6 @@ import { User } from "../../interfaces/reducerInterfaces";
 import "./Header.scss";
 import UserAvatar from "../UserAvatar";
 
-const teacher = {
-  name: "Sr. Marquez",
-};
-
 const Header: FunctionComponent<any> = ({ user }: { user: User }) => {
   return (
     <div className="header-grand-wrapper">
@@ -17,7 +13,7 @@ const Header: FunctionComponent<any> = ({ user }: { user: User }) => {
         <div className="header-grand-wrapper__left-block__logo" />
       </div>
       <div className="header-grand-wrapper__right-block">
-        <NavLink to="/profile">
+        <NavLink to={user.isTeacher ? "/profile" : "/home"}>
           <h3>{user.name}</h3>
           <UserAvatar
             avatarString={user.avatar}

@@ -5,18 +5,18 @@
   flex-direction: row-reverse;
   justify-content: space-between;
 
-  &__avatar {
-    background-image: linear-gradient(
-      white,
-      $secondary-color,
-      $secondary-color
-    );
-    border: solid;
-    border-radius: 50%;
+  &__avatar-wrapper {
     height: 12rem;
     margin-right: 15rem;
     margin-top: 4rem;
     width: 12rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .bigger {
+      transform: scale(2);
+    }
   }
 
   &__detail {
