@@ -48,5 +48,5 @@ export const loginTeacher = (
 export const logout = (history: History<any>) => async (dispatch: any) => {
   await axios.get("/api/user/logout");
   dispatch({ type: GET_CURRENT_USER, payload: null });
-  history.push("/login");
+  history.push("/");
 };

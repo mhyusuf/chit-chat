@@ -5,7 +5,7 @@ import Login from "../pages/Login";
 const UnauthorizedApp: FunctionComponent<any> = () => {
   return (
     <Switch>
-      <Route path="/login" component={Login} />
+      <Route path="/" component={Login} />
     </Switch>
   );
 };
