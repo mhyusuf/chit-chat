@@ -27,8 +27,23 @@ export interface AssignmentPreview {
   Task: any;
 }
 
+export interface Comment {
+  id: number;
+  sender: User;
+  content: string;
+}
+
+export interface AssignmentDetail {
+  submitData: any;
+  task: Task;
+  student: Student;
+  comments: Comment[];
+  likes: string[];
+  completed: boolean;
+}
+
 export interface AssignmentState {
-  AssignmentDetail: any;
+  AssignmentDetail: AssignmentDetail;
   AssignmentPreviews: AssignmentPreview[];
 }
 
@@ -84,4 +99,16 @@ export interface Student {
   isTeacher: boolean;
   userId: string;
   avatar: string;
+}
+
+export interface Task {
+  id: number;
+  level: number;
+  title: string;
+  description: string;
+}
+
+export interface TaskDetailState {
+  task: Task;
+  students: Student[];
 }

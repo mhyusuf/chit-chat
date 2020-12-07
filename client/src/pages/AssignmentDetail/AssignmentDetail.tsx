@@ -1,68 +1,69 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useEffect } from "react";
 import "./AssignmentDetail.scss";
 import Comment from "../../components/Comment";
 import { IoIosSend } from "react-icons/io";
+import { AssignmentDetail as IAssignmentDetail } from "../../interfaces/reducerInterfaces";
+import { getAssignmentDetailById } from "../../actions";
+import { connect } from "react-redux";
+import { RouteComponentProps } from "react-router-dom";
 
-const event = {
-  type: "submit",
-  submitData: ["document"],
-  task: {
-    level: 1,
-    title: "Introducing yourself and others",
-    description:
-      "Provide a powerpoint presentation with four paragraphs in your target language about yourself, your family and your hometown. What do you like to do? What are some of your favorite things?",
-  },
-  student: {
-    name: "David A.",
-    avatar: "DA",
-  },
-  comments: [
-    { sender: "student1", content: "Wow. Awesome" },
-    { sender: "student2", content: "Agreed, good job" },
-    { sender: "student3", content: "Aren't we learning French?" },
-    { sender: "student4", content: "Oui" },
-    { sender: "student1", content: "Wow. Awesome" },
-    { sender: "student2", content: "Agreed, good job" },
-    { sender: "student3", content: "Aren't we learning French?" },
-    { sender: "student4", content: "Oui" },
-    { sender: "student1", content: "Wow. Awesome" },
-    { sender: "student2", content: "Agreed, good job" },
-    { sender: "student3", content: "Aren't we learning French?" },
-    { sender: "student4", content: "Oui" },
-  ],
-  likes: ["123", "231", "666", "231"],
-  completed: true,
-};
+// interface AssignmentDetail {
+//   submitData: any,
+//   task: Task;
+//   student: Student;
+//   comments: Comment[];
+//   likes: string[],
+//   completed: boolean,
+// };
 
-const comments = event.comments.map((comment, idx) => (
-  <Comment key={idx} comment={comment} />
-));
+interface MatchInterface {
+  id: string;
+}
 
-const AssignmentDetail: FunctionComponent<any> = () => {
-  const submitted = true;
+interface AssignmentDetailProps extends RouteComponentProps<MatchInterface> {
+  assignment: IAssignmentDetail;
+  getAssignmentDetailById: Function;
+}
+
+const AssignmentDetail: FunctionComponent<AssignmentDetailProps> = (props) => {
+  console.log(props);
+
+  const { assignment, getAssignmentDetailById, match } = props;
+
+  useEffect(() => {
+    getAssignmentDetailById(match.params.id);
+  });
+
+  const comments =
+    assignment.comments &&
+    assignment.comments.map((comment, idx) => (
+      <Comment key={idx} comment={comment} />
+    ));
+
+  const submitted = assignment.submitData ? true : false;
 
   return (
-    <div className="event-detail-grand-wrapper">
-      <div className="event-detail-grand-wrapper__text-wrapper">
-        <h1>{event.task.title}</h1>
-        <h2 className="--lessPadding">{event.student.name}</h2>
+    <div className="assignment-detail-grand-wrapper">
+      <div className="assignment-detail-grand-wrapper__text-wrapper">
+        <h1>{assignment.task.title}</h1>
+        <h2 className="--lessPadding">{assignment.student.name}</h2>
       </div>
 
       {!submitted && (
-        <div className="event-detail-grand-wrapper__submission-wrapper">
+        <div className="assignment-detail-grand-wrapper__submission-wrapper">
           <h2>Nothing uploaded yet!</h2>
-          <button>Upload</button>
+          <button>upload</button>
         </div>
       )}
 
       {submitted && (
-        <div className="event-detail-grand-wrapper__content-wrapper">
-          <div className="event-detail-grand-wrapper__content-wrapper__preview">
+        <div className="assignment-detail-grand-wrapper__content-wrapper">
+          <div className="assignment-detail-grand-wrapper__content-wrapper__preview">
             <div className="preview-placeholder" />
             <button onClick={(e) => e.preventDefault()}>download</button>
           </div>
-          <div className="event-detail-grand-wrapper__comment-wrapper">
-            <div className="event-detail-grand-wrapper__comment-wrapper__comments">
+          <div className="assignment-detail-grand-wrapper__comment-wrapper">
+            <div className="assignment-detail-grand-wrapper__comment-wrapper__comments">
               {comments}
             </div>
             <form>
@@ -75,12 +76,22 @@ const AssignmentDetail: FunctionComponent<any> = () => {
         </div>
       )}
 
-      <div className="event-detail-grand-wrapper__task-description">
+      <div className="assignment-detail-grand-wrapper__task-description">
         <h2>Description</h2>
-        <p>{event.task.description}</p>
+        <p>{assignment.task.description}</p>
       </div>
     </div>
   );
 };
 
-export default AssignmentDetail;
+function mapStateToProps({
+  assignmentDetail,
+}: {
+  assignmentDetail: IAssignmentDetail;
+}) {
+  return { assignment: assignmentDetail };
+}
+
+export default connect(mapStateToProps, { getAssignmentDetailById })(
+  AssignmentDetail
+);

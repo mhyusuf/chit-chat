@@ -1,3 +1,4 @@
+// @ts-nocheck
 const models = require("../models").sequelize.models;
 
 exports.GetTaskDetail = async (req, res) => {
@@ -12,11 +13,12 @@ exports.GetTaskDetail = async (req, res) => {
       include: [
         {
           model: models.Assignment,
-          include: {
-            model: models.Task,
-            where: { id: TaskId },
-            attributes: [],
-          },
+          include: [
+            {
+              model: models.Task,
+              where: { id: TaskId },
+            },
+          ],
           attributes: ["fileName"],
         },
       ],

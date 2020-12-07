@@ -5,14 +5,8 @@ import {
 } from "react-icons/io";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { User } from "../../interfaces/reducerInterfaces";
+import { User, Task } from "../../interfaces/reducerInterfaces";
 import "./TaskPreview.scss";
-
-interface Task {
-  id: number;
-  title: string;
-  description: string;
-}
 
 interface TaskPreviewProps {
   task: Task;

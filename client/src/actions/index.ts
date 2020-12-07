@@ -5,7 +5,10 @@ import {
   logout,
 } from "./userActions";
 import { getAllMessagesByRoom, getRoomUsers } from "./roomActions";
-import { getAssignmentPreviewsByCourse } from "./assignmentActions";
+import {
+  getAssignmentPreviewsByCourse,
+  getAssignmentDetailById,
+} from "./assignmentActions";
 import { getCoursesByTeacher, setActiveCourse } from "./courseActions";
 import { getStudentsByCourse, getStudent } from "./studentActions";
 import { getTaskDetail } from "./tasksActions";
@@ -18,6 +21,7 @@ export {
   getAllMessagesByRoom,
   getRoomUsers,
   getAssignmentPreviewsByCourse,
+  getAssignmentDetailById,
   getCoursesByTeacher,
   setActiveCourse,
   getStudentsByCourse,
