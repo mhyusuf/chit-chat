@@ -1,18 +1,20 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useEffect, useState } from "react";
 import {
   IoIosArrowDropdownCircle,
   IoIosArrowDropupCircle,
 } from "react-icons/io";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { User } from "../../interfaces/reducerInterfaces";
+import {
+  User,
+  Task,
+  TaskDetailState,
+  CourseState,
+} from "../../interfaces/reducerInterfaces";
+import { getTaskDetail } from "../../actions";
 import "./TaskPreview.scss";
-
-interface Task {
-  id: number;
-  title: string;
-  description: string;
-}
+import CourseSelect from "../CourseSelect";
+import AssignModal from "../AssignModal";
 
 interface TaskPreviewProps {
   task: Task;
@@ -20,6 +22,9 @@ interface TaskPreviewProps {
   open: boolean;
   isTeacher: boolean;
   handleOpen: (i: number | null) => void;
+  taskDetail: TaskDetailState;
+  getTaskDetail: (TaskId: string, CourseId: string) => void;
+  activeCourse: string;
 }
 
 const TaskPreview: FunctionComponent<TaskPreviewProps> = ({
@@ -28,7 +33,14 @@ const TaskPreview: FunctionComponent<TaskPreviewProps> = ({
   open,
   handleOpen,
   isTeacher,
+  taskDetail,
+  getTaskDetail,
+  activeCourse,
 }) => {
+  useEffect(() => {
+    getTaskDetail(String(task.id), activeCourse);
+  }, []);
+
   return (
     <div className="task-preview-grand-wrapper">
       <div
@@ -58,14 +70,14 @@ const TaskPreview: FunctionComponent<TaskPreviewProps> = ({
               <button>View Task</button>
             </Link>
             {isTeacher && (
-              <button>
-                <p>Assign All</p>
-              </button>
+              <Link to={`/tasks/${task.id}?edit=true&all=true`}>
+                <button>Assign All</button>
+              </Link>
             )}
             {isTeacher && (
-              <button>
-                <p>Assign To</p>
-              </button>
+              <Link to={`/tasks/${task.id}?edit=true`}>
+                <button>Assign To</button>
+              </Link>
             )}
           </div>
         </div>
@@ -74,8 +86,20 @@ const TaskPreview: FunctionComponent<TaskPreviewProps> = ({
   );
 };
 
-const mapStateToProps = ({ user }: { user: User }) => {
-  return { isTeacher: user.isTeacher };
+const mapStateToProps = ({
+  user,
+  taskDetail,
+  course,
+}: {
+  user: User;
+  taskDetail: TaskDetailState;
+  course: CourseState;
+}) => {
+  return {
+    isTeacher: user.isTeacher,
+    taskDetail,
+    activeCourse: course.activeCourse,
+  };
 };
 
-export default connect(mapStateToProps)(TaskPreview);
+export default connect(mapStateToProps, { getTaskDetail })(TaskPreview);

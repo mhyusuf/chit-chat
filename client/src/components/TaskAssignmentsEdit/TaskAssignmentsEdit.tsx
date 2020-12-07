@@ -1,4 +1,9 @@
-import React, { ChangeEvent, FunctionComponent, useState } from "react";
+import React, {
+  ChangeEvent,
+  FunctionComponent,
+  useState,
+  useEffect,
+} from "react";
 import { Student } from "../../interfaces/reducerInterfaces";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
@@ -8,11 +13,13 @@ import "./TaskAssignmentsEdit.scss";
 interface TaskAssignmentsEditProps {
   students: Student[];
   TaskId: string;
+  all: boolean;
 }
 
 const TaskAssignmentsEdit: FunctionComponent<TaskAssignmentsEditProps> = ({
   students,
   TaskId,
+  all,
 }) => {
   const history = useHistory();
   const initalState = students.map((student: any, i: number) => {
@@ -20,6 +27,16 @@ const TaskAssignmentsEdit: FunctionComponent<TaskAssignmentsEditProps> = ({
   });
 
   const [assignments, setAssignments] = useState(initalState);
+
+  useEffect(() => {
+    if (all) {
+      setAssignments((assignments) => {
+        return assignments.map((assignment) => {
+          return { ...assignment, assigned: true };
+        });
+      });
+    }
+  }, []);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setAssignments((assignments) => {
@@ -43,6 +60,7 @@ const TaskAssignmentsEdit: FunctionComponent<TaskAssignmentsEditProps> = ({
         });
       }
     });
+    history.push(`/tasks/${TaskId}`);
     history.go(0);
   };
 
@@ -74,7 +92,7 @@ const TaskAssignmentsEdit: FunctionComponent<TaskAssignmentsEditProps> = ({
           ))}
         </table>
       </div>
-      <button onClick={handleSubmit}>save</button>
+      <button onClick={handleSubmit}>confirm</button>
     </>
   );
 };

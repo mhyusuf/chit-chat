@@ -1,21 +1,16 @@
 import React, { FunctionComponent, useEffect, useState } from "react";
 import { connect } from "react-redux";
+import { useLocation } from "react-router-dom";
 import { getTaskDetail } from "../../actions";
 import TaskAssignments from "../../components/TaskAssigments";
 import TaskAssignmentsEdit from "../../components/TaskAssignmentsEdit";
-import { CourseState, Student } from "../../interfaces/reducerInterfaces";
+import {
+  CourseState,
+  Student,
+  Task,
+  TaskDetailState,
+} from "../../interfaces/reducerInterfaces";
 import "./TaskDetail.scss";
-
-interface TaskDetailState {
-  task: Task;
-  students: Student[];
-}
-
-interface Task {
-  id: number;
-  title: string;
-  description: string;
-}
 
 const TaskDetail: FunctionComponent<any> = ({
   activeCourse,
@@ -23,7 +18,10 @@ const TaskDetail: FunctionComponent<any> = ({
   getTaskDetail,
   match,
 }) => {
-  const [showEdit, setShowEdit] = useState(false);
+  const query = new URLSearchParams(useLocation().search);
+  const edit = query.get("edit") === "true";
+  const all = query.get("all") === "true";
+  const [showEdit, setShowEdit] = useState(edit ? true : false);
   useEffect(() => {
     if (activeCourse) getTaskDetail(match.params.id, activeCourse);
   }, [activeCourse]);
@@ -45,6 +43,7 @@ const TaskDetail: FunctionComponent<any> = ({
             <TaskAssignmentsEdit
               students={taskDetail.students}
               TaskId={taskDetail.task.id}
+              all={all}
             />
           ) : (
             <TaskAssignments

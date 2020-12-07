@@ -85,3 +85,14 @@ export interface Student {
   userId: string;
   avatar: string;
 }
+
+export interface Task {
+  id: number;
+  title: string;
+  description: string;
+}
+
+export interface TaskDetailState {
+  task: Task;
+  students: Student[];
+}

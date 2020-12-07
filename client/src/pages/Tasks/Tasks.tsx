@@ -3,22 +3,21 @@ import { connect } from "react-redux";
 import { getAllTasks } from "../../actions/tasksActions";
 import TaskPreview from "../../components/TaskPreview/TaskPreview";
 import { CourseState } from "../../interfaces/reducerInterfaces";
+import { Task } from "../../interfaces/reducerInterfaces";
 
 import "./Tasks.scss";
-
-interface Task {
-  id: number;
-  title: string;
-  description: string;
-}
 
 const Tasks: FunctionComponent<any> = ({ tasks, course, getAllTasks }) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   useEffect(() => {
-    console.log("USEEFFECT");
-    getAllTasks(1, "ES");
-  }, []);
+    if (course.courseList.length) {
+      const { level, targetLanguage } = course.courseList.find((el: any) => {
+        return String(el.id) === String(course.activeCourse);
+      });
+      getAllTasks(level, targetLanguage);
+    }
+  }, [course.activeCourse]);
 
   return (
     <div className="tasks-grand-wrapper">
@@ -49,7 +48,7 @@ const mapStateToProps = ({
   tasks: Task[];
   course: CourseState;
 }) => {
-  return { tasks, course: course.activeCourse };
+  return { tasks, course };
 };
 
 export default connect(mapStateToProps, { getAllTasks })(Tasks);
