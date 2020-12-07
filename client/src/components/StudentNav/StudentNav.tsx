@@ -23,11 +23,13 @@ const StudentNav: FunctionComponent = () => {
         </NavLink>
         <NavLink to={`/rooms/${student.id}`}>
           <p className="nav-grand-wrapper__link-wrapper__link-text">
-            Group Chat
+            Team Chat
           </p>
         </NavLink>
         <NavLink to="/students">
-          <p className="nav-grand-wrapper__link-wrapper__link-text">Class</p>
+          <p className="nav-grand-wrapper__link-wrapper__link-text">
+            Teammates
+          </p>
         </NavLink>
       </div>
     </div>

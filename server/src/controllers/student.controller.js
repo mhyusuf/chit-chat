@@ -112,3 +112,37 @@ exports.GetStudentsByCourse = async (req, res) => {
     res.status(500).send(e.message);
   }
 };
+
+exports.GetStudentsByRoom = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const result = await models.Student.findAll({ where: { RoomId: id } });
+    if (result) res.status(200).send(result);
+    else res.status(404).send(new Error("No students found"));
+  } catch (e) {
+    res.status(500).send(e.message);
+  }
+};
+
+exports.GetBothSetsStudentsByCourse = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const courseA = await models.Course.findByPk(id, {
+      include: { model: models.Student },
+    });
+    const courseB = await models.Course.findByPk(
+      courseA.dataValues.sisterCourse,
+      { include: { model: models.Student } }
+    );
+    if (
+      courseA.dataValues.Students.length ||
+      courseB.dataValues.Students.length
+    )
+      res
+        .status(200)
+        .send([...courseA.dataValues.Students, ...courseB.dataValues.Students]);
+    else res.status(404).send(new Error("No students found"));
+  } catch (e) {
+    res.status(500).send(e.message);
+  }
+};

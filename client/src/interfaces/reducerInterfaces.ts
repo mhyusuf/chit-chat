@@ -99,6 +99,8 @@ export interface Student {
   isTeacher: boolean;
   userId: string;
   avatar: string;
+  RoomId: number;
+  CourseId: number;
 }
 
 export interface Task {

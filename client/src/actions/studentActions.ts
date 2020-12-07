@@ -1,5 +1,9 @@
 import axios from "axios";
-import { GET_STUDENTS_BY_COURSE } from "./types";
+import {
+  GET_STUDENTS_BY_COURSE,
+  GET_STUDENT_BY_ROOM,
+  GET_STUDENTS_WITH_SISTER_COURSE,
+} from "./types";
 import { getRoomUsers } from "./roomActions";
 
 export const GET_STUDENT = "GET_STUDENT";
@@ -14,4 +18,16 @@ export const getStudent = (id: number) => async (dispatch: any) => {
 export const getStudentsByCourse = (id: string) => async (dispatch: any) => {
   const { data } = await axios.get(`/api/student/course/${id}`);
   dispatch({ type: GET_STUDENTS_BY_COURSE, payload: data });
+};
+
+export const getStudentsByRoom = (id: string) => async (dispatch: any) => {
+  const { data } = await axios.get(`/api/student/course/${id}`);
+  dispatch({ type: GET_STUDENT_BY_ROOM, payload: data });
+};
+
+export const getBothSetsStudentsByCourse = (id: string) => async (
+  dispatch: any
+) => {
+  const { data } = await axios.get(`/api/student/sistercourse/${id}`);
+  dispatch({ type: GET_STUDENTS_WITH_SISTER_COURSE, payload: data });
 };
