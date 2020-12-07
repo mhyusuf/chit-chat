@@ -13,6 +13,11 @@ export interface User {
   avatar: string;
 }
 
+export interface StudentUser extends User {
+  CourseId: number;
+  RoomId: number;
+}
+
 export interface AssignmentPreview {
   AssignmentId: number;
   student: {
@@ -37,6 +42,7 @@ export interface Comment {
 
 export interface AssignmentDetail {
   submitData: any;
+  fileName: string;
   task: Task;
   student: Student;
   comments: Comment[];
@@ -92,7 +98,7 @@ export interface Course {
 
 export interface CourseState {
   courseList: Course[];
-  activeCourse: string;
+  activeCourse: number;
 }
 
 export interface Student {

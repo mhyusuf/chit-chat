@@ -22,7 +22,7 @@ interface TaskPreviewProps {
   handleOpen: (i: number | null) => void;
   taskDetail: TaskDetailState;
   getTaskDetail: (TaskId: string, CourseId: string) => void;
-  activeCourse: string;
+  activeCourse: number;
 }
 
 const TaskPreview: FunctionComponent<TaskPreviewProps> = ({
@@ -35,7 +35,7 @@ const TaskPreview: FunctionComponent<TaskPreviewProps> = ({
   activeCourse,
 }) => {
   useEffect(() => {
-    getTaskDetail(String(task.id), activeCourse);
+    getTaskDetail(String(task.id), `${activeCourse}`);
   }, []);
 
   return (

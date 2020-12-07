@@ -34,6 +34,7 @@ exports.GetAssignmentById = async (req, res) => {
     if (assignment)
       res.status(200).send({
         submitData: assignment.fileData,
+        fileName: assignment.fileName,
         task: assignment.Task,
         student: assignment.Student,
         comments: assignment.comments,

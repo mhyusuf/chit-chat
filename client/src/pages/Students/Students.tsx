@@ -6,6 +6,7 @@ import {
   Course,
   CourseState,
   Student,
+  StudentUser,
   User,
 } from "../../interfaces/reducerInterfaces";
 
@@ -14,9 +15,9 @@ import "./Students.scss";
 interface StudentsProps {
   user: User;
   courses: Course[];
-  activeCourse: string;
+  activeCourse: number;
   students: Student[];
-  getBothSetsStudentsByCourse: (id: string) => {};
+  getBothSetsStudentsByCourse: Function;
 }
 
 const Students: FunctionComponent<StudentsProps> = ({
@@ -34,11 +35,12 @@ const Students: FunctionComponent<StudentsProps> = ({
     const studentSelf = user.isTeacher
       ? null
       : students.filter((student) => user.userId !== student.userId);
-    const targetRoom = studentSelf ? studentSelf[0].RoomId : "0";
+    const targetRoom =
+      studentSelf && studentSelf[0] ? studentSelf[0].RoomId : 0;
 
     setStudentsToMap(
       user.isTeacher
-        ? students.filter((student) => student.CourseId === +activeCourse)
+        ? students.filter((student) => student.CourseId === activeCourse)
         : students.filter((student) => student.RoomId === +targetRoom)
     );
   }, [activeCourse]);

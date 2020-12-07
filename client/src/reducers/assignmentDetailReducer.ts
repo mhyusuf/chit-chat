@@ -6,6 +6,7 @@ import { GET_ASSIGNMENT, LIKE_ASSIGNMENT } from "../actions/types";
 
 const initialState: AssignmentDetail = {
   submitData: null,
+  fileName: "",
   task: {
     id: 0,
     level: 0,

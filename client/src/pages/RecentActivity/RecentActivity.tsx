@@ -11,7 +11,7 @@ import "./RecentActivity.scss";
 interface RecentActivityProps {
   assignments: AssignmentPreview[];
   getAssignmentPreviewsByCourse: (id: string) => void;
-  activeCourse: string;
+  activeCourse: number;
 }
 
 const RecentActivity: FunctionComponent<RecentActivityProps> = ({
@@ -20,7 +20,7 @@ const RecentActivity: FunctionComponent<RecentActivityProps> = ({
   activeCourse,
 }) => {
   useEffect(() => {
-    if (activeCourse) getAssignmentPreviewsByCourse(activeCourse);
+    if (activeCourse) getAssignmentPreviewsByCourse(`${activeCourse}`);
   }, [activeCourse]);
 
   return (

@@ -45,7 +45,15 @@ const AssignmentDetail: FunctionComponent<AssignmentDetailProps> = (props) => {
     likeAssignment(match.params.id);
   }
 
+  let fileType = "";
   const submitted = assignment.submitData ? true : false;
+
+  if (assignment.fileName) {
+    const extension = assignment.fileName.split(".")[1];
+    if (extension === "doc" || extension === "docx") fileType = "wordDoc";
+    if (extension === "ppt" || extension === "pptx") fileType = "powerpoint";
+    if (extension === "pdf") fileType = "pdf";
+  }
 
   return (
     <div className="assignment-detail-grand-wrapper">
@@ -64,7 +72,7 @@ const AssignmentDetail: FunctionComponent<AssignmentDetailProps> = (props) => {
       {submitted && (
         <div className="assignment-detail-grand-wrapper__content-wrapper">
           <div className="assignment-detail-grand-wrapper__content-wrapper__preview">
-            <div className="preview-placeholder" />
+            <div className={`preview-icon ${fileType ? fileType : null}`} />
             <div className="assignment-detail-grand-wrapper__content-wrapper__preview__button-wrapper">
               <button onClick={(e) => e.preventDefault()}>download</button>
               <button className="heart" onClick={likeHandler}>

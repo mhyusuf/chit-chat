@@ -16,7 +16,7 @@ router.post("/register", RegisterStudent);
 router.post("/login", LoginStudent);
 router.get("/:id", authMiddleware, GetStudentById);
 router.get("/course/:id", authMiddleware, GetStudentsByCourse);
-router.get("/sistercourse/:id", authMiddleware, GetBothSetsStudentsByCourse);
+router.get("/sisterCourse/:id", authMiddleware, GetBothSetsStudentsByCourse);
 router.get("/student/:id", authMiddleware, GetStudentsByRoom);
 router.put("/profile/:id", authMiddleware, ChangeNameStudent);
 router.put("/avatar/:id", authMiddleware, ChangeAvatarStudent);

@@ -60,9 +60,10 @@ const Login: FunctionComponent<any> = ({
     <>
       <div className="top-page-grand-wrapper">
         <div className="bottom-half-grand-wrapper__textbox">
+          <h1>Welcome to Chit Chat,</h1>{" "}
           <p>
-            <h1>Welcome to Chit Chat,</h1> where foreign classrooms connect in
-            real-time for language and cultural exchange
+            where foreign classrooms connect in real-time for language and
+            cultural exchange
           </p>
         </div>
         <img src={Logo} alt="" />
