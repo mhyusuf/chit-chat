@@ -1,0 +1,5 @@
+@import "../../App.scss";
+
+.my-assignments-grand-wrapper {
+  @include route-scroll;
+}

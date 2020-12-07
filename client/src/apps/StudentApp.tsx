@@ -3,6 +3,7 @@ import { Switch, Route } from "react-router-dom";
 import Header from "../components/Header";
 import StudentNav from "../components/StudentNav";
 import AssignmentDetail from "../pages/AssignmentDetail";
+import MyAssignments from "../pages/MyAssignments";
 import Login from "../pages/Login";
 import Profile from "../pages/Profile";
 import RecentActivity from "../pages/RecentActivity";
@@ -21,6 +22,7 @@ const StudentApp: FunctionComponent = () => {
         <div className="app-wrapper__router-wrapper">
           <Switch>
             <Route path="/home" component={RecentActivity} />
+            <Route path="/assignments/" component={MyAssignments} />
             <Route path="/assignments/:id" component={AssignmentDetail} />
             <Route path="/tasks" component={Tasks} exact />
             <Route path="/tasks/:id" component={TaskDetail} />

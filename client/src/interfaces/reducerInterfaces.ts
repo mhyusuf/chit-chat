@@ -52,6 +52,19 @@ export interface RoomDetailState {
   roomName: string;
 }
 
+export interface StudentState {
+  student: User;
+  roomId: string;
+  assignments: AssignmentPreview[];
+  room: RoomPreview;
+}
+
+export interface RoomPreview {
+  name: string;
+  studentNames: string[];
+  teamMembers: string[];
+}
+
 export interface Course {
   id: string;
   name: string;
