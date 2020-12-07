@@ -17,6 +17,7 @@ import AdminApp from "./AdminApp";
 import CourseCreate from "../pages/CourseCreate";
 import CourseEdit from "../pages/CourseEdit";
 import CourseDelete from "../pages/CourseDelete";
+import ResourceCreate from "../pages/ResourceCreate";
 
 const TeacherApp: FunctionComponent<any> = () => {
   return (
@@ -46,6 +47,10 @@ const TeacherApp: FunctionComponent<any> = () => {
             <Route
               path="/administrator/delete-course"
               component={CourseDelete}
+            />
+            <Route
+              path="/administrator/create-resource"
+              component={ResourceCreate}
             />
           </Switch>
         </div>

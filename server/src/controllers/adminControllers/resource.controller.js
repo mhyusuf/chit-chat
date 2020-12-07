@@ -3,14 +3,7 @@ const models = require("../../models").sequelize.models;
 
 exports.CreateResource = async (req, res) => {
   try {
-    const {
-      title,
-      description,
-      level,
-      extra,
-      nativeLanguage,
-      targetLanguage,
-    } = req.body;
+    const { title, description, level, extra, targetLanguage } = req.body;
     const newResource = await models.Resource.create({
       title,
       description,
@@ -19,7 +12,6 @@ exports.CreateResource = async (req, res) => {
       fileName: req.file.originalname,
       mimeType: req.file.mimetype,
       extra,
-      nativeLanguage,
       targetLanguage,
     });
     res.status(201).send(newResource);
@@ -48,7 +40,6 @@ exports.EditResource = async (req, res) => {
       fileContent,
       extra,
       targetLanguage,
-      nativeLanguage,
     } = req.body;
     const resource = await models.Resource.findByPk(id);
     if (title) resource.title = title;
@@ -56,7 +47,6 @@ exports.EditResource = async (req, res) => {
     if (level) resource.level = level;
     if (fileContent) resource.fileContent = fileContent;
     if (extra) resource.extra = extra;
-    if (nativeLanguage) resource.nativeLanguage = nativeLanguage;
     if (targetLanguage) resource.targetLanguage = targetLanguage;
     await resource.save();
     res.status(200).send(resource);
