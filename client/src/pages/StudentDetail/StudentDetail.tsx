@@ -10,21 +10,9 @@ import {
   AssignmentPreview,
   User,
   RoomDetailState,
+  StudentState,
 } from "../../interfaces/reducerInterfaces";
 import UserAvatar from "../../components/UserAvatar";
-
-interface RoomPreview1 {
-  name: string;
-  studentNames: string[];
-  teamMembers: string[];
-}
-
-interface StudentState {
-  student: User;
-  roomId: string;
-  assignments: AssignmentPreview[];
-  room: RoomPreview1;
-}
 
 const tasks = [
   {

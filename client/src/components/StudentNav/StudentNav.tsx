@@ -16,8 +16,10 @@ const StudentNav: FunctionComponent = () => {
             Recent Activity
           </p>
         </NavLink>
-        <NavLink to="/tasks">
-          <p className="nav-grand-wrapper__link-wrapper__link-text">My Tasks</p>
+        <NavLink to="/assignments">
+          <p className="nav-grand-wrapper__link-wrapper__link-text">
+            My Assignments
+          </p>
         </NavLink>
         <NavLink to={`/rooms/${student.id}`}>
           <p className="nav-grand-wrapper__link-wrapper__link-text">

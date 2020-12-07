@@ -126,17 +126,33 @@ exports.EditAssignment = async (req, res) => {
 };
 
 exports.GetAssignmentByStudent = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const assigments = await Assignment.findAll({
-      where: { StudentId: id },
-      include: { model: Task },
-    });
-    console.log("assigments", assigments);
-    res.status(200).send(assigments);
-  } catch (e) {
-    res.status(404).send(e.message);
-  }
+  // try{
+  //   const { id } = req.params;
+  //   const student = await Student.findByPk(id, {
+  //     include: {
+  //       model: Assignment,
+  //       include: [{ model: Task }, { model: Comment }],
+  //     },
+  //   });
+  //   const formattedAssignments = [];
+  //   const { Assignments } = student.dataValues;
+  //   Assignments.forEach((assignment) => {
+  //     if (!assignment.dataValues.dismissed) {
+  //       allAssignments.push({
+  //         AssignmentId: assignment.dataValues.id,
+  //         student: { name: student.name, avatar: student.avatar },
+  //         taskName: assignment.dataValues.Task.dataValues.title,
+  //         description: assignment.dataValues.Task.dataValues.description,
+  //         likes: assignment.dataValues.likes.length,
+  //         comments: assignment.dataValues.Comments.length,
+  //         fileData: assignment.dataValues.fileData,
+  //       });
+  //     }
+  //   });
+  //   res.status(200).send(formattedAssignments);
+  // } catch (e) {
+  //   res.status(404).send(e.message);
+  // }
 };
 
 exports.GetAssignmentByTask = async (req, res) => {
