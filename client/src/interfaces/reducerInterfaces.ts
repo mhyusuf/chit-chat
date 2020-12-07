@@ -14,7 +14,7 @@ export interface User {
 }
 
 export interface AssignmentPreview {
-  id: number;
+  AssignmentId: number;
   student: {
     name: string;
     avatar: string;

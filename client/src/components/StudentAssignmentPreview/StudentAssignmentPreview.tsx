@@ -13,6 +13,7 @@ type StudentAssignmentPreviewProps = {
   index: number;
   task: { id: number; title: string; description: string };
   submitted: boolean;
+  id: number;
 };
 
 const StudentAssignmentPreview: FunctionComponent<StudentAssignmentPreviewProps> = ({
@@ -21,6 +22,7 @@ const StudentAssignmentPreview: FunctionComponent<StudentAssignmentPreviewProps>
   index,
   task,
   submitted,
+  id,
 }) => {
   return (
     <div className="student-assignment-preview-grand-wrapper">
@@ -47,7 +49,7 @@ const StudentAssignmentPreview: FunctionComponent<StudentAssignmentPreviewProps>
             <div className="content__picture"></div>
           </div>
           <div className="content__buttons">
-            <Link to="/assignments/:id">
+            <Link to={`/assignments/${id}`}>
               <button>View Assignment</button>
             </Link>
           </div>
