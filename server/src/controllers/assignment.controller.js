@@ -82,6 +82,8 @@ exports.GetAssignmentPreviewsByCourse = async (req, res) => {
             likes: assignment.dataValues.likes.length,
             comments: assignment.dataValues.Comments.length,
             fileData: assignment.dataValues.fileData,
+            createdAt: assignment.dataValues.createdAt,
+            updatedAt: assignment.dataValues.updatedAt,
           });
         }
       });

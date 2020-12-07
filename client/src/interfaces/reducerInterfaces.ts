@@ -25,6 +25,8 @@ export interface AssignmentPreview {
   comments: number;
   fileData?: string;
   Task: any;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface Comment {
