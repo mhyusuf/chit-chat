@@ -3,7 +3,7 @@ const uuid = require("uuid");
 
 exports.CreatePairOfCourses = async (req, res) => {
   try {
-    const { level, langA, langB, teacherA, teacherB } = req.body;
+    const { level, langA, langB, teacherA, teacherB, nameA, nameB } = req.body;
     const registrationIdA = uuid.v4();
     const registrationIdB = uuid.v4();
 
@@ -11,16 +11,16 @@ exports.CreatePairOfCourses = async (req, res) => {
       level,
       registrationId: registrationIdA,
       TeacherId: teacherA,
-      nativeLanguage: langA,
       targetLanguage: langB,
+      name: nameA,
     });
     const courseB = await models.Course.create({
       level,
       registrationId: registrationIdB,
       TeacherId: teacherB,
-      nativeLanguage: langB,
       targetLanguage: langA,
       sisterCourse: courseA.id,
+      name: nameB,
     });
     courseA.sisterCourse = courseB.id;
     await courseA.save();

@@ -13,6 +13,8 @@ import StudentDetail from "../pages/StudentDetail";
 import Students from "../pages/Students";
 import TaskDetail from "../pages/TaskDetail";
 import Tasks from "../pages/Tasks";
+import AdminApp from "./AdminApp";
+import CourseCreate from "../pages/CourseCreate";
 
 const TeacherApp: FunctionComponent<any> = () => {
   return (
@@ -33,6 +35,11 @@ const TeacherApp: FunctionComponent<any> = () => {
             <Route path="/profile" component={Profile} />
             <Route path="/resources" component={Resources} />
             <Route path="/login" component={Login} />
+            <Route exact path="/administrator" component={AdminApp} />
+            <Route
+              path="/administrator/create-course"
+              component={CourseCreate}
+            />
           </Switch>
         </div>
       </div>
