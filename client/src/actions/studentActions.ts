@@ -26,10 +26,12 @@ export const getStudentsByRoom = (id: string) => async (dispatch: any) => {
   dispatch({ type: GET_STUDENT_BY_ROOM, payload: data });
 };
 
-export const getBothSetsStudentsByCourse = (id: string) => async (
+export const getBothSetsStudentsByCourse = (id: number) => async (
   dispatch: any
 ) => {
-  const { data } = await axios.get(`/api/student/sistercourse/${id}`);
+  const { data } = await axios.get(`/api/student/sisterCourse/${id}`);
+  console.log(data, "IN STUDENT ACTIONS");
+
   dispatch({ type: GET_STUDENTS_WITH_SISTER_COURSE, payload: data });
 };
 

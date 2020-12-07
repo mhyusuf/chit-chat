@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
 import Header from "../components/Header";
 import StudentNav from "../components/StudentNav";
@@ -12,8 +12,22 @@ import StudentDetail from "../pages/StudentDetail";
 import Students from "../pages/Students";
 import TaskDetail from "../pages/TaskDetail";
 import Tasks from "../pages/Tasks";
+import { CourseState, StudentUser } from "../interfaces/reducerInterfaces";
+import { setActiveCourse } from "../actions";
+import { connect } from "react-redux";
 
-const StudentApp: FunctionComponent = () => {
+interface StudentAppProps {
+  user: StudentUser;
+  setActiveCourse: Function;
+}
+
+const StudentApp: FunctionComponent<StudentAppProps> = (props) => {
+  const { user, setActiveCourse } = props;
+
+  useEffect(() => {
+    setActiveCourse(`${user.CourseId}`);
+  }, []);
+
   return (
     <>
       <Header />
@@ -38,4 +52,8 @@ const StudentApp: FunctionComponent = () => {
   );
 };
 
-export default StudentApp;
+function mapStateToProps({ user }: { user: StudentUser }) {
+  return { user };
+}
+
+export default connect(mapStateToProps, { setActiveCourse })(StudentApp);

@@ -35,14 +35,29 @@
     justify-content: center;
 
     &__preview {
+      margin-right: 3rem;
+      height: 50vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      .preview-placeholder {
+      justify-content: center;
+
+      .preview-icon {
         border: solid;
         width: 20rem;
-        height: 30rem;
+        height: 20rem;
         flex-shrink: 0;
+        background-repeat: round;
+        &.wordDoc {
+          background-image: url("../../assets/powerpoint.png");
+          background-size: cover;
+        }
+        &.powerpoint {
+          background-image: url("../../assets/wordDoc.png");
+        }
+        &.pdf {
+          background-image: url("../../assets/pdf.png");
+        }
       }
       &__button-wrapper {
         height: 9vh;
