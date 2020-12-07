@@ -16,6 +16,7 @@ import Tasks from "../pages/Tasks";
 import AdminApp from "./AdminApp";
 import CourseCreate from "../pages/CourseCreate";
 import CourseEdit from "../pages/CourseEdit";
+import CourseDelete from "../pages/CourseDelete";
 
 const TeacherApp: FunctionComponent<any> = () => {
   return (
@@ -42,6 +43,10 @@ const TeacherApp: FunctionComponent<any> = () => {
               component={CourseCreate}
             />
             <Route path="/administrator/edit-course" component={CourseEdit} />
+            <Route
+              path="/administrator/delete-course"
+              component={CourseDelete}
+            />
           </Switch>
         </div>
       </div>
