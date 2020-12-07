@@ -8,6 +8,7 @@ const AdminApp: FunctionComponent<any> = () => {
       <Link to="/administrator/edit-course">Edit Course</Link>
       <Link to="/administrator/delete-course">Delete Course</Link>
       <Link to="/administrator/create-resource">Create Resource</Link>
+      <Link to="/administrator/edit-resource">Edit Resource</Link>
     </div>
   );
 };

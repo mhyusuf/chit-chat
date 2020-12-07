@@ -9,6 +9,6 @@ const {
 
 router.post("/", uploadFile.single("fileData"), CreateResource);
 router.delete("/:id", DeleteResource);
-router.put("/:id", EditResource);
+router.put("/:id", uploadFile.single("fileData"), EditResource);
 
 module.exports = router;

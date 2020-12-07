@@ -1,0 +1,15 @@
+@import "../../../App.scss";
+
+.edit-resource-form {
+  border: $border $dark-green;
+  border-radius: 0.5rem;
+  width: 30%;
+  margin: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+  > * {
+    margin: 1rem;
+  }
+}
