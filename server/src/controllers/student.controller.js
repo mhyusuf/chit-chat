@@ -80,7 +80,6 @@ exports.GetStudentById = async (req, res) => {
         { model: models.Room },
       ],
     });
-    console.log("RESULT", result);
     const student = {
       id: result.dataValues.id,
       isTeacher: false,

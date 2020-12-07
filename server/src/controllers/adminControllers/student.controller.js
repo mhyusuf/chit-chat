@@ -2,6 +2,7 @@
 const bcrypt = require("bcrypt");
 const models = require("../../models").sequelize.models;
 const uuid = require("uuid");
+const { generateAuthToken } = require("../../utils/authHelpers.js");
 
 exports.DeleteStudent = async (req, res) => {
   try {
@@ -44,7 +45,9 @@ exports.RegisterStudent = async (req, res) => {
       RoomId,
       CourseId,
     });
-    res.status(201).send(newStudent);
+    const token = await generateAuthToken(newStudent.userId);
+
+    res.status(201).cookie("authToken", token).send(newStudent);
   } catch (e) {
     res.status(500).send(e, e.message);
   }
