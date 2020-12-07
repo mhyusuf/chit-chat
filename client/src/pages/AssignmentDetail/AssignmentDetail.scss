@@ -44,10 +44,24 @@
         height: 30rem;
         flex-shrink: 0;
       }
-      button {
-        margin: 1rem;
+      &__button-wrapper {
+        height: 9vh;
+        width: 90%;
+        display: flex;
+        justify-content: space-between;
+        button {
+          @include primary-button;
+          margin: 1rem;
 
-        @include primary-button;
+          &.heart {
+            background-color: $primary-color;
+            font-size: 2rem;
+            color: red;
+            > * {
+              margin-top: 5px;
+            }
+          }
+        }
       }
     }
   }

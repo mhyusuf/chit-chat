@@ -3,9 +3,10 @@ import "./AssignmentDetail.scss";
 import Comment from "../../components/Comment";
 import { IoIosSend } from "react-icons/io";
 import { AssignmentDetail as IAssignmentDetail } from "../../interfaces/reducerInterfaces";
-import { getAssignmentDetailById } from "../../actions";
+import { getAssignmentDetailById, likeAssignment } from "../../actions";
 import { connect } from "react-redux";
 import { RouteComponentProps } from "react-router-dom";
+import { FaRegHeart } from "react-icons/fa";
 
 // interface AssignmentDetail {
 //   submitData: any,
@@ -23,22 +24,26 @@ interface MatchInterface {
 interface AssignmentDetailProps extends RouteComponentProps<MatchInterface> {
   assignment: IAssignmentDetail;
   getAssignmentDetailById: Function;
+  likeAssignment: Function;
 }
 
 const AssignmentDetail: FunctionComponent<AssignmentDetailProps> = (props) => {
-  console.log(props);
-
-  const { assignment, getAssignmentDetailById, match } = props;
+  const { assignment, getAssignmentDetailById, match, likeAssignment } = props;
 
   useEffect(() => {
     getAssignmentDetailById(match.params.id);
-  });
+  }, []);
 
   const comments =
     assignment.comments &&
     assignment.comments.map((comment, idx) => (
       <Comment key={idx} comment={comment} />
     ));
+
+  function likeHandler(e: any) {
+    e.preventDefault();
+    likeAssignment(match.params.id);
+  }
 
   const submitted = assignment.submitData ? true : false;
 
@@ -60,7 +65,12 @@ const AssignmentDetail: FunctionComponent<AssignmentDetailProps> = (props) => {
         <div className="assignment-detail-grand-wrapper__content-wrapper">
           <div className="assignment-detail-grand-wrapper__content-wrapper__preview">
             <div className="preview-placeholder" />
-            <button onClick={(e) => e.preventDefault()}>download</button>
+            <div className="assignment-detail-grand-wrapper__content-wrapper__preview__button-wrapper">
+              <button onClick={(e) => e.preventDefault()}>download</button>
+              <button className="heart" onClick={likeHandler}>
+                <FaRegHeart />
+              </button>
+            </div>
           </div>
           <div className="assignment-detail-grand-wrapper__comment-wrapper">
             <div className="assignment-detail-grand-wrapper__comment-wrapper__comments">
@@ -92,6 +102,7 @@ function mapStateToProps({
   return { assignment: assignmentDetail };
 }
 
-export default connect(mapStateToProps, { getAssignmentDetailById })(
-  AssignmentDetail
-);
+export default connect(mapStateToProps, {
+  getAssignmentDetailById,
+  likeAssignment,
+})(AssignmentDetail);

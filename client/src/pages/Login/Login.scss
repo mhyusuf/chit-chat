@@ -103,7 +103,7 @@
         input {
           border: solid $primary-color 1px;
           border-radius: 0.5rem;
-          width: 90%;
+          width: 70%;
           height: 2.5rem;
           grid-column: 2;
         }
@@ -136,6 +136,7 @@
   display: flex;
   width: 100vw;
   justify-content: center;
+  align-items: center;
   margin: $XL 0;
 
   > a {
@@ -146,6 +147,7 @@
       cursor: pointer;
       border-radius: 0.4rem;
       border: none;
+      font-family: inherit;
     }
   }
 }

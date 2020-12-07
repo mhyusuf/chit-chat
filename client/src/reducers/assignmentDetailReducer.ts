@@ -2,7 +2,7 @@ import {
   AssignmentDetail,
   ChitChatAction,
 } from "../interfaces/reducerInterfaces";
-import { GET_ASSIGNMENT } from "../actions/types";
+import { GET_ASSIGNMENT, LIKE_ASSIGNMENT } from "../actions/types";
 
 const initialState: AssignmentDetail = {
   submitData: null,
@@ -33,6 +33,8 @@ const reducer = (
   switch (action.type) {
     case GET_ASSIGNMENT:
       return action.payload;
+    case LIKE_ASSIGNMENT:
+      return { ...state, likes: action.payload };
     default:
       return state;
   }
