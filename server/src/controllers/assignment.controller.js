@@ -31,17 +31,18 @@ exports.GetAssignmentById = async (req, res) => {
     const assignment = await Assignment.findByPk(id, {
       include: [{ model: Student }, { model: Task }, { model: Comment }],
     });
-    if (assignment)
+    console.log(assignment);
+    if (assignment) {
       res.status(200).send({
         submitData: assignment.fileData,
         fileName: assignment.fileName,
         task: assignment.Task,
         student: assignment.Student,
-        comments: assignment.comments,
+        comments: assignment.Comments,
         likes: assignment.likes,
         completed: assignment.fileData ? true : false,
       });
-    else res.status(404).send(new Error("No assignment found"));
+    } else res.status(404).send(new Error("No assignment found"));
   } catch (e) {
     res.status(500).send(e.message);
   }

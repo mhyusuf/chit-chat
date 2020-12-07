@@ -1,21 +1,24 @@
-import React, { FunctionComponent, useEffect } from "react";
+import React, {
+  FunctionComponent,
+  useEffect,
+  useState,
+  useCallback,
+} from "react";
 import "./AssignmentDetail.scss";
 import Comment from "../../components/Comment";
 import { IoIosSend } from "react-icons/io";
-import { AssignmentDetail as IAssignmentDetail } from "../../interfaces/reducerInterfaces";
-import { getAssignmentDetailById, likeAssignment } from "../../actions";
+import {
+  AssignmentDetail as IAssignmentDetail,
+  User,
+} from "../../interfaces/reducerInterfaces";
+import {
+  getAssignmentDetailById,
+  likeAssignment,
+  commentAssignment,
+} from "../../actions";
 import { connect } from "react-redux";
 import { RouteComponentProps } from "react-router-dom";
 import { FaRegHeart } from "react-icons/fa";
-
-// interface AssignmentDetail {
-//   submitData: any,
-//   task: Task;
-//   student: Student;
-//   comments: Comment[];
-//   likes: string[],
-//   completed: boolean,
-// };
 
 interface MatchInterface {
   id: string;
@@ -25,10 +28,25 @@ interface AssignmentDetailProps extends RouteComponentProps<MatchInterface> {
   assignment: IAssignmentDetail;
   getAssignmentDetailById: Function;
   likeAssignment: Function;
+  commentAssignment: Function;
+  user: User;
 }
 
 const AssignmentDetail: FunctionComponent<AssignmentDetailProps> = (props) => {
-  const { assignment, getAssignmentDetailById, match, likeAssignment } = props;
+  const {
+    assignment,
+    getAssignmentDetailById,
+    match,
+    likeAssignment,
+    user,
+    commentAssignment,
+  } = props;
+  const [commentInput, setCommentInput] = useState("");
+  const scrollRef = useCallback((node) => {
+    if (node) {
+      node.scrollIntoView({ smooth: true });
+    }
+  }, []);
 
   useEffect(() => {
     getAssignmentDetailById(match.params.id);
@@ -37,12 +55,24 @@ const AssignmentDetail: FunctionComponent<AssignmentDetailProps> = (props) => {
   const comments =
     assignment.comments &&
     assignment.comments.map((comment, idx) => (
-      <Comment key={idx} comment={comment} />
+      <div
+        className="comment-grand-wrapper"
+        ref={idx === assignment.comments.length - 1 ? scrollRef : null}
+        key={idx}
+      >
+        <Comment comment={comment} />
+      </div>
     ));
 
   function likeHandler(e: any) {
     e.preventDefault();
     likeAssignment(match.params.id);
+  }
+
+  function submitHandler(e: any) {
+    e.preventDefault();
+    commentAssignment(match.params.id, user.userId, commentInput);
+    setCommentInput("");
   }
 
   let fileType = "";
@@ -90,8 +120,11 @@ const AssignmentDetail: FunctionComponent<AssignmentDetailProps> = (props) => {
               {comments}
             </div>
             <form>
-              <input />
-              <button onClick={(e) => e.preventDefault()}>
+              <input
+                onChange={(e) => setCommentInput(e.target.value)}
+                value={commentInput}
+              />
+              <button onClick={submitHandler}>
                 <IoIosSend className="send-icon" />
               </button>
             </form>
@@ -104,13 +137,16 @@ const AssignmentDetail: FunctionComponent<AssignmentDetailProps> = (props) => {
 
 function mapStateToProps({
   assignmentDetail,
+  user,
 }: {
   assignmentDetail: IAssignmentDetail;
+  user: User;
 }) {
-  return { assignment: assignmentDetail };
+  return { assignment: assignmentDetail, user };
 }
 
 export default connect(mapStateToProps, {
   getAssignmentDetailById,
   likeAssignment,
+  commentAssignment,
 })(AssignmentDetail);
