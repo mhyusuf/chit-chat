@@ -1,4 +1,5 @@
 import React, { FormEvent, FunctionComponent, useState } from "react";
+import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { loginTeacher, loginStudent } from "../../actions";
 import Logo from "../../assets/color-logo.png";
@@ -61,9 +62,9 @@ const Login: FunctionComponent<any> = ({
       <div className="bottom-half-grand-wrapper">
         <div className="bottom-half-grand-wrapper__textbox">
           <p>
-            Welcome to Chit Chat, the place where classrooms studying each
-            other's language can connect in real-time for language and cultural
-            exchange
+            Welcome to Chit Chat, the place where you can connect in real-time
+            to exchange language and cultural with other students around the
+            world.
           </p>
         </div>
         <div className="bottom-half-grand-wrapper__login-grand-wrapper">
@@ -97,6 +98,12 @@ const Login: FunctionComponent<any> = ({
             </form>
           </div>
         </div>
+      </div>
+      <div className="register-link-container">
+        <p>New to Chit Chat?</p>
+        <NavLink to="/register">
+          <button>Register</button>
+        </NavLink>
       </div>
     </>
   );
