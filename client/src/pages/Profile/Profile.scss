@@ -1,6 +1,8 @@
 @import "../../App.scss";
 
 .profile {
+  @include route-scroll;
+
   display: flex;
   flex-direction: row-reverse;
   justify-content: space-between;
