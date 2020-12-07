@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 import { getTaskDetail } from "../../actions";
 import TaskAssignments from "../../components/TaskAssigments";
 import TaskAssignmentsEdit from "../../components/TaskAssignmentsEdit";
+import UserAvatar from "../../components/UserAvatar";
 import {
   CourseState,
   TaskDetailState,
@@ -51,8 +52,16 @@ const TaskDetail: FunctionComponent<any> = ({
           )}
         </div>
         <div className="task-detail-grand-wrapper__page-content__doc-preview-block">
-          <div className="task-detail-grand-wrapper__page-content__doc-preview-block__preview"></div>
-          <button>download</button>
+          <div className={"thumbnail-grand-wrapper"}>
+            <img
+              src={`/api/task/${taskDetail.task.id}/thumbnail`}
+              alt="task-thumbnail"
+            />
+          </div>
+          <div className="description">
+            <h3>Description</h3>
+            <p>{taskDetail.task.description}</p>
+          </div>
         </div>
       </div>
     </div>
