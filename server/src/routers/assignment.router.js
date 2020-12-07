@@ -8,7 +8,6 @@ const {
   EditAssignment,
   GetAssignmentById,
   GetAssignmentPreviewsByCourse,
-  GetAssignmentByStudent,
   GetAssignmentByTask,
   GetFile,
 } = require("../controllers/assignment.controller");
@@ -19,7 +18,6 @@ router.put("/:id", authMiddleware, EditAssignment);
 router.get("/:id", GetAssignmentById);
 router.get("/:id/download", GetFile);
 router.get("/course/:id", GetAssignmentPreviewsByCourse);
-router.get("/student/:id", GetAssignmentByStudent);
 router.get("/task/:id", GetAssignmentByTask);
 
 module.exports = router;

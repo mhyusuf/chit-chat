@@ -1,12 +1,16 @@
 import React, { FunctionComponent } from "react";
 import { Switch, Route } from "react-router-dom";
 import Login from "../pages/Login";
+import Header from "../components/Header";
 
 const UnauthorizedApp: FunctionComponent<any> = () => {
   return (
-    <Switch>
-      <Route path="/" component={Login} />
-    </Switch>
+    <>
+      <Header />
+      <Switch>
+        <Route path="/" component={Login} />
+      </Switch>
+    </>
   );
 };
 

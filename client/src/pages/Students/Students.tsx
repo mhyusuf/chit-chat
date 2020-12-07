@@ -1,11 +1,12 @@
-import React, { FunctionComponent, useEffect } from "react";
+import React, { FunctionComponent, useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { getStudentsByCourse } from "../../actions";
+import { getBothSetsStudentsByCourse } from "../../actions";
 import StudentPreview from "../../components/StudentPreview";
 import {
   Course,
   CourseState,
   Student,
+  User,
 } from "../../interfaces/reducerInterfaces";
 
 import "./Students.scss";
@@ -41,20 +42,35 @@ const mocks = [
 ];
 
 interface StudentsProps {
+  user: User;
   courses: Course[];
   activeCourse: string;
   students: Student[];
-  getStudentsByCourse: (id: string) => {};
+  getBothSetsStudentsByCourse: (id: string) => {};
 }
 
 const Students: FunctionComponent<StudentsProps> = ({
+  user,
   students,
   courses,
   activeCourse,
-  getStudentsByCourse,
+  getBothSetsStudentsByCourse,
 }) => {
+  const [studentsToMap, setStudentsToMap] = useState<Student[]>([]);
+
   useEffect(() => {
-    getStudentsByCourse(activeCourse);
+    getBothSetsStudentsByCourse(activeCourse);
+
+    const studentSelf = user.isTeacher
+      ? null
+      : students.filter((student) => user.userId !== student.userId);
+    const targetRoom = studentSelf ? studentSelf[0].RoomId : "0";
+
+    setStudentsToMap(
+      user.isTeacher
+        ? students.filter((student) => student.CourseId === +activeCourse)
+        : students.filter((student) => student.RoomId === +targetRoom)
+    );
   }, [activeCourse]);
 
   return (
@@ -62,8 +78,8 @@ const Students: FunctionComponent<StudentsProps> = ({
       <h1>Students: Class 7e</h1>
       <div className="students-grand-wrapper__students-container">
         <div className="students-grand-wrapper__students-container__students-container-wrapper">
-          {students.length ? (
-            students.map((student) => {
+          {studentsToMap.length ? (
+            studentsToMap.map((student) => {
               return <StudentPreview student={student} key={student.id} />;
             })
           ) : (
@@ -76,17 +92,22 @@ const Students: FunctionComponent<StudentsProps> = ({
 };
 
 const mapStateToProps = ({
+  user,
   course,
   students,
 }: {
+  user: User;
   course: CourseState;
   students: Student[];
 }) => {
   return {
+    user: user,
     courses: course.courseList,
     activeCourse: course.activeCourse,
     students,
   };
 };
 
-export default connect(mapStateToProps, { getStudentsByCourse })(Students);
+export default connect(mapStateToProps, { getBothSetsStudentsByCourse })(
+  Students
+);

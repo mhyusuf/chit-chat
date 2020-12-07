@@ -6,8 +6,6 @@ import TaskAssignments from "../../components/TaskAssigments";
 import TaskAssignmentsEdit from "../../components/TaskAssignmentsEdit";
 import {
   CourseState,
-  Student,
-  Task,
   TaskDetailState,
 } from "../../interfaces/reducerInterfaces";
 import "./TaskDetail.scss";

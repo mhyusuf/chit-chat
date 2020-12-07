@@ -1,12 +1,8 @@
 import React, { FormEvent, FunctionComponent, useState } from "react";
 import { connect } from "react-redux";
 import { loginTeacher, loginStudent } from "../../actions";
+import Logo from "../../assets/color-logo.png";
 import "./Login.scss";
-
-// interface LoginProps extends RouteComponentProps {
-//   loginTeacher: ()=>void,
-//   loginStudent: ()=>void,
-// }
 
 const Login: FunctionComponent<any> = ({
   loginTeacher,
@@ -40,14 +36,14 @@ const Login: FunctionComponent<any> = ({
       className="toggle-button toggle-button--teacher"
       onClick={toggleTeacher}
     >
-      change to Student login
+      Student login
     </button>
   ) : (
     <button
       className="toggle-button toggle-button--student"
       onClick={toggleTeacher}
     >
-      change to Teacher login
+      Teacher login
     </button>
   );
 
@@ -58,37 +54,51 @@ const Login: FunctionComponent<any> = ({
   );
 
   return (
-    <div className="login-grand-wrapper">
-      <div className="login-grand-wrapper__center-block">
-        <div className="login-grand-wrapper__center-block__top-row">
-          {promptText}
-          {teacherButton}
-        </div>
-        <form onSubmit={loginHandler}>
-          <label className="align-email" htmlFor="email">
-            Email:{" "}
-          </label>
-          <input
-            onChange={handleInputChange}
-            value={formData.email}
-            className="align-email"
-            name="email"
-            type="text"
-          />
-          <label className="align-pw" htmlFor="password">
-            Password:{" "}
-          </label>
-          <input
-            onChange={handleInputChange}
-            value={formData.password}
-            className="align-pw"
-            name="password"
-            type="password"
-          />
-          <button>Login</button>
-        </form>
+    <>
+      <div className="top-page-grand-wrapper">
+        <img src={Logo} alt="" />
       </div>
-    </div>
+      <div className="bottom-half-grand-wrapper">
+        <div className="bottom-half-grand-wrapper__textbox">
+          <p>
+            Welcome to Chit Chat, the place where classrooms studying each
+            other's language can connect in real-time for language and cultural
+            exchange
+          </p>
+        </div>
+        <div className="bottom-half-grand-wrapper__login-grand-wrapper">
+          <div className="bottom-half-grand-wrapper__login-grand-wrapper__center-block">
+            <div className="bottom-half-grand-wrapper__login-grand-wrapper__center-block__top-row">
+              {promptText}
+              {teacherButton}
+            </div>
+            <form onSubmit={loginHandler}>
+              <label className="align-email" htmlFor="email">
+                Email:{" "}
+              </label>
+              <input
+                onChange={handleInputChange}
+                value={formData.email}
+                className="align-email"
+                name="email"
+                type="text"
+              />
+              <label className="align-pw" htmlFor="password">
+                Password:{" "}
+              </label>
+              <input
+                onChange={handleInputChange}
+                value={formData.password}
+                className="align-pw"
+                name="password"
+                type="password"
+              />
+              <button>Login</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </>
   );
 };
 

@@ -25,18 +25,20 @@ const Header: FunctionComponent<any> = ({ user, logout }) => {
         <h1>Chit Chat</h1>
         <div className="header-grand-wrapper__left-block__logo" />
       </div>
-      <div className="header-grand-wrapper__right-block">
-        <div className="header-grand-wrapper__right-block__user">
-          <h3>{user.name}</h3>
-          <div onClick={handleClick}>
-            <UserAvatar
-              avatarString={user.avatar}
-              smaller={true}
-              className="smaller"
-            />
+      {user.name && (
+        <div className="header-grand-wrapper__right-block">
+          <div className="header-grand-wrapper__right-block__user">
+            <h3>{user.name}</h3>
+            <div onClick={handleClick}>
+              <UserAvatar
+                avatarString={user.avatar}
+                smaller={true}
+                className="smaller"
+              />
+            </div>
           </div>
         </div>
-      </div>
+      )}
       {avatarClicked && (
         <div className="header-grand-wrapper__drop-down-wrapper">
           {user.isTeacher && (

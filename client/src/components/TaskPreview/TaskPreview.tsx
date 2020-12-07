@@ -13,8 +13,6 @@ import {
 } from "../../interfaces/reducerInterfaces";
 import { getTaskDetail } from "../../actions";
 import "./TaskPreview.scss";
-import CourseSelect from "../CourseSelect";
-import AssignModal from "../AssignModal";
 
 interface TaskPreviewProps {
   task: Task;
@@ -33,7 +31,6 @@ const TaskPreview: FunctionComponent<TaskPreviewProps> = ({
   open,
   handleOpen,
   isTeacher,
-  taskDetail,
   getTaskDetail,
   activeCourse,
 }) => {

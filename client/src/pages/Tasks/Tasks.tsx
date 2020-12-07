@@ -2,8 +2,7 @@ import React, { FunctionComponent, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { getAllTasks } from "../../actions/tasksActions";
 import TaskPreview from "../../components/TaskPreview/TaskPreview";
-import { CourseState } from "../../interfaces/reducerInterfaces";
-import { Task } from "../../interfaces/reducerInterfaces";
+import { CourseState, Task } from "../../interfaces/reducerInterfaces";
 
 import "./Tasks.scss";
 
