@@ -2,20 +2,16 @@ import React, { FunctionComponent } from "react";
 import "./Comment.scss";
 import { deleteComment } from "../../actions/assignmentActions";
 import { connect } from "react-redux";
-import { User } from "../../interfaces/reducerInterfaces";
+import { Comment as IComment, User } from "../../interfaces/reducerInterfaces";
 
 interface CommentProps {
-  comment: {
-    sender: any;
-    content: string;
-    id: number;
-  };
+  comment: IComment;
   deleteComment: Function;
   user: User;
 }
 
 const Comment: FunctionComponent<CommentProps> = (props) => {
-  const { sender, content, id } = props.comment;
+  const { senderId, senderName, content, id } = props.comment;
   const { deleteComment, user } = props;
 
   function deleteHandler(e: any, id: number) {
@@ -24,7 +20,7 @@ const Comment: FunctionComponent<CommentProps> = (props) => {
   }
 
   const deleteButton =
-    sender === user.userId || user.isTeacher ? (
+    senderId === user.userId || user.isTeacher ? (
       <button className="delete-button" onClick={(e) => deleteHandler(e, id)}>
         X
       </button>
@@ -35,7 +31,7 @@ const Comment: FunctionComponent<CommentProps> = (props) => {
   return (
     <>
       <div className="comment-grand-wrapper__text">
-        <h4>{sender}</h4>
+        <h4>{senderName}</h4>
         <p>{content}</p>
       </div>
       {deleteButton}

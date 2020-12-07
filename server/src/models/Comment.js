@@ -1,7 +1,11 @@
 module.exports = (sequelize, DataTypes) => {
   const Comment = sequelize.define("Comment", {
-    sender: {
+    senderId: {
       type: DataTypes.UUID,
+      allowNull: false,
+    },
+    senderName: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
     content: {

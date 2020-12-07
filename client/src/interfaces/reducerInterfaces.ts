@@ -36,7 +36,8 @@ export interface AssignmentPreview {
 
 export interface Comment {
   id: number;
-  sender: User;
+  senderId: string;
+  senderName: string;
   content: string;
 }
 

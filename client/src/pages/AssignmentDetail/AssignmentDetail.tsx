@@ -71,7 +71,7 @@ const AssignmentDetail: FunctionComponent<AssignmentDetailProps> = (props) => {
 
   function submitHandler(e: any) {
     e.preventDefault();
-    commentAssignment(match.params.id, user.userId, commentInput);
+    commentAssignment(match.params.id, user, commentInput);
     setCommentInput("");
   }
 
