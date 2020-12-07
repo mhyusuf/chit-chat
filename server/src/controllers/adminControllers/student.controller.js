@@ -15,9 +15,26 @@ exports.DeleteStudent = async (req, res) => {
 
 exports.RegisterStudent = async (req, res) => {
   try {
-    const { email, name, password, avatar, RoomId, CourseId } = req.body;
+    const {
+      email,
+      name,
+      password,
+      avatar,
+      roomRegistrationId,
+      courseRegistrationId,
+    } = req.body;
     const hashedPw = await bcrypt.hash(password, 10);
     const userId = uuid.v4();
+    // get room pk using room UUID
+    const resultRoom = await models.Room.findOne({
+      where: { roomRegistrationId },
+    });
+    const RoomId = resultRoom.dataValues.id;
+    const resultCourse = await models.Course.findOne({
+      where: { registrationId: courseRegistrationId },
+    });
+    const CourseId = resultCourse.dataValues.id;
+    // get course ok using course UUID
     const newStudent = await models.Student.create({
       userId,
       email,
