@@ -28,18 +28,20 @@ const RecentActivity: FunctionComponent<RecentActivityProps> = ({
       <h1>Recent Activity</h1>
       <div className="recent-activity-events-wrapper">
         {assignments &&
-          assignments.map((assignment: AssignmentPreview, idx: number) => {
-            return (
-              <Assignment
-                student={assignment.student}
-                key={idx}
-                title={assignment.taskName}
-                likes={assignment.likes}
-                comments={assignment.comments}
-                assignmentId={assignment.id}
-              />
-            );
-          })}
+          assignments
+            .sort((a, b) => Date.parse(b.updatedAt) - Date.parse(a.updatedAt))
+            .map((assignment: AssignmentPreview, idx: number) => {
+              return (
+                <Assignment
+                  student={assignment.student}
+                  key={idx}
+                  title={assignment.taskName}
+                  likes={assignment.likes}
+                  comments={assignment.comments}
+                  assignmentId={assignment.id}
+                />
+              );
+            })}
       </div>
     </div>
   );
