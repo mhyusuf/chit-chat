@@ -30,6 +30,7 @@
   }
 
   &__content {
+    position: relative;
     .content__main {
       display: flex;
       justify-content: space-between;

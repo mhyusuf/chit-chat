@@ -10,9 +10,13 @@ const Tasks: FunctionComponent<any> = ({ tasks, course, getAllTasks }) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   useEffect(() => {
-    console.log("USEEFFECT");
-    getAllTasks(1, "ES");
-  }, []);
+    if (course.courseList.length) {
+      const { level, targetLanguage } = course.courseList.find((el: any) => {
+        return String(el.id) === String(course.activeCourse);
+      });
+      getAllTasks(level, targetLanguage);
+    }
+  }, [course.activeCourse]);
 
   return (
     <div className="tasks-grand-wrapper">
@@ -43,7 +47,7 @@ const mapStateToProps = ({
   tasks: Task[];
   course: CourseState;
 }) => {
-  return { tasks, course: course.activeCourse };
+  return { tasks, course };
 };
 
 export default connect(mapStateToProps, { getAllTasks })(Tasks);
