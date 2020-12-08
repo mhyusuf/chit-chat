@@ -17,9 +17,24 @@
       font-size: 3.2rem;
     }
 
+    &__edit-input {
+      background: none;
+      font-family: inherit;
+      border: none;
+      font-size: 3.2rem;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
     &__edit-icon {
       font-size: 1rem;
       cursor: pointer;
+    }
+
+    &__save-btn {
+      @include primary-button;
     }
   }
 
