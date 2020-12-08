@@ -3,10 +3,9 @@ const models = require("../models").sequelize.models;
 
 exports.GetResources = async (req, res) => {
   try {
-    const { nativeLanguage, targetLanguage, level } = req.params;
+    const { targetLanguage, level } = req.params;
     const resources = await models.Resource.findAll({
       where: {
-        nativeLanguage,
         targetLanguage,
         level,
       },
