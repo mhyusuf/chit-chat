@@ -9,6 +9,7 @@ import {
   StudentUser,
   User,
 } from "../../interfaces/reducerInterfaces";
+import translate from "../../utils/translate";
 
 import "./Students.scss";
 
@@ -16,6 +17,7 @@ interface StudentsProps {
   user: User;
   courses: Course[];
   activeCourse: number;
+  activeCourseDetail: Course;
   students: Student[];
   getBothSetsStudentsByCourse: Function;
 }
@@ -26,6 +28,7 @@ const Students: FunctionComponent<StudentsProps> = ({
   courses,
   activeCourse,
   getBothSetsStudentsByCourse,
+  activeCourseDetail,
 }) => {
   const [studentsToMap, setStudentsToMap] = useState<Student[]>([]);
 
@@ -45,9 +48,14 @@ const Students: FunctionComponent<StudentsProps> = ({
     );
   }, [activeCourse]);
 
+  const header = user.isTeacher
+    ? `${translate("Students", activeCourseDetail.targetLanguage)}: ${
+        activeCourseDetail.name
+      }`
+    : `${translate("Teammates", activeCourseDetail.targetLanguage)}`;
   return (
     <div className="students-grand-wrapper">
-      <h1>Students: Class 7e</h1>
+      <h1>{header}</h1>
       <div className="students-grand-wrapper__students-container">
         <div className="students-grand-wrapper__students-container__students-container-wrapper">
           {studentsToMap.length ? (
@@ -76,6 +84,7 @@ const mapStateToProps = ({
     user: user,
     courses: course.courseList,
     activeCourse: course.activeCourse,
+    activeCourseDetail: course.activeCourseDetail,
     students,
   };
 };
