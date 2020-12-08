@@ -19,7 +19,6 @@ exports.GetRoomsByCourseId = async (req, res) => {
           RoomId: room.id,
         };
       });
-      console.log(rooms);
       res.status(200).send(rooms);
     } else res.status(404).send(new Error("No rooms found"));
   } catch (e) {
