@@ -1,19 +1,27 @@
 import React, { FunctionComponent, useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { StudentState, User } from "../../interfaces/reducerInterfaces";
+import {
+  Course,
+  CourseState,
+  StudentState,
+  User,
+} from "../../interfaces/reducerInterfaces";
 import { getStudent } from "../../actions";
 import StudentAssignmentPreview from "../../components/StudentAssignmentPreview";
+import translate from "../../utils/translate";
 
 interface MyAssignmentsProps {
   user: User;
   student: StudentState;
   getStudent: Function;
+  targetLanguage: string;
 }
 
 const MyAssignments: FunctionComponent<MyAssignmentsProps> = ({
   user,
   student,
   getStudent,
+  targetLanguage,
 }) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
@@ -45,7 +53,7 @@ const MyAssignments: FunctionComponent<MyAssignmentsProps> = ({
 
   return (
     <div className="my-assignments-grand-wrapper">
-      <h1>My Assignments</h1>
+      <h1>{translate("My Assignments", targetLanguage)}</h1>
       <div className="my-assignments-grand-wrapper__previews-wrapper">
         {studentAssignments}
       </div>
@@ -56,10 +64,16 @@ const MyAssignments: FunctionComponent<MyAssignmentsProps> = ({
 function mapStateToProps({
   user,
   student,
+  course,
 }: {
   user: User;
   student: StudentState;
+  course: CourseState;
 }) {
-  return { user, student };
+  return {
+    user,
+    student,
+    targetLanguage: course.activeCourseDetail.targetLanguage,
+  };
 }
 export default connect(mapStateToProps, { getStudent })(MyAssignments);

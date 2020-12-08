@@ -14,7 +14,10 @@ import { getAllMessagesByRoom, getRoomUsers } from "../../actions";
 
 import AudioCapture from "../../components/AudioCapture";
 import Message from "../../components/Message";
-import { Message as IMessage } from "../../interfaces/reducerInterfaces";
+import {
+  CourseState,
+  Message as IMessage,
+} from "../../interfaces/reducerInterfaces";
 import "./RoomDetail.scss";
 import {
   RoomDetailState,
@@ -24,6 +27,7 @@ import {
 import { RouteComponentProps } from "react-router-dom";
 import UserAvatar from "../../components/UserAvatar";
 import { SET_ERROR } from "../../actions/types";
+import translate from "../../utils/translate.js";
 
 const socket = io.connect("http://localhost:5000");
 
@@ -36,10 +40,20 @@ interface RoomDetailProps extends RouteComponentProps<matchInterface> {
   getAllMessagesByRoom: (id: string) => void;
   getRoomUsers: (id: string) => void;
   user: User;
+  targetLanguage: string;
+  error: string;
 }
 
 const RoomDetail: FunctionComponent<RoomDetailProps> = (props) => {
-  const { roomDetail, getAllMessagesByRoom, getRoomUsers, match, user } = props;
+  const {
+    roomDetail,
+    getAllMessagesByRoom,
+    getRoomUsers,
+    match,
+    user,
+    targetLanguage,
+    error,
+  } = props;
   const [audioSelected, setAudioSelected] = useState(false);
   const [input, setInput] = useState("");
   const [blobURL, setBlobURL] = useState("");
@@ -206,12 +220,12 @@ const RoomDetail: FunctionComponent<RoomDetailProps> = (props) => {
 
   return (
     <div className="room-detail-grand-wrapper">
-      <h1>Blue Team Chat</h1>
+      <h1>{roomDetail.roomName} Chat</h1>
       <div className="room-detail-grand-wrapper__chat-block">
         <div className="room-detail-grand-wrapper__chat-block__user-list">
-          <h3>Teachers:</h3>
+          <h3>{translate("Teachers", targetLanguage)}:</h3>
           {teacherList}
-          <h3>Teammates:</h3>
+          <h3>{translate("Teammates", targetLanguage)}:</h3>
           {studentList}
         </div>
         <div className="room-detail-grand-wrapper__chat-block__chatroom">
@@ -219,6 +233,7 @@ const RoomDetail: FunctionComponent<RoomDetailProps> = (props) => {
             <div className="flex-div">{allMessagesJSX}</div>
           </div>
           {inputBlock}
+          {error && <div className="error">{error}</div>}
         </div>
       </div>
     </div>
@@ -228,11 +243,20 @@ const RoomDetail: FunctionComponent<RoomDetailProps> = (props) => {
 const mapStateToProps = ({
   roomDetail,
   user,
+  course,
+  error,
 }: {
   roomDetail: RoomDetailState;
   user: User;
+  course: CourseState;
+  error: string;
 }) => {
-  return { roomDetail, user };
+  return {
+    roomDetail,
+    user,
+    targetLanguage: course.activeCourseDetail.targetLanguage,
+    error,
+  };
 };
 
 export default connect(mapStateToProps, { getAllMessagesByRoom, getRoomUsers })(
