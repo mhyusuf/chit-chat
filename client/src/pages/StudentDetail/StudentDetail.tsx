@@ -5,6 +5,7 @@ import StudentAssignmentPreview from "../../components/StudentAssignmentPreview"
 import RoomPreview from "../../components/RoomPreview";
 import { BsPencilSquare } from "react-icons/bs";
 import { getStudent } from "../../actions/studentActions";
+import { editStudentName } from "../../actions/teacherActions";
 import "./StudentDetail.scss";
 import {
   AssignmentPreview,
@@ -22,7 +23,9 @@ interface matchInterface {
 
 interface StudentDetailProps extends RouteComponentProps<matchInterface> {
   getStudent: Function;
+  editStudentName: Function;
   student: User;
+  user: User;
   room: RoomDetailState;
   RoomId: number;
   assignments: AssignmentPreview[];
@@ -30,8 +33,11 @@ interface StudentDetailProps extends RouteComponentProps<matchInterface> {
 }
 
 const StudentDetail: FunctionComponent<StudentDetailProps> = ({
+  history,
   getStudent,
+  editStudentName,
   student,
+  user,
   assignments,
   RoomId,
   room,
@@ -39,7 +45,9 @@ const StudentDetail: FunctionComponent<StudentDetailProps> = ({
   targetLanguage,
 }) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
-  const [isTeacher, setIsTeacher] = useState<boolean>(true);
+  const [isTeacher, setIsTeacher] = useState<boolean>(false);
+  const [editName, setEditName] = useState<boolean>(false);
+  const [studentName, setStudentName] = useState<string>("");
 
   const handleOpen = (i: number | null) => setOpenIndex(i);
 
@@ -47,48 +55,75 @@ const StudentDetail: FunctionComponent<StudentDetailProps> = ({
 
   useEffect(() => {
     getStudent(id);
+    setStudentName(student.name);
+    setIsTeacher(user.isTeacher);
   }, []);
-
-  console.log("student", student);
-  console.log("assignments", assignments);
 
   const roomMembers: string[] = [];
   if (room) {
     room.students.forEach((student) => roomMembers.push(student.name));
   }
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setStudentName(e.target.value);
+  };
+
+  const handleClick = async () => {
+    await editStudentName(studentName, student.userId);
+    setEditName(!editName);
+    history.go(0);
+  };
+
   return (
     <div className="student-detail-grand-wrapper">
       <div className="student-detail-grand-wrapper__student-details">
-        <UserAvatar avatarString={student.avatar} />
-        {student && (
+        {student && <UserAvatar avatarString={student.avatar} />}
+        {student && !editName && (
           <h2 className="student-detail-grand-wrapper__student-details__student-name">
             {student.name}
           </h2>
         )}
-        <BsPencilSquare className="student-detail-grand-wrapper__student-details__edit-icon" />
+        {student && editName && (
+          <input
+            type="text"
+            value={studentName}
+            name="editStudentName"
+            onChange={handleChange}
+          />
+        )}
+        {isTeacher && !editName && (
+          <BsPencilSquare
+            onClick={() => {
+              setEditName(!editName);
+              setStudentName(student.name);
+            }}
+            className="student-detail-grand-wrapper__student-details__edit-icon"
+          />
+        )}
+        {isTeacher && editName && <button onClick={handleClick}>save</button>}
       </div>
       <div className="student-detail-grand-wrapper__tasks">
         <h2 className="student-detail-grand-wrapper__tasks__subtitle">
-          {translate("Assignments", targetLanguage)}:
+          Assignments
         </h2>
-        {assignments.map((assignment, index) => {
-          return (
-            <StudentAssignmentPreview
-              key={assignment.AssignmentId}
-              id={assignment.AssignmentId}
-              open={index === openIndex}
-              handleOpen={handleOpen}
-              index={index}
-              task={{
-                id: assignment.Task.id,
-                title: assignment.Task.title,
-                description: assignment.Task.description,
-              }}
-              submitted={assignment.fileData ? true : false}
-            />
-          );
-        })}
+        {assignments &&
+          assignments.map((assignment, index) => {
+            return (
+              <StudentAssignmentPreview
+                key={assignment.AssignmentId}
+                id={assignment.AssignmentId}
+                open={index === openIndex}
+                handleOpen={handleOpen}
+                index={index}
+                task={{
+                  id: assignment.Task.id,
+                  title: assignment.Task.title,
+                  description: assignment.Task.description,
+                }}
+                submitted={assignment.fileData ? true : false}
+              />
+            );
+          })}
       </div>
       {isTeacher && (
         <div className="student-detail-grand-wrapper__room">
@@ -113,18 +148,23 @@ const mapStateToProps = ({
   student,
   roomDetail,
   course,
+  user,
 }: {
   student: StudentState;
   roomDetail: RoomDetailState;
   course: CourseState;
+  user: User;
 }) => {
   return {
     student: student.student,
     RoomId: student.RoomId,
+    user: user,
     assignments: student.assignments,
     room: roomDetail,
     targetLanguage: course.activeCourseDetail.targetLanguage,
   };
 };
 
-export default connect(mapStateToProps, { getStudent })(StudentDetail);
+export default connect(mapStateToProps, { getStudent, editStudentName })(
+  StudentDetail
+);

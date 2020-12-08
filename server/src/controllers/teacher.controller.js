@@ -55,6 +55,19 @@ exports.ChangeNameTeacher = async (req, res) => {
   }
 };
 
+exports.ChangeStudentName = async (req, res) => {
+  try {
+    const { newName, studentId } = req.body;
+    const result = await models.Student.update(
+      { name: newName },
+      { where: { userId: studentId }, returning: true }
+    );
+    res.status(200).send(result[1][0]);
+  } catch (e) {
+    res.status(500).send(e.message);
+  }
+};
+
 exports.GetTeacherByCourse = async (req, res) => {
   try {
     const { id } = req.params;
