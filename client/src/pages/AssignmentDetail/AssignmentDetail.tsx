@@ -16,9 +16,10 @@ import {
   likeAssignment,
   commentAssignment,
 } from "../../actions";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { RouteComponentProps } from "react-router-dom";
 import { FaRegHeart } from "react-icons/fa";
+import { SET_ERROR } from "../../actions/types";
 
 interface MatchInterface {
   id: string;
@@ -30,6 +31,7 @@ interface AssignmentDetailProps extends RouteComponentProps<MatchInterface> {
   likeAssignment: Function;
   commentAssignment: Function;
   user: User;
+  error: string;
 }
 
 const AssignmentDetail: FunctionComponent<AssignmentDetailProps> = (props) => {
@@ -40,6 +42,7 @@ const AssignmentDetail: FunctionComponent<AssignmentDetailProps> = (props) => {
     likeAssignment,
     user,
     commentAssignment,
+    error,
   } = props;
   const [commentInput, setCommentInput] = useState("");
   const scrollRef = useCallback((node) => {
@@ -47,6 +50,7 @@ const AssignmentDetail: FunctionComponent<AssignmentDetailProps> = (props) => {
       node.scrollIntoView({ smooth: true });
     }
   }, []);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     getAssignmentDetailById(match.params.id);
@@ -71,8 +75,13 @@ const AssignmentDetail: FunctionComponent<AssignmentDetailProps> = (props) => {
 
   function submitHandler(e: any) {
     e.preventDefault();
-    commentAssignment(match.params.id, user, commentInput);
-    setCommentInput("");
+    if (!commentInput.trim()) {
+      dispatch({ type: SET_ERROR, payload: "Please enter a comment." });
+    } else {
+      dispatch({ type: SET_ERROR, payload: "" });
+      commentAssignment(match.params.id, user, commentInput);
+      setCommentInput("");
+    }
   }
 
   let fileType = "";
@@ -128,6 +137,7 @@ const AssignmentDetail: FunctionComponent<AssignmentDetailProps> = (props) => {
                 <IoIosSend className="send-icon" />
               </button>
             </form>
+            {error && <div className="error">{error}</div>}
           </div>
         </div>
       )}
@@ -138,11 +148,13 @@ const AssignmentDetail: FunctionComponent<AssignmentDetailProps> = (props) => {
 function mapStateToProps({
   assignmentDetail,
   user,
+  error,
 }: {
   assignmentDetail: IAssignmentDetail;
   user: User;
+  error: string;
 }) {
-  return { assignment: assignmentDetail, user };
+  return { assignment: assignmentDetail, user, error };
 }
 
 export default connect(mapStateToProps, {

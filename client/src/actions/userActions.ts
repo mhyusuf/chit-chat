@@ -27,6 +27,7 @@ export const loginStudent = (
     dispatch({ type: GET_CURRENT_USER, payload: res.data });
     history.push("/home");
   } catch (e) {
+    dispatch({ type: SET_ERROR, payload: "" });
     dispatch({ type: SET_ERROR, payload: "Incorrect username or password." });
   }
 };
@@ -47,6 +48,7 @@ export const loginTeacher = (
       password,
     });
     dispatch({ type: GET_CURRENT_USER, payload: data });
+    dispatch({ type: SET_ERROR, payload: "" });
     history.push("/home");
   } catch (e) {
     dispatch({ type: SET_ERROR, payload: "Incorrect username or password." });

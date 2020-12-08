@@ -46,6 +46,15 @@
     justify-content: center;
     justify-content: space-evenly;
 
+    .error {
+      background-color: rgba($red, 0.2);
+      border: lighten($red, 10%);
+      border-radius: 5px;
+      margin-top: 1rem;
+      padding: 1rem 0;
+      text-align: center;
+    }
+
     &__preview {
       height: 40vh;
       display: flex;
