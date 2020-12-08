@@ -6,11 +6,13 @@ const {
   ChangeNameTeacher,
   RegisterTeacher,
   LoginTeacher,
+  ChangeStudentName,
 } = require("../controllers/teacher.controller");
 
 router.post("/register", RegisterTeacher);
 router.post("/login", LoginTeacher);
 router.get("/:id", authMiddleware, GetTeacherByCourse);
 router.put("/profile", authMiddleware, ChangeNameTeacher);
+router.put("/student", authMiddleware, ChangeStudentName);
 
 module.exports = router;
