@@ -4,7 +4,7 @@ import React, {
   useState,
   useCallback,
 } from "react";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import io from "socket.io-client";
 import axios from "axios";
 import { IoIosSend } from "react-icons/io";
@@ -26,6 +26,7 @@ import {
 } from "../../interfaces/reducerInterfaces";
 import { RouteComponentProps } from "react-router-dom";
 import UserAvatar from "../../components/UserAvatar";
+import { SET_ERROR } from "../../actions/types";
 import translate from "../../utils/translate.js";
 
 const socket = io.connect("http://localhost:5000");
@@ -40,6 +41,7 @@ interface RoomDetailProps extends RouteComponentProps<matchInterface> {
   getRoomUsers: (id: string) => void;
   user: User;
   targetLanguage: string;
+  error: string;
 }
 
 const RoomDetail: FunctionComponent<RoomDetailProps> = (props) => {
@@ -50,6 +52,7 @@ const RoomDetail: FunctionComponent<RoomDetailProps> = (props) => {
     match,
     user,
     targetLanguage,
+    error,
   } = props;
   const [audioSelected, setAudioSelected] = useState(false);
   const [input, setInput] = useState("");
@@ -64,6 +67,8 @@ const RoomDetail: FunctionComponent<RoomDetailProps> = (props) => {
     }
   }, []);
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
     getRoomUsers(id);
     getAllMessagesByRoom(id);
@@ -71,6 +76,10 @@ const RoomDetail: FunctionComponent<RoomDetailProps> = (props) => {
     socket.on("message", (newMessage: any) => {
       setLocalMessages((msgs) => [...msgs, newMessage]);
     });
+
+    return () => {
+      dispatch({ type: SET_ERROR, payload: "" });
+    };
   }, []);
 
   useEffect(() => {
@@ -123,7 +132,10 @@ const RoomDetail: FunctionComponent<RoomDetailProps> = (props) => {
   });
 
   function toggleAudioSelected() {
-    setAudioSelected((selected) => !selected);
+    setAudioSelected((selected) => {
+      dispatch({ type: SET_ERROR, payload: "" });
+      return !selected;
+    });
   }
   function handleTextChange(e: React.ChangeEvent<HTMLInputElement>) {
     setInput(e.target.value);
@@ -151,18 +163,23 @@ const RoomDetail: FunctionComponent<RoomDetailProps> = (props) => {
         createdAt: data.createdAt,
       });
     } else {
-      socket.emit("message", {
-        sender: user,
-        type: "text",
-        content: input,
-        seenBy: [user.userId],
-        createdAt: Date.now(),
-      });
-      axios.post("/api/message", {
-        textContent: input,
-        contentType: "text",
-        RoomId: id,
-      });
+      if (!input.trim()) {
+        dispatch({ type: SET_ERROR, payload: "Please enter a message." });
+      } else {
+        dispatch({ type: SET_ERROR, payload: "" });
+        socket.emit("message", {
+          sender: user,
+          type: "text",
+          content: input,
+          seenBy: [user.userId],
+          createdAt: Date.now(),
+        });
+        axios.post("/api/message", {
+          textContent: input,
+          contentType: "text",
+          RoomId: id,
+        });
+      }
     }
     setInput("");
     //trigger socket with message from variable Input and state Current User
@@ -216,6 +233,7 @@ const RoomDetail: FunctionComponent<RoomDetailProps> = (props) => {
             <div className="flex-div">{allMessagesJSX}</div>
           </div>
           {inputBlock}
+          {error && <div className="error">{error}</div>}
         </div>
       </div>
     </div>
@@ -226,15 +244,18 @@ const mapStateToProps = ({
   roomDetail,
   user,
   course,
+  error,
 }: {
   roomDetail: RoomDetailState;
   user: User;
   course: CourseState;
+  error: string;
 }) => {
   return {
     roomDetail,
     user,
     targetLanguage: course.activeCourseDetail.targetLanguage,
+    error,
   };
 };
 
