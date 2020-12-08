@@ -7,17 +7,20 @@ import {
 } from "../../interfaces/reducerInterfaces";
 import { getAssignmentPreviewsByCourse } from "../../actions";
 import "./RecentActivity.scss";
+import translate from "../../utils/translate";
 
 interface RecentActivityProps {
   assignments: AssignmentPreview[];
   getAssignmentPreviewsByCourse: (id: string) => void;
   activeCourse: number;
+  targetLanguage: string;
 }
 
 const RecentActivity: FunctionComponent<RecentActivityProps> = ({
   getAssignmentPreviewsByCourse,
   assignments,
   activeCourse,
+  targetLanguage,
 }) => {
   useEffect(() => {
     if (activeCourse) getAssignmentPreviewsByCourse(`${activeCourse}`);
@@ -25,7 +28,7 @@ const RecentActivity: FunctionComponent<RecentActivityProps> = ({
 
   return (
     <div className="recent-activity-grand-wrapper">
-      <h1>Recent Activity</h1>
+      <h1>{translate("Recent Activity", targetLanguage)}</h1>
       <div className="recent-activity-events-wrapper">
         {assignments &&
           assignments
@@ -54,7 +57,11 @@ const mapStateToProps = ({
   assignments: AssignmentPreview[];
   course: CourseState;
 }) => {
-  return { assignments, activeCourse: course.activeCourse };
+  return {
+    assignments,
+    activeCourse: course.activeCourse,
+    targetLanguage: course.activeCourseDetail.targetLanguage,
+  };
 };
 
 export default connect(mapStateToProps, { getAssignmentPreviewsByCourse })(
