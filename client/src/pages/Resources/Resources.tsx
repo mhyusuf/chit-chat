@@ -1,38 +1,25 @@
-import React, { FunctionComponent, useState } from "react";
+import React, { FunctionComponent, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import ResourcePreview from "../../components/ResourcePreview";
 import "./Resources.scss";
 import translate from "../../utils/translate";
-import { CourseState } from "../../interfaces/reducerInterfaces";
-
-const resources = [
-  {
-    id: 1,
-    title: "Some title",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur rhoncus massa ac orci placerat viverra. Mauris pellentesque placerat viverra. Duis eleifend eu purus quis maximus.",
-  },
-  {
-    id: 2,
-    title: "Some title",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur rhoncus massa ac orci placerat viverra. Mauris pellentesque placerat viverra. Duis eleifend eu purus quis maximus.",
-  },
-  {
-    id: 3,
-    title: "Some title",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur rhoncus massa ac orci placerat viverra. Mauris pellentesque placerat viverra. Duis eleifend eu purus quis maximus.",
-  },
-];
+import { CourseState, Resource } from "../../interfaces/reducerInterfaces";
+import { getAllResources } from "../../actions";
 
 interface ResourcesProps {
   targetLanguage: string;
+  getAllResources: Function;
+  level: number;
+  resources: Resource[];
 }
 
 const Resources: FunctionComponent<ResourcesProps> = (props) => {
-  const { targetLanguage } = props;
+  const { targetLanguage, getAllResources, level, resources } = props;
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  useEffect(() => {
+    getAllResources(targetLanguage, level);
+  }, []);
 
   return (
     <div className="resources-grand-wrapper">
@@ -41,14 +28,17 @@ const Resources: FunctionComponent<ResourcesProps> = (props) => {
           <th className="teacher-pack__heading">Teacher's Pack</th>
         </thead>
         <tbody className="teacher-pack__body">
-          <tr className="teacher-pack__row">
-            Assessment Pack pdf
-            <button>{translate("Download", targetLanguage)}</button>
-          </tr>
-          <tr className="teacher-pack__row">
-            Course Guide pdf
-            <button>{translate("Download", targetLanguage)}</button>
-          </tr>
+          {resources &&
+            resources
+              .filter((resource) => !resource.extra)
+              .map((resource) => {
+                return (
+                  <tr className="teacher-pack__row">
+                    {resource.title}
+                    <button>{translate("Download", targetLanguage)}</button>
+                  </tr>
+                );
+              })}
         </tbody>
         <tr className="teacher-pack__action">
           <button>{translate("Download All", targetLanguage)}</button>
@@ -57,24 +47,37 @@ const Resources: FunctionComponent<ResourcesProps> = (props) => {
 
       <h2>Extra Resources</h2>
       <div className="resources__extra">
-        {resources.map((resource, i) => {
-          return (
-            <ResourcePreview
-              key={resource.id}
-              resource={resource}
-              open={i === openIndex}
-              index={i}
-              handleOpen={(i: number) => setOpenIndex(i)}
-            />
-          );
-        })}
+        {resources &&
+          resources
+            .filter((resource) => resource.extra)
+            .map((resource, i) => {
+              return (
+                <ResourcePreview
+                  key={resource.id}
+                  resource={resource}
+                  open={i === openIndex}
+                  index={i}
+                  handleOpen={(i: number) => setOpenIndex(i)}
+                />
+              );
+            })}
       </div>
     </div>
   );
 };
 
-function mapStateToProps({ course }: { course: CourseState }) {
-  return { targetLanguage: course.activeCourseDetail.targetLanguage };
+function mapStateToProps({
+  course,
+  resources,
+}: {
+  course: CourseState;
+  resources: Resource[];
+}) {
+  return {
+    targetLanguage: course.activeCourseDetail.targetLanguage,
+    level: course.activeCourseDetail.level,
+    resources,
+  };
 }
 
-export default connect(mapStateToProps, {})(Resources);
+export default connect(mapStateToProps, { getAllResources })(Resources);
