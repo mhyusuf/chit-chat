@@ -4,13 +4,7 @@ const models = require("../../models").sequelize.models;
 
 exports.CreateTask = async (req, res) => {
   try {
-    const {
-      level,
-      title,
-      description,
-      nativeLanguage,
-      targetLanguage,
-    } = req.body;
+    const { level, title, description, targetLanguage } = req.body;
     const thumbnail = await processImage({
       buffer: req.file.buffer,
       width: 300,
@@ -21,7 +15,6 @@ exports.CreateTask = async (req, res) => {
       title,
       description,
       thumbnail,
-      nativeLanguage,
       targetLanguage,
     });
     res.status(201).send(newTask);
@@ -43,20 +36,12 @@ exports.DeleteTask = async (req, res) => {
 exports.EditTask = async (req, res) => {
   try {
     const { id } = req.params;
-    const {
-      level,
-      title,
-      description,
-      nativeLanguage,
-      targetLanguage,
-      thumbnail,
-    } = req.body;
+    const { level, title, description, targetLanguage, thumbnail } = req.body;
     const task = await models.Task.findByPk(id);
     if (level) task.level = level;
     if (title) task.title = title;
     if (description) task.description = description;
     if (thumbnail) task.thumbnail = thumbnail;
-    if (nativeLanguage) task.nativeLanguage = nativeLanguage;
     if (targetLanguage) task.targetLanguage = targetLanguage;
     await task.save();
     res.status(200).send(task);
