@@ -3,24 +3,38 @@ import { connect } from "react-redux";
 import { getAllTasks } from "../../actions/tasksActions";
 import TaskPreview from "../../components/TaskPreview/TaskPreview";
 import { CourseState, Task } from "../../interfaces/reducerInterfaces";
+import translate from "../../utils/translate";
 
 import "./Tasks.scss";
 
-const Tasks: FunctionComponent<any> = ({ tasks, course, getAllTasks }) => {
+interface TasksProps {
+  tasks: Task[];
+  course: CourseState;
+  getAllTasks: Function;
+}
+
+const Tasks: FunctionComponent<TasksProps> = ({
+  tasks,
+  course,
+  getAllTasks,
+}) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const courseList: any = course.courseList;
+  const { activeCourse, activeCourseDetail } = course;
+  const targetLanguage = activeCourseDetail.targetLanguage;
 
   useEffect(() => {
     if (course.courseList.length) {
-      const { level, targetLanguage } = course.courseList.find((el: any) => {
+      const { level, targetLanguage } = courseList.find((el: any) => {
         return String(el.id) === String(course.activeCourse);
       });
       getAllTasks(level, targetLanguage);
     }
-  }, [course.activeCourse]);
+  }, [activeCourse]);
 
   return (
     <div className="tasks-grand-wrapper">
-      <h1>Tasks</h1>
+      <h1>{translate("Tasks", targetLanguage)}</h1>
       {tasks && (
         <div className="tasks-grand-wrapper__tasks-wrapper">
           {tasks.map((task: Task, i: number) => {
