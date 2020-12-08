@@ -31,7 +31,6 @@ exports.GetAssignmentById = async (req, res) => {
     const assignment = await Assignment.findByPk(id, {
       include: [{ model: Student }, { model: Task }, { model: Comment }],
     });
-    console.log(assignment);
     if (assignment) {
       res.status(200).send({
         submitData: assignment.fileData,
@@ -52,7 +51,6 @@ exports.GetFile = async (req, res) => {
   try {
     const { id } = req.params;
     const assignment = await Assignment.findByPk(id);
-    // console.log(assignment.fileData, assignment.mimeType, assignment.fileName);
     res.status(200);
     res.set("Content-Type", assignment.mimeType);
     res.send(assignment.fileData);
@@ -77,7 +75,7 @@ exports.GetAssignmentPreviewsByCourse = async (req, res) => {
       Assignments.forEach((assignment) => {
         if (!assignment.dataValues.dismissed) {
           allAssignments.push({
-            AssignmentId: assignment.dataValues.id,
+            id: assignment.dataValues.id,
             student: { name: student.name, avatar: student.avatar },
             taskName: assignment.dataValues.Task.dataValues.title,
             description: assignment.dataValues.Task.dataValues.description,
@@ -93,7 +91,6 @@ exports.GetAssignmentPreviewsByCourse = async (req, res) => {
 
     res.status(200).send(allAssignments);
   } catch (e) {
-    console.log(e);
     res.status(500).send(e.message);
   }
 };

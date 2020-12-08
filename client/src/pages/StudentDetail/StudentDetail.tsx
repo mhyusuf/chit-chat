@@ -49,9 +49,6 @@ const StudentDetail: FunctionComponent<StudentDetailProps> = ({
     getStudent(id);
   }, []);
 
-  console.log("student", student);
-  console.log("assignments", assignments);
-
   const roomMembers: string[] = [];
   if (room) {
     room.students.forEach((student) => roomMembers.push(student.name));
@@ -75,8 +72,8 @@ const StudentDetail: FunctionComponent<StudentDetailProps> = ({
         {assignments.map((assignment, index) => {
           return (
             <StudentAssignmentPreview
-              key={assignment.AssignmentId}
-              id={assignment.AssignmentId}
+              key={`${index}/student`}
+              id={assignment.id}
               open={index === openIndex}
               handleOpen={handleOpen}
               index={index}

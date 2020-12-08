@@ -18,7 +18,6 @@ const Register = ({ registerStudent }: { registerStudent: Function }) => {
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLFormElement>): void => {
-    console.log(e.target.name, e.target.value);
     setInput((prevInput) => {
       return { ...prevInput, [e.target.name]: e.target.value };
     });
