@@ -5,6 +5,6 @@ const {
 } = require("../controllers/resource.controller");
 
 router.get("/:targetLanguage/:level", GetResources);
-router.get("/:id/download", GetResourceFile);
+router.get("/:id", GetResourceFile);
 
 module.exports = router;

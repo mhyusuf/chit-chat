@@ -5,6 +5,7 @@ import "./Resources.scss";
 import translate from "../../utils/translate";
 import { CourseState, Resource } from "../../interfaces/reducerInterfaces";
 import { getAllResources } from "../../actions";
+import axios from "axios";
 
 interface ResourcesProps {
   targetLanguage: string;
@@ -19,7 +20,11 @@ const Resources: FunctionComponent<ResourcesProps> = (props) => {
 
   useEffect(() => {
     getAllResources(targetLanguage, level);
-  }, []);
+  }, [targetLanguage, level]);
+
+  // const handleClick = (id:number) => {
+  //   axios.get(`/api/resource/${id}/download`)
+  // }
 
   return (
     <div className="resources-grand-wrapper">
@@ -28,26 +33,31 @@ const Resources: FunctionComponent<ResourcesProps> = (props) => {
           <th className="teacher-pack__heading">Teacher's Pack</th>
         </thead>
         <tbody className="teacher-pack__body">
-          {resources &&
+          {resources.length &&
             resources
               .filter((resource) => !resource.extra)
               .map((resource) => {
                 return (
                   <tr className="teacher-pack__row">
                     {resource.title}
-                    <button>{translate("Download", targetLanguage)}</button>
+                    <a href={`/api/resource/${resource.id}`}>
+                      <button>{translate("Download", targetLanguage)}</button>
+                    </a>
+                    {/* <form action={`/api/resource/${resource.id}`} style={{width: '100px'}}>
+                      <button style={{width: '100px'}}>{translate("Download", targetLanguage)}</button>
+                    </form> */}
                   </tr>
                 );
               })}
         </tbody>
-        <tr className="teacher-pack__action">
+        {/* <tr className="teacher-pack__action">
           <button>{translate("Download All", targetLanguage)}</button>
-        </tr>
+        </tr> */}
       </table>
 
       <h2>Extra Resources</h2>
       <div className="resources__extra">
-        {resources &&
+        {resources.length &&
           resources
             .filter((resource) => resource.extra)
             .map((resource, i) => {

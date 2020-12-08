@@ -25,15 +25,18 @@ const ResoucePreview: FunctionComponent<ResourcePreviewProps> = ({
 }) => {
   return (
     <div className="resource-preview-grand-wrapper">
-      <div
-        className="resource-preview__header"
-        onClick={() => handleOpen(index)}
-      >
+      <div className="resource-preview__header">
         <h2>{resource.title}</h2>
         {!open ? (
-          <IoIosArrowDropdownCircle className="header__dropdown-icon" />
+          <IoIosArrowDropdownCircle
+            className="header__dropdown-icon"
+            onClick={() => handleOpen(index)}
+          />
         ) : (
-          <IoIosArrowDropupCircle className="header__dropdown-icon" />
+          <IoIosArrowDropupCircle
+            className="header__dropdown-icon"
+            onClick={() => handleOpen(null)}
+          />
         )}
       </div>
       {open && (
@@ -43,9 +46,9 @@ const ResoucePreview: FunctionComponent<ResourcePreviewProps> = ({
             <div className="content__picture"></div>
           </div>
           <div className="content__buttons">
-            <button>
-              <p>{translate("Download", targetLanguage)}</p>
-            </button>
+            <a href={`/api/resource/${resource.id}`}>
+              <button>{translate("Download", targetLanguage)}</button>
+            </a>
           </div>
         </div>
       )}
