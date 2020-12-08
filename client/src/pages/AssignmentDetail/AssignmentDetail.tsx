@@ -101,6 +101,14 @@ const AssignmentDetail: FunctionComponent<AssignmentDetailProps> = (props) => {
   function handleUpload(e: any) {
     e.preventDefault();
     if (fileInput) {
+      if (!fileInput.name.match(/\.(doc|docx|ppt|pptx|pdf)$/)) {
+        return dispatch({
+          type: SET_ERROR,
+          payload:
+            "Incorrect file type. Please upload a doc, docx, ppt, pptx or pdf file.",
+        });
+      }
+
       const submitData = new FormData();
       submitData.append("fileData", fileInput);
       submitAssignment(match.params.id, submitData);
@@ -132,20 +140,25 @@ const AssignmentDetail: FunctionComponent<AssignmentDetailProps> = (props) => {
       {!submitted && (
         <div className="assignment-detail-grand-wrapper__submission-wrapper upload-wrapper">
           <h2>{translate("Nothing uploaded", targetLanguage)}!</h2>
-          <label htmlFor="file-upload">
-            Select file
-            <input
-              id="file-upload"
-              type="file"
-              onChange={(e) =>
-                setFileInput(e.target.files && e.target.files[0])
-              }
-              hidden
-            />
-          </label>
-          <button onClick={handleUpload}>
-            {translate("upload", targetLanguage)}
-          </button>
+          {assignment.student.id === user.id && (
+            <>
+              <label htmlFor="file-upload">
+                Select file
+                <input
+                  id="file-upload"
+                  type="file"
+                  onChange={(e) =>
+                    setFileInput(e.target.files && e.target.files[0])
+                  }
+                  hidden
+                />
+              </label>
+              <button onClick={handleUpload}>
+                {translate("upload", targetLanguage)}
+              </button>
+            </>
+          )}
+          {error && <div className="error">{error}</div>}
         </div>
       )}
 
