@@ -7,6 +7,7 @@ exports.GetMessagesByRoom = async (req, res) => {
     const messages = await models.Message.findAll({
       where: { RoomId: id },
     });
+    console.log(messages, "ALL MESSAGES");
     const results = [];
     for (let i = 0; i < messages.length; i++) {
       const message = messages[i];

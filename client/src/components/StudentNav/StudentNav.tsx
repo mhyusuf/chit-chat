@@ -3,10 +3,12 @@ import { NavLink } from "react-router-dom";
 
 import "../Nav/Nav.scss";
 
-const StudentNav: FunctionComponent = () => {
-  //TODO: SELECT COURSE
+interface StudentNavProps {
+  roomId: number;
+}
 
-  const student = { id: 2 };
+const StudentNav: FunctionComponent<StudentNavProps> = (props) => {
+  const { roomId } = props;
 
   return (
     <div className="nav-grand-wrapper">
@@ -21,7 +23,7 @@ const StudentNav: FunctionComponent = () => {
             My Assignments
           </p>
         </NavLink>
-        <NavLink to={`/rooms/${student.id}`}>
+        <NavLink to={`/rooms/${roomId}`}>
           <p className="nav-grand-wrapper__link-wrapper__link-text">
             Team Chat
           </p>
