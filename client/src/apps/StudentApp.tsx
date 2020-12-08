@@ -32,7 +32,7 @@ const StudentApp: FunctionComponent<StudentAppProps> = (props) => {
     <>
       <Header />
       <div className="app-wrapper">
-        <StudentNav />
+        <StudentNav roomId={user.RoomId} />
         <div className="app-wrapper__router-wrapper">
           <Switch>
             <Route path="/home" component={RecentActivity} />

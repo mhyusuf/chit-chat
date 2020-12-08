@@ -14,7 +14,7 @@ const reducer = (state = initialState, action: ChitChatAction<any>) => {
     case GET_COURSES_BY_TEACHER:
       return { ...state, courseList: action.payload };
     case SET_ACTIVE_COURSE:
-      return { ...state, activeCourse: action.payload };
+      return { ...state, activeCourse: +action.payload };
     default:
       return state;
   }
