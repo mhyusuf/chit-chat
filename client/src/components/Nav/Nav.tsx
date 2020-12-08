@@ -24,7 +24,7 @@ const Nav: FunctionComponent<NavProps> = ({
   const { targetLanguage } = activeCourseDetail;
 
   useEffect(() => {
-    setActiveCourseDetail(activeCourse);
+    activeCourse !== 0 && setActiveCourseDetail(activeCourse);
   }, [activeCourse]);
 
   return (
