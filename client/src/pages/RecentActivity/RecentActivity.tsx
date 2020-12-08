@@ -26,15 +26,19 @@ const RecentActivity: FunctionComponent<RecentActivityProps> = ({
     if (activeCourse) getAssignmentPreviewsByCourse(`${activeCourse}`);
   }, [activeCourse]);
 
+  const assignmentsToShow =
+    assignments &&
+    assignments.length &&
+    assignments
+      .filter((assignment) => assignment.fileData)
+      .sort((a, b) => Date.parse(b.updatedAt) - Date.parse(a.updatedAt));
   return (
     <div className="recent-activity-grand-wrapper">
       <h1>{translate("Recent Activity", targetLanguage)}</h1>
       <div className="recent-activity-events-wrapper">
-        {assignments &&
-          assignments
-            .filter((assignment) => assignment.fileData)
-            .sort((a, b) => Date.parse(b.updatedAt) - Date.parse(a.updatedAt))
-            .map((assignment: AssignmentPreview, idx: number) => {
+        {assignmentsToShow && assignmentsToShow.length ? (
+          assignmentsToShow.map(
+            (assignment: AssignmentPreview, idx: number) => {
               return (
                 <Assignment
                   student={assignment.student}
@@ -45,7 +49,13 @@ const RecentActivity: FunctionComponent<RecentActivityProps> = ({
                   assignmentId={assignment.id}
                 />
               );
-            })}
+            }
+          )
+        ) : (
+          <div className="nothing-new">
+            {translate("Nothing to show", targetLanguage)}
+          </div>
+        )}
       </div>
     </div>
   );
