@@ -85,6 +85,7 @@ const StudentDetail: FunctionComponent<StudentDetailProps> = ({
         )}
         {student && editName && (
           <input
+            className="student-detail-grand-wrapper__student-details__edit-input"
             type="text"
             value={studentName}
             name="editStudentName"
@@ -100,7 +101,14 @@ const StudentDetail: FunctionComponent<StudentDetailProps> = ({
             className="student-detail-grand-wrapper__student-details__edit-icon"
           />
         )}
-        {isTeacher && editName && <button onClick={handleClick}>save</button>}
+        {isTeacher && editName && (
+          <button
+            className="student-detail-grand-wrapper__student-details__save-btn"
+            onClick={handleClick}
+          >
+            save
+          </button>
+        )}
       </div>
       <div className="student-detail-grand-wrapper__tasks">
         <h2 className="student-detail-grand-wrapper__tasks__subtitle">
