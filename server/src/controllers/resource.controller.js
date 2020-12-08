@@ -9,6 +9,7 @@ exports.GetResources = async (req, res) => {
         targetLanguage,
         level,
       },
+      attributes: ["id", "title", "description", "extra", "fileName"],
     });
     if (resources) {
       res.status(200).send(resources);
