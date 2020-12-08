@@ -14,7 +14,12 @@ const {
 
 router.post("/", uploadFile.single("fileData"), CreateAssignment);
 router.delete("/:id", DeleteAssignment);
-router.put("/:id", authMiddleware, EditAssignment);
+router.put(
+  "/:id",
+  authMiddleware,
+  uploadFile.single("fileData"),
+  EditAssignment
+);
 router.get("/:id", GetAssignmentById);
 router.get("/:id/download", GetFile);
 router.get("/course/:id", GetAssignmentPreviewsByCourse);
