@@ -84,15 +84,15 @@
         }
       }
       .error {
-        margin: 0 auto;
-        margin-bottom: $S;
+        position: fixed;
+        top: 45rem;
+        left: 25%;
+        width: 12%;
         background-color: rgba($red, 0.2);
         border: lighten($red, 10%);
         border-radius: 5px;
-        margin-top: 1rem;
-        padding: 1rem 0;
+        padding: 1rem;
         text-align: center;
-        width: 40%;
       }
       form {
         height: 15rem;
