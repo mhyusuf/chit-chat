@@ -140,20 +140,24 @@ const AssignmentDetail: FunctionComponent<AssignmentDetailProps> = (props) => {
       {!submitted && (
         <div className="assignment-detail-grand-wrapper__submission-wrapper upload-wrapper">
           <h2>{translate("Nothing uploaded", targetLanguage)}!</h2>
-          <label htmlFor="file-upload">
-            Select file
-            <input
-              id="file-upload"
-              type="file"
-              onChange={(e) =>
-                setFileInput(e.target.files && e.target.files[0])
-              }
-              hidden
-            />
-          </label>
-          <button onClick={handleUpload}>
-            {translate("upload", targetLanguage)}
-          </button>
+          {assignment.student.id === user.id && (
+            <>
+              <label htmlFor="file-upload">
+                Select file
+                <input
+                  id="file-upload"
+                  type="file"
+                  onChange={(e) =>
+                    setFileInput(e.target.files && e.target.files[0])
+                  }
+                  hidden
+                />
+              </label>
+              <button onClick={handleUpload}>
+                {translate("upload", targetLanguage)}
+              </button>
+            </>
+          )}
           {error && <div className="error">{error}</div>}
         </div>
       )}
