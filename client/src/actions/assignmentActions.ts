@@ -44,3 +44,10 @@ export const deleteComment = (id: string) => async (dispatch: any) => {
   await axios.delete(`/api/comment/${id}`);
   dispatch({ type: DELETE_COMMENT, payload: id });
 };
+
+export const submitAssignment = (id: string, file: File) => async (
+  dispatch: any
+) => {
+  await axios.put(`/api/assignment/${id}?type=upload`, file);
+  dispatch(getAssignmentDetailById(id));
+};

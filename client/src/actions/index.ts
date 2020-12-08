@@ -11,6 +11,7 @@ import {
   likeAssignment,
   commentAssignment,
   deleteComment,
+  submitAssignment,
 } from "./assignmentActions";
 import { getCoursesByTeacher, setActiveCourse } from "./courseActions";
 import {
@@ -32,6 +33,7 @@ export {
   likeAssignment,
   commentAssignment,
   deleteComment,
+  submitAssignment,
   getCoursesByTeacher,
   setActiveCourse,
   getStudentsByCourse,

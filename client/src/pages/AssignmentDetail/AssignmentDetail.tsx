@@ -15,6 +15,7 @@ import {
   getAssignmentDetailById,
   likeAssignment,
   commentAssignment,
+  submitAssignment,
 } from "../../actions";
 import { connect, useDispatch } from "react-redux";
 import { RouteComponentProps } from "react-router-dom";
@@ -30,6 +31,7 @@ interface AssignmentDetailProps extends RouteComponentProps<MatchInterface> {
   getAssignmentDetailById: Function;
   likeAssignment: Function;
   commentAssignment: Function;
+  submitAssignment: Function;
   user: User;
   error: string;
 }
@@ -43,8 +45,10 @@ const AssignmentDetail: FunctionComponent<AssignmentDetailProps> = (props) => {
     user,
     commentAssignment,
     error,
+    submitAssignment,
   } = props;
   const [commentInput, setCommentInput] = useState("");
+  const [fileInput, setFileInput] = useState<any>();
   const scrollRef = useCallback((node) => {
     if (node) {
       node.scrollIntoView({ smooth: true });
@@ -87,6 +91,15 @@ const AssignmentDetail: FunctionComponent<AssignmentDetailProps> = (props) => {
     }
   }
 
+  function handleUpload(e: any) {
+    e.preventDefault();
+    if (fileInput) {
+      const submitData = new FormData();
+      submitData.append("fileData", fileInput);
+      submitAssignment(match.params.id, submitData);
+    }
+  }
+
   let fileType = "";
   const submitted = assignment.submitData ? true : false;
 
@@ -112,7 +125,11 @@ const AssignmentDetail: FunctionComponent<AssignmentDetailProps> = (props) => {
       {!submitted && (
         <div className="assignment-detail-grand-wrapper__submission-wrapper">
           <h2>Nothing uploaded yet!</h2>
-          <button>upload</button>
+          <input
+            type="file"
+            onChange={(e) => setFileInput(e.target.files && e.target.files[0])}
+          />
+          <button onClick={handleUpload}>upload</button>
         </div>
       )}
 
@@ -164,4 +181,5 @@ export default connect(mapStateToProps, {
   getAssignmentDetailById,
   likeAssignment,
   commentAssignment,
+  submitAssignment,
 })(AssignmentDetail);
