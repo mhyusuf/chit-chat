@@ -19,14 +19,34 @@
   &__submission-wrapper {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+    height: 25vh;
 
     > button {
       @include primary-button;
-      width: 15rem;
-      font-size: $L;
+      width: 10rem;
+      font-size: $M;
       margin: 2rem 0;
+    }
+
+    &.upload-wrapper {
+      h2 {
+      }
+      label {
+        margin-top: 1rem;
+        padding: 1rem;
+        width: 15rem;
+        border-radius: 2rem;
+        text-align: center;
+        border: $border;
+        background-color: $secondary-color;
+        color: black;
+        transition: 0.1s;
+        &:hover {
+          border: solid white;
+        }
+      }
     }
   }
 

@@ -60,36 +60,60 @@ const ResourceEdit: FunctionComponent<any> = ({ history }) => {
     <div>
       <h3>Edit resource</h3>
       <form onSubmit={handleSubmit} className="edit-resource-form">
-        <label>Resource ID</label>
-        <input type="number" onChange={handleInputChange} name="id" />
-        <label>Title</label>
-        <input type="text" onChange={handleInputChange} name="title" />
-        <label>description</label>
-        <textarea name="description" onChange={handleInputChange} />
-        <label>Level</label>
-        <input type="number" name="level" onChange={handleInputChange} />
-        <label>Language Code</label>
-        <input type="text" name="targetLanguage" onChange={handleInputChange} />
-        <label>Extra: </label>
-        <br />
-        <label>True</label>
-        <input
-          type="radio"
-          name="extra"
-          value="true"
-          onChange={handleInputChange}
-        />
-        <label>False</label>
-        <input
-          type="radio"
-          name="extra"
-          value="false"
-          onChange={handleInputChange}
-        />
-        <br />
-        <label>File</label>
-        <input type="file" name="fileData" onChange={handleFileInputChange} />
-
+        <label>
+          Resource ID
+          <input
+            type="number"
+            onChange={handleInputChange}
+            name="id"
+            required
+          />
+        </label>
+        <label>
+          Title
+          <input type="text" onChange={handleInputChange} name="title" />
+        </label>
+        <label>
+          description
+          <textarea name="description" onChange={handleInputChange} />
+        </label>
+        <label>
+          Level
+          <input type="number" name="level" onChange={handleInputChange} />
+        </label>
+        <label>
+          Language Code
+          <input
+            type="text"
+            name="targetLanguage"
+            onChange={handleInputChange}
+          />
+        </label>
+        <label>
+          Extra:
+          <label>
+            True
+            <input
+              type="radio"
+              name="extra"
+              value="true"
+              onChange={handleInputChange}
+            />
+          </label>
+          <label>
+            False
+            <input
+              type="radio"
+              name="extra"
+              value="false"
+              onChange={handleInputChange}
+            />
+          </label>
+        </label>
+        <label>
+          File
+          <input type="file" name="fileData" onChange={handleFileInputChange} />
+        </label>
         <button type="submit">Submit</button>
       </form>
     </div>
