@@ -135,3 +135,9 @@ export interface TaskDetailState {
   task: Task;
   students: Student[];
 }
+
+export interface Resource {
+  id: number;
+  title: string;
+  description: string;
+}

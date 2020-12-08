@@ -19,6 +19,7 @@ import {
   getBothSetsStudentsByCourse,
 } from "./studentActions";
 import { getTaskDetail } from "./tasksActions";
+import { getAllResources } from "./resourceActions";
 
 export {
   getCurrentUser,
@@ -38,4 +39,5 @@ export {
   getBothSetsStudentsByCourse,
   getStudent,
   getTaskDetail,
+  getAllResources,
 };
