@@ -9,6 +9,7 @@ import Comment from "../../components/Comment";
 import { IoIosSend } from "react-icons/io";
 import {
   AssignmentDetail as IAssignmentDetail,
+  CourseState,
   User,
 } from "../../interfaces/reducerInterfaces";
 import {
@@ -20,6 +21,7 @@ import { connect, useDispatch } from "react-redux";
 import { RouteComponentProps } from "react-router-dom";
 import { FaRegHeart } from "react-icons/fa";
 import { SET_ERROR } from "../../actions/types";
+import translate from "../../utils/translate";
 
 interface MatchInterface {
   id: string;
@@ -32,6 +34,7 @@ interface AssignmentDetailProps extends RouteComponentProps<MatchInterface> {
   commentAssignment: Function;
   user: User;
   error: string;
+  targetLanguage: string;
 }
 
 const AssignmentDetail: FunctionComponent<AssignmentDetailProps> = (props) => {
@@ -43,6 +46,7 @@ const AssignmentDetail: FunctionComponent<AssignmentDetailProps> = (props) => {
     user,
     commentAssignment,
     error,
+    targetLanguage,
   } = props;
   const [commentInput, setCommentInput] = useState("");
   const scrollRef = useCallback((node) => {
@@ -60,16 +64,19 @@ const AssignmentDetail: FunctionComponent<AssignmentDetailProps> = (props) => {
   }, []);
 
   const comments =
-    assignment.comments &&
-    assignment.comments.map((comment, idx) => (
-      <div
-        className="comment-grand-wrapper"
-        ref={idx === assignment.comments.length - 1 ? scrollRef : null}
-        key={idx}
-      >
-        <Comment comment={comment} />
-      </div>
-    ));
+    assignment.comments && assignment.comments.length ? (
+      assignment.comments.map((comment, idx) => (
+        <div
+          className="comment-grand-wrapper"
+          ref={idx === assignment.comments.length - 1 ? scrollRef : null}
+          key={idx}
+        >
+          <Comment comment={comment} />
+        </div>
+      ))
+    ) : (
+      <p className="no-comments">{translate("No comments", targetLanguage)}</p>
+    );
 
   function likeHandler(e: any) {
     e.preventDefault();
@@ -111,8 +118,8 @@ const AssignmentDetail: FunctionComponent<AssignmentDetailProps> = (props) => {
 
       {!submitted && (
         <div className="assignment-detail-grand-wrapper__submission-wrapper">
-          <h2>Nothing uploaded yet!</h2>
-          <button>upload</button>
+          <h2>{translate("Nothing uploaded", targetLanguage)}!</h2>
+          <button>{translate("upload", targetLanguage)}</button>
         </div>
       )}
 
@@ -121,7 +128,9 @@ const AssignmentDetail: FunctionComponent<AssignmentDetailProps> = (props) => {
           <div className="assignment-detail-grand-wrapper__content-wrapper__preview">
             <div className={`preview-icon ${fileType ? fileType : null}`} />
             <div className="assignment-detail-grand-wrapper__content-wrapper__preview__button-wrapper">
-              <button onClick={(e) => e.preventDefault()}>download</button>
+              <button onClick={(e) => e.preventDefault()}>
+                {translate("download", targetLanguage)}
+              </button>
               <button className="heart" onClick={likeHandler}>
                 <FaRegHeart />
               </button>
@@ -152,12 +161,19 @@ function mapStateToProps({
   assignmentDetail,
   user,
   error,
+  course,
 }: {
   assignmentDetail: IAssignmentDetail;
   user: User;
   error: string;
+  course: CourseState;
 }) {
-  return { assignment: assignmentDetail, user, error };
+  return {
+    assignment: assignmentDetail,
+    user,
+    error,
+    targetLanguage: course.activeCourseDetail.targetLanguage,
+  };
 }
 
 export default connect(mapStateToProps, {
