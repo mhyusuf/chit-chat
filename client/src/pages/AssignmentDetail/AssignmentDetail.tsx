@@ -101,6 +101,14 @@ const AssignmentDetail: FunctionComponent<AssignmentDetailProps> = (props) => {
   function handleUpload(e: any) {
     e.preventDefault();
     if (fileInput) {
+      if (!fileInput.name.match(/\.(doc|docx|ppt|pptx|pdf)$/)) {
+        return dispatch({
+          type: SET_ERROR,
+          payload:
+            "Incorrect file type. Please upload a doc, docx, ppt, pptx or pdf file.",
+        });
+      }
+
       const submitData = new FormData();
       submitData.append("fileData", fileInput);
       submitAssignment(match.params.id, submitData);
@@ -139,6 +147,7 @@ const AssignmentDetail: FunctionComponent<AssignmentDetailProps> = (props) => {
           <button onClick={handleUpload}>
             {translate("upload", targetLanguage)}
           </button>
+          {error && <div className="error">{error}</div>}
         </div>
       )}
 
