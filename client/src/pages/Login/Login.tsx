@@ -1,14 +1,34 @@
 import React, { FormEvent, FunctionComponent, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, RouteChildrenProps } from "react-router-dom";
 import { connect } from "react-redux";
 import { loginTeacher, loginStudent } from "../../actions";
 import Logo from "../../assets/color-logo.png";
+import { History } from "history";
 import "./Login.scss";
 
-const Login: FunctionComponent<any> = ({
+interface UserCredentials {
+  email: string;
+  password: string;
+}
+
+interface LoginProps {
+  loginTeacher: (
+    { email, password }: UserCredentials,
+    history: History
+  ) => Promise<void>;
+  loginStudent: (
+    { email, password }: UserCredentials,
+    history: History
+  ) => Promise<void>;
+  error: string;
+  history: History<any>;
+}
+
+const Login: FunctionComponent<LoginProps> = ({
   loginTeacher,
   loginStudent,
   history,
+  error,
 }) => {
   const [teacherStatus, setTeacherStatus] = useState(false);
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -75,6 +95,7 @@ const Login: FunctionComponent<any> = ({
               {promptText}
               {teacherButton}
             </div>
+            {error && <div className="error">{error}</div>}
             <form onSubmit={loginHandler}>
               <label className="align-email" htmlFor="email">
                 Email:{" "}
@@ -85,6 +106,7 @@ const Login: FunctionComponent<any> = ({
                 className="align-email"
                 name="email"
                 type="text"
+                required
               />
               <label className="align-pw" htmlFor="password">
                 Password:{" "}
@@ -95,6 +117,7 @@ const Login: FunctionComponent<any> = ({
                 className="align-pw"
                 name="password"
                 type="password"
+                required
               />
               <button>Login</button>
             </form>
@@ -111,4 +134,8 @@ const Login: FunctionComponent<any> = ({
   );
 };
 
-export default connect(null, { loginStudent, loginTeacher })(Login);
+const mapStateToProps = ({ error }: { error: string }) => {
+  return { error };
+};
+
+export default connect(mapStateToProps, { loginStudent, loginTeacher })(Login);

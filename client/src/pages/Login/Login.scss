@@ -49,7 +49,7 @@
       }
 
       &__top-row {
-        height: 10rem;
+        height: 8rem;
         display: flex;
         justify-content: space-between;
         align-items: flex-start;
@@ -82,6 +82,17 @@
         h2 {
           margin: 1rem;
         }
+      }
+      .error {
+        margin: 0 auto;
+        margin-bottom: $S;
+        background-color: rgba($red, 0.2);
+        border: lighten($red, 10%);
+        border-radius: 5px;
+        margin-top: 1rem;
+        padding: 1rem 0;
+        text-align: center;
+        width: 40%;
       }
       form {
         height: 15rem;
