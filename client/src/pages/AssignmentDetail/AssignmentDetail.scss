@@ -110,6 +110,15 @@
           @include primary-button;
           margin: 1rem;
 
+          a,
+          a:visited {
+            color: white;
+            text-decoration: none;
+          }
+          a:hover {
+            color: black;
+          }
+
           &.heart {
             background-color: $primary-color;
             font-size: 2rem;
