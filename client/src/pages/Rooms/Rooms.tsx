@@ -61,8 +61,6 @@ const Rooms: FunctionComponent<RoomsProps> = ({
     getRoomsByCourse(`${activeCourse}`);
   }, []);
 
-  console.log(roomList);
-
   return (
     <div className="rooms-grand-wrapper">
       <h1>Chats</h1>

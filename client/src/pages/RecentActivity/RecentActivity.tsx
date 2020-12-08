@@ -32,6 +32,7 @@ const RecentActivity: FunctionComponent<RecentActivityProps> = ({
       <div className="recent-activity-events-wrapper">
         {assignments &&
           assignments
+            .filter((assignment) => assignment.fileData)
             .sort((a, b) => Date.parse(b.updatedAt) - Date.parse(a.updatedAt))
             .map((assignment: AssignmentPreview, idx: number) => {
               return (
@@ -41,7 +42,7 @@ const RecentActivity: FunctionComponent<RecentActivityProps> = ({
                   title={assignment.taskName}
                   likes={assignment.likes}
                   comments={assignment.comments}
-                  assignmentId={assignment.AssignmentId}
+                  assignmentId={assignment.id}
                 />
               );
             })}

@@ -11,7 +11,6 @@ export const GET_STUDENT = "GET_STUDENT";
 
 export const getStudent = (id: number) => async (dispatch: any) => {
   const { data } = await axios.get(`/api/student/${id}`);
-  console.log("DATA", data);
   dispatch(getRoomUsers(data.RoomId));
   dispatch({ type: GET_STUDENT, payload: data });
 };
@@ -30,8 +29,6 @@ export const getBothSetsStudentsByCourse = (id: number) => async (
   dispatch: any
 ) => {
   const { data } = await axios.get(`/api/student/sisterCourse/${id}`);
-  console.log(data, "IN STUDENT ACTIONS");
-
   dispatch({ type: GET_STUDENTS_WITH_SISTER_COURSE, payload: data });
 };
 
@@ -43,7 +40,6 @@ export const registerStudent = (
   roomRegistrationId: string,
   courseRegistrationId: string
 ) => async (dispatch: any) => {
-  console.log("ACTIONS");
   const { data } = await axios.post(`/admin/student/`, {
     email,
     name,

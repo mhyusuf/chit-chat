@@ -19,7 +19,7 @@ export interface StudentUser extends User {
 }
 
 export interface AssignmentPreview {
-  AssignmentId: number;
+  id: number;
   student: {
     name: string;
     avatar: string;
