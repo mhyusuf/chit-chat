@@ -119,9 +119,12 @@ exports.EditAssignment = async (req, res) => {
       await assignment.save();
       return res.status(200).send(assignment.likes);
     } else if (type === "upload") {
-      const { submitData } = req.body;
       const submitted = await Assignment.update(
-        { submitData: submitData },
+        {
+          fileData: req.file ? req.file.buffer : null,
+          fileName: req.file ? req.file.originalname : null,
+          mimeType: req.file ? req.file.mimetype : null,
+        },
         { where: { id }, returning: true }
       );
       return res.status(200).send(submitted[1][0]);
