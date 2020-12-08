@@ -35,14 +35,7 @@ const io = require("socket.io")(server, {
     origin: "*",
   },
 });
-console.log("HELLO");
-io.on("connect", (socket) => {
-  console.log("user connected to io");
-  socket.on("message", (data) => {
-    console.log("emitting", data);
-    io.emit("message", data);
-  });
-});
+require("./socket")(io);
 
 (async () => {
   await db.sequelize.sync();

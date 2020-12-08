@@ -23,6 +23,7 @@ import { RouteComponentProps } from "react-router-dom";
 import { FaRegHeart } from "react-icons/fa";
 import { SET_ERROR } from "../../actions/types";
 import translate from "../../utils/translate";
+import axios from "axios";
 
 interface MatchInterface {
   id: string;
@@ -167,8 +168,10 @@ const AssignmentDetail: FunctionComponent<AssignmentDetailProps> = (props) => {
           <div className="assignment-detail-grand-wrapper__content-wrapper__preview">
             <div className={`preview-icon ${fileType ? fileType : null}`} />
             <div className="assignment-detail-grand-wrapper__content-wrapper__preview__button-wrapper">
-              <button onClick={(e) => e.preventDefault()}>
-                {translate("download", targetLanguage)}
+              <button>
+                <a href={`/api/assignment/${match.params.id}/download`}>
+                  {translate("download", targetLanguage)}
+                </a>
               </button>
               <button className="heart" onClick={likeHandler}>
                 <FaRegHeart />
