@@ -11,6 +11,7 @@ import resourceReducer from "./resourceReducer";
 import tasksReducer from "./tasksReducer";
 import taskDetailReducer from "./taskDetailReducer";
 import studentReducer from "./studentReducer";
+import errorReducer from "./errorReducer";
 
 export default combineReducers({
   user: userReducer,
@@ -25,4 +26,5 @@ export default combineReducers({
   roomDetail: roomDetailReducer,
   roomList: roomListReducer,
   resources: resourceReducer,
+  error: errorReducer,
 });
