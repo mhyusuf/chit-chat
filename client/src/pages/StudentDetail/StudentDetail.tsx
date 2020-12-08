@@ -11,53 +11,10 @@ import {
   User,
   RoomDetailState,
   StudentState,
+  CourseState,
 } from "../../interfaces/reducerInterfaces";
 import UserAvatar from "../../components/UserAvatar";
-
-const tasks = [
-  {
-    id: 1,
-    title: "Some title",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur rhoncus massa ac orci placerat viverra. Mauris pellentesque placerat viverra. Duis eleifend eu purus quis maximus.",
-    submitted: true,
-  },
-  {
-    id: 2,
-    title: "Some title",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur rhoncus massa ac orci placerat viverra. Mauris pellentesque placerat viverra. Duis eleifend eu purus quis maximus.",
-    submitted: true,
-  },
-  {
-    id: 3,
-    title: "Some title",
-    submitted: false,
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur rhoncus massa ac orci placerat viverra. Mauris pellentesque placerat viverra. Duis eleifend eu purus quis maximus.",
-  },
-  {
-    id: 4,
-    title: "Some title",
-    submitted: false,
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur rhoncus massa ac orci placerat viverra. Mauris pellentesque placerat viverra. Duis eleifend eu purus quis maximus.",
-  },
-  {
-    id: 5,
-    title: "Some title",
-    submitted: false,
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur rhoncus massa ac orci placerat viverra. Mauris pellentesque placerat viverra. Duis eleifend eu purus quis maximus.",
-  },
-  {
-    id: 6,
-    title: "Some title",
-    submitted: false,
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur rhoncus massa ac orci placerat viverra. Mauris pellentesque placerat viverra. Duis eleifend eu purus quis maximus.",
-  },
-];
+import translate from "../../utils/translate.js";
 
 interface matchInterface {
   id: string;
@@ -67,17 +24,19 @@ interface StudentDetailProps extends RouteComponentProps<matchInterface> {
   getStudent: Function;
   student: User;
   room: RoomDetailState;
-  roomId: string;
+  RoomId: number;
   assignments: AssignmentPreview[];
+  targetLanguage: string;
 }
 
 const StudentDetail: FunctionComponent<StudentDetailProps> = ({
   getStudent,
   student,
   assignments,
-  roomId,
+  RoomId,
   room,
   match,
+  targetLanguage,
 }) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [isTeacher, setIsTeacher] = useState<boolean>(true);
@@ -111,7 +70,7 @@ const StudentDetail: FunctionComponent<StudentDetailProps> = ({
       </div>
       <div className="student-detail-grand-wrapper__tasks">
         <h2 className="student-detail-grand-wrapper__tasks__subtitle">
-          Assignments
+          {translate("Assignments", targetLanguage)}:
         </h2>
         {assignments.map((assignment, index) => {
           return (
@@ -130,30 +89,18 @@ const StudentDetail: FunctionComponent<StudentDetailProps> = ({
             />
           );
         })}
-        {/* {tasks.map((assignment, index) => {
-          return (
-            <StudentAssignmentPreview
-              key={assignment.id}
-              open={index === openIndex}
-              handleOpen={handleOpen}
-              index={index}
-              task={assignment}
-              submitted={assignment.submitted}
-            />
-          );
-        })} */}
       </div>
       {isTeacher && (
         <div className="student-detail-grand-wrapper__room">
           <h2 className="student-detail-grand-wrapper__room__subtitle">
-            Chat Group
+            {translate("Team", targetLanguage)}:
           </h2>
           <div className="student-detail-grand-wrapper__room__room-preview-wrapper">
             <RoomPreview
               teamName={room.roomName}
               teamMembers={roomMembers}
-              roomId={roomId}
-              key={roomId}
+              roomId={RoomId}
+              key={RoomId}
             />
           </div>
         </div>
@@ -165,15 +112,18 @@ const StudentDetail: FunctionComponent<StudentDetailProps> = ({
 const mapStateToProps = ({
   student,
   roomDetail,
+  course,
 }: {
   student: StudentState;
   roomDetail: RoomDetailState;
+  course: CourseState;
 }) => {
   return {
     student: student.student,
-    roomId: student.roomId,
+    RoomId: student.RoomId,
     assignments: student.assignments,
     room: roomDetail,
+    targetLanguage: course.activeCourseDetail.targetLanguage,
   };
 };
 

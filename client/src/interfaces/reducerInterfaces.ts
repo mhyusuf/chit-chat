@@ -78,7 +78,7 @@ export interface RoomDetailState {
 
 export interface StudentState {
   student: User;
-  roomId: string;
+  RoomId: number;
   assignments: AssignmentPreview[];
   room: RoomPreview;
 }

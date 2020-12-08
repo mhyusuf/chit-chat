@@ -3,12 +3,13 @@ import { connect } from "react-redux";
 import RoomPreview from "../../components/RoomPreview";
 import { getRoomsByCourse } from "../../actions/roomActions";
 import "./Rooms.scss";
+import { CourseState } from "../../interfaces/reducerInterfaces";
 
 interface IRoomPreview {
   name: string;
   studentNames: string[];
   unseenMessages: boolean;
-  RoomId: string;
+  RoomId: number;
 }
 interface RoomListState {
   roomsByCourse: IRoomPreview[];
@@ -45,19 +46,19 @@ const mockData = [
   },
 ];
 
-const courseId = "1";
-
 interface RoomsProps {
   getRoomsByCourse: (id: string) => void;
   roomList: RoomListState;
+  activeCourse: number;
 }
 
 const Rooms: FunctionComponent<RoomsProps> = ({
   getRoomsByCourse,
   roomList,
+  activeCourse,
 }) => {
   useEffect(() => {
-    getRoomsByCourse(courseId);
+    getRoomsByCourse(`${activeCourse}`);
   }, []);
 
   console.log(roomList);
@@ -82,8 +83,14 @@ const Rooms: FunctionComponent<RoomsProps> = ({
   );
 };
 
-function mapStateToProps({ roomList }: { roomList: RoomListState }) {
-  return { roomList };
+function mapStateToProps({
+  roomList,
+  course,
+}: {
+  roomList: RoomListState;
+  course: CourseState;
+}) {
+  return { roomList, activeCourse: course.activeCourse };
 }
 
 export default connect(mapStateToProps, { getRoomsByCourse })(Rooms);
