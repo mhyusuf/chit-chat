@@ -12,8 +12,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  user-select: none;
 
   img {
+    user-select: none;
     height: 3.6rem;
     width: 3.6rem;
   }

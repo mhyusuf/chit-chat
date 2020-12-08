@@ -1,17 +1,31 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useEffect } from "react";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { User } from "../../interfaces/reducerInterfaces";
+import { User, CourseState, Course } from "../../interfaces/reducerInterfaces";
 import ActiveCourse from "../ActiveCourse";
-
+import { setActiveCourseDetail } from "../../actions/courseActions";
+import translate from "../../utils/translate";
 import "./Nav.scss";
 
 interface NavProps {
   isTeacher: boolean;
+  activeCourseDetail: Course;
+  activeCourse: number;
+  setActiveCourseDetail: Function;
 }
 
-const Nav: FunctionComponent<NavProps> = ({ isTeacher }) => {
+const Nav: FunctionComponent<NavProps> = ({
+  isTeacher,
+  activeCourseDetail,
+  activeCourse,
+  setActiveCourseDetail,
+}) => {
   const courseSelect = isTeacher ? <ActiveCourse /> : null;
+  const { targetLanguage } = activeCourseDetail;
+
+  useEffect(() => {
+    setActiveCourseDetail(activeCourse);
+  }, [activeCourse]);
 
   return (
     <div className="nav-grand-wrapper">
@@ -19,23 +33,27 @@ const Nav: FunctionComponent<NavProps> = ({ isTeacher }) => {
       <div className="nav-grand-wrapper__link-wrapper">
         <NavLink to="/home">
           <p className="nav-grand-wrapper__link-wrapper__link-text">
-            Recent Activity
+            {translate("Recent Activity", targetLanguage)}
           </p>
         </NavLink>
         <NavLink to="/rooms">
           <p className="nav-grand-wrapper__link-wrapper__link-text">
-            Chat Rooms
+            {translate("Chat Rooms", targetLanguage)}
           </p>
         </NavLink>
         <NavLink to="/students">
-          <p className="nav-grand-wrapper__link-wrapper__link-text">Students</p>
+          <p className="nav-grand-wrapper__link-wrapper__link-text">
+            {translate("Students", targetLanguage)}
+          </p>
         </NavLink>
         <NavLink to="/tasks">
-          <p className="nav-grand-wrapper__link-wrapper__link-text">Tasks</p>
+          <p className="nav-grand-wrapper__link-wrapper__link-text">
+            {translate("Tasks", targetLanguage)}
+          </p>
         </NavLink>
         <NavLink to="/resources">
           <p className="nav-grand-wrapper__link-wrapper__link-text">
-            Resources
+            {translate("Resources", targetLanguage)}
           </p>
         </NavLink>
       </div>
@@ -43,8 +61,18 @@ const Nav: FunctionComponent<NavProps> = ({ isTeacher }) => {
   );
 };
 
-const mapStateToProps = ({ user }: { user: User }) => {
-  return { isTeacher: user.isTeacher };
+const mapStateToProps = ({
+  user,
+  course,
+}: {
+  user: User;
+  course: CourseState;
+}) => {
+  return {
+    isTeacher: user.isTeacher,
+    activeCourseDetail: course.activeCourseDetail,
+    activeCourse: course.activeCourse,
+  };
 };
 
-export default connect(mapStateToProps, {})(Nav);
+export default connect(mapStateToProps, { setActiveCourseDetail })(Nav);

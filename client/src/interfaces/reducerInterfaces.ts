@@ -99,6 +99,7 @@ export interface Course {
 
 export interface CourseState {
   courseList: Course[];
+  activeCourseDetail: Course;
   activeCourse: number;
 }
 
