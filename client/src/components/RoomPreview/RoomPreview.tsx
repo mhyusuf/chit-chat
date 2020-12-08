@@ -6,7 +6,7 @@ import "./RoomPreview.scss";
 type RoomPreviewProps = {
   teamName: string;
   teamMembers: string[];
-  roomId: string;
+  roomId: number;
 };
 
 const unseenMessages = true;
@@ -24,7 +24,6 @@ const RoomPreview: FunctionComponent<RoomPreviewProps> = ({
         }`}
       >
         <div className="room-preview-grand-wrapper__text">
-          <h3>Chat Group:</h3>
           <h2 className="name">{teamName} Team</h2>
         </div>
         <div className="room-preview-grand-wrapper__student-names-wrapper">
