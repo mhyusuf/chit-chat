@@ -63,7 +63,7 @@ const Students: FunctionComponent<StudentsProps> = ({
               return <StudentPreview student={student} key={student.id} />;
             })
           ) : (
-            <p>There are no students in this course</p>
+            <div />
           )}
         </div>
       </div>

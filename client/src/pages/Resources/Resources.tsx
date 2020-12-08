@@ -1,7 +1,9 @@
 import React, { FunctionComponent, useState } from "react";
-
+import { connect } from "react-redux";
 import ResourcePreview from "../../components/ResourcePreview";
 import "./Resources.scss";
+import translate from "../../utils/translate";
+import { CourseState } from "../../interfaces/reducerInterfaces";
 
 const resources = [
   {
@@ -24,7 +26,12 @@ const resources = [
   },
 ];
 
-const Resources: FunctionComponent<any> = () => {
+interface ResourcesProps {
+  targetLanguage: string;
+}
+
+const Resources: FunctionComponent<ResourcesProps> = (props) => {
+  const { targetLanguage } = props;
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
@@ -36,15 +43,15 @@ const Resources: FunctionComponent<any> = () => {
         <tbody className="teacher-pack__body">
           <tr className="teacher-pack__row">
             Assessment Pack pdf
-            <button>Download</button>
+            <button>{translate("Download", targetLanguage)}</button>
           </tr>
           <tr className="teacher-pack__row">
             Course Guide pdf
-            <button>Download</button>
+            <button>{translate("Download", targetLanguage)}</button>
           </tr>
         </tbody>
         <tr className="teacher-pack__action">
-          <button>Download All</button>
+          <button>{translate("Download All", targetLanguage)}</button>
         </tr>
       </table>
 
@@ -66,4 +73,8 @@ const Resources: FunctionComponent<any> = () => {
   );
 };
 
-export default Resources;
+function mapStateToProps({ course }: { course: CourseState }) {
+  return { targetLanguage: course.activeCourseDetail.targetLanguage };
+}
+
+export default connect(mapStateToProps, {})(Resources);

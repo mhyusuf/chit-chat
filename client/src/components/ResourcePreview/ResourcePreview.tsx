@@ -3,28 +3,37 @@ import {
   IoIosArrowDropdownCircle,
   IoIosArrowDropupCircle,
 } from "react-icons/io";
+import { connect } from "react-redux";
+import { CourseState } from "../../interfaces/reducerInterfaces";
 import "./ResourcePreview.scss";
+import translate from "../../utils/translate.js";
 
-const ResoucePreview: FunctionComponent<any> = ({
+interface ResourcePreviewProps {
+  targetLanguage: string;
+  resource: any;
+  open: boolean;
+  index: number;
+  handleOpen: Function;
+}
+
+const ResoucePreview: FunctionComponent<ResourcePreviewProps> = ({
   resource,
   index,
   open,
   handleOpen,
+  targetLanguage,
 }) => {
   return (
     <div className="resource-preview-grand-wrapper">
-      <div className="resource-preview__header">
+      <div
+        className="resource-preview__header"
+        onClick={() => handleOpen(index)}
+      >
         <h2>{resource.title}</h2>
         {!open ? (
-          <IoIosArrowDropdownCircle
-            className="header__dropdown-icon"
-            onClick={() => handleOpen(index)}
-          />
+          <IoIosArrowDropdownCircle className="header__dropdown-icon" />
         ) : (
-          <IoIosArrowDropupCircle
-            className="header__dropdown-icon"
-            onClick={() => handleOpen(null)}
-          />
+          <IoIosArrowDropupCircle className="header__dropdown-icon" />
         )}
       </div>
       {open && (
@@ -35,7 +44,7 @@ const ResoucePreview: FunctionComponent<any> = ({
           </div>
           <div className="content__buttons">
             <button>
-              <p>Download</p>
+              <p>{translate("Download", targetLanguage)}</p>
             </button>
           </div>
         </div>
@@ -44,4 +53,8 @@ const ResoucePreview: FunctionComponent<any> = ({
   );
 };
 
-export default ResoucePreview;
+function mapStateToProps({ course }: { course: CourseState }) {
+  return { targetLanguage: course.activeCourseDetail.targetLanguage };
+}
+
+export default connect(mapStateToProps, {})(ResoucePreview);

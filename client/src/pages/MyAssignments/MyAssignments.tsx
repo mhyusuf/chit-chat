@@ -10,6 +10,8 @@ import { getStudent } from "../../actions";
 import StudentAssignmentPreview from "../../components/StudentAssignmentPreview";
 import translate from "../../utils/translate";
 
+import "./MyAssignments.scss";
+
 interface MyAssignmentsProps {
   user: User;
   student: StudentState;
@@ -31,25 +33,32 @@ const MyAssignments: FunctionComponent<MyAssignmentsProps> = ({
 
   const handleOpen = (i: number | null) => setOpenIndex(i);
 
-  const studentAssignments = student.assignments
-    .sort((a, b) => Date.parse(b.updatedAt) - Date.parse(a.updatedAt))
-    .map((assignment, index) => {
-      return (
-        <StudentAssignmentPreview
-          key={assignment.id}
-          id={assignment.id}
-          open={index === openIndex}
-          handleOpen={handleOpen}
-          index={index}
-          task={{
-            id: assignment.Task.id,
-            title: assignment.Task.title,
-            description: assignment.Task.description,
-          }}
-          submitted={assignment.fileData ? true : false}
-        />
-      );
-    });
+  const studentAssignments =
+    student.assignments && student.assignments.length ? (
+      student.assignments
+        .sort((a, b) => Date.parse(b.updatedAt) - Date.parse(a.updatedAt))
+        .map((assignment, index) => {
+          return (
+            <StudentAssignmentPreview
+              key={assignment.id}
+              id={assignment.id}
+              open={index === openIndex}
+              handleOpen={handleOpen}
+              index={index}
+              task={{
+                id: assignment.Task.id,
+                title: assignment.Task.title,
+                description: assignment.Task.description,
+              }}
+              submitted={assignment.fileData ? true : false}
+            />
+          );
+        })
+    ) : (
+      <p className="no-assignments">
+        {translate("Nothing to show", targetLanguage)}
+      </p>
+    );
 
   return (
     <div className="my-assignments-grand-wrapper">

@@ -1,10 +1,16 @@
-import React, { FormEvent, FunctionComponent, useState } from "react";
-import { NavLink, RouteChildrenProps } from "react-router-dom";
-import { connect } from "react-redux";
+import React, {
+  FormEvent,
+  FunctionComponent,
+  useState,
+  useEffect,
+} from "react";
+import { NavLink } from "react-router-dom";
+import { connect, useDispatch } from "react-redux";
 import { loginTeacher, loginStudent } from "../../actions";
 import Logo from "../../assets/color-logo.png";
 import { History } from "history";
 import "./Login.scss";
+import { SET_ERROR } from "../../actions/types";
 
 interface UserCredentials {
   email: string;
@@ -32,6 +38,13 @@ const Login: FunctionComponent<LoginProps> = ({
 }) => {
   const [teacherStatus, setTeacherStatus] = useState(false);
   const [formData, setFormData] = useState({ email: "", password: "" });
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    return () => {
+      dispatch({ type: SET_ERROR, payload: "" });
+    };
+  }, []);
 
   function toggleTeacher(e: any) {
     e.preventDefault();

@@ -2,4 +2,9 @@
 
 .my-assignments-grand-wrapper {
   @include route-scroll;
+  &__previews-wrapper {
+    .no-assignments {
+      text-align: center;
+    }
+  }
 }
