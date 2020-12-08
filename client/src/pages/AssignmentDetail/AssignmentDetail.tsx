@@ -54,6 +54,9 @@ const AssignmentDetail: FunctionComponent<AssignmentDetailProps> = (props) => {
 
   useEffect(() => {
     getAssignmentDetailById(match.params.id);
+    return () => {
+      dispatch({ type: SET_ERROR, payload: "" });
+    };
   }, []);
 
   const comments =
