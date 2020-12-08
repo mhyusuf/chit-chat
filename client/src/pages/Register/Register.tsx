@@ -14,7 +14,7 @@ const Register = ({ registerStudent }: { registerStudent: Function }) => {
     confirmPassword: "",
     courseId: "",
     roomId: "",
-    avatar: "cat",
+    avatar: "monkey",
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLFormElement>): void => {
@@ -45,12 +45,14 @@ const Register = ({ registerStudent }: { registerStudent: Function }) => {
         <form action="" onChange={handleChange}>
           <div className="register-grand-wrapper__form__div">
             <input
+              required
               type="text"
               name="name"
               placeholder="name"
               value={input.name}
             />
             <input
+              required
               type="email"
               name="email"
               value={input.email}
@@ -59,12 +61,14 @@ const Register = ({ registerStudent }: { registerStudent: Function }) => {
           </div>
           <div className="register-grand-wrapper__form__div">
             <input
+              required
               type="password"
               name="password"
               value={input.password}
               placeholder="password"
             />
             <input
+              required
               type="password"
               name="confirmPassword"
               value={input.confirmPassword}
@@ -103,6 +107,7 @@ const Register = ({ registerStudent }: { registerStudent: Function }) => {
           </div>
           <div className="register-grand-wrapper__form__div">
             <input
+              required
               type="text"
               name="courseId"
               value={input.courseId}
@@ -110,6 +115,7 @@ const Register = ({ registerStudent }: { registerStudent: Function }) => {
               placeholder="course id"
             />
             <input
+              required
               type="text"
               name="roomId"
               value={input.roomId}
@@ -117,7 +123,22 @@ const Register = ({ registerStudent }: { registerStudent: Function }) => {
               placeholder="room id"
             />
           </div>
-          <button onClick={handleClick}>Submit</button>
+          {input.password !== "" &&
+            input.password !== input.confirmPassword && (
+              <p style={{ color: "red" }}>Passwords don't match</p>
+            )}
+          {(input.password === "" ||
+            input.password === input.confirmPassword) && (
+            <div style={{ height: "19.33px" }}></div>
+          )}
+          <button
+            disabled={
+              input.password === "" || input.password !== input.confirmPassword
+            }
+            onClick={handleClick}
+          >
+            Submit
+          </button>
         </form>
       </div>
       <NavLink to="/">
