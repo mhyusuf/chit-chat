@@ -13,6 +13,16 @@ exports.GetCourseBySister = async (req, res) => {
   }
 };
 
+exports.GetCourseById = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const result = await models.Course.findByPk(id);
+    res.status(200).send(result);
+  } catch (e) {
+    res.status(500).send(e.message);
+  }
+};
+
 exports.GetCoursesByTeacher = async (req, res) => {
   try {
     const id = req.params.id;
