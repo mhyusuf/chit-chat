@@ -88,6 +88,11 @@ const Register = ({ registerStudent }: { registerStudent: Function }) => {
                 <option value="monkey">Monkey</option>
                 <option value="panda">Panda</option>
                 <option value="mouse">Mouse</option>
+                <option value="deer">Deer</option>
+                <option value="koala">Koala</option>
+                <option value="octopus">Octopus</option>
+                <option value="owl">Owl</option>
+                <option value="rabbit">Rabbit</option>
               </select>
             </div>
             <div
