@@ -24,10 +24,13 @@ const Tasks: FunctionComponent<TasksProps> = ({
   const targetLanguage = activeCourseDetail.targetLanguage;
 
   useEffect(() => {
-    if (course.courseList.length) {
-      const { level, targetLanguage } = courseList.find((el: any) => {
+    const targetCourse =
+      courseList &&
+      courseList.find((el: any) => {
         return String(el.id) === String(course.activeCourse);
       });
+    if (targetCourse) {
+      const { level, targetLanguage } = targetCourse;
       getAllTasks(level, targetLanguage);
     }
   }, [activeCourse]);
