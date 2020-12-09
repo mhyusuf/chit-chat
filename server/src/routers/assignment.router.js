@@ -10,6 +10,7 @@ const {
   GetAssignmentPreviewsByCourse,
   GetAssignmentByTask,
   GetFile,
+  GetAssignmentPreviewsByRoom,
 } = require("../controllers/assignment.controller");
 
 router.post("/", uploadFile.single("fileData"), CreateAssignment);
@@ -23,6 +24,7 @@ router.put(
 router.get("/:id", GetAssignmentById);
 router.get("/:id/download", GetFile);
 router.get("/course/:id", GetAssignmentPreviewsByCourse);
+router.get("/room/:id", GetAssignmentPreviewsByRoom);
 router.get("/task/:id", GetAssignmentByTask);
 
 module.exports = router;

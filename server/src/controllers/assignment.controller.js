@@ -59,6 +59,41 @@ exports.GetFile = async (req, res) => {
   }
 };
 
+exports.GetAssignmentPreviewsByRoom = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const students = await Student.findAll({
+      where: { RoomId: id },
+      include: {
+        model: Assignment,
+        include: [{ model: Task }, { model: Comment }],
+      },
+    });
+    const allAssignments = [];
+    students.forEach((student) => {
+      const { Assignments } = student.dataValues;
+      Assignments.forEach((assignment) => {
+        if (!assignment.dataValues.dismissed) {
+          allAssignments.push({
+            id: assignment.dataValues.id,
+            student: { name: student.name, avatar: student.avatar },
+            taskName: assignment.dataValues.Task.dataValues.title,
+            description: assignment.dataValues.Task.dataValues.description,
+            likes: assignment.dataValues.likes.length,
+            comments: assignment.dataValues.Comments.length,
+            fileData: assignment.dataValues.fileData,
+            createdAt: assignment.dataValues.createdAt,
+            updatedAt: assignment.dataValues.updatedAt,
+          });
+        }
+      });
+    });
+    res.status(200).send(allAssignments);
+  } catch (e) {
+    res.status(500).send(e.message);
+  }
+};
+
 exports.GetAssignmentPreviewsByCourse = async (req, res) => {
   try {
     const { id } = req.params;
