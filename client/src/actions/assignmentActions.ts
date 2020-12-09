@@ -2,6 +2,7 @@ import axios from "axios";
 import { User } from "../interfaces/reducerInterfaces";
 import {
   GET_ASSIGNMENT_PREVIEWS_BY_COURSE,
+  GET_ASSIGNMENT_PREVIEWS_BY_ROOM,
   GET_ASSIGNMENT,
   LIKE_ASSIGNMENT,
   COMMENT_ASSIGNMENT,
@@ -15,6 +16,12 @@ export const getAssignmentPreviewsByCourse = (id: string) => async (
   dispatch({ type: GET_ASSIGNMENT_PREVIEWS_BY_COURSE, payload: data });
 };
 
+export const getAssignmentPreviewsByRoom = (id: string) => async (
+  dispatch: any
+) => {
+  const { data } = await axios.get(`/api/assignment/room/${id}`);
+  dispatch({ type: GET_ASSIGNMENT_PREVIEWS_BY_ROOM, payload: data });
+};
 export const getAssignmentDetailById = (id: string) => async (
   dispatch: any
 ) => {
