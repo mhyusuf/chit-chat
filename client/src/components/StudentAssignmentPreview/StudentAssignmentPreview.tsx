@@ -46,7 +46,7 @@ const StudentAssignmentPreview: FunctionComponent<StudentAssignmentPreviewProps>
         <div className="student-assignment-preview__content">
           <div className="content__main">
             <p>{task.description}</p>
-            <div className="content__picture"></div>
+            <img src={`/api/task/${task.id}/thumbnail`} alt="task thumbnail" />
           </div>
           <div className="content__buttons">
             <Link to={`/assignments/${id}`}>
