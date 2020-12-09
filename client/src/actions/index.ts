@@ -7,6 +7,7 @@ import {
 import { getAllMessagesByRoom, getRoomUsers } from "./roomActions";
 import {
   getAssignmentPreviewsByCourse,
+  getAssignmentPreviewsByRoom,
   getAssignmentDetailById,
   likeAssignment,
   commentAssignment,
@@ -30,6 +31,7 @@ export {
   getAllMessagesByRoom,
   getRoomUsers,
   getAssignmentPreviewsByCourse,
+  getAssignmentPreviewsByRoom,
   getAssignmentDetailById,
   likeAssignment,
   commentAssignment,
