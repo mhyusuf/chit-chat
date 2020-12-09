@@ -37,17 +37,19 @@ const Tasks: FunctionComponent<TasksProps> = ({
       <h1>{translate("Tasks", targetLanguage)}</h1>
       {tasks && (
         <div className="tasks-grand-wrapper__tasks-wrapper">
-          {tasks.map((task: Task, i: number) => {
-            return (
-              <TaskPreview
-                key={task.id}
-                task={task}
-                open={i === openIndex}
-                index={i}
-                handleOpen={(i: number | null) => setOpenIndex(i)}
-              />
-            );
-          })}
+          {tasks
+            .sort((a, b) => a.id - b.id)
+            .map((task: Task, i: number) => {
+              return (
+                <TaskPreview
+                  key={task.id}
+                  task={task}
+                  open={i === openIndex}
+                  index={i}
+                  handleOpen={(i: number | null) => setOpenIndex(i)}
+                />
+              );
+            })}
         </div>
       )}
       <div className="empty-space" />
