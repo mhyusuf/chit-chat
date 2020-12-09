@@ -4,26 +4,37 @@ import Assignment from "../../components/AssignmentPreview";
 import {
   AssignmentPreview,
   CourseState,
+  StudentUser,
 } from "../../interfaces/reducerInterfaces";
-import { getAssignmentPreviewsByCourse } from "../../actions";
+import {
+  getAssignmentPreviewsByCourse,
+  getAssignmentPreviewsByRoom,
+} from "../../actions";
 import "./RecentActivity.scss";
 import translate from "../../utils/translate";
 
 interface RecentActivityProps {
   assignments: AssignmentPreview[];
   getAssignmentPreviewsByCourse: (id: string) => void;
+  getAssignmentPreviewsByRoom: Function;
   activeCourse: number;
   targetLanguage: string;
+  user: StudentUser;
 }
 
 const RecentActivity: FunctionComponent<RecentActivityProps> = ({
   getAssignmentPreviewsByCourse,
+  getAssignmentPreviewsByRoom,
   assignments,
   activeCourse,
   targetLanguage,
+  user,
 }) => {
   useEffect(() => {
-    if (activeCourse) getAssignmentPreviewsByCourse(`${activeCourse}`);
+    if (activeCourse && user.isTeacher)
+      getAssignmentPreviewsByCourse(`${activeCourse}`);
+    else if (activeCourse && !user.isTeacher)
+      getAssignmentPreviewsByRoom(`${user.RoomId}`);
   }, [activeCourse]);
 
   const assignmentsToShow =
@@ -32,6 +43,7 @@ const RecentActivity: FunctionComponent<RecentActivityProps> = ({
     assignments
       .filter((assignment) => assignment.fileData)
       .sort((a, b) => Date.parse(b.updatedAt) - Date.parse(a.updatedAt));
+
   return (
     <div className="recent-activity-grand-wrapper">
       <h1>{translate("Recent Activity", targetLanguage)}</h1>
@@ -64,17 +76,21 @@ const RecentActivity: FunctionComponent<RecentActivityProps> = ({
 const mapStateToProps = ({
   assignments,
   course,
+  user,
 }: {
   assignments: AssignmentPreview[];
   course: CourseState;
+  user: StudentUser;
 }) => {
   return {
     assignments,
     activeCourse: course.activeCourse,
     targetLanguage: course.activeCourseDetail.targetLanguage,
+    user,
   };
 };
 
-export default connect(mapStateToProps, { getAssignmentPreviewsByCourse })(
-  RecentActivity
-);
+export default connect(mapStateToProps, {
+  getAssignmentPreviewsByCourse,
+  getAssignmentPreviewsByRoom,
+})(RecentActivity);
