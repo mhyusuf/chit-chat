@@ -33,7 +33,7 @@ const Students: FunctionComponent<StudentsProps> = ({
   const [studentsToMap, setStudentsToMap] = useState<Student[]>([]);
 
   useEffect(() => {
-    getBothSetsStudentsByCourse(activeCourse);
+    if (activeCourse) getBothSetsStudentsByCourse(activeCourse);
 
     const studentSelf = user.isTeacher
       ? null
@@ -46,7 +46,7 @@ const Students: FunctionComponent<StudentsProps> = ({
         ? students.filter((student) => student.CourseId === activeCourse)
         : students.filter((student) => student.RoomId === +targetRoom)
     );
-  }, [activeCourse]);
+  }, [activeCourse, students]);
 
   const header = user.isTeacher
     ? `${translate("Students", activeCourseDetail.targetLanguage)}: ${
