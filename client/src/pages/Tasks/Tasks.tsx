@@ -50,6 +50,7 @@ const Tasks: FunctionComponent<TasksProps> = ({
           })}
         </div>
       )}
+      <div className="empty-space" />
     </div>
   );
 };
