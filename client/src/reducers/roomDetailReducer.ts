@@ -2,7 +2,11 @@ import {
   RoomDetailState,
   ChitChatAction,
 } from "../interfaces/reducerInterfaces";
-import { GET_ALL_MESSAGES, GET_ROOM_USERS } from "../actions/types";
+import {
+  GET_ALL_MESSAGES,
+  GET_ROOM_USERS,
+  CLEAR_ROOM_DETAIL,
+} from "../actions/types";
 const initialState: RoomDetailState = {
   teachers: [],
   students: [],
@@ -21,6 +25,8 @@ const reducer = (state = initialState, action: ChitChatAction<any>) => {
         teachers: action.payload.teachers,
         roomName: action.payload.roomName,
       };
+    case CLEAR_ROOM_DETAIL:
+      return initialState;
     default:
       return state;
   }

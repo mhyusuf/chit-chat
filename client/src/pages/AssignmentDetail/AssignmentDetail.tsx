@@ -92,9 +92,9 @@ const AssignmentDetail: FunctionComponent<AssignmentDetailProps> = (props) => {
         className="clear-button"
         onClick={(e) => clearUploadHandler(e, match.params.id)}
       >
-        Clear uploaded file
+        {translate("Clear uploaded file", targetLanguage)}
       </button>
-      <p>(this action is permanent)</p>
+      <p>({translate("this action is permanent", targetLanguage)})</p>
     </div>
   );
   const clearButtonVisible: boolean =
