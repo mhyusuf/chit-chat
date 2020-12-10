@@ -17,13 +17,13 @@ import {
   likeAssignment,
   commentAssignment,
   submitAssignment,
+  clearAssignmentUpload,
 } from "../../actions";
 import { connect, useDispatch } from "react-redux";
 import { RouteComponentProps } from "react-router-dom";
 import { FaRegHeart } from "react-icons/fa";
 import { SET_ERROR } from "../../actions/types";
 import translate from "../../utils/translate";
-import axios from "axios";
 
 interface MatchInterface {
   id: string;
@@ -35,6 +35,7 @@ interface AssignmentDetailProps extends RouteComponentProps<MatchInterface> {
   likeAssignment: Function;
   commentAssignment: Function;
   submitAssignment: Function;
+  clearAssignmentUpload: Function;
   user: User;
   error: string;
   targetLanguage: string;
@@ -51,6 +52,7 @@ const AssignmentDetail: FunctionComponent<AssignmentDetailProps> = (props) => {
     error,
     submitAssignment,
     targetLanguage,
+    clearAssignmentUpload,
   } = props;
   const [commentInput, setCommentInput] = useState("");
   const [fileInput, setFileInput] = useState<any>();
@@ -83,9 +85,28 @@ const AssignmentDetail: FunctionComponent<AssignmentDetailProps> = (props) => {
       <p className="no-comments">{translate("No comments", targetLanguage)}</p>
     );
 
+  const clearButton = (
+    <div className="clear-button-wrapper">
+      <button
+        className="clear-button"
+        onClick={(e) => clearUploadHandler(e, match.params.id)}
+      >
+        Clear uploaded file
+      </button>
+      <p>(this action is permanent)</p>
+    </div>
+  );
+  const clearButtonVisible: boolean =
+    user.isTeacher || user.id === assignment.student.id;
+
   function likeHandler(e: any) {
     e.preventDefault();
     likeAssignment(match.params.id);
+  }
+
+  function clearUploadHandler(e: any, id: string) {
+    e.preventDefault();
+    clearAssignmentUpload(id);
   }
 
   function submitHandler(e: any) {
@@ -109,7 +130,6 @@ const AssignmentDetail: FunctionComponent<AssignmentDetailProps> = (props) => {
             "Incorrect file type. Please upload a doc, docx, ppt, pptx or pdf file.",
         });
       }
-
       const submitData = new FormData();
       submitData.append("fileData", fileInput);
       submitAssignment(match.params.id, submitData);
@@ -168,14 +188,17 @@ const AssignmentDetail: FunctionComponent<AssignmentDetailProps> = (props) => {
           <div className="assignment-detail-grand-wrapper__content-wrapper__preview">
             <div className={`preview-icon ${fileType ? fileType : null}`} />
             <div className="assignment-detail-grand-wrapper__content-wrapper__preview__button-wrapper">
-              <button>
-                <a href={`/api/assignment/${match.params.id}/download`}>
-                  {translate("download", targetLanguage)}
-                </a>
-              </button>
-              <button className="heart" onClick={likeHandler}>
-                <FaRegHeart />
-              </button>
+              <div className="top-buttons-wrapper">
+                <button>
+                  <a href={`/api/assignment/${match.params.id}/download`}>
+                    {translate("download", targetLanguage)}
+                  </a>
+                </button>
+                <button className="heart" onClick={likeHandler}>
+                  <FaRegHeart />
+                </button>
+              </div>
+              {clearButtonVisible ? clearButton : <div />}
             </div>
           </div>
           <div className="assignment-detail-grand-wrapper__comment-wrapper">
@@ -223,4 +246,5 @@ export default connect(mapStateToProps, {
   likeAssignment,
   commentAssignment,
   submitAssignment,
+  clearAssignmentUpload,
 })(AssignmentDetail);

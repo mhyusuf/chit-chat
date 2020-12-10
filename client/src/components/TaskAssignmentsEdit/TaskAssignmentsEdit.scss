@@ -28,13 +28,12 @@
   > :nth-child(2n) {
     background-color: adjust-color($secondary-color, $lightness: 15%);
   }
-}
+  button {
+    margin-left: 35%;
+    margin-top: 2rem;
+    height: 3rem;
+    width: 30%;
 
-button {
-  margin-left: 35%;
-  margin-top: 2rem;
-  height: 3rem;
-  width: 30%;
-
-  @include primary-button;
+    @include primary-button;
+  }
 }
