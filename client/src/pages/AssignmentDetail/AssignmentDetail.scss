@@ -139,6 +139,14 @@
           &:hover {
             background-color: $light-orange;
           }
+          &.clicked-heart {
+            background-color: rgb(209, 206, 206);
+            font-size: 2rem;
+            color: grey;
+            > * {
+              margin-top: 5px;
+            }
+          }
         }
       }
       .clear-button-wrapper {
