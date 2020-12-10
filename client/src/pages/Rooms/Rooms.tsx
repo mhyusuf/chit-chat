@@ -15,37 +15,6 @@ interface RoomListState {
   roomsByCourse: IRoomPreview[];
 }
 
-const mockData = [
-  {
-    name: "Blue",
-    studentNames: [
-      "Timmy",
-      "James",
-      "Olivia",
-      "Carmen",
-      "Pili",
-      "Juan",
-      "Joe",
-      "Matt",
-      "Matt Again",
-    ],
-    unseenMessages: false,
-    RoomId: "somerandomstring",
-  },
-  {
-    name: "Green",
-    studentNames: ["Timmy", "James", "Olivia", "Carmen", "Pili", "Juan"],
-    unseenMessages: true,
-    RoomId: "somerandomstring",
-  },
-  {
-    name: "Yellow",
-    studentNames: ["Timmy", "James", "Olivia", "Carmen", "Pili", "Juan"],
-    unseenMessages: false,
-    RoomId: "somerandomstring",
-  },
-];
-
 interface RoomsProps {
   getRoomsByCourse: (id: string) => void;
   roomList: RoomListState;
@@ -59,13 +28,13 @@ const Rooms: FunctionComponent<RoomsProps> = ({
 }) => {
   useEffect(() => {
     getRoomsByCourse(`${activeCourse}`);
-  }, []);
+  }, [roomList, activeCourse]);
 
   return (
     <div className="rooms-grand-wrapper">
       <h1>Chats</h1>
       <div className="rooms-grand-wrapper__room-previews-wrapper">
-        {roomList.roomsByCourse.length &&
+        {roomList.roomsByCourse &&
           roomList.roomsByCourse.map((room, idx) => {
             return (
               <RoomPreview
