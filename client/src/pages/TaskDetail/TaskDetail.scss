@@ -22,53 +22,21 @@
     &__table-block {
       flex-shrink: 0;
       width: 55%;
+
       &__headers {
         width: 100%;
         height: 3rem;
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-      }
-      &__student-table {
-        height: 50vh;
-        overflow-y: scroll;
-        overflow-x: hidden;
-        box-shadow: $shadow-settings;
-        border: $border;
-        border-radius: 0.5rem;
-        > table {
-          width: 100%;
-          tr,
-          th {
-            width: 100%;
-            height: 4rem;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-          }
-          th {
-            display: sticky;
-          }
+        position: sticky;
+        display: flex;
+        justify-content: space-around;
 
-          > :nth-child(2n) {
-            background-color: adjust-color($secondary-color, $lightness: 15%);
-          }
-          td {
-            padding: 1rem 0;
-            text-align: center;
-
-            &:first-of-type {
-              text-align: left;
-              padding-left: 1rem;
-            }
-          }
+        > p {
+          text-align: center;
+          width: 33%;
         }
       }
-      button {
-        margin-left: 35%;
-        margin-top: 2rem;
-        height: 3rem;
-        width: 30%;
-
-        @include primary-button;
+      &__table-wrapper {
+        height: 50vh;
       }
     }
     &__doc-preview-block {
