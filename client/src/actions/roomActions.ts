@@ -3,7 +3,7 @@ import { GET_ALL_MESSAGES, GET_ROOM_USERS } from "./types";
 
 export const GET_ROOMS_BY_COURSE = "GET_ROOMS_BY_COURSE";
 
-export const getAllMessagesByRoom = (id: string) => async (dispatch: any) => {
+export const getAllMessagesByRoom = (id: any) => async (dispatch: any) => {
   const { data } = await axios.get(`/api/message/${id}`);
   dispatch({ type: GET_ALL_MESSAGES, payload: data });
 };
