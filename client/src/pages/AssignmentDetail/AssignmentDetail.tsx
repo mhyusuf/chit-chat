@@ -201,9 +201,11 @@ const AssignmentDetail: FunctionComponent<AssignmentDetailProps> = (props) => {
               {clearButtonVisible ? clearButton : <div />}
             </div>
           </div>
-          <div className="assignment-detail-grand-wrapper__comment-wrapper">
-            <div className="assignment-detail-grand-wrapper__comment-wrapper__comments">
-              {comments}
+          <div className="assignment-detail-grand-wrapper__comment-block">
+            <div className="assignment-detail-grand-wrapper__comment-block__comment-wrapper">
+              <div className="assignment-detail-grand-wrapper__comment-block__comment-wrapper__comments">
+                {comments}
+              </div>
             </div>
             <form>
               <input
