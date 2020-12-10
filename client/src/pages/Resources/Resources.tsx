@@ -5,7 +5,6 @@ import "./Resources.scss";
 import translate from "../../utils/translate";
 import { CourseState, Resource } from "../../interfaces/reducerInterfaces";
 import { getAllResources } from "../../actions";
-import axios from "axios";
 
 interface ResourcesProps {
   targetLanguage: string;
@@ -19,45 +18,35 @@ const Resources: FunctionComponent<ResourcesProps> = (props) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   useEffect(() => {
-    getAllResources(targetLanguage, level);
+    if(level) getAllResources(targetLanguage, level);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [targetLanguage, level]);
-
-  // const handleClick = (id:number) => {
-  //   axios.get(`/api/resource/${id}/download`)
-  // }
 
   return (
     <div className="resources-grand-wrapper">
-      <table className="resources__teacher-pack">
-        <thead>
-          <th className="teacher-pack__heading">Teacher's Pack</th>
-        </thead>
-        <tbody className="teacher-pack__body">
-          {resources.length &&
-            resources
+      <div className="resources__teacher-pack">
+        <div>
+          <h2 className="teacher-pack__heading">Teacher's Pack</h2>
+        </div>
+        {!!resources.length && <div className="teacher-pack__body">
+            {resources
               .filter((resource) => !resource.extra)
               .map((resource) => {
                 return (
-                  <tr className="teacher-pack__row">
+                  <div key={resource.id} className="teacher-pack__row">
                     {resource.title}
                     <a href={`/api/resource/${resource.id}`}>
                       <button>{translate("Download", targetLanguage)}</button>
                     </a>
-                    {/* <form action={`/api/resource/${resource.id}`} style={{width: '100px'}}>
-                      <button style={{width: '100px'}}>{translate("Download", targetLanguage)}</button>
-                    </form> */}
-                  </tr>
+                  </div>
                 );
               })}
-        </tbody>
-        {/* <tr className="teacher-pack__action">
-          <button>{translate("Download All", targetLanguage)}</button>
-        </tr> */}
-      </table>
+        </div>}
+      </div>
 
-      <h2>Extra Resources</h2>
+      {!!resources.length && <> <h2>Extra Resources</h2>
       <div className="resources__extra">
-        {resources.length &&
+        {
           resources
             .filter((resource) => resource.extra)
             .map((resource, i) => {
@@ -71,7 +60,7 @@ const Resources: FunctionComponent<ResourcesProps> = (props) => {
                 />
               );
             })}
-      </div>
+      </div></>}
     </div>
   );
 };
