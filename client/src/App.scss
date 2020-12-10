@@ -26,6 +26,7 @@ $secondary-color: $main-orange;
   background-color: $dark-green;
   border-radius: $M;
   transition: all 0.2s;
+  font-family: inherit;
 
   &:hover {
     background-color: $main-green;

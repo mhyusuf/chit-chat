@@ -13,6 +13,7 @@ import {
   commentAssignment,
   deleteComment,
   submitAssignment,
+  clearAssignmentUpload,
 } from "./assignmentActions";
 import { getCoursesByTeacher, setActiveCourse } from "./courseActions";
 import {
@@ -37,6 +38,7 @@ export {
   commentAssignment,
   deleteComment,
   submitAssignment,
+  clearAssignmentUpload,
   getCoursesByTeacher,
   setActiveCourse,
   getStudentsByCourse,

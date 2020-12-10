@@ -7,6 +7,8 @@ import {
   LIKE_ASSIGNMENT,
   COMMENT_ASSIGNMENT,
   DELETE_COMMENT,
+  DISMISS_ASSIGNMENT,
+  CLEAR_ASSIGNMENT_UPLOAD,
 } from "./types";
 
 export const getAssignmentPreviewsByCourse = (id: string) => async (
@@ -32,6 +34,11 @@ export const getAssignmentDetailById = (id: string) => async (
 export const likeAssignment = (id: string) => async (dispatch: any) => {
   const { data } = await axios.put(`/api/assignment/${id}?type=like`);
   dispatch({ type: LIKE_ASSIGNMENT, payload: data });
+};
+
+export const clearAssignmentUpload = (id: string) => async (dispatch: any) => {
+  await axios.put(`/api/assignment/${id}?type=upload`, null);
+  dispatch({ type: CLEAR_ASSIGNMENT_UPLOAD });
 };
 
 export const commentAssignment = (

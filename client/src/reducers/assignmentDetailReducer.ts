@@ -7,6 +7,7 @@ import {
   LIKE_ASSIGNMENT,
   COMMENT_ASSIGNMENT,
   DELETE_COMMENT,
+  CLEAR_ASSIGNMENT_UPLOAD,
 } from "../actions/types";
 
 const initialState: AssignmentDetail = {
@@ -46,6 +47,12 @@ const reducer = (state = initialState, action: ChitChatAction<any>) => {
         comments: state.comments.filter(
           (comment) => comment.id !== action.payload
         ),
+      };
+    case CLEAR_ASSIGNMENT_UPLOAD:
+      return {
+        ...state,
+        submitData: null,
+        fileName: "",
       };
     default:
       return state;
