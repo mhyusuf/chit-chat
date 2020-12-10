@@ -1,5 +1,26 @@
 @import "../../App.scss";
 
+.assignment-preview-wrapper {
+  position: relative;
+  @include popout-left;
+
+  > button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    flex-shrink: 0;
+    width: 1.5rem;
+    height: 1.5rem;
+    border: none;
+    border-radius: 0 0 0 0.5rem;
+    background-color: black;
+    color: white;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
 .assignment-nav-link {
   text-decoration: none;
   color: black;
@@ -16,7 +37,6 @@
   border-radius: $XXS;
   box-shadow: $shadow-settings;
   background-color: rgba($light-green, 0.6);
-  @include popout-left;
 
   &__img-title-name-div {
     display: flex;
