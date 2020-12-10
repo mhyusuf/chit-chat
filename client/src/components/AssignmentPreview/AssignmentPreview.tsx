@@ -27,7 +27,7 @@ const Assignment: FunctionComponent<AssignmentProps> = ({
   isTeacher,
 }) => {
   return (
-    <div>
+    <div className="assignment-preview-wrapper">
       <NavLink
         to={`/assignments/${assignmentId}`}
         className="assignment-nav-link"
