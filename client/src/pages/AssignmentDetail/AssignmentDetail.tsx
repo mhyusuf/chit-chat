@@ -151,7 +151,7 @@ const AssignmentDetail: FunctionComponent<AssignmentDetailProps> = (props) => {
     <div className="assignment-detail-grand-wrapper">
       <div className="assignment-detail-grand-wrapper__text-wrapper">
         <div className="assignment-detail-grand-wrapper__text-wrapper__left-block">
-          <h1>{assignment.task.title}:</h1>
+          {assignment.task.title && <h1>{assignment.task.title}:</h1>}
           <h2 className="--lessPadding">{assignment.student.name}</h2>
         </div>
         <div className="assignment-detail-grand-wrapper__text-wrapper__right-block">
@@ -196,9 +196,15 @@ const AssignmentDetail: FunctionComponent<AssignmentDetailProps> = (props) => {
                     {translate("download", targetLanguage)}
                   </a>
                 </button>
-                <button className="heart" onClick={likeHandler}>
-                  <FaRegHeart />
-                </button>
+                {assignment.likes.includes(user.userId) ? (
+                  <button className="clicked-heart" onClick={likeHandler}>
+                    <FaRegHeart />
+                  </button>
+                ) : (
+                  <button className="heart" onClick={likeHandler}>
+                    <FaRegHeart />
+                  </button>
+                )}
               </div>
               {clearButtonVisible ? clearButton : <div />}
             </div>
