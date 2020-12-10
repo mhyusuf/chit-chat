@@ -36,6 +36,11 @@ export const likeAssignment = (id: string) => async (dispatch: any) => {
   dispatch({ type: LIKE_ASSIGNMENT, payload: data });
 };
 
+export const dismissAssignment = (id: string) => async (dispatch: any) => {
+  const { data } = await axios.put(`/api/assignment/${id}?type=dismiss`);
+  dispatch({ type: DISMISS_ASSIGNMENT, payload: data });
+};
+
 export const clearAssignmentUpload = (id: string) => async (dispatch: any) => {
   await axios.put(`/api/assignment/${id}?type=upload`, null);
   dispatch({ type: CLEAR_ASSIGNMENT_UPLOAD });
