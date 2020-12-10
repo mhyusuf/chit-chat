@@ -31,6 +31,9 @@
     }
 
     &.upload-wrapper {
+      > p {
+        font-style: italic;
+      }
       h2 {
       }
       label {
@@ -45,6 +48,7 @@
         transition: 0.1s;
         &:hover {
           border: solid white;
+          cursor: pointer;
         }
       }
     }
