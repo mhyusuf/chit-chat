@@ -18,7 +18,7 @@ const Resources: FunctionComponent<ResourcesProps> = (props) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   useEffect(() => {
-    if(level) getAllResources(targetLanguage, level);
+    if (level) getAllResources(targetLanguage, level);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [targetLanguage, level]);
 
@@ -28,7 +28,8 @@ const Resources: FunctionComponent<ResourcesProps> = (props) => {
         <div>
           <h2 className="teacher-pack__heading">Teacher's Pack</h2>
         </div>
-        {!!resources.length && <div className="teacher-pack__body">
+        {!!resources.length && (
+          <div className="teacher-pack__body">
             {resources
               .filter((resource) => !resource.extra)
               .map((resource) => {
@@ -41,27 +42,31 @@ const Resources: FunctionComponent<ResourcesProps> = (props) => {
                   </div>
                 );
               })}
-        </div>}
+          </div>
+        )}
       </div>
 
-      {!!resources.length &&
-        <> <h2>Extra Resources</h2>
-      <div className="resources__extra">
-        {
-          resources
-            .filter((resource) => resource.extra)
-            .map((resource, i) => {
-              return (
-                <ResourcePreview
-                  key={resource.id}
-                  resource={resource}
-                  open={i === openIndex}
-                  index={i}
-                  handleOpen={(i: number) => setOpenIndex(i)}
-                />
-              );
-            })}
-      </div></>}
+      {!!resources.length && (
+        <>
+          {" "}
+          <h2>Extra Resources</h2>
+          <div className="resources__extra">
+            {resources
+              .filter((resource) => resource.extra)
+              .map((resource, i) => {
+                return (
+                  <ResourcePreview
+                    key={resource.id}
+                    resource={resource}
+                    open={i === openIndex}
+                    index={i}
+                    handleOpen={(i: number) => setOpenIndex(i)}
+                  />
+                );
+              })}
+          </div>
+        </>
+      )}
     </div>
   );
 };

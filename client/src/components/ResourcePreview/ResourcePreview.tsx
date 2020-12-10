@@ -24,12 +24,12 @@ const ResoucePreview: FunctionComponent<ResourcePreviewProps> = ({
   targetLanguage,
 }) => {
   const fileType = resource.fileName.match(/\.(doc|docx)$/)
-  ? 'wordDoc'
-  : resource.fileName.match(/\.(ppt|pptx)$/)
-  ? 'powerpoint'
-  : resource.fileName.match(/\.(pdf)$/)
-  ? 'pdf'
-  : null;
+    ? "wordDoc"
+    : resource.fileName.match(/\.(ppt|pptx)$/)
+    ? "powerpoint"
+    : resource.fileName.match(/\.(pdf)$/)
+    ? "pdf"
+    : null;
 
   return (
     <div className="resource-preview-grand-wrapper">
@@ -51,7 +51,9 @@ const ResoucePreview: FunctionComponent<ResourcePreviewProps> = ({
         <div className="resource-preview__content">
           <div className="content__main">
             <p>{resource.description}</p>
-            <div className={`content__picture ${fileType ? fileType : null}`}></div>
+            <div
+              className={`content__picture ${fileType ? fileType : null}`}
+            ></div>
           </div>
           <div className="content__buttons">
             <a href={`/api/resource/${resource.id}`}>
