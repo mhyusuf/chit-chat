@@ -56,6 +56,7 @@ const AssignmentDetail: FunctionComponent<AssignmentDetailProps> = (props) => {
   } = props;
   const [commentInput, setCommentInput] = useState("");
   const [fileInput, setFileInput] = useState<any>();
+
   const scrollRef = useCallback((node) => {
     if (node) {
       node.scrollIntoView({ smooth: true });
@@ -174,6 +175,7 @@ const AssignmentDetail: FunctionComponent<AssignmentDetailProps> = (props) => {
                   hidden
                 />
               </label>
+              <p>{fileInput ? fileInput.name : ""}</p>
               <button onClick={handleUpload}>
                 {translate("upload", targetLanguage)}
               </button>
