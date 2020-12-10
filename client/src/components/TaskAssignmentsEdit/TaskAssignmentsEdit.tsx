@@ -49,8 +49,9 @@ const TaskAssignmentsEdit: FunctionComponent<TaskAssignmentsEditProps> = ({
       });
     });
   };
-  const handleSubmit = () => {
-    assignments.forEach(async (assignment, i: number) => {
+  const handleSubmit = async () => {
+    for (let i = 0; i < assignments.length; i++) {
+      const assignment = assignments[i];
       const alreadyAssigned = initalState[i].assigned;
       const currentlyAssigned = assignment.assigned;
       if (currentlyAssigned && !alreadyAssigned) {
@@ -59,7 +60,7 @@ const TaskAssignmentsEdit: FunctionComponent<TaskAssignmentsEditProps> = ({
           TaskId,
         });
       }
-    });
+    }
     history.push(`/tasks/${TaskId}`);
     history.go(0);
   };
