@@ -9,6 +9,7 @@ import {
 import {
   getAssignmentPreviewsByCourse,
   getAssignmentPreviewsByRoom,
+  dismissAssignment,
 } from "../../actions";
 import "./RecentActivity.scss";
 import translate from "../../utils/translate";
@@ -17,6 +18,7 @@ interface RecentActivityProps {
   assignments: AssignmentPreview[];
   getAssignmentPreviewsByCourse: (id: string) => void;
   getAssignmentPreviewsByRoom: Function;
+  dismissAssignment: Function;
   activeCourse: number;
   targetLanguage: string;
   user: StudentUser;
@@ -25,6 +27,7 @@ interface RecentActivityProps {
 const RecentActivity: FunctionComponent<RecentActivityProps> = ({
   getAssignmentPreviewsByCourse,
   getAssignmentPreviewsByRoom,
+  dismissAssignment,
   assignments,
   activeCourse,
   targetLanguage,
@@ -35,7 +38,7 @@ const RecentActivity: FunctionComponent<RecentActivityProps> = ({
       getAssignmentPreviewsByCourse(`${activeCourse}`);
     else if (activeCourse && !user.isTeacher)
       getAssignmentPreviewsByRoom(`${user.RoomId}`);
-  }, [activeCourse]);
+  }, [activeCourse, assignments]);
 
   const assignmentsToShow =
     assignments &&
@@ -43,6 +46,10 @@ const RecentActivity: FunctionComponent<RecentActivityProps> = ({
     assignments
       .filter((assignment) => assignment.fileData)
       .sort((a, b) => Date.parse(b.updatedAt) - Date.parse(a.updatedAt));
+
+  const handleClick = (id: number): void => {
+    dismissAssignment(id);
+  };
 
   return (
     <div className="recent-activity-grand-wrapper">
@@ -59,6 +66,8 @@ const RecentActivity: FunctionComponent<RecentActivityProps> = ({
                   likes={assignment.likes}
                   comments={assignment.comments}
                   assignmentId={assignment.id}
+                  handleClick={handleClick}
+                  isTeacher={user.isTeacher}
                 />
               );
             }
@@ -93,4 +102,5 @@ const mapStateToProps = ({
 export default connect(mapStateToProps, {
   getAssignmentPreviewsByCourse,
   getAssignmentPreviewsByRoom,
+  dismissAssignment,
 })(RecentActivity);
