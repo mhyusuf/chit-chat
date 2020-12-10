@@ -33,23 +33,25 @@ const TaskDetail: FunctionComponent<any> = ({
       </div>
       <div className="task-detail-grand-wrapper__page-content">
         <div className="task-detail-grand-wrapper__page-content__table-block">
-          <th className="task-detail-grand-wrapper__page-content__table-block__headers">
-            <td>Student</td>
-            <td>assigned?</td>
-            <td>completed?</td>
-          </th>
-          {showEdit ? (
-            <TaskAssignmentsEdit
-              students={taskDetail.students}
-              TaskId={taskDetail.task.id}
-              all={all}
-            />
-          ) : (
-            <TaskAssignments
-              students={taskDetail.students}
-              setShowEdit={setShowEdit}
-            />
-          )}
+          <div className="task-detail-grand-wrapper__page-content__table-block__headers">
+            <p>Student</p>
+            <p>assigned?</p>
+            <p>completed?</p>
+          </div>
+          <div className="task-detail-grand-wrapper__page-content__table-block__table-wrapper">
+            {showEdit ? (
+              <TaskAssignmentsEdit
+                students={taskDetail.students}
+                TaskId={taskDetail.task.id}
+                all={all}
+              />
+            ) : (
+              <TaskAssignments
+                students={taskDetail.students}
+                setShowEdit={setShowEdit}
+              />
+            )}
+          </div>
         </div>
         <div className="task-detail-grand-wrapper__page-content__doc-preview-block">
           <div className={"thumbnail-grand-wrapper"}>

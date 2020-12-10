@@ -14,20 +14,18 @@ const TaskAssignments: FunctionComponent<TaskAssignmentsProps> = ({
 }) => {
   return (
     <>
-      <div className="task-detail-grand-wrapper__page-content__table-block__student-table">
-        <table>
-          {students.map((student: any) => (
-            <tr key={student.id}>
-              <td>{student.name}</td>
-              <td>{student.Assignments.length ? "✓" : ""}</td>
-              <td>
-                {student.Assignments.length && student.Assignments[0].fileName
-                  ? "✓"
-                  : ""}
-              </td>
-            </tr>
-          ))}
-        </table>
+      <div className="student-table">
+        {students.map((student: any) => (
+          <div className="row" key={student.id}>
+            <p>{student.name}</p>
+            <p>{student.Assignments.length ? "✓" : ""}</p>
+            <p>
+              {student.Assignments.length && student.Assignments[0].fileName
+                ? "✓"
+                : ""}
+            </p>
+          </div>
+        ))}
       </div>
       <button onClick={() => setShowEdit(true)}>assign</button>
     </>
