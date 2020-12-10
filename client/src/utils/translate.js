@@ -19,6 +19,12 @@ const languageMap = {
     Students: "Estudiantes",
     Tasks: "Tareas",
     Resources: "Recursos",
+    "Clear uploaded file": "Borrar el archivo",
+    "this action is permanent": "esta acción es permanente",
+    "View Assignment": "Ver la tarea",
+    "Assign To": "Dar a",
+    "Assign All": "Dar a todos",
+    "View Task": "Ver la tarea",
   },
   FR: {
     "Recent Activity": "Nouveautés",
@@ -40,6 +46,12 @@ const languageMap = {
     Students: "Étudiants",
     Tasks: "Tâches",
     Resources: "Ressources",
+    "Clear uploaded file": "Effacer le document",
+    "this action is permanent": "cette action est parmanente",
+    "View Assignment": "Voir le devoir",
+    "Assign To": "Donner à",
+    "Assign All": "Donner à tous",
+    "View Task": "Voir la tâche",
   },
   EN: {
     "Recent Activity": "Recent Activity",
@@ -61,6 +73,12 @@ const languageMap = {
     Students: "Students",
     Tasks: "Tasks",
     Resources: "Resources",
+    "Clear uploaded file": "Clear uploaded file",
+    "this action is permanent": "this action is permanent",
+    "View Assignment": "View Assignment",
+    "Assign To": "Assign To",
+    "Assign All": "Assign All",
+    "View Task": "View Task",
   },
 };
 

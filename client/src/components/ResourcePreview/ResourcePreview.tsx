@@ -33,18 +33,15 @@ const ResoucePreview: FunctionComponent<ResourcePreviewProps> = ({
 
   return (
     <div className="resource-preview-grand-wrapper">
-      <div className="resource-preview__header">
+      <div
+        className="resource-preview__header"
+        onClick={() => handleOpen(!open ? index : null)}
+      >
         <h2>{resource.title}</h2>
         {!open ? (
-          <IoIosArrowDropdownCircle
-            className="header__dropdown-icon"
-            onClick={() => handleOpen(index)}
-          />
+          <IoIosArrowDropdownCircle className="header__dropdown-icon" />
         ) : (
-          <IoIosArrowDropupCircle
-            className="header__dropdown-icon"
-            onClick={() => handleOpen(null)}
-          />
+          <IoIosArrowDropupCircle className="header__dropdown-icon" />
         )}
       </div>
       {open && (

@@ -4,7 +4,10 @@ import {
   IoIosArrowDropupCircle,
   IoIosCheckmarkCircle,
 } from "react-icons/io";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { CourseState } from "../../interfaces/reducerInterfaces";
+import translate from "../../utils/translate";
 import "./StudentAssignmentPreview.scss";
 
 type StudentAssignmentPreviewProps = {
@@ -14,6 +17,7 @@ type StudentAssignmentPreviewProps = {
   task: { id: number; title: string; description: string };
   submitted: boolean;
   id: number;
+  targetLanguage: string;
 };
 
 const StudentAssignmentPreview: FunctionComponent<StudentAssignmentPreviewProps> = ({
@@ -23,6 +27,7 @@ const StudentAssignmentPreview: FunctionComponent<StudentAssignmentPreviewProps>
   task,
   submitted,
   id,
+  targetLanguage,
 }) => {
   return (
     <div className="student-assignment-preview-grand-wrapper">
@@ -50,7 +55,7 @@ const StudentAssignmentPreview: FunctionComponent<StudentAssignmentPreviewProps>
           </div>
           <div className="content__buttons">
             <Link to={`/assignments/${id}`}>
-              <button>View Assignment</button>
+              <button>{translate("View Assignment", targetLanguage)}</button>
             </Link>
           </div>
         </div>
@@ -59,4 +64,8 @@ const StudentAssignmentPreview: FunctionComponent<StudentAssignmentPreviewProps>
   );
 };
 
-export default StudentAssignmentPreview;
+function mapStateToProps({ course }: { course: CourseState }) {
+  return { targetLanguage: course.activeCourseDetail.targetLanguage };
+}
+
+export default connect(mapStateToProps, {})(StudentAssignmentPreview);
