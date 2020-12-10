@@ -28,8 +28,8 @@ const RoomPreview: FunctionComponent<RoomPreviewProps> = ({
         </div>
         <div className="room-preview-grand-wrapper__student-names-wrapper">
           {teamMembers &&
-            teamMembers.map((student) => {
-              return <p>{student}</p>;
+            teamMembers.map((student, i) => {
+              return <p key={i}>{student}</p>;
             })}
         </div>
       </div>
