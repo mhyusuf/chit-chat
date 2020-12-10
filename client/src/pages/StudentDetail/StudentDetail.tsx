@@ -144,6 +144,7 @@ const StudentDetail: FunctionComponent<StudentDetailProps> = ({
               teamMembers={roomMembers}
               roomId={RoomId}
               key={RoomId}
+              unseenMessages={false}
             />
           </div>
         </div>

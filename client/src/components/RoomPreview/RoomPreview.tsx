@@ -7,14 +7,14 @@ type RoomPreviewProps = {
   teamName: string;
   teamMembers: string[];
   roomId: number;
+  unseenMessages: boolean;
 };
-
-const unseenMessages = true;
 
 const RoomPreview: FunctionComponent<RoomPreviewProps> = ({
   teamName,
   teamMembers,
   roomId,
+  unseenMessages,
 }) => {
   return (
     <NavLink to={`/rooms/${roomId}`} className="room-preview-nav-link">

@@ -61,6 +61,13 @@ export interface RoomParticipant {
   avatar: string;
 }
 
+export interface RoomPreview {
+  name: string;
+  studentNames: string[];
+  unseenMessages: boolean;
+  RoomId: number;
+}
+
 export interface Message {
   sender: RoomParticipant;
   type: string;

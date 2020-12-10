@@ -1,25 +1,15 @@
-import { ChitChatAction } from "../interfaces/reducerInterfaces";
+import { ChitChatAction, RoomPreview } from "../interfaces/reducerInterfaces";
 import { GET_ROOMS_BY_COURSE } from "../actions/roomActions";
 
-interface RoomPreview {
-  name: string;
-  studentNames: string[];
-  unseenMessages: boolean;
-  RoomId: string;
-}
+const initialState: RoomPreview[] = [];
 
-interface RoomListState {
-  roomsByCourse: RoomPreview[];
-}
-
-const initialState: RoomListState = {
-  roomsByCourse: [],
-};
-
-const reducer = (state = initialState, action: ChitChatAction<any>) => {
+const reducer = (
+  state = initialState,
+  action: ChitChatAction<RoomPreview[]>
+) => {
   switch (action.type) {
     case GET_ROOMS_BY_COURSE:
-      return { ...state, roomsByCourse: action.payload };
+      return action.payload;
     default:
       return state;
   }

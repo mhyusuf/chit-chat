@@ -5,7 +5,10 @@ exports.GetRoomsByCourseId = async (req, res) => {
   try {
     const { id } = req.params;
     const course = await models.Course.findByPk(id, {
-      include: { model: models.Room, include: { model: models.Student } },
+      include: {
+        model: models.Room,
+        include: [{ model: models.Student }, { model: models.Message }],
+      },
     });
     if (course.dataValues.Rooms) {
       const rooms = course.dataValues.Rooms.map((room) => {
@@ -13,10 +16,14 @@ exports.GetRoomsByCourseId = async (req, res) => {
         room.dataValues.Students.forEach((student) => {
           studentNames.push(student.name);
         });
+        const unseenMessages = room.dataValues.Messages.some(
+          (message) => !message.dataValues.seenBy.includes(req.user.userId)
+        );
         return {
           name: room.name,
           studentNames,
           RoomId: room.id,
+          unseenMessages,
         };
       });
       res.status(200).send(rooms);
