@@ -44,7 +44,8 @@ const Resources: FunctionComponent<ResourcesProps> = (props) => {
         </div>}
       </div>
 
-      {!!resources.length && <> <h2>Extra Resources</h2>
+      {!!resources.length &&
+      <> <h2>Extra Resources</h2>
       <div className="resources__extra">
         {
           resources
