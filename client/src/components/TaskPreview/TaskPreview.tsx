@@ -10,9 +10,11 @@ import {
   Task,
   TaskDetailState,
   CourseState,
+  Course,
 } from "../../interfaces/reducerInterfaces";
 import { getTaskDetail } from "../../actions";
 import "./TaskPreview.scss";
+import translate from "../../utils/translate";
 
 interface TaskPreviewProps {
   task: Task;
@@ -23,6 +25,7 @@ interface TaskPreviewProps {
   taskDetail: TaskDetailState;
   getTaskDetail: (TaskId: string, CourseId: string) => void;
   activeCourse: number;
+  activeCourseDetail: Course;
 }
 
 const TaskPreview: FunctionComponent<TaskPreviewProps> = ({
@@ -33,6 +36,7 @@ const TaskPreview: FunctionComponent<TaskPreviewProps> = ({
   isTeacher,
   getTaskDetail,
   activeCourse,
+  activeCourseDetail,
 }) => {
   useEffect(() => {
     getTaskDetail(String(task.id), `${activeCourse}`);
@@ -64,16 +68,22 @@ const TaskPreview: FunctionComponent<TaskPreviewProps> = ({
           </div>
           <div className="content__buttons">
             <Link to={`/tasks/${task.id}`}>
-              <button>View Task</button>
+              <button>
+                {translate("View Task", activeCourseDetail.targetLanguage)}
+              </button>
             </Link>
             {isTeacher && (
               <Link to={`/tasks/${task.id}?edit=true&all=true`}>
-                <button>Assign All</button>
+                <button>
+                  {translate("Assign All", activeCourseDetail.targetLanguage)}
+                </button>
               </Link>
             )}
             {isTeacher && (
               <Link to={`/tasks/${task.id}?edit=true`}>
-                <button>Assign To</button>
+                <button>
+                  {translate("Assign To", activeCourseDetail.targetLanguage)}
+                </button>
               </Link>
             )}
           </div>
@@ -96,6 +106,7 @@ const mapStateToProps = ({
     isTeacher: user.isTeacher,
     taskDetail,
     activeCourse: course.activeCourse,
+    activeCourseDetail: course.activeCourseDetail,
   };
 };
 
