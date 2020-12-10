@@ -4,7 +4,11 @@ import {
   loginTeacher,
   logout,
 } from "./userActions";
-import { getAllMessagesByRoom, getRoomUsers } from "./roomActions";
+import {
+  getAllMessagesByRoom,
+  getRoomUsers,
+  clearRoomDetail,
+} from "./roomActions";
 import {
   getAssignmentPreviewsByCourse,
   getAssignmentPreviewsByRoom,
@@ -32,6 +36,7 @@ export {
   logout,
   getAllMessagesByRoom,
   getRoomUsers,
+  clearRoomDetail,
   getAssignmentPreviewsByCourse,
   getAssignmentPreviewsByRoom,
   getAssignmentDetailById,

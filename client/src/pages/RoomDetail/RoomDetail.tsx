@@ -26,7 +26,7 @@ import {
 } from "../../interfaces/reducerInterfaces";
 import { RouteComponentProps } from "react-router-dom";
 import UserAvatar from "../../components/UserAvatar";
-import { SET_ERROR } from "../../actions/types";
+import { SET_ERROR, CLEAR_ROOM_DETAIL } from "../../actions/types";
 import translate from "../../utils/translate.js";
 
 const socket = io.connect("http://localhost:5000");
@@ -78,6 +78,7 @@ const RoomDetail: FunctionComponent<RoomDetailProps> = (props) => {
     });
 
     return () => {
+      dispatch({ type: CLEAR_ROOM_DETAIL });
       dispatch({ type: SET_ERROR, payload: "" });
     };
   }, []);
