@@ -1,6 +1,6 @@
 # Welcome to ChitChat
 
-ChitChat is a platform for classrooms studying each other's language to connect in real-time for language and cultural exchange, all with the safety of supervision by their teachers. Traditional, classroom-based methods of language education fail to leverage the potential for growth through real-time interaction of peers across cultural and geographic divides.
+ChitChat is a web platform where foreign classrooms connect in real-time for language and cultural exchange with peers, all with the safety of supervision by their teachers. Traditional, classroom-based methods of language education fail to leverage the potential for growth through peer interaction across cultural and geographic divides.
 
 *Tech stack: React, TypeScript, Sass, Socket.io, JWT, Express, PostgresSQL with Sequelize hosted on AWS RDS*
 
