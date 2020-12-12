@@ -6,10 +6,10 @@ ChitChat is a platform for classrooms studying each other's language to connect 
 
 Check out a demo here: https://youtu.be/ynfuqu1ECkk
 
-<div>
-  <img width="450" alt="Screen Shot 2020-12-12 at 11 03 45 AM" src="https://user-images.githubusercontent.com/25126281/101982077-7fe6d900-3c69-11eb-8994-c120bab968bd.png">
+<span>
+  <img width="450 alt="Screen Shot 2020-12-12 at 11 03 45 AM" src="https://user-images.githubusercontent.com/25126281/101982077-7fe6d900-3c69-11eb-8994-c120bab968bd.png">
   <img width="450" alt="Screen Shot 2020-12-12 at 11 03 19 AM" src="https://user-images.githubusercontent.com/25126281/101982151-d18f6380-3c69-11eb-95b9-3e87b641fd00.png">
-</div>
+</span>
 
 # Getting Started
 
