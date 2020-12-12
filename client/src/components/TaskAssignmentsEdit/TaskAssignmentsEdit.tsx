@@ -91,7 +91,9 @@ const TaskAssignmentsEdit: FunctionComponent<TaskAssignmentsEditProps> = ({
           </div>
         ))}
       </div>
-      <button onClick={handleSubmit}>confirm</button>
+      <button className="task-assignment-edit__button" onClick={handleSubmit}>
+        confirm
+      </button>
     </>
   );
 };
