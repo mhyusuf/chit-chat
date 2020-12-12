@@ -10,9 +10,12 @@
   "scripts": {
     "start": "node server/src/index.js",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
-    "dev": "nodemon server/src/index.js",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
     "lint": "prettier --check .",
-    "format": "prettier --write . && git add -A ."
+    "format": "prettier --write . && git add -A .",
+    "postinstall": "(cd client && npm i)",
+    "server": "nodemon server/src/index.js",
+    "client": "npm run start --prefix client"
   },
   "pre-commit": [
     "format"
@@ -29,6 +32,7 @@
   },
   "homepage": "https://github.com/mhyusuf/chit-chat#readme",
   "devDependencies": {
+    "concurrently": "^5.3.0",
     "cz-conventional-changelog": "^3.3.0",
     "dotenv": "^8.2.0",
     "nodemon": "^2.0.6",
