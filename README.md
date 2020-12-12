@@ -1,7 +1,27 @@
-### ChitChat
+# Welcome to ChitChat
 
-is a platform for classrooms studying each other's language to connect in real-time for language and cultural exchange, all with the safety of supervision by their teachers. Native speakers of each language are able to offer key insights on current useage patterns and modern vocabulary. The platform is intended to supplement and improve traditional, classroom-based methods of language education.
+ChitChat is a platform for classrooms studying each other's language to connect in real-time for language and cultural exchange, all with the safety of supervision by their teachers. Traditional, classroom-based methods of language education fail to leverage the potential for growth through real-time interaction of peers across cultural and geographic divides.
 
-This prototype of allows for live chat in small groups, with both text and short-form audio messaging leveraging peer-to-peer technologies unrepresented in classroom models of language education. Teachers can also assign tasks to students, who then submit their work by uploading a prepared file (eg .doc, .pptx, .pdf, etc). Students can comment on each other's submitted work to give constructive feedback.
+*Tech stack: React, TypeScript, Sass, Socket.io, JWT, Express, PostgresSQL with Sequelize hosted on AWS RDS*
 
-We hope to deploy future iterations of ChitChat to allow for more meaningful interaction with foreign languages and their native speakers.
+Check out a demo here: https://youtu.be/ynfuqu1ECkk
+
+<div>
+  <img width="450" alt="Screen Shot 2020-12-12 at 11 03 45 AM" src="https://user-images.githubusercontent.com/25126281/101982077-7fe6d900-3c69-11eb-8994-c120bab968bd.png">
+  <img width="450" alt="Screen Shot 2020-12-12 at 11 03 19 AM" src="https://user-images.githubusercontent.com/25126281/101982151-d18f6380-3c69-11eb-95b9-3e87b641fd00.png">
+</div>
+
+# Getting Started
+
+If you're interested in getting ChitChat up and running on your own machine, follow the steps below:
+1. Git clone this repo with `git clone https://github.com/mhyusuf/chit-chat`
+2. Open the directory with `cd chit-chat`
+3. Install dependencies with `npm install`
+4. Run the server and client bootstrap with `npm run dev`, which leverages the concurrently library to simulataneously launch processes on both ports 3000 and 5000
+
+**NB: As we are not yet deployed or using Docker, if you wish to interact with app users/messages/etc, you'll have to follow the example in .env.example within the server directory to create your own .env file with information on the database you wish to use with the app.**
+
+# Contributors
+- Co-Founder, Full-Stack Engineer: Mohamed Yusuf - [GitHub profile](https://www.github.com/mhyusuf)
+- Co-Founder, Full-Stack Engineer: Brett Glauser - [GitHub profile](https://www.github.com/bmcglauser)
+- Co-Founder, Full-Stack Engineer: Matthew Hurst - [GitHub profile](https://www.github.com/Matt-Hurst)
