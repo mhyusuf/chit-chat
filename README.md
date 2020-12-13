@@ -7,8 +7,7 @@ ChitChat is a web platform where foreign classrooms connect in real-time for lan
 Check out a demo here: https://youtu.be/ynfuqu1ECkk
 
 <span>
-  <img width="400 alt="Screen Shot 2020-12-12 at 11 03 45 AM" src="https://user-images.githubusercontent.com/25126281/101982077-7fe6d900-3c69-11eb-8994-c120bab968bd.png">
-  <img width="400" alt="Screen Shot 2020-12-12 at 11 03 19 AM" src="https://user-images.githubusercontent.com/25126281/101982151-d18f6380-3c69-11eb-95b9-3e87b641fd00.png">
+  <img width="700" alt="Screen Shot 2020-12-12 at 11 03 45 AM" src="https://user-images.githubusercontent.com/25126281/102017230-7a6abb00-3d5d-11eb-9fed-d40bfbf1d192.png">
 </span>
 
 # Getting Started
