@@ -6,8 +6,6 @@ const routers = require("./routers");
 const adminRouters = require("./routers/adminRouters");
 const cookieParser = require("cookie-parser");
 
-require("dotenv").config();
-
 app.use(express.json());
 app.use(cookieParser());
 
@@ -37,19 +35,28 @@ const io = require("socket.io")(server, {
 });
 require("./socket")(io);
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("../../client/build"));
-  const path = require("path");
-  app.get("*", (req, res) => {
-    res.send(path.resolve(__dirname, "client", "build", "index.html"));
-  });
-}
+// if (process.env.NODE_ENV === "production") {
+//   app.use(express.static("../../client/build"));
+//   const path = require("path");
+//   app.get("*", (req, res) => {
+//     res.send(path.resolve(__dirname, "client", "build", "index.html"));
+//   });
+// }
 
 (async () => {
-  await db.sequelize.sync();
-
-  console.log("Connected to Sequelize on 5432");
-  server.listen(PORT, () => {
-    console.log(`Server is listening on http://localhost:${PORT}`);
-  });
+  let retries = 5;
+  while (retries) {
+    try {
+      await db.sequelize.sync().then(() => {
+        console.log(`Connected to Sequelize on 5432`);
+      });
+      break;
+    } catch (err) {
+      console.log(err);
+      retries -= 1;
+      console.log(`Retries left: ${retries}`);
+      await new Promise((res) => setTimeout(res, 5000));
+    }
+  }
+  app.listen(PORT, () => console.log(`Listening on ${PORT}`));
 })();

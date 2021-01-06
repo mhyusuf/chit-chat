@@ -1,28 +1,34 @@
-require("dotenv").config();
-const { USERNAME, PASSWORD, HOST, PORT, DIALECT } = process.env;
-const { Sequelize, DataTypes } = require("sequelize");
+"use strict";
+
 const fs = require("fs");
 const path = require("path");
+const Sequelize = require("sequelize");
+const basename = path.basename(__filename);
+// const env = process.env.NODE_ENV || 'development';
+const { DB_HOST, DB_PORT, DB_USERNAME, DB_PASSWORD, DB_DATABASE } = process.env;
 const db = {};
-// @ts-ignore
+
 const sequelize = new Sequelize({
-  username: USERNAME,
-  password: PASSWORD,
-  host: HOST,
-  port: PORT,
-  dialect: DIALECT,
-  logging: false,
+  type: "postgres",
+  dialect: "postgres",
+  host: DB_HOST,
+  port: DB_PORT,
+  username: DB_USERNAME,
+  password: DB_PASSWORD,
+  database: DB_DATABASE,
 });
 
 fs.readdirSync(__dirname)
   .filter((file) => {
     return (
-      file.indexOf(".") !== 0 && file !== "index.js" && file.slice(-3) === ".js"
+      file.indexOf(".") !== 0 && file !== basename && file.slice(-3) === ".js"
     );
   })
   .forEach((file) => {
-    const modelImport = require(path.join(__dirname, file));
-    const model = modelImport(sequelize, DataTypes);
+    const model = require(path.join(__dirname, file))(
+      sequelize,
+      Sequelize.DataTypes
+    );
     db[model.name] = model;
   });
 

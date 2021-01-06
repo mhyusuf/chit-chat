@@ -4,7 +4,7 @@ import React, {
   useState,
   useEffect,
 } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { connect, useDispatch } from "react-redux";
 import { loginTeacher, loginStudent } from "../../actions";
 import Logo from "../../assets/color-logo.png";
@@ -93,7 +93,16 @@ const Login: FunctionComponent<LoginProps> = ({
     <>
       <div className="top-page-grand-wrapper">
         <div className="bottom-half-grand-wrapper__textbox">
-          <h1>Welcome to Chit Chat,</h1>{" "}
+          <h1>
+            Welcome{" "}
+            <Link
+              to="/administrator"
+              style={{ color: "black", textDecoration: "none" }}
+            >
+              to
+            </Link>{" "}
+            Chit Chat,
+          </h1>{" "}
           <p>
             where foreign classrooms connect in real-time for language and
             cultural exchange

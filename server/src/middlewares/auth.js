@@ -2,8 +2,6 @@
 const models = require("../models").sequelize.models;
 const jwt = require("jsonwebtoken");
 
-require("dotenv").config();
-
 exports.authMiddleware = async (req, res, next) => {
   try {
     const encodedToken = req.cookies.authToken;

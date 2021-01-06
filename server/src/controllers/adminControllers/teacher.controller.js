@@ -13,10 +13,13 @@ exports.RegisterTeacher = async (req, res) => {
       email,
       name,
       password: hashedPw,
+      avatar: "teachercap",
     });
-    res.status(201).send(newTeacher);
+    res.status(201);
+    res.send(newTeacher);
   } catch (e) {
-    res.status(500).send(e, e.message);
+    res.status(500);
+    res.send(e.message);
   }
 };
 
