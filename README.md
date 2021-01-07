@@ -12,14 +12,7 @@ Check out a demo here: https://youtu.be/ynfuqu1ECkk
 
 # Getting Started
 
-If you're interested in getting ChitChat up and running on your own machine, follow the steps below:
-
-1. Git clone this repo with `git clone https://github.com/mhyusuf/chit-chat`
-2. Open the directory with `cd chit-chat`
-3. Install dependencies with `npm install`
-4. Run the server and client bootstrap with `npm run dev`, which leverages the concurrently library to simultaneously launch processes on both ports 3000 and 5000
-
-**NB: As we are not yet deployed or using Docker, if you wish to interact with app users/messages/etc, you'll have to follow the example in .env.example within the server directory to create your own .env file with information on the database you wish to use with the app.**
+**NB: We are currently containerizing ChitChat for ease of viewing. In this process though, Chit-Chat will be unavailable for live preview. We hope to get it running by the end of the week.
 
 # Contributors
 
