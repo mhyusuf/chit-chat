@@ -7,6 +7,9 @@ import React, {
 import axios from "axios";
 import "./CourseDelete.scss";
 
+const REACT_APP_SERVER_URI =
+  process.env.REACT_APP_SERVER_URI || "http://localhost:5000";
+
 const CourseDelete: FunctionComponent<any> = ({ history }) => {
   const [id, setId] = useState<string>("");
 
@@ -16,7 +19,7 @@ const CourseDelete: FunctionComponent<any> = ({ history }) => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    await axios.delete(`/admin/course/${id}`);
+    await axios.delete(`${REACT_APP_SERVER_URI}/admin/course/${id}`);
     history.push("/administrator");
   };
 

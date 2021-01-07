@@ -5,7 +5,9 @@ const db = require("./models");
 const routers = require("./routers");
 const adminRouters = require("./routers/adminRouters");
 const cookieParser = require("cookie-parser");
+const cors = require("cors");
 
+app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 

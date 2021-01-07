@@ -8,6 +8,9 @@ import axios from "axios";
 
 import "./CourseEdit.scss";
 
+const REACT_APP_SERVER_URI =
+  process.env.REACT_APP_SERVER_URI || "http://localhost:5000";
+
 const CourseEdit: FunctionComponent<any> = ({ history }) => {
   const [formValues, setFormValues] = useState<{
     id: number | null;
@@ -32,7 +35,10 @@ const CourseEdit: FunctionComponent<any> = ({ history }) => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    await axios.put(`/admin/course/${formValues.id}`, formValues);
+    await axios.put(
+      `${REACT_APP_SERVER_URI}/admin/course/${formValues.id}`,
+      formValues
+    );
     history.push("/administrator");
   };
 
