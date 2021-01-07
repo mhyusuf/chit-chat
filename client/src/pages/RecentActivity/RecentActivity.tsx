@@ -38,7 +38,7 @@ const RecentActivity: FunctionComponent<RecentActivityProps> = ({
       getAssignmentPreviewsByCourse(`${activeCourse}`);
     else if (activeCourse && !user.isTeacher)
       getAssignmentPreviewsByRoom(`${user.RoomId}`);
-  }, [activeCourse, assignments]);
+  }, []);
 
   const assignmentsToShow =
     assignments &&
