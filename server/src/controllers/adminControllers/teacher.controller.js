@@ -13,7 +13,7 @@ exports.RegisterTeacher = async (req, res) => {
       email,
       name,
       password: hashedPw,
-      avatar: "teachercap",
+      avatar: "teacherCap",
     });
     res.status(201);
     res.send(newTeacher);
