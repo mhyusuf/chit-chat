@@ -58,5 +58,5 @@ require("./socket")(io);
       await new Promise((res) => setTimeout(res, 5000));
     }
   }
-  app.listen(PORT, () => console.log(`Listening on ${PORT}`));
+  server.listen(PORT, () => console.log(`Listening on ${PORT}`));
 })();
