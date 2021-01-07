@@ -29,7 +29,11 @@ import UserAvatar from "../../components/UserAvatar";
 import { SET_ERROR, CLEAR_ROOM_DETAIL } from "../../actions/types";
 import translate from "../../utils/translate.js";
 
-const socket = io.connect("/");
+const SERVER_URI: string =
+  process.env.REACT_APP_SERVER_URI ||
+  "http://localhost:5000" ||
+  "http://localhost:5000";
+const socket = io.connect(SERVER_URI);
 
 interface matchInterface {
   id: string;

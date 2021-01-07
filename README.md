@@ -12,7 +12,7 @@ Check out a demo here: https://youtu.be/ynfuqu1ECkk
 
 # Getting Started
 
-**NB: We are currently containerizing ChitChat for ease of viewing. In this process though, Chit-Chat will be unavailable for live preview. We hope to get it running by the end of the week.
+\*\*NB: We are currently containerizing ChitChat for ease of viewing. In this process though, Chit-Chat will be unavailable for live preview. We hope to get it running by the end of the week.
 
 # Contributors
 

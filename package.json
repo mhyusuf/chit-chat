@@ -15,7 +15,10 @@
     "format": "prettier --write . && git add -A .",
     "postinstall": "(cd client && npm i)",
     "server": "nodemon server/src/index.js",
-    "client": "npm run start --prefix client"
+    "client": "npm run start --prefix client",
+    "build-server": "docker build -t bmcglauser/chit-chat-server ./server",
+    "build-client": "docker build -t bmcglauser/chit-chat-client ./client",
+    "build-images": "npm run build-server && npm run build-client"
   },
   "pre-commit": [
     "format"

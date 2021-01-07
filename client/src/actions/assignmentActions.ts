@@ -11,38 +11,54 @@ import {
   CLEAR_ASSIGNMENT_UPLOAD,
 } from "./types";
 
+const REACT_APP_SERVER_URI =
+  process.env.REACT_APP_SERVER_URI || "http://localhost:5000";
+
 export const getAssignmentPreviewsByCourse = (id: string) => async (
   dispatch: any
 ) => {
-  const { data } = await axios.get(`/api/assignment/course/${id}`);
+  const { data } = await axios.get(
+    `${REACT_APP_SERVER_URI}/api/assignment/course/${id}`
+  );
   dispatch({ type: GET_ASSIGNMENT_PREVIEWS_BY_COURSE, payload: data });
 };
 
 export const getAssignmentPreviewsByRoom = (id: string) => async (
   dispatch: any
 ) => {
-  const { data } = await axios.get(`/api/assignment/room/${id}`);
+  const { data } = await axios.get(
+    `${REACT_APP_SERVER_URI}/api/assignment/room/${id}`
+  );
   dispatch({ type: GET_ASSIGNMENT_PREVIEWS_BY_ROOM, payload: data });
 };
 export const getAssignmentDetailById = (id: string) => async (
   dispatch: any
 ) => {
-  const { data } = await axios.get(`/api/assignment/${id}`);
+  const { data } = await axios.get(
+    `${REACT_APP_SERVER_URI}/api/assignment/${id}`
+  );
   dispatch({ type: GET_ASSIGNMENT, payload: data });
 };
 
 export const likeAssignment = (id: string) => async (dispatch: any) => {
-  const { data } = await axios.put(`/api/assignment/${id}?type=like`);
+  const { data } = await axios.put(
+    `${REACT_APP_SERVER_URI}/api/assignment/${id}?type=like`
+  );
   dispatch({ type: LIKE_ASSIGNMENT, payload: data });
 };
 
 export const dismissAssignment = (id: string) => async (dispatch: any) => {
-  const { data } = await axios.put(`/api/assignment/${id}?type=dismiss`);
+  const { data } = await axios.put(
+    `${REACT_APP_SERVER_URI}/api/assignment/${id}?type=dismiss`
+  );
   dispatch({ type: DISMISS_ASSIGNMENT, payload: data });
 };
 
 export const clearAssignmentUpload = (id: string) => async (dispatch: any) => {
-  await axios.put(`/api/assignment/${id}?type=upload`, null);
+  await axios.put(
+    `${REACT_APP_SERVER_URI}/api/assignment/${id}?type=upload`,
+    null
+  );
   dispatch({ type: CLEAR_ASSIGNMENT_UPLOAD });
 };
 
@@ -51,7 +67,7 @@ export const commentAssignment = (
   user: User,
   content: string
 ) => async (dispatch: any) => {
-  const { data } = await axios.post("/api/comment", {
+  const { data } = await axios.post(`${REACT_APP_SERVER_URI}/api/comment`, {
     AssignmentId,
     user,
     content,
@@ -60,13 +76,16 @@ export const commentAssignment = (
 };
 
 export const deleteComment = (id: string) => async (dispatch: any) => {
-  await axios.delete(`/api/comment/${id}`);
+  await axios.delete(`${REACT_APP_SERVER_URI}/api/comment/${id}`);
   dispatch({ type: DELETE_COMMENT, payload: id });
 };
 
 export const submitAssignment = (id: string, file: File) => async (
   dispatch: any
 ) => {
-  await axios.put(`/api/assignment/${id}?type=upload`, file);
+  await axios.put(
+    `${REACT_APP_SERVER_URI}/api/assignment/${id}?type=upload`,
+    file
+  );
   dispatch(getAssignmentDetailById(id));
 };

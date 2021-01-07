@@ -8,6 +8,9 @@ import axios from "axios";
 
 import "./ResourceEdit.scss";
 
+const REACT_APP_SERVER_URI =
+  process.env.REACT_APP_SERVER_URI || "http://localhost:5000";
+
 const ResourceEdit: FunctionComponent<any> = ({ history }) => {
   const [formValues, setFormValues] = useState<{
     id: number;
@@ -52,7 +55,10 @@ const ResourceEdit: FunctionComponent<any> = ({ history }) => {
     formData.append("extra", formValues.extra);
     formData.append("targetLanguage", formValues.targetLanguage);
     formData.append("fileData", formValues.fileData);
-    await axios.put(`/admin/resource/${formValues.id}`, formData);
+    await axios.put(
+      `${REACT_APP_SERVER_URI}/admin/resource/${formValues.id}`,
+      formData
+    );
     history.push("/administrator");
   };
 

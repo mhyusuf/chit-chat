@@ -8,6 +8,9 @@ import axios from "axios";
 
 import "./CourseCreate.scss";
 
+const REACT_APP_SERVER_URI =
+  process.env.REACT_APP_SERVER_URI || "http://localhost:5000";
+
 const CourseCreate: FunctionComponent<any> = ({ history }) => {
   const [formValues, setFormValues] = useState<{
     level: number | null;
@@ -36,7 +39,7 @@ const CourseCreate: FunctionComponent<any> = ({ history }) => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    await axios.post("/admin/course", formValues);
+    await axios.post(`${REACT_APP_SERVER_URI}/admin/course`, formValues);
     history.push("/administrator");
   };
 

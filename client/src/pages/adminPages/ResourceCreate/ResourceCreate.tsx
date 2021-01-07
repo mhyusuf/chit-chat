@@ -7,6 +7,9 @@ import React, {
 import axios from "axios";
 import "./ResourceCreate.scss";
 
+const REACT_APP_SERVER_URI =
+  process.env.REACT_APP_SERVER_URI || "http://localhost:5000";
+
 const ResourceCreate: FunctionComponent<any> = ({ history }) => {
   const [formValues, setFormValues] = useState<{
     title: string;
@@ -49,7 +52,7 @@ const ResourceCreate: FunctionComponent<any> = ({ history }) => {
     formData.append("extra", formValues.extra);
     formData.append("targetLanguage", formValues.targetLanguage);
     formData.append("fileData", formValues.fileData);
-    await axios.post(`/admin/resource`, formData);
+    await axios.post(`${REACT_APP_SERVER_URI}/admin/resource`, formData);
     history.push("/administrator");
   };
 
