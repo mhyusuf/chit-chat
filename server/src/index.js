@@ -32,7 +32,7 @@ const server = require("http").createServer(app);
 // @ts-ignore
 const io = require("socket.io")(server, {
   cors: {
-    origin: "*",
+    origin: "http://localhost:3000",
   },
 });
 require("./socket")(io);
