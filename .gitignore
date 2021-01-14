@@ -105,3 +105,6 @@ dist
 
 # Local Postgres volumes
 pgdata/
+
+# Local Folder config
+.DS_Store
