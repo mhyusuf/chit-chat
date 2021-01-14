@@ -8,7 +8,7 @@ const REACT_APP_SERVER_URI =
   process.env.REACT_APP_SERVER_URI || "http://localhost:5000";
 
 export const getCurrentUser = () => async (dispatch: Dispatch<any>) => {
-  const { data } = await axios.get(`${REACT_APP_SERVER_URI}/api/user`);
+  const { data } = await axios.get(`${REACT_APP_SERVER_URI}/api/user`, { withCredentials: true });
   dispatch({ type: GET_CURRENT_USER, payload: data });
 };
 
@@ -26,7 +26,7 @@ export const loginStudent = (
     const res = await axios.post(`${REACT_APP_SERVER_URI}/api/student/login`, {
       email,
       password,
-    });
+    }, { withCredentials: true });
     dispatch({ type: GET_CURRENT_USER, payload: res.data });
     history.push("/home");
   } catch (e) {
@@ -51,7 +51,7 @@ export const loginTeacher = (
       {
         email,
         password,
-      }
+      }, { withCredentials: true }
     );
     dispatch({ type: GET_CURRENT_USER, payload: data });
     dispatch({ type: SET_ERROR, payload: "" });
@@ -62,7 +62,7 @@ export const loginTeacher = (
 };
 
 export const logout = (history: History<any>) => async (dispatch: any) => {
-  await axios.get(`${REACT_APP_SERVER_URI}/api/user/logout`);
+  await axios.get(`${REACT_APP_SERVER_URI}/api/user/logout`, { withCredentials: true });
   dispatch({ type: GET_CURRENT_USER, payload: null });
   history.push("/");
 };
